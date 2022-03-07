@@ -2,39 +2,34 @@
 	"name": "dbms-gui",
 	"displayName": "DBMS-GUI",
 	"description": "",
-	"version": "0.0.1",
+	"version": "0.0.0",
 	"engines": {
-		"vscode": "^1.65.0"
+		"vscode": "^1.64.0"
 	},
 	"categories": [
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:dbms-gui.helloWorld"
+		"onView:dbms-gui"
 	],
 	"main": "./extension.js",
 	"contributes": {
-		"commands": [
-			{
-				"command": "dbms-gui.helloWorld",
-				"title": "Hello World"
-			}
-		]
-	},
-	"scripts": {
-		"lint": "eslint .",
-		"pretest": "npm run lint",
-		"test": "node ./test/runTest.js"
+		"views": {
+			"explorer": [
+				{
+					"id": "dbms-gui",
+					"name": "DBMS-GUI"
+				}
+			]
+		}
 	},
 	"devDependencies": {
-		"@types/vscode": "^1.65.0",
-		"@types/glob": "^7.2.0",
-		"@types/mocha": "^9.0.0",
 		"@types/node": "14.x",
-		"eslint": "^8.6.0",
-		"glob": "^7.2.0",
-		"mocha": "^9.1.3",
-		"typescript": "^4.5.4",
-		"@vscode/test-electron": "^2.0.3"
+		"@types/vscode": "^1.65.0",
+		"@vscode/test-electron": "^2.1.3",
+		"typescript": "^4.5.4"
+	},
+	"dependencies": {
+		"knex": "^1.0.3"
 	}
 }

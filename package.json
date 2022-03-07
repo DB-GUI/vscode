@@ -1,6 +1,6 @@
 {
-	"name": "dbms-gui",
-	"displayName": "DBMS-GUI",
+	"name": "ppz",
+	"displayName": "ppz",
 	"description": "",
 	"version": "0.0.0",
 	"engines": {
@@ -10,15 +10,26 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onView:dbms-gui"
+		"onStartupFinished"
 	],
 	"main": "./extension.js",
 	"contributes": {
-		"views": {
-			"explorer": [
+		"viewsContainers": {
+			"activitybar": [
 				{
-					"id": "dbms-gui",
-					"name": "DBMS-GUI"
+					"id": "ppz-container",
+					"title": "PPZ",
+					"icon": "assets/logo.svg"
+				}
+			]
+		},
+		"views": {
+			"ppz-container": [
+				{
+					"id": "connections",
+					"name": "连接",
+					"contextualTitle": "PPZ",
+					"icon": "assets/logo.svg"
 				}
 			]
 		}

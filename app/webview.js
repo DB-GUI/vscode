@@ -9,7 +9,7 @@ module.exports = class {
     title = 'ppz'
   }) {
     console.debug('constructing add-connection.html webview')
-    const path = this.localPath(filename + '.html')
+    const path = this.localPath('pages/' + filename + '/index.html')
     console.debug({ path })
     fs.readFile(path, (err, data) => {
       if(err) {
@@ -18,14 +18,20 @@ module.exports = class {
         console.error(err)
         throw Error(msg)
       }
-      this.panel.webview.html = data.toString()
+      this.panel.webview.html = this.tmpl({
+        title,
+        body: data.toString()
+      })
     })
 
     this.panel = vscode.window.createWebviewPanel(
       category,
       title,
       vscode.ViewColumn.One,
-      { localResourceRoots: [vscode.Uri.file(Context.extensionPath)] }
+      {
+        localResourceRoots: [vscode.Uri.file(Context.extensionPath)],
+        enableScripts: true
+      }
     )
     this.panel.iconPath = {
       light: this.uri('logo.svg'),
@@ -34,7 +40,7 @@ module.exports = class {
     console.debug('constructed add-connection.html webview')
   }
 
-  localUrl(path) {
+  webviewUri(path) {
     return this.panel.webview.asWebviewUri(vscode.Uri.file(
       Path.join(Context.extensionPath, 'assets', path)
     ))
@@ -46,5 +52,24 @@ module.exports = class {
 
   uri(path) {
     return vscode.Uri.file(this.localPath(path))
+  }
+
+  tmpl({
+    title,
+    body
+  }) {
+    return `
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <title>${title}</title>
+          <link rel="stylesheet" href="${this.webviewUri('pages/global.css')}">
+          <script src="${this.webviewUri('pages/global.js')}"></script>
+        </head>
+        <body>
+          ${body}
+        </body>
+      </html>
+    `
   }
 }

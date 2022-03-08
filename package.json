@@ -12,7 +12,7 @@
 	"activationEvents": [
 		"onStartupFinished"
 	],
-	"main": "./extension.js",
+	"main": "./app/extension.js",
 	"contributes": {
 		"viewsContainers": {
 			"activitybar": [
@@ -36,14 +36,15 @@
 		"viewsWelcome": [
 			{
 				"view": "connections",
-				"contents": "点击右上方 “+” 或下面按钮，以连接数据库\n[新连接](command:ppz.addConnection)"
+				"contents": "点击右上方 “+” 或下面按钮，以连接数据库\n[创建连接](command:ppz.addConnection)"
 			}
 		],
 		"commands": [
 			{
 				"command": "ppz.addConnection",
-				"title": "新连接",
-				"icon": "$(add)"
+				"title": "创建连接",
+				"icon": "$(add)",
+				"category": "ppz"
 			}
 		],
 		"menus": {

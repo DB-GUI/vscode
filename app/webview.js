@@ -19,6 +19,7 @@ module.exports = class {
         throw Error(msg)
       }
       this.panel.webview.html = this.tmpl({
+        filename,
         title,
         body: data.toString()
       })
@@ -55,6 +56,7 @@ module.exports = class {
   }
 
   tmpl({
+    filename,
     title,
     body
   }) {
@@ -63,11 +65,11 @@ module.exports = class {
       <html>
         <head>
           <title>${title}</title>
-          <link rel="stylesheet" href="${this.webviewUri('pages/global.css')}">
-          <script src="${this.webviewUri('pages/global.js')}"></script>
+          <link rel="stylesheet" href="${this.webviewUri('pages/style/index.css')}">
         </head>
         <body>
           ${body}
+          <script type="module" src="${this.webviewUri(`pages/${filename}/index.js`)}"></script>
         </body>
       </html>
     `

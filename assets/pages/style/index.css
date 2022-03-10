@@ -1,0 +1,55 @@
+@import url('./flex-container.css');
+
+body {
+  --color1: #77777777;
+}
+
+form input {
+  background: var(--vscode-input-background);
+  border: 1px solid #00000000;
+  color: var(--vscode-foreground);
+  height: 2em;
+  padding: 0 .6em;
+  outline: none !important;
+}
+form input:focus {
+  border: 1px solid var(--vscode-focusBorder);
+}
+
+fieldset {
+  border: 1px solid var(--vscode-panel-border);
+  margin: 0;
+  padding: 1rem;
+}
+
+fieldset legend {
+  padding: 0 .3rem;
+}
+
+form label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  
+  width: 16rem;
+  margin: .5rem 1rem;
+}
+
+form label input {
+  margin-left: 1rem;
+  width: 10rem;
+}
+
+button {
+  outline: none;
+  border: none;
+  background-color: var(--vscode-button-background);
+  color: var(--vscode-button-foreground);
+  
+  display: inline-block;
+  height: 2em;
+  width: 6rem;
+}
+button:hover {
+  background-color: var(--vscode-button-hoverBackground);
+}

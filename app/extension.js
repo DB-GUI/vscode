@@ -1,5 +1,5 @@
 const vscode = require('vscode')
-const Webview = require('./webview')
+const AddConnectionWebview = require('./webview/add-connection')
 
 const app = {
   activate(context) {
@@ -8,10 +8,7 @@ const app = {
   
     this.registerCommand('addConnection', () => {
       console.debug('command: addConnection')
-      new Webview({
-        filename: 'add-connection',
-        title: '创建连接'
-      })
+      new AddConnectionWebview()
     })
     
     console.debug('activated')

@@ -16,6 +16,3 @@ $.isNil = function(target) {
     return true
   return false
 }
-
-import twb from './two-way-data-binding.js'
-$.twb = twb

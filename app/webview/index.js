@@ -10,7 +10,7 @@ module.exports = class {
   }) {
     console.debug('constructing add-connection.html webview')
     const path = this.localPath('pages/' + filename + '/index.html')
-    console.debug({ path })
+    console.debug(path)
     fs.readFile(path, (err, data) => {
       if(err) {
         const msg = 'webview 创建失败：读取 html 文件时发生异常'
@@ -38,6 +38,9 @@ module.exports = class {
       light: this.uri('logo.svg'),
       dark: this.uri('logo-white.svg')
     }
+    this.onMessage('dispose', () => {
+      this.panel.dispose()
+    })
     console.debug('constructed add-connection.html webview')
   }
 
@@ -48,11 +51,25 @@ module.exports = class {
   }
 
   localPath(path) {
-    return Path.join(__dirname, '../assets', path)
+    return Path.join(__dirname, '../../assets', path)
   }
 
   uri(path) {
     return vscode.Uri.file(this.localPath(path))
+  }
+
+  onMessage(type, handler) {
+    console.debug('注册 message', type)
+    this.panel.webview.onDidReceiveMessage(evt => {
+      if(!evt.type) {
+        console.error({ evt })
+        throw Error('不合法的 message')
+      }
+      if(evt.type == type) {
+        console.debug('webview message', evt)
+        handler(evt)
+      }
+    })
   }
 
   tmpl({

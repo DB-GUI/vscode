@@ -43,6 +43,10 @@ class Observer {
   }
 }
 
+/**
+ * data 里的数据变化会更新到 $form，$form 里的数据变化会更新到 data 
+ * @param {HTMLElement|string} $form
+ */ 
 export default function twoWayDataBinding($form, data = {}) {
   $form = $($form)
   const observer = new Observer(data)

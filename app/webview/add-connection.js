@@ -1,4 +1,5 @@
 const Webview = require('./index')
+const connectionService = require('../service/connection')
 
 module.exports = class AddConnectionWebview extends Webview {
   constructor() {
@@ -7,10 +8,9 @@ module.exports = class AddConnectionWebview extends Webview {
       title: '创建连接'
     })
     this.onMessage('save', function(data) {
-      console.log('saving', data)
-    })
-    this.onMessage('connect', function(data) {
-      console.log('connecting', data)
+      const id = connectionService.save(data.connection)
+      if(data.connect)
+        connectionService.connect(id)
     })
   }
 }

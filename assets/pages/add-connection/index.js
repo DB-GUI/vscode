@@ -3,12 +3,15 @@ import twb from '../script/two-way-data-binding.js'
 const vscode = acquireVsCodeApi()
 
 const data = twb('form').subject
+
 $('form').onsubmit = function(evt) {
   switch(evt.submitter.id) {
     case 'connect':
-      connect()
+      save(true)
+      break
     case 'save':
       save()
+      break
   }
   evt.preventDefault()
   vscode.postMessage({
@@ -16,18 +19,13 @@ $('form').onsubmit = function(evt) {
   })
 }
 
-function connect() {
-  console.debug('连接...')
-  vscode.postMessage({
-    type: 'connect',
-    data
-  })
-}
-
-function save() {
-  console.debug('保存连接')
+function save(connect) {
+  console.debug('保存连接', { connect })
   vscode.postMessage({
     type: 'save',
-    data
+    data: {
+      connect,
+      connection: data
+    }
   })
 }

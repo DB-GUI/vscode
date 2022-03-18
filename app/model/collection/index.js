@@ -19,7 +19,7 @@ module.exports = class Collection {
 
   save(data) {
     this.validate(data)
-    return Context.globalState.update(this.name, this.data)
+    return Context.globalState.update(this.name, data)
   }
   
   validate(data) {

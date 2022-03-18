@@ -1,28 +1,21 @@
-const vscode = require('vscode')
-const AddConnectionWebview = require('./webview/add-connection')
+const init = require('./service/init')
 
-const app = {
-  activate(context) {
-    console.debug('activating')
-    globalThis.Context = context
-  
-    this.registerCommand('addConnection', () => {
-      console.debug('command: addConnection')
-      new AddConnectionWebview()
-    })
-    
+exports.activate = async function(context) {
+  // const keys = context.globalState.keys()
+  // console.log(keys)
+  // keys.forEach(key => context.globalState.update(key, undefined))
+  // return
+  console.debug('activating')
+  globalThis.Context = context
+  try {
+    await init()
     console.debug('activated')
-  },
-  deactivate() {
-    console.debug('deactivated')
-  },
-
-  registerCommand(name, handler) {
-    Context.subscriptions.push(
-      vscode.commands.registerCommand('ppz.' + name, handler)
-    )
+  } catch(e) {
+    console.error('error on activating')
+    console.error(e)
   }
 }
 
-exports.activate = ctx => app.activate(ctx)
-exports.deactivate = () => app.deactivate()
+exports.deactivate = function() {
+  console.debug('deactivated')
+}

@@ -1,6 +1,8 @@
 const Path = require('path')
 const fs = require('fs')
 const vscode = require('vscode')
+const { NilField, FieldWrongDetail } = require('@ppzp/type')
+const { noty } = require('../utils')
 
 module.exports = class {
   constructor({
@@ -67,9 +69,31 @@ module.exports = class {
       }
       if(evt.type == type) {
         console.debug('webview message', evt)
-        handler(evt)
+        handler(evt.data)
       }
     })
+  }
+
+  sendMessage(type, data) {
+    const msg = { type, data }
+    console.debug('sending message', msg)
+    this.panel.webview.postMessage(msg)
+  }
+
+  handleSaveErr(err) {
+    if(err instanceof FieldWrongDetail) {
+      noty.error('保存失败：' + err.name + (
+        err.type == NilField
+        ? ' 不可为空'
+        : ' 格式错误'
+      ))
+    } else
+      this.handleErr(err)
+  }
+
+  handleErr(err) {
+    console.error(err)
+    noty.error('未知错误 ' + err.toString())
   }
 
   tmpl({

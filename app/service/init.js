@@ -1,6 +1,6 @@
 const system = require('../model/system')
 const vscode = require('vscode')
-const AddConnectionWebview = require('../webview/add-connection')
+const UpsertConnectionWebview = require('../webview/upsert-connection')
 
 function registerCommand(name, handler) {
   Context.subscriptions.push(
@@ -20,7 +20,7 @@ async function init() {
 
   registerCommand('addConnection', () => {
     console.debug('command: addConnection')
-    new AddConnectionWebview()
+    new UpsertConnectionWebview()
   })
 }
 

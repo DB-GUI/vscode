@@ -3,7 +3,7 @@ const Collection = require('./index')
 const { v4: UUID } = require('uuid')
 
 module.exports = class ArrayCollection extends Collection {
-  constructor(name, pkField) {
+  constructor(name, pkField = 'id') {
     super(name)
     this.pkField = pkField
   }
@@ -44,24 +44,34 @@ module.exports = class ArrayCollection extends Collection {
     return this.getAllData().find(record => record[this.pkField] == key)
   }
 
-  upsert(record) {
+  save(data) {
+    console.warn('you are saving data using ArrayCollection.prototype.save')
+    return super.save(data)
+  }
+
+  async upsert(record) {
     if(isNil(record))
       this.err('upsert error: record is nil')
     const list = this.getAllData()
     let pk = record[this.pkField]
     if(pk) { // update
       const index = list.findIndex(record => record[this.pkField] == pk)
+      if(index == -1)
+        throw Error('updating record which doesn\'t exist')
       list.splice(index, 1, record)
     } else {
       record[this.pkField] = UUID()
       list.push(record)
     }
-    this.save(list)
+    await super.save(list)
+    return record[this.pkField]
   }
 
   drop(key) {
     const list = this.getAllData()
     const index = list.findIndex(record => record[this.pkField] == key)
+    if(index == -1)
+      throw Error('deleting record which not exist')
     list.splice(index, 1)
     this.save(list)
   }

@@ -19,7 +19,7 @@ form input:focus {
 fieldset {
   border: 1px solid var(--vscode-panel-border);
   margin: 0;
-  padding: 1rem;
+  padding: 1rem 1rem 1.6rem;
 }
 
 fieldset legend {
@@ -31,7 +31,7 @@ form label {
   align-items: center;
   justify-content: flex-end;
   
-  width: 16rem;
+  width: 20rem;
   margin: .5rem 1rem;
 }
 

@@ -14,13 +14,11 @@ $('form').onsubmit = function(evt) {
       break
   }
   evt.preventDefault()
-  vscode.postMessage({
-    type: 'dispose'
-  })
 }
 
 function save(connect) {
   console.debug('保存连接', { connect })
+  data.client = 'mysql'
   vscode.postMessage({
     type: 'save',
     data: {

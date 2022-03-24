@@ -23,7 +23,7 @@ class Collection {
   }
   
   validate(data) {
-    throw Error('未实现 validate 方法')
+    throw Error('未实现 validate 函数')
   }
 }
 

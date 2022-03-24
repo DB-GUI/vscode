@@ -2,6 +2,7 @@ const system = require('../model/system')
 const vscode = require('vscode')
 const UpsertConnectionWebview = require('../view/web/upsert-connection')
 const Collection = require('../model/collection/index')
+const initTreeview = require('../view/treeview')
 const { noty } = require('../utils')
 
 function registerCommand(name, handler) {
@@ -44,6 +45,8 @@ async function init() {
   const systemInfo = system.getAllData()
   console.log('system info', systemInfo)
 
+  initTreeview()
+  
   registerCommand('addConnection', () => {
     console.debug('command: addConnection')
     new UpsertConnectionWebview()

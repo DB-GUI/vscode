@@ -4,7 +4,8 @@ const { Type } = require('@ppzp/type')
 exports.noty = new Proxy({
   info: vscode.window.showInformationMessage,
   warn: vscode.window.showWarningMessage,
-  error: vscode.window.showErrorMessage
+  error: vscode.window.showErrorMessage,
+  fatal: msg => vscode.window.showErrorMessage('[BUG] ' + msg)
 }, {
   get(target, method) {
     return msg => target[method]('[PPZ] ' + msg)

@@ -13,10 +13,10 @@ module.exports = class UpsertConnectionWebview extends Webview {
 
   async save(data) {
     try {
-      const id = await service.upsert(data.connection)
+      await service.upsert(data.connection)
       noty.info('连接已保存')
       if(data.connect)
-        service.connect(id)
+        service.connect(data.connection)
     } catch(err) {
       this.handleSaveErr(err)
     }

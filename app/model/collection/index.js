@@ -1,7 +1,8 @@
 const isNil = require('../../utils').isNil
 
-module.exports = class Collection {
+class Collection {
   constructor(name) {
+    Collection.instances.push(this)
     this.name = name
   }
   
@@ -9,7 +10,6 @@ module.exports = class Collection {
     let data = Context.globalState.get(this.name)
     if(isNil(data))
       data = this.initData()
-    this.validate(data)
     return data
   }
 
@@ -26,3 +26,7 @@ module.exports = class Collection {
     throw Error('未实现 validate 方法')
   }
 }
+
+Collection.instances = []
+
+module.exports = Collection

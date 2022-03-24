@@ -1,11 +1,15 @@
 const vscode = require('vscode')
 const { Type } = require('@ppzp/type')
 
-exports.noty = {
+exports.noty = new Proxy({
   info: vscode.window.showInformationMessage,
   warn: vscode.window.showWarningMessage,
   error: vscode.window.showErrorMessage
-}
+}, {
+  get(target, method) {
+    return msg => target[method]('[PPZ] ' + msg)
+  }
+})
 
 exports.isNil =
   target => target == null || target == undefined

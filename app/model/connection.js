@@ -3,7 +3,7 @@ const { Type } = require('../utils')
 
 const type = {
   mysql: Type([
-    ['id', 'string'],
+    ['name', 'string'],
     ['host', true, 'string'],
     ['port', 'string'],
     ['user', true, 'string'],

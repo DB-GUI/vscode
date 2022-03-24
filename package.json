@@ -42,9 +42,14 @@
 		"commands": [
 			{
 				"command": "ppz.addConnection",
-				"title": "创建连接",
+				"title": "Add Connection",
 				"icon": "$(add)",
-				"category": "ppz"
+				"category": "PPZ"
+			}, {
+				"command": "ppz.empty",
+				"title": "Empty PPZ",
+				"icon": "$(trash)",
+				"category": "PPZ"
 			}
 		],
 		"menus": {

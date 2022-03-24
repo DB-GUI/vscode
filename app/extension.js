@@ -1,10 +1,6 @@
 const init = require('./service/init')
 
 exports.activate = async function(context) {
-  // const keys = context.globalState.keys()
-  // console.log(keys)
-  // keys.forEach(key => context.globalState.update(key, undefined))
-  // return
   console.debug('activating')
   globalThis.Context = context
   try {

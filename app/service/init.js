@@ -11,13 +11,24 @@ function registerCommand(name, handler) {
 }
 
 async function init() {
+  // 注册命令：清空数据
+  registerCommand('empty', async () => {
+    const keys = Context.globalState.keys()
+    await Promise.all(
+      keys.map(key =>
+        Context.globalState.update(key, undefined)
+      )
+    )
+    noty.info('数据已清空，请重启 vscode')
+  })
+
   if(system.newInstall()) {
     console.log('first install')
     await system.save({
       version: '0.0.0'
     })
   }
-
+  
   // 检查数据
   try {
     Collection.instances.forEach(ins => {
@@ -26,7 +37,7 @@ async function init() {
     })
   } catch(e) {
     noty.error('数据校验失败')
-    console.error(e)
+    throw e
   }
 
   const systemInfo = system.getAllData()

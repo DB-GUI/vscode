@@ -1,6 +1,6 @@
 const Webview = require('./index')
-const service = require('../service/connection')
-const { noty } = require('../utils')
+const service = require('../../service/connection')
+const { noty } = require('../../utils')
 
 module.exports = class UpsertConnectionWebview extends Webview {
   constructor() {

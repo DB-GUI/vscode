@@ -1,6 +1,6 @@
 const system = require('../model/system')
 const vscode = require('vscode')
-const UpsertConnectionWebview = require('../webview/upsert-connection')
+const UpsertConnectionWebview = require('../view/web/upsert-connection')
 const Collection = require('../model/collection/index')
 const { noty } = require('../utils')
 
@@ -30,15 +30,16 @@ async function init() {
   }
   
   // 检查数据
-  try {
-    Collection.instances.forEach(ins => {
-      const data = ins.getAllData()
+  Collection.instances.forEach(ins => {
+    const data = ins.getAllData()
+    try {
       ins.validate(data)
-    })
-  } catch(e) {
-    noty.error('数据校验失败')
-    throw e
-  }
+    } catch(e) {
+      noty.error('数据校验失败')
+      console.error('数据校验失败', data)
+      throw e
+    }
+  })
 
   const systemInfo = system.getAllData()
   console.log('system info', systemInfo)

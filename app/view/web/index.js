@@ -2,7 +2,7 @@ const Path = require('path')
 const fs = require('fs')
 const vscode = require('vscode')
 const { NilField, FieldWrongDetail } = require('@ppzp/type')
-const { noty } = require('../utils')
+const { noty } = require('../../utils')
 
 module.exports = class {
   constructor({
@@ -53,7 +53,7 @@ module.exports = class {
   }
 
   localPath(path) {
-    return Path.join(__dirname, '../../assets', path)
+    return Path.join(__dirname, '../../../assets', path)
   }
 
   uri(path) {

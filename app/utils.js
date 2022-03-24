@@ -29,3 +29,7 @@ exports.Type = function(list) {
 exports.proto = function(father, son) {
   return Object.assign(Object.create(father), son)
 }
+
+exports.clone = function(data) {
+  return JSON.parse(JSON.stringify(data))
+}

@@ -1,4 +1,4 @@
-const isNil = require('../../utils').isNil
+const { isNil, clone } = require('../../utils')
 
 class Collection {
   constructor(name) {
@@ -7,7 +7,7 @@ class Collection {
   }
   
   getAllData() {
-    let data = Context.globalState.get(this.name)
+    let data = clone(Context.globalState.get(this.name))
     if(isNil(data))
       data = this.initData()
     return data

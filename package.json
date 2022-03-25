@@ -28,7 +28,10 @@
 				{
 					"id": "connections",
 					"name": "连接",
-					"contextualTitle": "PPZ",
+					"icon": "assets/logo.svg"
+				}, {
+					"id": "about",
+					"name": "关于",
 					"icon": "assets/logo.svg"
 				}
 			]

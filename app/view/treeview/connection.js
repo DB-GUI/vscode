@@ -1,6 +1,6 @@
 const vscode = require('vscode')
-const connectionService = require('../service/connection')
-const { noty } = require('../utils')
+const connectionService = require('../../service/connection')
+const { noty } = require('../../utils')
 const Path = require('path')
 
 module.exports = function() {
@@ -71,6 +71,6 @@ async function getTreeItem({ treeItem: {
 }}) {
   const result = new vscode.TreeItem(label, collapsibleState)
   if(icon)
-    result.iconPath = Path.join(__filename, '../../../assets/icon', icon)
+    result.iconPath = Path.join(__filename, '../../../../assets/icon', icon)
   return result
 }

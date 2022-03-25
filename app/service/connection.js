@@ -29,6 +29,10 @@ class KnexConnection {
   async dbList() {
     throw Error('未实现 dbList 函数')
   }
+
+  async tbList() {
+    throw Error('未实现 tbList 函数')
+  }
 }
 
 class MysqlKnexConnection extends KnexConnection {
@@ -41,5 +45,11 @@ class MysqlKnexConnection extends KnexConnection {
   async dbList() {
     const result = await this.client.raw('show databases;')
     return result[0].map(item => item.Database)
+  }
+  
+  async tbList(database) {
+    await this.client.raw('use ' + database)
+    const result = await this.client.raw('show tables;')
+    return result[0].map(item => item['Tables_in_' + database])
   }
 }

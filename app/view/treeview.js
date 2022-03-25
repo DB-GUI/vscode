@@ -1,6 +1,7 @@
 const vscode = require('vscode')
 const connectionService = require('../service/connection')
 const { noty } = require('../utils')
+const Path = require('path')
 
 module.exports = function() {
   vscode.window.registerTreeDataProvider('connections', {
@@ -25,7 +26,7 @@ async function getChildren(el) {
           return dbList.map(name => El('database', { name }))
         } catch(err) {
           const msg = '连接建立失败，请检查连接信息和数据库服务器的设置'
-          console.error(msg, el.data)
+          console.error(msg, el.data, err)
           noty.error(msg)
           return []
         }
@@ -48,7 +49,7 @@ async function getChildren(el) {
 async function getTreeItem(el) {
   switch(el.type) {
     case 'connection':
-      return new ConnectionTreeItem(el.data.name)
+      return new ConnectionTreeItem(el.data)
     case 'database':
       return new DatabaseTreeItem(el.data.name)
     default:
@@ -56,19 +57,25 @@ async function getTreeItem(el) {
   }
 }
 
-
+function localPath(target) {
+  return Path.join(__filename, '../../../assets/icon', target)
+}
 class TreeItem extends vscode.TreeItem {
   constructor(label, collapsibleState = vscode.TreeItemCollapsibleState.Collapsed) {
     super(label, collapsibleState)
   }
 }
+
 class ConnectionTreeItem extends TreeItem {
-  constructor(name) {
+  constructor({ name, client }) {
     super(name || '未命名连接')
+    this.iconPath = localPath(`dbms/${client}.svg`)
   }
 }
 class DatabaseTreeItem extends TreeItem {
   constructor(label) {
     super(label)
+    
+    this.iconPath = localPath('database.svg')
   }
 }

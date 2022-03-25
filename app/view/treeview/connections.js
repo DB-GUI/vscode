@@ -3,16 +3,11 @@ const connectionService = require('../../service/connection')
 const { noty } = require('../../utils')
 const Path = require('path')
 
-module.exports = function() {
-  vscode.window.registerTreeDataProvider('connections', {
-    getChildren, getTreeItem
-  })
-}
-
 function El(type, treeItem, connection, data) {
   return { type, treeItem, connection, data }
 }
-async function getChildren(el) {
+
+exports.getChildren = async function(el) {
   try {
     if(!el) // root
       return connectionService.getAllData()
@@ -66,7 +61,7 @@ async function getChildren(el) {
   }
 }
 
-async function getTreeItem({ treeItem: {
+exports.getTreeItem = async function({ treeItem: {
   label, icon, collapsibleState = vscode.TreeItemCollapsibleState.Collapsed
 }}) {
   const result = new vscode.TreeItem(label, collapsibleState)

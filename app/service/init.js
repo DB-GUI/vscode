@@ -1,27 +1,12 @@
 const system = require('../model/system')
-const vscode = require('vscode')
-const UpsertConnectionWebview = require('../view/web/upsert-connection')
 const Collection = require('../model/collection/index')
 const initTreeview = require('../view/treeview')
+const initCommand = require('../command')
 const { noty } = require('../utils')
 
-function registerCommand(name, handler) {
-  Context.subscriptions.push(
-    vscode.commands.registerCommand('ppz.' + name, handler)
-  )
-}
-
 async function init() {
-  // 注册命令：清空数据
-  registerCommand('empty', async () => {
-    const keys = Context.globalState.keys()
-    await Promise.all(
-      keys.map(key =>
-        Context.globalState.update(key, undefined)
-      )
-    )
-    noty.info('数据已清空，请重启 vscode')
-  })
+  // 注册命令
+  initCommand()
 
   if(system.newInstall()) {
     console.log('first install')
@@ -45,12 +30,8 @@ async function init() {
   const systemInfo = system.getAllData()
   console.log('system info', systemInfo)
 
+  // 左侧的 treeview
   initTreeview()
-  
-  registerCommand('addConnection', () => {
-    console.debug('command: addConnection')
-    new UpsertConnectionWebview()
-  })
 }
 
 module.exports = init

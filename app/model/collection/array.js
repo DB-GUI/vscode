@@ -73,6 +73,6 @@ module.exports = class ArrayCollection extends Collection {
     if(index == -1)
       throw Error('deleting record which not exist')
     list.splice(index, 1)
-    this.save(list)
+    return super.save(list)
   }
 }

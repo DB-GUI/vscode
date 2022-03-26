@@ -61,10 +61,11 @@ exports.getChildren = async function(el) {
   }
 }
 
-exports.getTreeItem = async function({ treeItem: {
+exports.getTreeItem = async function({ type, treeItem: {
   label, icon, collapsibleState = vscode.TreeItemCollapsibleState.Collapsed
 }}) {
   const result = new vscode.TreeItem(label, collapsibleState)
+  result.contextValue = type
   if(icon)
     result.iconPath = Path.join(__filename, '../../../../assets/icon', icon)
   return result

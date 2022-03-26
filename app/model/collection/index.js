@@ -7,10 +7,10 @@ class Collection {
   }
   
   getAllData() {
-    let data = clone(Context.globalState.get(this.name))
+    let data = Context.globalState.get(this.name)
     if(isNil(data))
       data = this.initData()
-    return data
+    return clone(data)
   }
 
   initData() {

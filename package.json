@@ -3,6 +3,7 @@
 	"displayName": "ppz",
 	"description": "",
 	"version": "0.0.0",
+	"publisher": "ppzbaba",
 	"engines": {
 		"vscode": "^1.64.0"
 	},

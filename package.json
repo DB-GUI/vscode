@@ -27,7 +27,7 @@
 		"views": {
 			"ppz-container": [
 				{
-					"id": "connections",
+					"id": "connection",
 					"name": "连接",
 					"icon": "assets/logo.svg"
 				},
@@ -40,7 +40,7 @@
 		},
 		"viewsWelcome": [
 			{
-				"view": "connections",
+				"view": "connection",
 				"contents": "点击右上方 “+” 或下面按钮，以连接数据库\n[创建连接](command:ppz.addConnection)"
 			}
 		],
@@ -68,14 +68,14 @@
 			"view/title": [
 				{
 					"command": "ppz.addConnection",
-					"when": "view == connections",
+					"when": "view == connection",
 					"group": "navigation"
 				}
 			],
 			"view/item/context": [
 				{
 					"command": "ppz.deleteConnection",
-					"when": "view == connections && viewItem == connection",
+					"when": "view == connection && viewItem == connection",
 					"group": "inline"
 				}
 			]
@@ -86,6 +86,7 @@
 		"@types/vscode": "^1.65.0"
 	},
 	"dependencies": {
+		"@ppzp/mixin": "^0.0.0",
 		"@ppzp/type": "file:../type.js",
 		"knex": "^1.0.3",
 		"mysql2": "^2.3.3",

@@ -1,6 +1,6 @@
 const vscode = require('vscode')
-const connections = require('./connections')
+const connection = require('./connection')
 
 module.exports = function() {
-  vscode.window.registerTreeDataProvider('connections', connections)
+  vscode.window.registerTreeDataProvider('connection', connection.provider)
 }

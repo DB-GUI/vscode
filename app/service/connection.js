@@ -1,6 +1,7 @@
 const Knex = require('knex')
 const collection = require('../model/connection')
 const { clone } = require('../utils')
+const connectionTreeview = require('../view/treeview/connection')
 
 const service = module.exports = Object.create(collection)
 
@@ -13,6 +14,15 @@ service.connect = function(connection) {
     default:
       throw Error('意外的连接类型 ' + connection.client)
   }
+}
+
+service.upsert = async function(record) {
+  const rawId = record.id
+  const id = await collection.upsert(record)
+  if(rawId)
+    console.error('todo edit')
+  else
+    connectionTreeview.addConnection(collection.getByKey(id))
 }
 
 class KnexConnection {

@@ -17,6 +17,14 @@ exports.delete = function(el) {
     ? undefined : el.parent
   updateEvent.fire(updateTarget)
 }
+
+// 增加连接
+exports.addConnection = function(options) {
+  console.debug('treeview add connection', options)
+  root.children.push(new ConnectionElement(root, null, options))
+  updateEvent.fire()
+}
+
 // treeviewDataProvider
 const provider = exports.provider = {
   onDidChangeTreeData: updateEvent.event

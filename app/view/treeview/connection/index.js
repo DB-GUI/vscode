@@ -23,45 +23,48 @@ const provider = exports.provider = {
 }
 
 var root = new RootElement()
-provider.getChildren = async function(el) {
+provider.getChildren = async function(el = root) {
+  if(el.children)
+    return el.children
   try {
-    if(!el) // root
-      return root.children = connectionService.getAllData().map(
-        options => new ConnectionElement(root, null, options)
-      )
-    switch(el.type) {
-      case 'connection':
-        try {
-          if(!el.connection)
+    return el.children = await async function() {
+      switch(el.type) {
+        case 'root':
+          return connectionService.getAllData().map(
+            options => new ConnectionElement(root, null, options)
+          )
+        case 'connection':
+          try {
             el.connection = connectionService.connect(el.options)
-          const dbList = await el.connection.dbList()
-          return dbList.map(
-            name => new DatabaseElement(el, el.connection, name)
-          )
-        } catch(err) {
-          const msg = '连接建立失败，请检查连接信息和数据库服务器的设置'
-          console.error(msg, el.options, err)
-          noty.error(msg)
+            const dbList = await el.connection.dbList()
+            return dbList.map(
+              name => new DatabaseElement(el, el.connection, name)
+            )
+          } catch(err) {
+            const msg = '连接建立失败，请检查连接信息和数据库服务器的设置'
+            console.error(msg, el.options, err)
+            noty.error(msg)
+            return []
+          }
+        case 'database':
+          try {
+            const tbList = await el.connection.tbList(el.name)
+            return tbList.map(
+              name => new TableElement(el, el.connection, name)
+            )
+          } catch(err) {
+            const msg = '获取 table 列表时发生异常，可尝试刷新连接'
+            console.error(msg, `[database ${el.name}]`, err)
+            noty.error(msg)
+            return []
+          }
+        default:
+          const msg = '意外的结点类型 ' + el.type
+          console.error(msg)
+          noty.fatal(msg)
           return []
-        }
-      case 'database':
-        try {
-          const tbList = await el.connection.tbList(el.name)
-          return tbList.map(
-            name => new TableElement(el, el.connection, name)
-          )
-        } catch(err) {
-          const msg = '获取 table 列表时发生异常，可尝试刷新连接'
-          console.error(msg, err)
-          noty.error(msg)
-          return []
-        }
-      default:
-        const msg = '意外的结点类型 ' + el.type
-        console.error(msg)
-        noty.fatal(msg)
-        return []
-    }
+      }
+    }()
   } catch(err) {
     const msg = 'Treeview getChildren 时发生异常'
     console.error(msg, err)

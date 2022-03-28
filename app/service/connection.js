@@ -62,4 +62,10 @@ class MysqlKnexConnection extends KnexConnection {
     const result = await this.client.raw('show tables;')
     return result[0].map(item => item['Tables_in_' + database])
   }
+
+  async close() {
+    console.debug('connection closing...')
+    await this.client.destroy()
+    console.debug('connection closed')
+  }
 }

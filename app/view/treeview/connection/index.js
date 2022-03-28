@@ -13,6 +13,8 @@ exports.delete = function(el) {
   console.debug('删除结点', el)
   const siblings = el.parent.children
   siblings.splice(siblings.indexOf(el), 1)
+  if(el instanceof ConnectionElement && el.connection)
+    el.connection.close()
   const updateTarget = el.parent == root
     ? undefined : el.parent
   updateEvent.fire(updateTarget)

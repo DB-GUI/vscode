@@ -4,16 +4,9 @@ const mixin = require('@ppzp/mixin')
 function Element() {}
 const adam = new Element()
 
-const Parent = function() {
-  function Parent() {
-    this.children = null
-    this.findParent = findParent
-  }
-  function findParent(el) {
-
-  }
-  return Parent
-}()
+function Parent() {
+  this.children = null
+}
 
 function Child(parent, type, connection, treeItem) {
   this.parent = parent

@@ -10,14 +10,19 @@ const {
 const updateEvent = new vscode.EventEmitter()
 // 删除结点
 exports.delete = function(el) {
-  console.log('deleting ', el.options)
+  console.debug('删除结点', el)
+  const siblings = el.parent.children
+  siblings.splice(siblings.indexOf(el), 1)
+  const updateTarget = el.parent == root
+    ? undefined : el.parent
+  updateEvent.fire(updateTarget)
 }
 // treeviewDataProvider
 const provider = exports.provider = {
   onDidChangeTreeData: updateEvent.event
 }
 
-let root = new RootElement()
+var root = new RootElement()
 provider.getChildren = async function(el) {
   try {
     if(!el) // root

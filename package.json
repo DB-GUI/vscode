@@ -62,6 +62,24 @@
 				"title": "Empty PPZ",
 				"icon": "$(trash)",
 				"category": "PPZ"
+			},
+			{
+				"command": "ppz.refreshConnections",
+				"title": "Refresh Connections",
+				"icon": "$(refresh)",
+				"category": "PPZ"
+			},
+			{
+				"command": "ppz.refreshConnection",
+				"title": "Refresh Connection",
+				"icon": "$(refresh)",
+				"category": "PPZ"
+			},
+			{
+				"command": "ppz.refreshDatabase",
+				"title": "Refresh Database",
+				"icon": "$(refresh)",
+				"category": "PPZ"
 			}
 		],
 		"menus": {
@@ -70,12 +88,27 @@
 					"command": "ppz.addConnection",
 					"when": "view == connection",
 					"group": "navigation"
+				},
+				{
+					"command": "ppz.refreshConnections",
+					"when": "view == connection",
+					"group": "navigation"
 				}
 			],
 			"view/item/context": [
 				{
 					"command": "ppz.deleteConnection",
 					"when": "view == connection && viewItem == connection",
+					"group": "inline"
+				},
+				{
+					"command": "ppz.refreshConnection",
+					"when": "view == connection && viewItem == connection",
+					"group": "inline"
+				},
+				{
+					"command": "ppz.refreshDatabase",
+					"when": "view == connection && viewItem == database",
 					"group": "inline"
 				}
 			]

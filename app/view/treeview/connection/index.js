@@ -29,19 +29,50 @@ exports.addConnection = function(options) {
 
 // 刷新
 exports.refreshConnections = async function() {
-  console.debug('connection refreshing')
+  console.debug('connections refreshing')
   for(const conn of root.children)
     if(conn.connection)
       await conn.connection.close()
   root.children = null
   updateEvent.fire()
+  console.debug('connections refreshed')
+}
+exports.refreshConnection = async function(connEl) {
+  console.debug('connection refreshing')
+  if(!connEl) {
+    noty.error('请从左侧 treeview 面板刷新连接')
+    return
+  }
+  if(!(connEl instanceof ConnectionElement)) {
+    const msg = '意外的结点类型 ' + connEl.type
+    console.error(msg, Error(msg))
+    noty.fatal(msg)
+    return
+  }
+  if(connEl.connection) {
+    await connEl.connection.close()
+    connEl.connection = null
+    connEl.children = null
+    updateEvent.fire(connEl)
+  } else
+    console.debug('没连的，就不刷新了')
   console.debug('connection refreshed')
 }
-exports.refreshConnection = function(connEl) {
-  
-}
 exports.refreshDatabase = function(dbEl) {
-  
+  console.debug('database refreshing')
+  if(!dbEl) {
+    noty.error('请从左侧 treeview 面板刷新数据库')
+    return
+  }
+  if(!(dbEl instanceof DatabaseElement)) {
+    const msg = '意外的结点类型 ' + dbEl.type
+    console.error(msg, Error(msg))
+    noty.fatal(msg)
+    return
+  }
+  dbEl.children = null
+  updateEvent.fire(dbEl)
+  console.debug('database refreshed')
 }
 
 // treeviewDataProvider

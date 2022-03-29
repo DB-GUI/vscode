@@ -26,8 +26,9 @@ service.upsert = async function(record) {
 }
 
 class KnexConnection {
-  constructor(clientType, connection) {
+  constructor(clientType, name, connection) {
     this.clientType = clientType
+    this.name = name
     this.client = Knex({
       client: clientType,
       connection,
@@ -52,8 +53,8 @@ class KnexConnection {
 }
 
 class MysqlKnexConnection extends KnexConnection {
-  constructor({ host, port, user, password, database }) {
-    super('mysql2', {
+  constructor({ name, host, port, user, password, database }) {
+    super('mysql2', name, {
       host, port, user, password, database
     })
   }

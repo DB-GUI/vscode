@@ -10,7 +10,7 @@ module.exports = class {
     category = 'ppz',
     title = 'ppz'
   }) {
-    console.debug('constructing add-connection.html webview')
+    console.debug('webview constructing', filename)
     const path = this.localPath('pages/' + filename + '/index.html')
     console.debug(path)
     fs.readFile(path, (err, data) => {
@@ -43,7 +43,7 @@ module.exports = class {
     this.onMessage('dispose', () => {
       this.panel.dispose()
     })
-    console.debug('constructed add-connection.html webview')
+    console.debug('webview constructed')
   }
 
   webviewUri(path) {

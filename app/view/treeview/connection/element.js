@@ -49,6 +49,11 @@ function TableElement(parent, connection, tableName) {
   mixin(this, Child, [parent, connection, {
     label: tableName,
     icon: 'table.svg',
+    command: {
+      command: 'ppz.openTable',
+      title: 'Open Table',
+      arguments: [this]
+    },
     collapsibleState: vscode.TreeItemCollapsibleState.None
   }])
   this.name = tableName

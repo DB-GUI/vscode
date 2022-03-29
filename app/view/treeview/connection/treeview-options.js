@@ -67,12 +67,15 @@ module.exports = function(root, updateEvent) {
   }
   
   async function getTreeItem({ type, treeItem: {
-    label, icon, collapsibleState = vscode.TreeItemCollapsibleState.Collapsed
+    label, icon, command,
+    collapsibleState = vscode.TreeItemCollapsibleState.Collapsed
   }}) {
     const result = new vscode.TreeItem(label, collapsibleState)
     result.contextValue = type
     if(icon)
       result.iconPath = Path.join(__filename, '../../../../../assets/icon', icon)
+    if(command)
+      result.command = command
     return result
   }
 }

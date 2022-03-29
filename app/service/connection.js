@@ -22,7 +22,7 @@ service.upsert = async function(record) {
   if(rawId)
     console.error('todo edit')
   else
-    connectionTreeview.addConnection(collection.getByKey(id))
+    connectionTreeview.add(collection.getByKey(id))
 }
 
 class KnexConnection {

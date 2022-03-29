@@ -15,7 +15,7 @@ exports.deleteConnection = async function(el) {
   if(el && el.type == 'connection' && el.options && el.options.id) {
     try {
       await service.drop(el.options.id) // 从数据库删除
-      connectionTreeview.delete(el) // 更新 treeview
+      connectionTreeview.drop(el) // 更新 treeview
     } catch(err) {
       const msg = '连接删除时发生意外'
       console.error(msg, err)

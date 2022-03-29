@@ -27,6 +27,23 @@ exports.addConnection = function(options) {
   updateEvent.fire()
 }
 
+// 刷新
+exports.refreshConnections = async function() {
+  console.debug('connection refreshing')
+  for(const conn of root.children)
+    if(conn.connection)
+      await conn.connection.close()
+  root.children = null
+  updateEvent.fire()
+  console.debug('connection refreshed')
+}
+exports.refreshConnection = function(connEl) {
+  
+}
+exports.refreshDatabase = function(dbEl) {
+  
+}
+
 // treeviewDataProvider
 const provider = exports.provider = {
   onDidChangeTreeData: updateEvent.event

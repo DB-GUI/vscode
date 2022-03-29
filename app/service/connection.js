@@ -43,6 +43,12 @@ class KnexConnection {
   async tbList() {
     throw Error('未实现 tbList 函数')
   }
+
+  async close() {
+    console.debug('connection closing...')
+    await this.client.destroy()
+    console.debug('connection closed')
+  }
 }
 
 class MysqlKnexConnection extends KnexConnection {
@@ -61,11 +67,5 @@ class MysqlKnexConnection extends KnexConnection {
     await this.client.raw('use ' + database)
     const result = await this.client.raw('show tables;')
     return result[0].map(item => item['Tables_in_' + database])
-  }
-
-  async close() {
-    console.debug('connection closing...')
-    await this.client.destroy()
-    console.debug('connection closed')
   }
 }

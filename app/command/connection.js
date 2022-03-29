@@ -7,6 +7,10 @@ exports.addConnection = function() {
   new UpsertConnectionWebview()
 }
 
+exports.refreshConnections = connectionTreeview.refreshConnections
+exports.refreshConnection = connectionTreeview.refreshConnection
+exports.refreshDatabase = connectionTreeview.refreshDatabase
+
 exports.deleteConnection = async function(el) {
   if(el && el.type == 'connection' && el.options && el.options.id) {
     try {

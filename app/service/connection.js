@@ -37,12 +37,19 @@ class KnexConnection {
     })
   }
   
+  async select(database, table, params) {
+    console.debug('sql select', arguments)
+    return await this.client.select(...params.fields).from(`${database}.${table}`)
+  }
+
   async dbList() {
     throw Error('未实现 dbList 函数')
   }
-
   async tbList() {
     throw Error('未实现 tbList 函数')
+  }
+  async fieldList() {
+    throw Error('未实现 fieldList 函数')
   }
 
   async close() {
@@ -68,5 +75,15 @@ class MysqlKnexConnection extends KnexConnection {
     await this.client.raw('use ' + database)
     const result = await this.client.raw('show tables;')
     return result[0].map(item => item['Tables_in_' + database])
+  }
+
+  async fieldList(database, table) {
+    const result = await this.client.raw(`desc ${database}.${table}`)
+    return result[0].map(field => ({
+      name: field.Field,
+      type: field.Type,
+      notNull: field.Null == 'NO',
+      default: field.Default
+    }))
   }
 }

@@ -1,6 +1,6 @@
 const vscode = require('vscode')
 const { noty } = require('../../../utils')
-const DataProvider = require('./data-provider')
+const TreeviewOptions = require('./treeview-options')
 const {
   RootElement, ConnectionElement, DatabaseElement
 } = require('./element')
@@ -9,8 +9,8 @@ const {
 const root = new RootElement()
 // 更新 treeview
 const updateEvent = new vscode.EventEmitter()
-// treeviewDataProvider
-exports.provider = DataProvider(root, updateEvent)
+// treeview
+exports.treeviewOptions = TreeviewOptions(root, updateEvent)
 
 // 删除结点
 exports.drop = function(el) {

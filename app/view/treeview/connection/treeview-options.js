@@ -8,9 +8,12 @@ const {
 
 module.exports = function(root, updateEvent) {
   return {
-    onDidChangeTreeData: updateEvent.event,
-    getChildren,
-    getTreeItem
+    showCollapseAll: true,
+    treeDataProvider: {
+      onDidChangeTreeData: updateEvent.event,
+      getChildren,
+      getTreeItem
+    }
   }
 
   async function getChildren(el = root) {

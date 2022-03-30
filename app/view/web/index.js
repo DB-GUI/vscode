@@ -11,7 +11,7 @@ module.exports = class {
     title = 'ppz'
   }) {
     console.debug('webview constructing', filename)
-    const path = this.localPath('pages/' + filename + '/index.html')
+    const path = this.localPath('webview/pages/' + filename + '/index.html')
     console.debug(path)
     fs.readFile(path, (err, data) => {
       if(err) {
@@ -48,7 +48,7 @@ module.exports = class {
 
   webviewUri(path) {
     return this.panel.webview.asWebviewUri(vscode.Uri.file(
-      Path.join(Context.extensionPath, 'assets', path)
+      Path.join(Context.extensionPath, 'assets/webview', path)
     ))
   }
 
@@ -106,7 +106,7 @@ module.exports = class {
       <html>
         <head>
           <title>${title}</title>
-          <link rel="stylesheet" href="${this.webviewUri('pages/style/index.css')}">
+          <link rel="stylesheet" href="${this.webviewUri('style/index.css')}">
         </head>
         <body>
           ${body}

@@ -1,4 +1,4 @@
-import $ from '../script/ppz-query.js'
+import $ from '../../script/ppz-query.js'
 const $body = $('body')
 
 var $$params = new function() {

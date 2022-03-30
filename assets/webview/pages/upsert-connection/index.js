@@ -1,5 +1,5 @@
-import $ from '../script/ppz-query.js'
-import twb from '../script/two-way-data-binding.js'
+import $ from '../../script/ppz-query.js'
+import twb from '../../script/two-way-data-binding.js'
 const vscode = acquireVsCodeApi()
 
 const data = twb('form').subject

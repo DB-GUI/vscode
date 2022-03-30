@@ -96,6 +96,10 @@ module.exports = class {
     noty.error('未知错误 ' + err.toString())
   }
 
+  getInitData() {
+    return {}
+  }
+
   tmpl({
     filename,
     title,
@@ -110,6 +114,11 @@ module.exports = class {
         </head>
         <body>
           ${body}
+          <script>
+            window.PPZ = {
+              initData: ${JSON.stringify(this.getInitData())}
+            }
+          </script>
           <script type="module" src="${this.webviewUri(`pages/${filename}/index.js`)}"></script>
         </body>
       </html>

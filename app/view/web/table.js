@@ -16,6 +16,15 @@ module.exports = class TableWebview extends Webview {
     console.debug('TableWebview constructed')
   }
 
+  getInitData() {
+    return {
+      connection: this.connection.name,
+      database: this.databaseName,
+      table: this.tableName,
+      connectionOptions: this.connection.options
+    }
+  }
+  
   async refresh() {
     await this.loadFieldsAndData()
     noty.info('数据已刷新')

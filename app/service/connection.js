@@ -29,6 +29,7 @@ class KnexConnection {
   constructor(clientType, name, connection) {
     this.clientType = clientType
     this.name = name
+    this.options = connection
     this.client = Knex({
       client: clientType,
       connection,

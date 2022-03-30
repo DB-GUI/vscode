@@ -2,6 +2,16 @@ import $ from '../../script/ppz-query.js'
 import Checkbox from '../../cmps/checkbox.js'
 import Button from '../../cmps/button.js'
 
+const header = new function() {
+  this.$el = $.El('header', '', [
+    $.Span(PPZ.initData.connection),
+    $.Icon('arrow-right'),
+    $.Span(PPZ.initData.database),
+    $.Icon('arrow-right'),
+    $.Span(PPZ.initData.table)
+  ])
+}
+
 var $$params = new function() {
   // 获取参数
   this.get = function() {
@@ -49,6 +59,7 @@ var $$btns = new function() {
 }
 
 $('body').append(
+  header.$el,
   $$params.$el,
   $$btns.$el
 )

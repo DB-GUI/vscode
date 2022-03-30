@@ -1,65 +1,62 @@
 import $ from '../../script/ppz-query.js'
-import Checkbox from '../../cmps/checkbox.js'
-import Button from '../../cmps/button.js'
 
 const header = new function() {
   this.$el = $.El('header', '', [
-    $.Span(PPZ.initData.connection),
-    $.Icon('arrow-right'),
-    $.Span(PPZ.initData.database),
-    $.Icon('arrow-right'),
-    $.Span(PPZ.initData.table)
+    $.El('nav', '', [
+      $.Span(PPZ.initData.connection),
+      $.Icon('arrow-right2'),
+      $.Span(PPZ.initData.database),
+      $.Icon('arrow-right2'),
+      $.Span(PPZ.initData.table)
+    ]),
+    $.Div('operations', [
+      $.Div('btns', [
+        // 通过事件来传达各种状态
+        Button('查询', function() {
+        }),
+        function() {
+          const $el = Button('字段', function() {
+          })
+          return $el
+        }(),
+        function() {
+          const $el = Button('新增', function() {
+          })
+          return $el
+        }(),
+        function() {
+          const $el = Button('删除', function() {
+          })
+          return $el
+        }(),
+        function() {
+          const $el = Button('保存', function() {
+          })
+          return $el
+        }(),
+        function() {
+          const $el = Button('取消', function() {
+          })
+          return $el
+        }()
+      ]),
+    ])
   ])
-}
-
-var $$params = new function() {
-  // 获取参数
-  this.get = function() {
-    return {
-      fields: $$fields.get(),
-    }
-  }
-  // 字段列表
-  var $$fields = new function() {
-    let items = [] // Field 组件们
-    this.$el = $.Div('fields')
-    // 字段类
-    const Field = function() {
-      function Field(options) {
-        const field = new Checkbox(options.name, true, options.name + ': ' + options.type)
-        field.options = options
-        // field.method = ...
-        return field
-      }
-      // function method() {}
-      return Field
-    }()
-    // 获取已选字段
-    this.get = () => items
-      .filter(field => field.checked())
-      .map(field => field.options.name)
-    $.msg('fields', fields => {
-      items = fields.map(f => new Field(f))
-      this.$el.replaceChildren(...items.map(item => item.$el))
-    })
-  }
   
-  this.$el = $.Div('params', [
-    $$fields.$el
-  ])
-}
-
-var $$btns = new function() {
-  const select = new Button('查询', function() {
-    console.log($$params.get())
-  })
-  this.$el = $.Div('btns', [
-    select
-  ])
+  function Button(label, icon, handler) {
+    if(!handler) {
+      handler = icon
+      icon = undefined
+    }
+    const children = [$.Span(label)]
+    if(icon)
+      children.unshift($.Icon(icon))
+    const el = $.Div('', children)
+    el.onclick = handler
+    return el
+  }
 }
 
 $('body').append(
   header.$el,
-  $$params.$el,
-  $$btns.$el
 )

@@ -6,9 +6,10 @@ html, body {
   padding: 0;
 }
 body {
-  --border: 1px solid var(--vscode-panel-border);
+  --border: 1px solid #77777777;
   --border-focus: 1px solid var(--vscode-focusBorder);
   --border-radius: .25rem;
+  --box-shadow: 0 0 8px 2px rgb(0 0 0 / 18%);
   line-height: 1;
 }
 

@@ -1,0 +1,11 @@
+.checkbox {
+  border: var(--border);
+  border-radius: var(--border-radius);
+  display: inline-flex;
+  align-items: center;
+  padding: .5em .38em;
+}
+.checkbox input {
+  margin: 0;
+  margin-right: .1em;
+}

@@ -1,7 +1,15 @@
 @import url('./flex-container.css');
+@import url('./checkbox.css');
 
+html, body {
+  margin: 0;
+  padding: 0;
+}
 body {
-  --color1: #77777777;
+  --border: 1px solid var(--vscode-panel-border);
+  --border-focus: 1px solid var(--vscode-focusBorder);
+  --border-radius: .25rem;
+  line-height: 1;
 }
 
 form input {
@@ -13,11 +21,11 @@ form input {
   outline: none !important;
 }
 form input:focus {
-  border: 1px solid var(--vscode-focusBorder);
+  border: var(--border-focus);
 }
 
 fieldset {
-  border: 1px solid var(--vscode-panel-border);
+  border: var(--border);
   margin: 0;
   padding: 1rem 1rem 1.6rem;
 }

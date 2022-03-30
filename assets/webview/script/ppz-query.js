@@ -14,6 +14,9 @@ $.El = function(tagname, className, children) {
     $el.append(...children)
   return $el
 }
+$.Div = function(className, children) {
+  return $.El('div', className, children)
+}
 
 $.clone = function(data) {
   const result = {}

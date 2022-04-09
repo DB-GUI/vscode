@@ -12,30 +12,30 @@ const header = new function() {
     $.Div('operations', [
       $.Div('btns', [
         // 通过事件来传达各种状态
-        Button('查询', function() {
+        Button('查询', 'light', function() {
         }),
         function() {
-          const $el = Button('字段', function() {
+          const $el = Button('字段', 'filter', function() {
           })
           return $el
         }(),
         function() {
-          const $el = Button('新增', function() {
+          const $el = Button('新增', 'add', function() {
           })
           return $el
         }(),
         function() {
-          const $el = Button('删除', function() {
+          const $el = Button('删除', 'delete', function() {
           })
           return $el
         }(),
         function() {
-          const $el = Button('保存', function() {
+          const $el = Button('保存', 'save', function() {
           })
           return $el
         }(),
         function() {
-          const $el = Button('取消', function() {
+          const $el = Button('取消', 'return', function() {
           })
           return $el
         }()
@@ -43,15 +43,9 @@ const header = new function() {
     ])
   ])
   
-  function Button(label, icon, handler) {
-    if(!handler) {
-      handler = icon
-      icon = undefined
-    }
-    const children = [$.Span(label)]
-    if(icon)
-      children.unshift($.Icon(icon))
-    const el = $.Div('', children)
+  function Button(title, icon, handler) {
+    const el = $.Div('', [$.Icon(icon)])
+    el.title = title
     el.onclick = handler
     return el
   }

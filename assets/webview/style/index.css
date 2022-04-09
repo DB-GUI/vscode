@@ -6,7 +6,9 @@ html, body {
   padding: 0;
 }
 body {
-  --border: 1px solid #77777777;
+  --that-color: #77777777;
+  --that-color2: #77777718;
+  --border: 1px solid var(--that-color);
   --border-focus: 1px solid var(--vscode-focusBorder);
   --border-radius: .25rem;
   --box-shadow: 0 0 8px 2px rgb(0 0 0 / 18%);

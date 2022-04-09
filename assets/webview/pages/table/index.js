@@ -53,11 +53,11 @@ const header = new function() {
 
 const table = new function() {
   const table = new $.Table()
-  this.$el = table.$el
+  this.$el = $.Div('table-wrapper', [table.$el])
 
   $.msg('fields', fields => {
     this.fields = fields
-    table.thead(fields.map(f => f.name))
+    table.thead([$.El('th', 'pre-unit'), ...fields.map(f => f.name)])
   })
 
   $.msg('data', data => {
@@ -67,7 +67,7 @@ const table = new function() {
       const row = []
       for(const f of this.fields)
         row.push(record[f.name])
-      return row
+      return [$.El('th', 'pre-unit'), ...row]
     }))
   })
 }

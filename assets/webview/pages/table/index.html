@@ -1,9 +1,12 @@
 <style>
   body {
-    padding: 0 .88em;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    --padding-h: .88em;
   }
   header nav{
-    padding: .38em 0;
+    padding: .38em var(--padding-h);
   }
   header nav span {
     font-size: .9em;
@@ -13,8 +16,7 @@
   }
   
   header .operations {
-    margin: 0 -.88em;
-    padding: 0 .88em;
+    padding: 0 var(--padding-h);
 
     background: var(--vscode-button-background);
     display: flex;
@@ -24,11 +26,41 @@
   header .operations .btns > div {
     display: inline-block;
     line-height: 2;
-    padding: 0 .68em;
+    padding: 0 .58em;
     cursor: pointer;
     color: var(--vscode-button-foreground);
   }
   header .operations .btns > div:hover {
     background: var(--vscode-button-hoverBackground);
+  }
+
+  .table-wrapper {
+    flex: 1;
+    overflow: auto;
+  }
+  table {
+    border-collapse: collapse;
+    min-width: 100%;
+  }
+  .pre-unit {
+    width: var(--padding-h);
+  }
+  thead {
+    position: sticky;
+    top: 0;
+    background: #77777738;
+  }
+  tbody tr:nth-child(even) {
+    background: var(--that-color2);
+  }
+  th, td {
+    max-width: 20em;
+    line-height: 2;
+  }
+  th {
+    text-align: left;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
   }
 </style>

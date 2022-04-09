@@ -1,4 +1,5 @@
 import './iconfont.js'
+import el from './el.js'
 
 /** @returns {HTMLElement} */
 export default function $(selector) {
@@ -7,30 +8,7 @@ export default function $(selector) {
   return selector
 }
 
-$.El = function(tagname, className, children) {
-  /** @type {HTMLElement} */
-  const $el = document.createElement(tagname)
-  if(className)
-    $el.className = className
-  if(children)
-    $el.append(...children)
-  return $el
-}
-$.Div = function(className, children) {
-  return $.El('div', className, children)
-}
-$.Span = function(txt, className = '') {
-  return $.El('span', className, [txt])
-}
-$.Icon = function(id) {
-  const wrapper = $.Div()
-  wrapper.innerHTML = `
-    <svg class="icon" aria-hidden="true">
-      <use xlink:href="#icon-${id}"></use>
-    </svg>
-  `
-  return wrapper.children[0]
-}
+el($)
 
 $.clone = function(data) {
   const result = {}

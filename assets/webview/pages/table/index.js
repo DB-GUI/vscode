@@ -51,6 +51,28 @@ const header = new function() {
   }
 }
 
+const table = new function() {
+  const table = new $.Table()
+  this.$el = table.$el
+
+  $.msg('fields', fields => {
+    this.fields = fields
+    table.thead(fields.map(f => f.name))
+  })
+
+  $.msg('data', data => {
+    // 在 webview 里确定先发 fields，后发 data
+    this.data = data
+    table.tbody(data.map(record => {
+      const row = []
+      for(const f of this.fields)
+        row.push(record[f.name])
+      return row
+    }))
+  })
+}
+
 $('body').append(
   header.$el,
+  table.$el
 )

@@ -76,7 +76,7 @@ module.exports = class {
 
   sendMessage(type, data) {
     const msg = { type, data }
-    console.debug('sending message to webview', msg)
+    console.debug('sending message to webview', { type })
     this.panel.webview.postMessage(msg)
   }
 

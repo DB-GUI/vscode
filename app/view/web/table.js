@@ -1,9 +1,10 @@
 const Webview = require('./index')
 const { noty } = require('../../utils')
+const TableTreeviewElement = require('../treeview/connection/element').TableElement
 
-module.exports = class TableWebview extends Webview {
+class TableWebview extends Webview {
   constructor(databaseName, tableName, connection) {
-    console.debug('TableWebview constructing', databaseName, tableName)
+    console.debug('TableWebview constructing', { databaseName, tableName })
     super({
       filename: 'table',
       title: tableName
@@ -42,4 +43,24 @@ module.exports = class TableWebview extends Webview {
     const data = await this.connection.select(this.databaseName, this.tableName, params)
     this.sendMessage('data', data)
   }
+}
+
+const map = new Map()
+
+module.exports = function openTableWebview(tableEl) {
+  if(!(tableEl instanceof TableTreeviewElement))
+    throw Error('cant create a TableWebview from a non-TableTreeviewElement')
+  
+  if(map.has(tableEl)) {
+    console.debug('[openTableWebview] reveal tableWebview')
+    map.get(tableEl).panel.reveal()
+    return
+  }
+
+  console.debug('[openTableWebview] create tableWebview')
+  const view = new TableWebview(tableEl.parent.name, tableEl.name, tableEl.connection)
+  map.set(tableEl, view)
+  view.panel.onDidDispose(() => {
+    map.delete(tableEl)
+  }, null, Context.subscriptions)
 }

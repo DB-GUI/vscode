@@ -1,15 +1,11 @@
 const UpsertConnectionWebview = require('../view/web/upsert-connection')
-const TableWebview = require('../view/web/table')
+const openTableWebview = require('../view/web/table')
 const service = require('../service/connection')
 const { noty } = require('../utils')
 const connectionTreeview = require('../view/treeview/connection')
 
-const tableMap = new Map()
-exports.openTable = function(tbEl) {
-  if(!tableMap.has(tbEl))
-    tableMap.set(tbEl, new TableWebview(tbEl.parent.name, tbEl.name, tbEl.connection))
-  tableMap.get(tbEl).open()
-}
+exports.openTable = openTableWebview
+
 exports.addConnection = function() {
   new UpsertConnectionWebview()
 }

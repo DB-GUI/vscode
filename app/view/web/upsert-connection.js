@@ -3,14 +3,19 @@ const service = require('../../service/connection')
 const { noty } = require('../../utils')
 
 module.exports = class UpsertConnectionWebview extends Webview {
-  constructor() {
+  constructor(record) {
     super({
       filename: 'upsert-connection',
-      title: '创建连接'
+      title: record ? '更新连接' : '创建连接'
     })
+    this.data = record
     this.onMessage('save', data => this.save(data))
   }
-
+  
+  getInitData() {
+    return this.data
+  }
+  
   async save(data) {
     try {
       await service.upsert(data.connection)

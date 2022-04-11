@@ -52,6 +52,12 @@
 				"category": "PPZ"
 			},
 			{
+				"command": "ppz.editConnection",
+				"title": "Edit Connection",
+				"icon": "$(edit)",
+				"category": "PPZ"
+			},
+			{
 				"command": "ppz.deleteConnection",
 				"title": "删除连接",
 				"icon": "$(trash)",
@@ -98,6 +104,11 @@
 			"view/item/context": [
 				{
 					"command": "ppz.deleteConnection",
+					"when": "view == connection && viewItem == connection",
+					"group": "inline"
+				},
+				{
+					"command": "ppz.editConnection",
 					"when": "view == connection && viewItem == connection",
 					"group": "inline"
 				},

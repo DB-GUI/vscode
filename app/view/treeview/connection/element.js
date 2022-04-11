@@ -31,9 +31,18 @@ function ConnectionElement(parent, connection, options) {
     icon: `dbms/${options.client}.svg`
   }])
   this.options = options
+  ConnectionElement.instance.push(this)
 }
+ConnectionElement.instance = []
 ConnectionElement.prototype = Object.create(adam)
 ConnectionElement.prototype.type = 'connection'
+ConnectionElement.prototype.updateOptions = function(options) {
+  this.treeItem = {
+    label: options.name || '未命名连接',
+    icon: `dbms/${options.client}.svg`
+  }
+  this.options = options
+}
 
 function DatabaseElement(parent, connection, databaseName) {
   mixin(this, Happy, [parent, connection, {

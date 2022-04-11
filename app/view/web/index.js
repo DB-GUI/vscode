@@ -115,6 +115,7 @@ module.exports = class {
         <body>
           ${body}
           <script>
+            window.VSCODE = acquireVsCodeApi()
             window.PPZ = {
               initData: ${JSON.stringify(this.getInitData())}
             }

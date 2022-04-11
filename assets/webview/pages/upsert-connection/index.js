@@ -1,29 +1,44 @@
 import $ from '../../script/ppz-query.js'
 import twb from '../../script/two-way-data-binding.js'
-const vscode = acquireVsCodeApi()
+import Page from '../../script/page.js'
 
-const data = twb('form').subject
-
-$('form').onsubmit = function(evt) {
-  switch(evt.submitter.id) {
-    case 'connect':
-      save(true)
-      break
-    case 'save':
-      save()
-      break
-  }
-  evt.preventDefault()
-}
-
-function save(connect) {
-  console.debug('保存连接', { connect })
-  data.client = 'mysql'
-  vscode.postMessage({
-    type: 'save',
-    data: {
-      connect,
-      connection: data
+new Page({
+  initState() {
+    return {
+      data: PPZ.initData
     }
-  })
-}
+  },
+  init() {
+    const { subject: data, items} = twb('form', this.state.data.value)
+    this.state.data = data
+    for(const key in items)
+      // 每一个 key 值变化，都更新 state.data
+      items[key].push(() =>
+        this.saveState()
+      )
+
+    $('form').onsubmit = function(evt) {
+      switch(evt.submitter.id) {
+        case 'connect':
+          save(true)
+          break
+        case 'save':
+          save()
+          break
+      }
+      evt.preventDefault()
+    }
+    
+    function save(connect) {
+      console.debug('保存连接', { connect })
+      data.client = 'mysql'
+      VSCODE.postMessage({
+        type: 'save',
+        data: {
+          connect,
+          connection: data
+        }
+      })
+    }
+  }
+})

@@ -55,9 +55,9 @@ exports.refreshConnection = async function(connEl) {
     return
   }
   if(connEl.connection) {
-    await connEl.connection.close()
-    connEl.connection = null
-    connEl.children = null
+    await connEl.connection.close() // 关闭连接
+    connEl.connection = null // 丢掉连接
+    connEl.children = null // 抛弃子节点
     updateEvent.fire(connEl)
   } else
     console.debug('没连的，就不刷新了')
@@ -79,4 +79,19 @@ exports.refreshDatabase = function(dbEl) {
   dbEl.children = null
   updateEvent.fire(dbEl)
   console.debug('database refreshed')
+}
+
+// 更新 connection
+exports.updateConnection = async function(record) {
+  for(const el of ConnectionElement.instance)
+    if(el.options.id == record.id) {
+      el.updateOptions(record)
+      if(el.connection) {
+        // 把已连接的关上
+        await el.connection.close() // 关闭连接
+        el.connection = null // 丢掉连接
+        el.children = null // 抛弃子节点
+      }
+      updateEvent.fire(el)
+    }
 }

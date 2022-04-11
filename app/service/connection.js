@@ -20,7 +20,7 @@ service.upsert = async function(record) {
   const rawId = record.id
   const id = await collection.upsert(record)
   if(rawId)
-    console.error('todo edit')
+    connectionTreeview.updateConnection(record)
   else
     connectionTreeview.add(collection.getByKey(id))
 }

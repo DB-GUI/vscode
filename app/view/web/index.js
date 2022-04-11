@@ -84,7 +84,7 @@ module.exports = class {
     if(err instanceof FieldWrongDetail) {
       noty.error('保存失败：' + err.name + (
         err.type == NilField
-        ? ' 不可为空'
+        ? ' 未填写'
         : ' 格式错误'
       ))
     } else

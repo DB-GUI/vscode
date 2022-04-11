@@ -16,11 +16,7 @@ exports.isNil =
   target => target == null || target == undefined
 
 exports.Type = function(list) {
-  return new Type(list.map(function([ name, notNull, validate ]) {
-    if(exports.isNil(validate)) {
-      validate = notNull
-      notNull = undefined
-    }
+  return new Type(list.map(function([ name, validate, notNull ]) {
     return {
       name, validate, notNull
     }

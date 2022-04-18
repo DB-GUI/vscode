@@ -1,4 +1,4 @@
-import Connection from './index'
+import Connection from './index.js'
 
 export default class MysqlConnection extends Connection {
   constructor() {

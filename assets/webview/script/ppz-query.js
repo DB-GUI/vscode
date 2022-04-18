@@ -8,12 +8,15 @@ export default function $(selector) {
 }
 
 import { El, Span, Div, Icon } from './el/index.js'
+import Form from './el/form/index.js'
 import { Table, THead, TBody } from './el/table/index.js'
 
 $.El = El
 $.Div = Div
 $.Span = Span
 $.Icon = Icon
+
+$.Form = Form
 
 $.Table = Table
 $.THead = THead

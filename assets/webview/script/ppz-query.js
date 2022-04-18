@@ -1,5 +1,4 @@
 import './iconfont.js'
-import el from './el.js'
 
 /** @returns {HTMLElement} */
 export default function $(selector) {
@@ -8,7 +7,17 @@ export default function $(selector) {
   return selector
 }
 
-el($)
+import { El, Span, Div, Icon } from './el/index.js'
+import { Table, THead, TBody } from './el/table/index.js'
+
+$.El = El
+$.Div = Div
+$.Span = Span
+$.Icon = Icon
+
+$.Table = Table
+$.THead = THead
+$.TBody = TBody
 
 $.clone = function(data) {
   const result = {}

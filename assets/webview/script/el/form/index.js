@@ -9,8 +9,9 @@ const InputMap = {
 
 export default class Form {
   constructor(data, fields) {
-    this.inputs = {}
+    this.data = data
     this.fields = fields
+    this.inputs = {}
     this.elList = fields.map(field => {
       const input = new InputMap[field.type || 'input'](field, data)
       this.inputs[field.name] = input
@@ -25,6 +26,7 @@ export default class Form {
     })
   }
   init(data) {
+    this.data = data
     for(const f of this.fields)
       this.inputs[f.name].init(data)
   }

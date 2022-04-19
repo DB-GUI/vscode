@@ -119,6 +119,7 @@ module.exports = class {
             window.PPZ = {
               initData: ${JSON.stringify(this.getInitData())}
             }
+            console.debug({ PPZ })
           </script>
           <script type="module" src="${this.webviewUri(`pages/${filename}/index.js`)}"></script>
         </body>

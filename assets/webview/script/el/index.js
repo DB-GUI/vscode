@@ -25,3 +25,9 @@ export function Icon(id) {
   `
   return wrapper.children[0]
 }
+
+export function Button(label, onclick) {
+  const button = El('button', '', [label])
+  button.onclick = onclick
+  return button
+}

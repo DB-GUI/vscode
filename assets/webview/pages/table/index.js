@@ -56,6 +56,7 @@ new Page({
       ])
       
       function Button(title, icon, handler) {
+        // TODO 此处的按钮应使用 button 而不是 div
         const el = $.Div('', [$.Icon(icon)])
         el.title = title
         el.onclick = handler

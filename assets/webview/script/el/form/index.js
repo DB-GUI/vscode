@@ -13,10 +13,14 @@ export default class Form {
     this.elList = fields.map(field => {
       const input = new InputMap[field.type || 'input'](field, data)
       this.inputs[field.name] = input
-      return El('label', null, [
-        Span(field.label || field.name),
-        input.$el
-      ])
+      return El(
+        'label',
+        field.required ? 'required' : null,
+        [
+          Span(field.label || field.name),
+          input.$el
+        ]
+      )
     })
   }
   init(data) {

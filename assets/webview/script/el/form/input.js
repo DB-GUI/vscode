@@ -12,13 +12,14 @@ import { El, Span } from '../index.js'
 class Input {
   constructor(field, data, getElOptions) {
     this._key = field.name
-    this.init(data)
+    this.init(data, true)
     this.onChange = []
     this.$el = this.getEl(getElOptions)
   }
   
-  init(data) {
-    this._value = data[this._key]
+  init(data, constructing) {
+    const value = data[this._key]
+    this._value = value
     Object.defineProperty(data, this._key, {
       enumerable: true,
       get: () => this._value,
@@ -28,6 +29,10 @@ class Input {
         this._onChange(value)
       }
     })
+    if(!constructing) {
+      this.setInput(value)
+      this._onChange(value)
+    }
   }
 
   getEl() {} // 创建 el；监听 el 值的改变（改变 this._value；_onChange）
@@ -51,6 +56,9 @@ class TextInput extends Input {
       this._onChange(e.target.value)
     }
     return $el
+  }
+  setInput(value) {
+    super.setInput(isNil(value)? '' : value)
   }
 }
 
@@ -81,4 +89,8 @@ class FileInput extends Input {
   setInput(value) {
 
   }
+}
+
+function isNil(target) {
+  return target == null || target == undefined
 }

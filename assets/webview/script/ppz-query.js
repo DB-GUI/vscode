@@ -45,3 +45,12 @@ $.isNil = function(target) {
     return true
   return false
 }
+
+$.getOldSetNow = new function() {
+  let old = undefined
+  return function(now) {
+    const _old = old
+    old = now
+    return _old
+  }
+}

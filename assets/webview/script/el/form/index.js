@@ -12,7 +12,7 @@ export default class Form {
     this.data = data
     this.fields = fields
     this.inputs = {}
-    this.elList = fields.map(field => {
+    this.$elList = fields.map(field => {
       const input = new InputMap[field.type || 'input'](field, data)
       this.inputs[field.name] = input
       return El(

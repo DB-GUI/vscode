@@ -1,23 +1,20 @@
 import $ from '../../../script/ppz-query.js'
 
 export default class Connection {
-  constructor(label, client, fields) {
-    this.label = label
-    this.client = client
-    this.commonFields = [
-      { name: 'name' }
-    ]
-    this.fields = fields
-  }
+  constructor(label, client, onSelect, fields) {
+    this.data = { client }
+    this.onSelect = onSelect
 
-  getForm() {
-    const data = {}
-    return {
-      data,
-      $elList: [
-        $.Div('common', new $.Form(data, this.commonFields).$elList),
-        $.Div('private', new $.Form(data, this.fields).$elList)
-      ]
-    }
+    const $btn = $.Button([label], () => this.select())
+    this.$el = $.Div(null, [
+      $btn,
+      $.Div('inputs', [
+        $.Div('public', new $.Form(this.data, [{ name: 'name' }]).$elList),
+        $.Div('private', new $.Form(this.data, fields).$elList)
+      ])
+    ])
+  }
+  select() {
+    this.onSelect(this.data)
   }
 }

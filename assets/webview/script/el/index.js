@@ -11,6 +11,9 @@ export function El(tagname, className, children) {
 export function Div(className, children) {
   return El('div', className, children)
 }
+export function Section(className, children) {
+  return El('section', className, children)
+}
 
 export function Span(txt, className) {
   return El('span', className, [txt])
@@ -26,8 +29,13 @@ export function Icon(id) {
   return wrapper.children[0]
 }
 
-export function Button(labels, onclick) {
-  const button = El('button', '', labels)
+export function Button(className, labels, onclick) {
+  if(!onclick) {
+    onclick = labels
+    labels = className
+    className = ''
+  }
+  const button = El('button', className, labels)
   button.onclick = onclick
   return button
 }

@@ -7,11 +7,12 @@ export default function $(selector) {
   return selector
 }
 
-import { El, Span, Div, Icon, Button } from './el/index.js'
+import { El, Section, Span, Div, Icon, Button } from './el/index.js'
 import Form from './el/form/index.js'
 import { Table, THead, TBody } from './el/table/index.js'
 
 $.El = El
+$.Section = Section
 $.Div = Div
 $.Span = Span
 $.Icon = Icon

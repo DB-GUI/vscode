@@ -1,0 +1,32 @@
+<style>
+  body {
+    flex-direction: column;
+  }
+  .form-container {
+    width: 100%;
+  }
+
+  .client-selector {
+    text-align: center;
+    margin-bottom: 2.6em;
+  }
+  .client-selector > button {
+    opacity: .66;
+  }
+  button.selected  {
+    opacity: 1;
+  }
+
+  .forms {
+    display: none;
+  }
+  .forms.selected {
+    display: block;
+  }
+
+  .form:not(:last-child) {
+    padding-bottom: .56em;
+    border-bottom: var(--border2);
+    margin-bottom: .56em;
+  }
+</style>

@@ -1,0 +1,53 @@
+/* input */
+input {
+  background: var(--vscode-input-background);
+  border: 1px solid #00000000;
+  color: var(--vscode-foreground);
+  height: 2em;
+  padding: 0 .6em;
+  outline: none !important;
+}
+input:focus {
+  border: var(--border-focus);
+}
+/* checkbox */
+.checkbox {
+  border: var(--border);
+  border-radius: var(--border-radius);
+  display: inline-flex;
+  align-items: center;
+  padding: .5em .38em;
+}
+.checkbox input {
+  margin: 0;
+  margin-right: .1em;
+}
+
+/* .form */
+.form {
+  margin: 0 3.8em;
+}
+
+.form-btns {
+  margin-top: 3.8em;
+}
+.form-btns button:not(:first-child) {
+  margin-left: 1.2rem;
+}
+
+.form > label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  
+  width: 18rem;
+  margin: .5rem 1rem;
+}
+.form > .required span::before {
+  content: '* ';
+}
+
+.form > label input {
+  margin-left: 1rem;
+  width: 10rem;
+}

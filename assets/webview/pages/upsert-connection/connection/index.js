@@ -5,13 +5,10 @@ export default class Connection {
     this.data = { client }
     this.onSelect = onSelect
 
-    const $btn = $.Button([label], () => this.select())
-    this.$el = $.Div(null, [
-      $btn,
-      $.Div('inputs', [
-        $.Div('public', new $.Form(this.data, [{ name: 'name' }]).$elList),
-        $.Div('private', new $.Form(this.data, fields).$elList)
-      ])
+    this.$selectorOption = $.Button([label], () => this.select())
+    this.$forms = $.Div('forms', [
+      $.Div('form', new $.Form(this.data, [{ name: 'name' }]).$elList),
+      $.Div('form', new $.Form(this.data, fields).$elList)
     ])
   }
   select() {

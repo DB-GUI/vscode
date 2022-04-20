@@ -1,5 +1,4 @@
-@import url('./flex-container.css');
-@import url('./checkbox.css');
+@import url('./form.css');
 
 html, body {
   margin: 0;
@@ -9,46 +8,11 @@ body {
   --that-color: #77777777;
   --that-color2: #77777718;
   --border: 1px solid var(--that-color);
+  --border2: 1px solid var(--that-color2);
   --border-focus: 1px solid var(--vscode-focusBorder);
   --border-radius: .25rem;
   --box-shadow: 0 0 8px 2px rgb(0 0 0 / 18%);
   line-height: 1;
-}
-
-form input {
-  background: var(--vscode-input-background);
-  border: 1px solid #00000000;
-  color: var(--vscode-foreground);
-  height: 2em;
-  padding: 0 .6em;
-  outline: none !important;
-}
-form input:focus {
-  border: var(--border-focus);
-}
-
-fieldset {
-  border: var(--border);
-  margin: 0;
-  padding: 1rem 1rem 1.6rem;
-}
-
-fieldset legend {
-  padding: 0 .3rem;
-}
-
-form label {
-  display: inline-flex;
-  align-items: center;
-  justify-content: flex-end;
-  
-  width: 20rem;
-  margin: .5rem 1rem;
-}
-
-form label input {
-  margin-left: 1rem;
-  width: 10rem;
 }
 
 button {
@@ -63,6 +27,14 @@ button {
 }
 button:hover {
   background-color: var(--vscode-button-hoverBackground);
+}
+
+.flex-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /** iconfont **/

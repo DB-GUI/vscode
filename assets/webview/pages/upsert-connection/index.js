@@ -19,9 +19,10 @@ new Page({
       function save(connect) {
         console.log('data', data.value)
       }
-      return $.Div('btns', [connBtn, saveBtn])
+      return $.Div('form-btns', [connBtn, saveBtn])
     }
 
+    $('body').classList.add('flex-container')
     $('body').append($form, btns)
   }
 })

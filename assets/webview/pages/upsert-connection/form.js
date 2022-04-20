@@ -4,10 +4,6 @@ import Sqlite3 from './connection/sqlite3.js'
 import Postgresql from './connection/postgresql.js'
 
 export default function Form(state) {
-  // 初始化：当前选中状态
-  var selectedIndex = state.value
-    ? conns.findIndex(conn => conn.client == state.value.client)
-    : 0
   // 所有连接
   const conns = [
     Mysql,
@@ -24,6 +20,15 @@ export default function Form(state) {
         conns[selectedIndex].$forms.classList.add('selected') // 新的添加
       })
   )
+
+  // 初始化：当前选中状态
+  var selectedIndex = 0
+  if(state.value) {
+    // 恢复关闭前的状态
+    selectedIndex = conns.findIndex(conn => conn.data.client == state.value.client)
+    for(const key in state.value)
+      conns[selectedIndex].data[key] = state.value[key]
+  }
 
   // 设置初始选中状态
   conns[selectedIndex].select()

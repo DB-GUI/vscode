@@ -10,7 +10,7 @@ export default class Page {
     if(options.init)
       options.init.apply(this, [{}])
     
-    window.onunload = () => this.onunload()
+    window.addEventListener('pagehide', () => this.onunload())
   }
 
   onunload() {

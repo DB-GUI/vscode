@@ -1,4 +1,4 @@
-import State from './state.js'
+import State, { unstate } from './state.js'
 import $ from './ppz-query.js'
 
 // 应保持页面代码量少，不添加类 Composition Api 特性
@@ -9,23 +9,18 @@ export default class Page {
     this.state = State(VSCODE.getState() || options.initState())
     if(options.init)
       options.init.apply(this, [{}])
+    
+    window.onunload = () => this.onunload()
+  }
+
+  onunload() {
+    VSCODE.setState(unstate(this.state))
   }
 
   msgState(...msgTypes) {
     for(const msgType of msgTypes)
       $.msg(msgType, data => {
-        this.state[msgType] = data
-        this.saveState()
+        this.state[msgType].value = data
       })
-  }
-
-  saveState() {
-    VSCODE.setState(
-      Object.fromEntries(
-        Object.entries(this.state).map( ([key, property]) => 
-          [key, property.value]
-        )
-      )
-    )
   }
 }

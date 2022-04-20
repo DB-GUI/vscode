@@ -1,34 +1,28 @@
 export default function State(data) {
-  const map = new Map()
+  const state = {}
   for(const key in data)
-    map.set(key, new Property(data[key]))
-  
-  return new Proxy(data, {
-    get(target, p) {
-      return map.get(p)
-    },
-    set(target, p, value) {
-      // 如果初始化时，data 里没有，则永远不应该有
-      map.get(p).update(value)
-      return true
-    }
-  })
+    state[key] = new Property(data[key])
+  return state
+}
+
+export function unstate(state) {
+  const result = {}
+  for(const key in state)
+    result[key] = state[key].value
+  return result
 }
 
 class Property {
   constructor(value) {
     this.watchers = []
-    this.value = value
-  }
-  update(value) {
-    this.value = value
-    try {
-      for(const watcher of this.watchers)
-        watcher(value)
-    } catch(err) {
-      console.error('error on updating property, one of the watchers failed')
-      throw err
-    }
+    Object.defineProperty(this, 'value', {
+      get: () => value,
+      set: newValue => {
+        value = newValue
+        for(const watcher of this.watchers)
+          watcher(value)
+      }
+    })
   }
 
   do(watcher) {
@@ -42,10 +36,8 @@ class Property {
   }
   unwatch(watcher) {
     const index = this.watchers.indexOf(watcher)
-    if(index == -1)
-      return -1
-    
-    this.watchers.splice(index, 1)
+    if(index != -1)
+      this.watchers.splice(index, 1)
     return index
   }
 }

@@ -1,4 +1,4 @@
-const Webview = require('./index')
+const Webview = require('./common/base')
 const service = require('../../service/connection')
 const { noty } = require('../../utils')
 
@@ -9,7 +9,6 @@ module.exports = class UpsertConnectionWebview extends Webview {
       title: record ? '更新连接' : '创建连接'
     })
     this.data = record
-    this.onMessage('save', data => this.save(data))
   }
   
   getInitData() {

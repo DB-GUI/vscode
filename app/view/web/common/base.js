@@ -2,13 +2,15 @@ const Path = require('path')
 const fs = require('fs')
 const vscode = require('vscode')
 const { NilField, FieldWrongDetail } = require('@ppzp/type')
-const { noty } = require('../../utils')
+const { noty } = require('../../../utils')
+const WebviewServer = require('../../../../lib/request/server')
 
 module.exports = class {
   constructor({
     filename,
     category = 'ppz',
-    title = 'ppz'
+    title = 'ppz',
+    webviewServerHandlers
   }) {
     console.debug('webview constructing', filename)
     const path = this.localPath('webview/pages/' + filename + '/index.html')
@@ -40,9 +42,13 @@ module.exports = class {
       light: this.uri('logo.svg'),
       dark: this.uri('logo-white.svg')
     }
-    this.onMessage('dispose', () => {
-      this.panel.dispose()
-    })
+
+    new WebviewServer(this.panel.webview, Context.subscriptions, Object.assign({
+      dispose: () => {
+        this.panel.dispose()
+      }
+    }, webviewServerHandlers))
+
     console.debug('webview constructed')
   }
 
@@ -53,25 +59,11 @@ module.exports = class {
   }
 
   localPath(path) {
-    return Path.join(__dirname, '../../../assets', path)
+    return Path.join(__dirname, '../../../../assets', path)
   }
 
   uri(path) {
     return vscode.Uri.file(this.localPath(path))
-  }
-
-  onMessage(type, handler) {
-    console.debug('注册 message', type)
-    this.panel.webview.onDidReceiveMessage(evt => {
-      if(!evt.type) {
-        console.error({ evt })
-        throw Error('不合法的 message')
-      }
-      if(evt.type == type) {
-        console.debug('webview message', evt)
-        handler(evt.data)
-      }
-    })
   }
 
   sendMessage(type, data) {

@@ -1,4 +1,4 @@
-const Webview = require('./index')
+const Webview = require('./common/base')
 const { noty } = require('../../utils')
 const TableTreeviewElement = require('../treeview/connection/element').TableElement
 

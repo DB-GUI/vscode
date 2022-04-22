@@ -41,6 +41,9 @@ $.msg = function(messageType, handler) {
   })
 }
 
+import Request from '../../../lib/request/client.js'
+$.request = Request({ vscode: VSCODE })
+
 $.isNil = function(target) {
   if(target == null || target == undefined)
     return true

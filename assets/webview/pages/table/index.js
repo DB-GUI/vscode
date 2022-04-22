@@ -10,7 +10,7 @@ new Page({
   },
   init() {
     const state = this.state
-    this.msgState('fields', 'data')
+    // this.msgState('fields', 'data')
     
     const header = new function() {
       this.$el = $.El('header', '', [

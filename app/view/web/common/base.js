@@ -46,6 +46,9 @@ module.exports = class {
     new WebviewServer(this.panel.webview, Context.subscriptions, Object.assign({
       dispose: () => {
         this.panel.dispose()
+      },
+      saveState: state => {
+        this.state = state
       }
     }, webviewServerHandlers))
 
@@ -109,7 +112,10 @@ module.exports = class {
           <script>
             window.VSCODE = acquireVsCodeApi()
             window.PPZ = {
-              initData: ${JSON.stringify(this.getInitData())}
+              initData: ${JSON.stringify(this.getInitData())},
+              getState() {
+                return ${JSON.stringify(this.state)}
+              }
             }
             console.debug({ PPZ })
           </script>

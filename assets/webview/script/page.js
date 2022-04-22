@@ -6,21 +6,12 @@ export default class Page {
   constructor(options) {
     // webview 重新来到前台时（不论是调用 reveal，还是切换 tab）
     // 页面都会重新加载，所以原来的 state 不是现在的 state
-    this.state = State(VSCODE.getState() || options.initState())
+    this.state = State(PPZ.getState() || options.initState())
     if(options.init)
       options.init.apply(this, [{}])
-    
-    window.addEventListener('pagehide', () => this.onunload())
   }
 
-  onunload() {
-    VSCODE.setState(unstate(this.state))
-  }
-
-  msgState(...msgTypes) {
-    for(const msgType of msgTypes)
-      $.msg(msgType, data => {
-        this.state[msgType].value = data
-      })
+  saveState() {
+    $.request('saveState', unstate(this.state))
   }
 }

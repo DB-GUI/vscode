@@ -50,6 +50,11 @@ $.isNil = function(target) {
   return false
 }
 
+$.emptyObj = function(target) {
+  for(const key in target)
+    delete target[key]
+}
+
 $.getOldSetNow = new function() {
   let old = undefined
   return function(now) {

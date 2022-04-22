@@ -6,13 +6,11 @@ module.exports = class UpsertConnectionWebview extends Webview {
   constructor(record) {
     super({
       filename: 'upsert-connection',
-      title: record ? '更新连接' : '创建连接'
+      title: record ? '更新连接' : '创建连接',
+      initState: {
+        data: record
+      }
     })
-    this.data = record
-  }
-  
-  getInitData() {
-    return this.data
   }
   
   async save(data) {

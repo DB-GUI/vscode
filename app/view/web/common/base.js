@@ -1,34 +1,38 @@
 const Path = require('path')
 const fs = require('fs')
 const vscode = require('vscode')
-const { NilField, FieldWrongDetail } = require('@ppzp/type')
 const { noty } = require('../../../utils')
 const WebviewServer = require('../../../../lib/request/server')
 
-module.exports = class {
+module.exports = class Webview {
   constructor({
     filename,
     category = 'ppz',
     title = 'ppz',
+    initState,
     webviewServerHandlers
   }) {
     console.debug('webview constructing', filename)
+    // html 文件路径
     const path = this.localPath('webview/pages/' + filename + '/index.html')
     console.debug(path)
+    // 读取 html 文件
     fs.readFile(path, (err, data) => {
       if(err) {
         const msg = 'webview 创建失败：读取 html 文件时发生异常'
-        console.error(msg)
-        console.error(err)
+        console.error(msg, err)
         throw Error(msg)
       }
+      // 向空网页填充内容
       this.panel.webview.html = this.tmpl({
         filename,
         title,
         body: data.toString()
       })
     })
-
+    // 网页的 state，非本实例的 state
+    this.state = initState
+    // 创建 webview
     this.panel = vscode.window.createWebviewPanel(
       category,
       title,
@@ -42,12 +46,12 @@ module.exports = class {
       light: this.uri('logo.svg'),
       dark: this.uri('logo-white.svg')
     }
-
+    // 处理来自网页的请求
     new WebviewServer(this.panel.webview, Context.subscriptions, Object.assign({
-      dispose: () => {
+      dispose: () => { // 销毁 webview
         this.panel.dispose()
       },
-      saveState: state => {
+      saveState: state => { // 保存 state
         this.state = state
       }
     }, webviewServerHandlers))
@@ -75,24 +79,9 @@ module.exports = class {
     this.panel.webview.postMessage(msg)
   }
 
-  handleSaveErr(err) {
-    if(err instanceof FieldWrongDetail) {
-      noty.error('保存失败：' + err.name + (
-        err.type == NilField
-        ? ' 未填写'
-        : ' 格式错误'
-      ))
-    } else
-      this.handleErr(err)
-  }
-
   handleErr(err) {
     console.error(err)
     noty.error('未知错误 ' + err.toString())
-  }
-
-  getInitData() {
-    return {}
   }
 
   tmpl({
@@ -112,10 +101,7 @@ module.exports = class {
           <script>
             window.VSCODE = acquireVsCodeApi()
             window.PPZ = {
-              initData: ${JSON.stringify(this.getInitData())},
-              getState() {
-                return ${JSON.stringify(this.state)}
-              }
+              initState: ${JSON.stringify(this.state)}
             }
             console.debug({ PPZ })
           </script>

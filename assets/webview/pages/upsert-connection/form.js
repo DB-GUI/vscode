@@ -12,7 +12,7 @@ export default function Form(state) {
   ].map(
     (Connection, index) =>
       Connection(function onSelect(data) {
-        state.value = data
+        state.data = data
         conns[selectedIndex].$selectorOption.classList.remove('selected') // 旧的去除
         conns[selectedIndex].$forms.classList.remove('selected') // 旧的去除
         selectedIndex = index
@@ -23,11 +23,12 @@ export default function Form(state) {
 
   // 初始化：当前选中状态
   var selectedIndex = 0
-  if(state.value) {
+  const data = state.data
+  if(data?.client) {
     // 恢复关闭前的状态
-    selectedIndex = conns.findIndex(conn => conn.data.client == state.value.client)
-    for(const key in state.value)
-      conns[selectedIndex].data[key] = state.value[key]
+    selectedIndex = conns.findIndex(conn => conn.data.client == data.client)
+    for(const key in data)
+      conns[selectedIndex].data[key] = data[key]
   }
 
   // 设置初始选中状态

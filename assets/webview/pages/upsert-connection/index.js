@@ -15,9 +15,11 @@ new Page({
       const connBtn = $.Button(['连接'], () => save(true))
       const saveBtn = $.Button(['保存'], () => save())
 
-      function save(connect) {
-        const data = getData(self.state)
-        console.log({ data })
+      async function save(connect) {
+        await $.request('save', {
+          connect,
+          record: getData(self.state)
+        })
       }
       return $.Div('form-btns', [connBtn, saveBtn])
     }

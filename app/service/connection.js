@@ -16,13 +16,13 @@ service.connect = function(connection) {
   }
 }
 
-service.upsert = async function(record) {
+service.upsert = async function({ record, connect }) {
   const rawId = record.id
   const id = await collection.upsert(record)
   if(rawId)
-    connectionTreeview.updateConnection(record)
+    connectionTreeview.updateConnection(record, connect)
   else
-    connectionTreeview.add(collection.getByKey(id))
+    connectionTreeview.add(collection.getByKey(id), connect)
 }
 
 class KnexConnection {

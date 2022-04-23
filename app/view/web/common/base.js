@@ -52,7 +52,7 @@ module.exports = class Webview {
       },
       saveState: state => { // 保存 state
         this.state = state
-        console.debug(new Date(), 'state saved', state)
+        console.debug('state saved', new Date(), state)
       },
       getState: () => this.state
     }, webviewServerHandlers))
@@ -82,7 +82,7 @@ module.exports = class Webview {
 
   handleErr(err) {
     console.error(err)
-    noty.error('未知错误 ' + err.toString())
+    noty.fatal('未知错误 ' + err.toString())
   }
 
   tmpl({

@@ -1,4 +1,4 @@
-const Webview = require('./common/base')
+const Webview = require('./common/form')
 const service = require('../../service/connection')
 const { noty } = require('../../utils')
 
@@ -10,15 +10,9 @@ module.exports = class UpsertConnectionWebview extends Webview {
       initData: record
     })
   }
-  
-  async save(data) {
-    try {
-      await service.upsert(data.connection)
-      noty.info('连接已保存')
-      if(data.connect)
-        service.connect(data.connection)
-    } catch(err) {
-      this.handleSaveErr(err)
-    }
+
+  async upsert(data) {
+    await service.upsert(data)
+    noty.info('连接已保存')
   }
 }

@@ -25,10 +25,13 @@ function RootElement() {
 RootElement.prototype = Object.create(adam)
 RootElement.prototype.type = 'root'
 
-function ConnectionElement(parent, connection, options) {
+function ConnectionElement(parent, connection, options, connect) {
   mixin(this, Happy, [parent, connection, {
     label: options.name || '未命名连接',
-    icon: `dbms/${options.client}.svg`
+    icon: `dbms/${options.client}.svg`,
+    collapsibleState: connect
+      ? vscode.TreeItemCollapsibleState.Expanded
+      : vscode.TreeItemCollapsibleState.Collapsed
   }])
   this.options = options
   ConnectionElement.instance.push(this)
@@ -36,10 +39,13 @@ function ConnectionElement(parent, connection, options) {
 ConnectionElement.instance = []
 ConnectionElement.prototype = Object.create(adam)
 ConnectionElement.prototype.type = 'connection'
-ConnectionElement.prototype.updateOptions = function(options) {
+ConnectionElement.prototype.updateOptions = function(options, connect) {
   this.treeItem = {
     label: options.name || '未命名连接',
-    icon: `dbms/${options.client}.svg`
+    icon: `dbms/${options.client}.svg`,
+    collapsibleState: connect
+      ? vscode.TreeItemCollapsibleState.Expanded
+      : vscode.TreeItemCollapsibleState.Collapsed
   }
   this.options = options
 }

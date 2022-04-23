@@ -18,6 +18,7 @@ class Collection {
   }
 
   save(data) {
+    console.debug('saving data')
     this.validate(data)
     return Context.globalState.update(this.name, data)
   }

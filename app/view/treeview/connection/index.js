@@ -25,9 +25,9 @@ exports.drop = function(el) {
 }
 
 // 增加连接
-exports.add = function(options) {
+exports.add = function(options, connect) {
   console.debug('treeview add connection', options)
-  root.children.push(new ConnectionElement(root, null, options))
+  root.children.push(new ConnectionElement(root, null, options, connect))
   updateEvent.fire()
 }
 
@@ -82,16 +82,16 @@ exports.refreshDatabase = function(dbEl) {
 }
 
 // 更新 connection
-exports.updateConnection = async function(record) {
+exports.updateConnection = async function(record, connect) {
   for(const el of ConnectionElement.instance)
     if(el.options.id == record.id) {
-      el.updateOptions(record)
+      el.updateOptions(record, connect)
       if(el.connection) {
         // 把已连接的关上
         await el.connection.close() // 关闭连接
         el.connection = null // 丢掉连接
         el.children = null // 抛弃子节点
       }
-      updateEvent.fire(el)
+      updateEvent.fire(el) // 好像是：如果 treeItem 不改动，就会更新 children（发生连接行为）
     }
 }

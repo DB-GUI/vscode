@@ -1,22 +1,28 @@
 import $ from '../../script/ppz-query.js'
 import Page from '../../script/page.js'
-import Form from './form.js'
+import { initState, Forms, getData } from './form.js'
 
 new Page({
   init() {
-    const $form = Form(this.state) // 把 state 交给子组件管理，不是好想法！
+    const self = this
+    if(!this.state) {
+      this.state = initState(PPZ.initData)
+      this.saveState() // 这样虽然繁琐，但省掉了“理解”成本
+    }
+    const $forms = Forms(this.state, () => this.saveState())
 
     const btns = new function() {
       const connBtn = $.Button(['连接'], () => save(true))
       const saveBtn = $.Button(['保存'], () => save())
 
       function save(connect) {
-        console.log('data', this.state.data)
+        const data = getData(self.state)
+        console.log({ data })
       }
       return $.Div('form-btns', [connBtn, saveBtn])
     }
 
     $('body').classList.add('flex-container')
-    $('body').append($form, btns)
+    $('body').append($forms, btns)
   }
 })

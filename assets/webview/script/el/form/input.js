@@ -12,9 +12,9 @@ import { El, Span } from '../index.js'
 class Input {
   constructor(field, data, getElOptions) {
     this._key = field.name
-    this.init(data, true)
-    this.onChange = []
+    this._changeListener = []
     this.$el = this.getEl(getElOptions)
+    this.init(data, true)
   }
   
   init(data, constructing) {
@@ -29,10 +29,9 @@ class Input {
         this._onChange(value)
       }
     })
-    if(!constructing) {
-      this.setInput(value)
+    this.setInput(value)
+    if(!constructing)
       this._onChange(value)
-    }
   }
 
   getEl() {} // 创建 el；监听 el 值的改变（改变 this._value；_onChange）
@@ -42,8 +41,13 @@ class Input {
     this.$el.value = value
   }
 
+  // 添加监听
+  onChange(listener) {
+    this._changeListener.push(listener)
+  }
+  // 触发监听
   _onChange(value) { // 传入 value 的目的在于，保证 value 变动时的原始值
-    this.onChange.forEach(h => h(value))
+    this._changeListener.forEach(h => h(value))
   }
 }
 

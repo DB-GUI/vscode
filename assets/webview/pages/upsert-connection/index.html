@@ -10,21 +10,15 @@
     text-align: center;
     margin-bottom: 2.6em;
   }
-  .client-selector > button {
+  .client-selector > button:not(.selected) {
     opacity: .66;
   }
-  button.selected  {
-    opacity: 1;
-  }
 
-  .forms {
+  .private.form:not(.selected) {
     display: none;
   }
-  .forms.selected {
-    display: block;
-  }
 
-  .form:not(:last-child) {
+  .public.form {
     padding-bottom: .56em;
     border-bottom: var(--border2);
     margin-bottom: .56em;

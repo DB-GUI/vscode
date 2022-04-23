@@ -30,4 +30,8 @@ export default class Form {
     for(const f of this.fields)
       this.inputs[f.name].init(data)
   }
+  onChange(handle) {
+    for(const name in this.inputs)
+      this.inputs[name].onChange(value => handle(name, value))
+  }
 }

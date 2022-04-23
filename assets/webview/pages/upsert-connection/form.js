@@ -1,41 +1,82 @@
 import $ from '../../script/ppz-query.js'
-import Mysql from './connection/mysql.js'
-import Sqlite3 from './connection/sqlite3.js'
-import Postgresql from './connection/postgresql.js'
 
-export default function Form(state) {
-  // 所有连接
-  const conns = [
-    Mysql,
-    Sqlite3,
-    Postgresql
-  ].map(
-    (Connection, index) =>
-      Connection(function onSelect(data) {
-        state.data = data
-        conns[selectedIndex].$selectorOption.classList.remove('selected') // 旧的去除
-        conns[selectedIndex].$forms.classList.remove('selected') // 旧的去除
-        selectedIndex = index
-        conns[selectedIndex].$selectorOption.classList.add('selected') // 新的添加
-        conns[selectedIndex].$forms.classList.add('selected') // 新的添加
-      })
-  )
+const publicFields = [
+  { name: 'name' }
+]
 
-  // 初始化：当前选中状态
-  var selectedIndex = 0
-  const data = state.data
-  if(data?.client) {
-    // 恢复关闭前的状态
-    selectedIndex = conns.findIndex(conn => conn.data.client == data.client)
-    for(const key in data)
-      conns[selectedIndex].data[key] = data[key]
+const formsOptions = [ // pivateFields
+  {
+    client: 'mysql',
+    label: 'MySQL',
+    fields: [
+      { name: 'host', required: true },
+      { name: 'port' },
+      { name: 'user', required: true },
+      { name: 'password', required: true },
+      { name: 'database' }
+    ]
+  }, {
+    client: 'sqlite3',
+    label: 'SQLite3',
+    fields: [
+      { name: 'filepath', required: true, file: true }
+    ]
+  }, {
+    client: 'postgresql',
+    label: 'PostgreSQL',
+    fields: [
+    ]
+  },
+]
+
+export function initState(initData) {
+  return {
+    current: 0,
+    public: {},
+    data: formsOptions.map(options => ({
+      client: options.client
+    }))
   }
+}
 
-  // 设置初始选中状态
-  conns[selectedIndex].select()
-
+export function Forms(state, saveState) {
+  const forms = formsOptions.map((options, index) => {
+    const $btn = $.Button([options.label], () => {
+      if(state.current == index) return // 重复选
+      // 原来的，unselect
+      forms[state.current].$btn.classList.remove('selected')
+      forms[state.current].$form.classList.remove('selected')
+      // 新的，select
+      state.current = index
+      saveState()
+      $btn.classList.add('selected')
+      $form.classList.add('selected')
+    })
+    const privateForm = new $.Form(state.data[index], formsOptions[index].fields)
+    privateForm.onChange(saveState)
+    const $form = $.Div(
+      'private form',
+      privateForm.$elList
+    )
+    if(index == state.current) {
+      $btn.classList.add('selected')
+      $form.classList.add('selected')
+    }
+    return { $btn, $form }
+  })
+  const publicForm = new $.Form(state.public, publicFields)
+  publicForm.onChange(saveState)
   return $.Div('form-container', [
-    $.Div('client-selector', conns.map(conn => conn.$selectorOption)),
-    ...conns.map(conn => conn.$forms)
+    $.Div('client-selector', forms.map(form => form.$btn)),
+    $.Div('forms', [
+      $.Div('public form', publicForm.$elList),
+      $.Div(null, forms.map(form => form.$form))
+    ])
   ])
+}
+
+export function getData(state) {
+  const current = state.data[state.current]
+  const data = Object.assign({}, current, state.public)
+  return data
 }

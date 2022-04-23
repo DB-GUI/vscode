@@ -9,7 +9,7 @@ module.exports = class Webview {
     filename,
     category = 'ppz',
     title = 'ppz',
-    initState,
+    initData,
     webviewServerHandlers
   }) {
     console.debug('webview constructing', filename)
@@ -30,8 +30,7 @@ module.exports = class Webview {
         body: data.toString()
       })
     })
-    // 网页的 state，非本实例的 state
-    this.state = initState
+    this.initData = initData
     // 创建 webview
     this.panel = vscode.window.createWebviewPanel(
       category,
@@ -53,7 +52,9 @@ module.exports = class Webview {
       },
       saveState: state => { // 保存 state
         this.state = state
-      }
+        console.debug(new Date(), 'state saved', state)
+      },
+      getState: () => this.state
     }, webviewServerHandlers))
 
     console.debug('webview constructed')
@@ -101,9 +102,8 @@ module.exports = class Webview {
           <script>
             window.VSCODE = acquireVsCodeApi()
             window.PPZ = {
-              initState: ${JSON.stringify(this.state)}
+              initData: ${JSON.stringify(this.initData)},
             }
-            console.debug({ PPZ })
           </script>
           <script type="module" src="${this.webviewUri(`pages/${filename}/index.js`)}"></script>
         </body>

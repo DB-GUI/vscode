@@ -1,10 +1,5 @@
 import './iconfont.js'
 
-/*
-  这些东西是以“保持项目简单性”为目的，而出现的
-  但结果却不好：面对复杂的 UI 逻辑，将力不从心
-*/
-
 /** @returns {HTMLElement} */
 export default function $(selector) {
   if(typeof selector == 'string')

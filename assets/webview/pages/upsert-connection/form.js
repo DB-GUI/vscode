@@ -30,6 +30,25 @@ const formsOptions = [ // pivateFields
 ]
 
 export function initState(initData) {
+  if(initData) {
+    const current = formsOptions.findIndex(options => options.client == initData.client)
+    const data = formsOptions.map(options => ({
+      client: options.client
+    }))
+    const publicData = {}
+    for(const key in initData) {
+      const p = publicFields.find(f => f.name == key)
+      if(p)
+        publicData[key] = initData[key]
+      else
+        data[current][key] = initData[key]
+    }
+    return {
+      current,
+      public: publicData,
+      data
+    }
+  }
   return {
     current: 0,
     public: {},

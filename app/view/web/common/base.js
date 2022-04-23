@@ -52,7 +52,7 @@ module.exports = class Webview {
       },
       saveState: state => { // 保存 state
         this.state = state
-        console.debug('state saved', new Date(), state)
+        console.debug('state saved')
       },
       getState: () => this.state
     }, webviewServerHandlers))

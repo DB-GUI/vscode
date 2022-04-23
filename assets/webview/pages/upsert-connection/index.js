@@ -12,14 +12,15 @@ new Page({
     const $forms = Forms(this.state, () => this.saveState())
 
     const btns = new function() {
-      const connBtn = $.Button(['连接'], () => save(true))
+      const connBtn = $.Button(['保存并连接'], () => save(true))
       const saveBtn = $.Button(['保存'], () => save())
-
+      
       async function save(connect) {
         await $.request('save', {
           connect,
           record: getData(self.state)
         })
+        $.request('dispose')
       }
       return $.Div('form-btns', [connBtn, saveBtn])
     }

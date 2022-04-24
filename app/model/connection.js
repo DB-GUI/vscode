@@ -9,6 +9,10 @@ const type = {
     ['user', 'truestring', true],
     ['password', 'truestring', true],
     ['database', 'string']
+  ]),
+  sqlite3: Type([
+    ['name', 'string'],
+    ['filepath', 'truestring', true]
   ])
 }
 
@@ -18,7 +22,10 @@ class ConnectionCollection extends ArrayCollection {
   }
 
   validateOne(record) {
-    let result = type[record.client].validate(record)
+    const validater = type[record.client]
+    if(!validater)
+      throw Error(`the "${record.client}" client type is not supported`)
+    let result = validater.validate(record)
     if(result)
       throw result
   }

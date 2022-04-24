@@ -28,13 +28,14 @@ service.upsert = async function({ record, connect }) {
 }
 
 class KnexConnection {
-  constructor(clientType, name, connection) {
+  constructor(clientType, name, connection, useNullAsDefault) {
     this.clientType = clientType
     this.name = name
     this.options = connection
     this.client = Knex({
       client: clientType,
       connection,
+      useNullAsDefault,
       acquireConnectionTimeout: 10000,
       pool: { min: 0, max: 1 }
     })
@@ -94,7 +95,7 @@ class MysqlKnexConnection extends KnexConnection {
 
 class Sqlite3KnexConnection extends KnexConnection {
   constructor({ name, filepath }) {
-    super('better-sqlite3', name, { filepath })
+    super('better-sqlite3', name, { filepath }, true)
   }
   
   async tbList() {

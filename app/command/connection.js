@@ -1,4 +1,5 @@
 const UpsertConnectionWebview = require('../view/web/upsert-connection')
+const { ConnectionElement } = require('../view/treeview/connection/element')
 const openTableWebview = require('../view/web/table')
 const service = require('../service/connection')
 const { noty } = require('../utils')
@@ -15,14 +16,14 @@ exports.refreshConnection = connectionTreeview.refreshConnection
 exports.refreshDatabase = connectionTreeview.refreshDatabase
 
 exports.editConnection = async function(el) {
-  if(el && el.type == 'connection' && el.options && el.options.id)
+  if(el instanceof ConnectionElement)
     new UpsertConnectionWebview(el.options)
   else
     noty.error('请从左侧 treeview 里选择并更新连接')
 }
 
 exports.deleteConnection = async function(el) {
-  if(el && el.type == 'connection' && el.options && el.options.id) {
+  if(el instanceof ConnectionElement) {
     try {
       await service.drop(el.options.id) // 从数据库删除
       connectionTreeview.drop(el) // 更新 treeview

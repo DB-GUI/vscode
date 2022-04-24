@@ -40,6 +40,18 @@ module.exports = function(root, updateEvent) {
               return []
             }
           case 'sqlite3-connection':
+            try {
+              el.connection = connectionService.connect(el.options)
+              const tbList = await el.connection.tbList(el.name)
+              return tbList.map(
+                name => new TableElement(el, el.connection, name)
+              )
+            } catch(err) {
+              const msg = 'SQLite3 连接建立失败，请检查数据库文件路径'
+              console.error(msg, el.options, err)
+              noty.error(msg)
+              return []
+            }
           case 'database':
             try {
               const tbList = await el.connection.tbList(el.name)

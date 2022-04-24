@@ -53,7 +53,7 @@
 			},
 			{
 				"command": "ppz.editConnection",
-				"title": "Edit Connection",
+				"title": "更新连接",
 				"icon": "$(edit)",
 				"category": "PPZ"
 			},
@@ -71,7 +71,7 @@
 			},
 			{
 				"command": "ppz.refreshConnections",
-				"title": "Refresh Connections",
+				"title": "刷新连接",
 				"icon": "$(refresh)",
 				"category": "PPZ"
 			},
@@ -104,17 +104,15 @@
 			"view/item/context": [
 				{
 					"command": "ppz.deleteConnection",
-					"when": "view == connection && viewItem == connection",
-					"group": "inline"
+					"when": "view == connection && viewItem == connection || viewItem == 'sqlite3-connection'"
 				},
 				{
 					"command": "ppz.editConnection",
-					"when": "view == connection && viewItem == connection",
-					"group": "inline"
+					"when": "view == connection && viewItem == connection || viewItem == 'sqlite3-connection'"
 				},
 				{
 					"command": "ppz.refreshConnection",
-					"when": "view == connection && viewItem == connection",
+					"when": "view == connection && viewItem == connection || viewItem == 'sqlite3-connection'",
 					"group": "inline"
 				},
 				{

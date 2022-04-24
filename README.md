@@ -1,5 +1,6 @@
 # todo
 + 把各 adapter 分离出去，似乎有懒安装的方法(https://github.com/cweijan/vscode-database-client/blob/e8e62c699c80ad35744efc9ecf4e86728dca5d7c/src/vue/connect/component/SQLite.vue#L28)
++ 把各 功能（request、持久化、恢复状态等）分离出去
 
 ### upsert 页面
 + 增加“测试连接”

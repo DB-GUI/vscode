@@ -39,6 +39,7 @@ module.exports = function(root, updateEvent) {
               noty.error(msg)
               return []
             }
+          case 'sqlite3-connection':
           case 'database':
             try {
               const tbList = await el.connection.tbList(el.name)

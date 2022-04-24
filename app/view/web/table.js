@@ -32,7 +32,7 @@ class TableWebview extends Webview {
   }
 
   async loadFieldsAndData() {
-    this.fields = await this.connection.fieldList(this.databaseName, this.tableName)
+    this.fields = await this.connection.fieldList(this.tableName, this.databaseName, )
     this.sendMessage('fields', this.fields)
     await this.loadData()
   }

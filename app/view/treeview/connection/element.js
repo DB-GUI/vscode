@@ -34,6 +34,8 @@ function ConnectionElement(parent, connection, options, connect) {
       : vscode.TreeItemCollapsibleState.Collapsed
   }])
   this.options = options
+  if(options.client == 'sqlite3')
+    this.type = 'sqlite3-connection'
   ConnectionElement.instance.push(this)
 }
 ConnectionElement.instance = []

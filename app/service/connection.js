@@ -11,6 +11,8 @@ service.connect = function(connection) {
   switch(connection.client) {
     case 'mysql':
       return new MysqlKnexConnection(connection)
+    case 'sqlite3':
+      return new Sqlite3KnexConnection(connection)
     default:
       throw Error('意外的连接类型 ' + connection.client)
   }
@@ -78,13 +80,37 @@ class MysqlKnexConnection extends KnexConnection {
     return result[0].map(item => item['Tables_in_' + database])
   }
 
-  async fieldList(database, table) {
+  async fieldList(table, database) {
     const result = await this.client.raw(`desc ${database}.${table}`)
     return result[0].map(field => ({
       name: field.Field,
       type: field.Type,
       notNull: field.Null == 'NO',
-      default: field.Default
+      default: field.Default,
+      pk: field.Key == 'PRI'
     }))
+  }
+}
+
+class Sqlite3KnexConnection extends KnexConnection {
+  constructor({ name, filepath }) {
+    super('better-sqlite3', name, { filepath })
+  }
+  
+  async tbList() {
+    return (await this.client.raw('Pragma table_list'))
+      .filter(tb => tb.type == 'table' && tb.schema == 'main')
+      .map(tb => tb.name)
+  }
+
+  async fieldList(name) {
+    return (await this.client.raw(`Pragma table_info(${name})`))
+      .map(field => ({
+        name: field.name,
+        type: field.Type,
+        notNull: Boolean(field.notnull),
+        default: field.dflt_value,
+        pk: Boolean(field.pk)
+      }))
   }
 }

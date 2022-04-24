@@ -15,12 +15,12 @@ const formsOptions = [ // pivateFields
       { name: 'password', required: true },
       { name: 'database' }
     ]
-  }, {
-    client: 'sqlite3',
-    label: 'SQLite3',
-    fields: [
-      { name: 'filepath', required: true, file: true }
-    ]
+  // }, {
+  //   client: 'sqlite3',
+  //   label: 'SQLite3',
+  //   fields: [
+  //     { name: 'filepath', required: true, file: true }
+  //   ]
   }, {
     client: 'postgresql',
     label: 'PostgreSQL',

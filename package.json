@@ -130,7 +130,6 @@
 	"dependencies": {
 		"@ppzp/mixin": "^0.0.0",
 		"@ppzp/type": "file:../type.js",
-		"better-sqlite3": "^7.5.1",
 		"knex": "^1.0.3",
 		"mysql2": "^2.3.3",
 		"uuid": "^8.3.2"

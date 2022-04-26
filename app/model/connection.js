@@ -12,7 +12,7 @@ const type = {
   ]),
   sqlite3: Type([
     ['name', 'string'],
-    ['filepath', 'truestring', true]
+    ['filename', 'truestring', true]
   ])
 }
 

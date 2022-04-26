@@ -94,8 +94,8 @@ class MysqlKnexConnection extends KnexConnection {
 }
 
 class Sqlite3KnexConnection extends KnexConnection {
-  constructor({ name, filepath }) {
-    super('better-sqlite3', name, { filepath }, true)
+  constructor({ name, filename }) {
+    super('sqlite3', name, { filename }, true)
   }
   
   async tbList() {

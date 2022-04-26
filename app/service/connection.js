@@ -100,7 +100,7 @@ class Sqlite3KnexConnection extends KnexConnection {
   
   async tbList() {
     return (await this.client.raw('Pragma table_list'))
-      .filter(tb => tb.type == 'table' && tb.schema == 'main')
+      .filter(tb => tb.type == 'table' && tb.schema == 'main' && tb.name.indexOf('sqlite_') != 0)
       .map(tb => tb.name)
   }
 
@@ -113,5 +113,10 @@ class Sqlite3KnexConnection extends KnexConnection {
         default: field.dflt_value,
         pk: Boolean(field.pk)
       }))
+  }
+  
+  async select(database, table, params) {
+    console.debug('sqlite select', { table })
+    return await this.client.select(...params.fields).from(table)
   }
 }

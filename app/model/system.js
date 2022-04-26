@@ -4,7 +4,7 @@ const { Type, FieldWrongDetail } = require('@ppzp/type')
 const type = new Type([
   {
     name: 'version',
-    validate: 'string',
+    validate: 'truestring',
     notNull: true
   }
 ])
@@ -16,12 +16,14 @@ class SystemCollection extends Collection {
 
   validate(data) {
     const result = type.validate(data)
-    if(result)
-      throw Error('validating system Collection ' + result)
+    if(result) {
+      console.error('validating "system collection":', data)
+      throw Error(result)
+    }
   }
 
   newInstall() {
-    return Context.globalState.keys().length == 0
+    return Context.globalState.get(this.name) == undefined
   }
 }
 

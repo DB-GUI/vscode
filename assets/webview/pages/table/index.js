@@ -2,16 +2,22 @@ import $ from '../../script/ppz-query.js'
 import Page from '../../script/page.js'
 
 new Page({
-  initState() {
-    return {
-      fields: [],
-      data: []
-    }
-  },
-  init() {
-    const state = this.state
-    // this.msgState('fields', 'data')
-    
+  async init() {
+    const page = this
+    if(!this.state) {
+      const fields = await $.request('getFields')
+      const selectParams = {
+        fields: fields.map(f => f.name)
+      }
+      this.state = {
+        fields,
+        selectParams,
+        records: await $.request('getRecords', selectParams)
+      }
+      this.saveState()
+    } else
+      console.debug('initial state', page.state)
+
     const header = new function() {
       this.$el = $.El('header', '', [
         $.El('nav', '', [
@@ -26,31 +32,31 @@ new Page({
             // 通过事件来传达各种状态
             Button('查询', 'light', function() {
             }),
-            function() {
+            new function() {
               const $el = Button('字段', 'filter', function() {
               })
               return $el
-            }(),
-            function() {
+            },
+            new function() {
               const $el = Button('新增', 'add', function() {
               })
               return $el
-            }(),
-            function() {
+            },
+            new function() {
               const $el = Button('删除', 'delete', function() {
               })
               return $el
-            }(),
-            function() {
+            },
+            new function() {
               const $el = Button('保存', 'save', function() {
               })
               return $el
-            }(),
-            function() {
+            },
+            new function() {
               const $el = Button('取消', 'return', function() {
               })
               return $el
-            }()
+            }
           ]),
         ])
       ])
@@ -65,24 +71,18 @@ new Page({
     }
 
     const table = new function() {
-      const table = new $.Table()
+      const table = new $.Table(
+        [$.El('th', 'pre-unit'), ...page.state.fields.map(f => f.name)],
+        page.state.records.map(
+          record => ([
+            $.El('th', 'pre-unit'),
+            ...page.state.fields.map(
+              f => record[f.name]
+            )
+          ])
+        )
+      )
       this.$el = $.Div('table-wrapper', [table.$el])
-
-      state.fields.do(fields => {
-        this.fields = fields
-        table.thead([$.El('th', 'pre-unit'), ...fields.map(f => f.name)])
-      })
-
-      state.data.do(data => {
-        // 在 webview 里确定先发 fields，后发 data
-        this.data = data
-        table.tbody(data.map(record => {
-          const row = []
-          for(const f of this.fields)
-            row.push(record[f.name])
-          return [$.El('th', 'pre-unit'), ...row]
-        }))
-      })
     }
 
     $('body').append(

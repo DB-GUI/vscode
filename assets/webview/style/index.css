@@ -1,4 +1,5 @@
 @import url('./form.css');
+@import url('../../../node_modules/@ppzp/noty/content/index.css');
 
 html, body {
   margin: 0;

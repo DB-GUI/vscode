@@ -45,6 +45,9 @@ import Request, { Api } from '../../../lib/request/client.js'
 $.request = Request({ vscode: VSCODE })
 $.api = Api($.request)
 
+import Noty from '../../../node_modules/@ppzp/noty/index.js'
+$.Noty = Noty
+
 $.isNil = function(target) {
   if(target == null || target == undefined)
     return true

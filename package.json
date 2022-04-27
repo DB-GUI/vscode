@@ -129,7 +129,7 @@
 	},
 	"dependencies": {
 		"@ppzp/mixin": "^0.0.0",
-		"@ppzp/noty": "^0.0.4",
+		"@ppzp/noty": "^0.0.5",
 		"@ppzp/type": "file:../type.js",
 		"knex": "^2.0.0",
 		"mysql2": "^2.3.3",

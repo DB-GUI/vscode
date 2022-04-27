@@ -3,9 +3,9 @@ import { El } from '../index.js'
 export function THead(fields) {
   return El('thead', '', [
     El('tr', '', fields.map(th =>
-      typeof th == 'string'
-        ? El('th', '', [th])
-        : th
+      th instanceof HTMLTableCellElement
+        ? th
+        : El('th', '', [th])
     ))
   ])
 }
@@ -14,9 +14,9 @@ export function TBody(data) {
   return El('tbody', '', 
     data.map(record =>
       El('tr', '', record.map(td => 
-        typeof td == 'string'
-          ? El('td', '', [td])
-          : td
+        td instanceof HTMLTableCellElement
+          ? td
+          : El('td', '', [td])
       ))
     )
   )

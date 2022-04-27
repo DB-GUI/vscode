@@ -92,7 +92,7 @@ new Page({
       function getTBody() {
         return page.state.records.map(
           record => ([
-            $.El('th', 'pre-unit'),
+            $.El('td', 'pre-unit'),
             ...page.state.fields.map(
               f => record[f.name]
             )

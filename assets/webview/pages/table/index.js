@@ -22,15 +22,15 @@ new Page({
       this.$el = $.El('header', '', [
         $.El('nav', '', [
           $.Span(PPZ.initData.connection),
-          $.Icon('arrow-right2'),
+          $.Icon('arrow-right'),
           $.Span(PPZ.initData.database),
-          $.Icon('arrow-right2'),
+          $.Icon('arrow-right'),
           $.Span(PPZ.initData.table)
         ]),
         $.Div('operations', [
           $.Div('btns', [
             // 通过事件来传达各种状态
-            Button('查询', 'light', refreshData),
+            Button('刷新', 'light', refreshData),
             new function() {
               const $el = Button('字段', 'filter', function() {
               })
@@ -72,7 +72,6 @@ new Page({
         page.state.records = records
         page.saveState()
         table.updateData()
-        $.Noty.success('数据已刷新')
       }
     }
 

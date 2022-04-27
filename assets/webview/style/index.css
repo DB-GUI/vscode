@@ -46,3 +46,10 @@ button:hover {
   fill: currentColor;
   overflow: hidden;
 }
+
+/* 动画 */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

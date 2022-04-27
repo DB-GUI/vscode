@@ -41,12 +41,16 @@ $.msg = function(messageType, handler) {
   })
 }
 
-import Request, { Api } from '../../../lib/request/client.js'
-$.request = Request({ vscode: VSCODE })
-$.api = Api($.request)
+import Loading from './loading.js'
+$.loading = Loading($)
 
-import Noty from '../../../node_modules/@ppzp/noty/index.js'
-$.Noty = Noty
+import Request, { Api } from '../../../lib/request/client.js'
+$.request = Request({
+  vscode: VSCODE,
+  beforeSend: $.loading.show,
+  afterReturn: $.loading.hide
+})
+$.api = Api($.request)
 
 $.isNil = function(target) {
   if(target == null || target == undefined)

@@ -43,7 +43,10 @@ class KnexConnection {
   
   async select(database, table, params) {
     console.debug('sql select', { database, table })
-    return await this.client.select(...params.fields).from(`${database}.${table}`)
+    let result = this.client.from(`${database}.${table}`)
+    if(params)
+      result = result.select(...params.fields)
+    return await result
   }
 
   async dbList() {

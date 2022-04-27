@@ -41,8 +41,9 @@ $.msg = function(messageType, handler) {
   })
 }
 
-import Request from '../../../lib/request/client.js'
+import Request, { Api } from '../../../lib/request/client.js'
 $.request = Request({ vscode: VSCODE })
+$.api = Api($.request)
 
 $.isNil = function(target) {
   if(target == null || target == undefined)

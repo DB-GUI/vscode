@@ -23,15 +23,18 @@
     justify-content: space-between;
   }
 
-  header .operations .btns > div {
-    display: inline-block;
+  header .operations .btns > button {
     line-height: 2;
     padding: 0 .58em;
     cursor: pointer;
-    color: var(--vscode-button-foreground);
+    background-color: transparent;
+    width: auto;
   }
-  header .operations .btns > div:hover {
+  header .operations .btns > button:hover {
     background: var(--vscode-button-hoverBackground);
+  }
+  header .operations .btns > button:active {
+    opacity: .8;
   }
 
   .table-wrapper {

@@ -5,14 +5,14 @@ new Page({
   async init() {
     const page = this
     if(!this.state) {
-      const fields = await $.request('getFields')
+      const { fields, records } = await $.api.getData()
       const selectParams = {
         fields: fields.map(f => f.name)
       }
       this.state = {
         fields,
         selectParams,
-        records: await $.request('getRecords', selectParams)
+        records
       }
       this.saveState()
     } else
@@ -62,10 +62,8 @@ new Page({
       ])
       
       function Button(title, icon, handler) {
-        // TODO 此处的按钮应使用 button 而不是 div
-        const el = $.Div('', [$.Icon(icon)])
+        const el = $.Button('', [$.Icon(icon)], handler)
         el.title = title
-        el.onclick = handler
         return el
       }
     }

@@ -117,6 +117,9 @@ class Sqlite3KnexConnection extends KnexConnection {
   
   async select(database, table, params) {
     console.debug('sqlite select', { table })
-    return await this.client.select(...params.fields).from(table)
+    let result = this.client.from(table)
+    if(params)
+      result = result.select(...params.fields)
+    return await result
   }
 }

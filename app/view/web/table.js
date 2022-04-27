@@ -15,11 +15,10 @@ class TableWebview extends Webview {
         connectionOptions: connection.options
       },
       webviewServerHandlers: {
-        getFields() {
-          return connection.fieldList(table, database)
-        },
-        getRecords(params) {
-          return connection.select(database, table, params)
+        async getData(params) {
+          const fields = await connection.fieldList(table, database)
+          const records = await connection.select(database, table, params)
+          return { fields, records }
         }
       }
     })

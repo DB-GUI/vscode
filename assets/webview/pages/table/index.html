@@ -23,20 +23,43 @@
     justify-content: space-between;
   }
 
-  header .operations .btns > button {
+  header .operations button {
     line-height: 2;
     padding: 0 .58em;
-    cursor: pointer;
     background-color: transparent;
     width: auto;
   }
-  header .operations .btns > button:hover {
+  header .operations button[disabled] {
+    opacity: .6;
+  }
+  header .operations button:not([disabled]):hover {
     background: var(--vscode-button-hoverBackground);
   }
-  header .operations .btns > button:active {
+  header .operations button:not([disabled]):active {
     opacity: .8;
   }
 
+  .ppz-pagination {
+    display: flex;
+    align-items: center;
+  }
+  header .ppz-pagination button {
+    padding: 0 .18em;
+  }
+  .ppz-pagination input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    width: 1.8em;
+    padding: 0;
+    height: 1em;
+    color: inherit;
+    text-align: center;
+  }
+  .ppz-pagination span {
+    font-size: .8em;
+    margin-right: 1em;
+  }
   .table-wrapper {
     flex: 1;
     overflow: auto;
@@ -56,8 +79,10 @@
   }
   th, td {
     padding: 0 .5em;
-    max-width: 20em;
+    max-width: 16em;
     line-height: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   th {
     text-align: left;

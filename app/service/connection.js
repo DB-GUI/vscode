@@ -79,13 +79,13 @@ class MysqlKnexConnection extends KnexConnection {
   }
   
   async tbList(database) {
-    await this.client.raw('use ' + database)
+    await this.client.raw('use `' + database + '`')
     const result = await this.client.raw('show tables;')
     return result[0].map(item => item['Tables_in_' + database])
   }
 
   async fieldList(table, database) {
-    const result = await this.client.raw(`desc ${database}.${table}`)
+    const result = await this.client.raw(`desc \`${database}\`.\`${table}\``)
     return result[0].map(field => ({
       name: field.Field,
       type: field.Type,
@@ -108,7 +108,7 @@ class Sqlite3KnexConnection extends KnexConnection {
   }
 
   async fieldList(name) {
-    return (await this.client.raw(`Pragma table_info(${name})`))
+    return (await this.client.raw(`Pragma table_info(\`${name}\`)`))
       .map(field => ({
         name: field.name,
         type: field.Type,

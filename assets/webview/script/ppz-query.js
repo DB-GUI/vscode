@@ -63,6 +63,9 @@ $.isNil = function(target) {
     return true
   return false
 }
+$.isInt = function(target) {
+  return typeof target == 'number' && target % 1 == 0
+}
 
 $.emptyObj = function(target) {
   for(const key in target)

@@ -12,7 +12,7 @@ export default function($) {
 
   el.style.transition = '.18s ease all'
   el.style.opacity = 0
-  el.style.transform = 'scale(.8, .8)'
+  el.style.transform = 'scale(0, 0)'
 
   $('body').appendChild(el)
 
@@ -31,7 +31,7 @@ export default function($) {
         console.debug('hide', { loading })
         if(loading == 0) {
           el.style.opacity = 0
-          el.style.transform = 'scale(.8, .8)'
+          el.style.transform = 'scale(0, 0)'
         }
       }, 300)
     }

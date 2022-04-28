@@ -19,6 +19,12 @@ $.Icon = Icon
 $.Button = Button
 
 $.Form = Form
+$.Input = function(options) {
+  const $el = $.El('input')
+  for(const key in options)
+    $el[key] = options[key]
+  return $el
+}
 
 $.Table = Table
 $.THead = THead

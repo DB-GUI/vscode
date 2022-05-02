@@ -43,10 +43,21 @@ class KnexConnection {
   
   async select(database, table, params) {
     console.debug('sql select', { database, table })
-    let result = this.client.from(`${database}.${table}`)
-    if(params)
-      result = result.select(...params.fields)
+    let result = this.queryBuilder(database, table)
+    
+    if(params) {
+      if(params.fields)
+        result = result.select(...params.fields)
+
+    }
+      
     return await result
+  }
+
+  queryBuilder(database, table) {
+    if(database)
+      table = database + '.' + table
+    return this.client.from(table)
   }
 
   async dbList() {
@@ -116,13 +127,5 @@ class Sqlite3KnexConnection extends KnexConnection {
         default: field.dflt_value,
         pk: Boolean(field.pk)
       }))
-  }
-  
-  async select(database, table, params) {
-    console.debug('sqlite select', { table })
-    let result = this.client.from(table)
-    if(params)
-      result = result.select(...params.fields)
-    return await result
   }
 }

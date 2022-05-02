@@ -1,7 +1,7 @@
 import $ from '../script/ppz-query.js'
 
 export const config = {
-  size: 16
+  size: 20
 }
 
 export default function Pagination({
@@ -35,6 +35,7 @@ export default function Pagination({
       size = initSize
       $sizeInput.value = size
     }
+    refreshIndex()
     refreshDisabled()
   }
 
@@ -54,11 +55,7 @@ export default function Pagination({
       index = 1
       $indexInput.value = index
     }
-    const _pageSum = pageSum()
-    if(index > _pageSum) {
-      index = _pageSum
-      $indexInput.value = index
-    }
+    refreshIndex()
     refreshDisabled()
   }
 
@@ -101,6 +98,13 @@ export default function Pagination({
     } else {
       $rightBtn.disabled = false
       $rightBtn2.disabled = false
+    }
+  }
+  function refreshIndex() {
+    const _pageSum = pageSum()
+    if(index > _pageSum) {
+      index = _pageSum
+      $indexInput.value = index
     }
   }
 

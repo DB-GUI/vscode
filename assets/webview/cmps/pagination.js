@@ -1,7 +1,7 @@
 import $ from '../script/ppz-query.js'
 
 export const config = {
-  size: 10
+  size: 16
 }
 
 export default function Pagination({

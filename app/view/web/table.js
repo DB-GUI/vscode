@@ -17,8 +17,8 @@ class TableWebview extends Webview {
       webviewServerHandlers: {
         async getData(params) {
           const fields = await connection.fieldList(table, database)
-          const records = await connection.select(database, table, params)
-          return { fields, records }
+          const { records, count } = await connection.select(database, table, params)
+          return { fields, records, count }
         }
       }
     })

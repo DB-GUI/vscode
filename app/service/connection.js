@@ -41,17 +41,16 @@ class KnexConnection {
     })
   }
   
-  async select(database, table, params) {
+  async select(database, table, { pagination, fields = ['*'], }) {
     console.debug('sql select', { database, table })
-    let result = this.queryBuilder(database, table)
-    
-    if(params) {
-      if(params.fields)
-        result = result.select(...params.fields)
-
+    const records = await this.queryBuilder(database, table)
+      .select(...fields)
+      .offset((pagination.index - 1) * pagination.size).limit(pagination.size)
+    const count = await this.queryBuilder(database, table).count()
+    return {
+      records,
+      count: count[0]['count(*)']
     }
-      
-    return await result
   }
 
   queryBuilder(database, table) {

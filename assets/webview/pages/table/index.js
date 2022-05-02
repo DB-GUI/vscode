@@ -1,24 +1,44 @@
 import $ from '../../script/ppz-query.js'
 import Page from '../../script/page.js'
+import Pagination, { config } from '../../cmps/pagination.js'
 
 new Page({
   async init() {
     const page = this
     if(!this.state) {
-      const { fields, records } = await $.api.getData()
       const selectParams = {
-        fields: fields.map(f => f.name)
+        pagination: {
+          index: 1,
+          size: config.size,
+          count: 0
+        }
       }
+      const { fields, records, count } = await $.api.getData(selectParams)
+      selectParams.fields = fields.map(f => f.name)
+      selectParams.pagination.count = count
+      
       this.state = {
         fields,
-        selectParams,
-        records
+        records,
+        selectParams
       }
       this.saveState()
     } else
       console.debug('initial state', page.state)
-
+    
     const header = new function() {
+      const pagination = new function() {
+        const { count, index, size } = page.state.selectParams.pagination
+        return Pagination({
+          count, index, size,
+          onChange({ index, size }) {
+            page.state.selectParams.pagination = { index, size }
+            // count 在返回后设置，state 在返回后保存
+            refreshData()
+          }
+        })
+      }
+      
       this.$el = $.El('header', '', [
         $.El('nav', '', [
           $.Span(PPZ.initData.connection),
@@ -57,6 +77,7 @@ new Page({
               return $el
             }
           ]),
+          pagination.$el
         ])
       ])
       

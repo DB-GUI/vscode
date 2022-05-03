@@ -1,7 +1,8 @@
 import $ from './ppz-query.js'
-import { putComputed } from '../../../lib/computed-css/index.js'
+import { getComputed, putComputed, writeStyle } from '../../../lib/computed-css/index.js'
 
 putComputed('color', 'background-color')
+putComputedBtn()
 
 // 应保持页面代码量少，不添加类 Composition Api 特性
 export default class Page {
@@ -18,4 +19,14 @@ export default class Page {
   async saveState() {
     await $.request('saveState', this.state)
   }
+}
+
+function putComputedBtn() {
+  const $btn = document.createElement('button')
+  const $body = document.querySelector('body')
+  $body.appendChild($btn)
+  const result = getComputed.apply($btn, ['background-color'])
+  result[0].prop = 'primary-color'
+  writeStyle(result)
+  $btn.remove()
 }

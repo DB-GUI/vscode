@@ -101,29 +101,40 @@ new Page({
         getTHead(),
         getTBody()
       )
+      const $style = $.El('style')
       this.updateData = function() {
         table.thead(getTHead())
         table.tbody(getTBody())
       }
-      
+
       function getTHead() {
         return [$.El('th', 'pre-unit'), ...page.state.fields.map(f => f.name)]
       }
       function getTBody() {
         return page.state.records.map(
-          record => ([
+          (record, rowIndex) => ([
             $.El('td', 'pre-unit'),
             ...page.state.fields.map(
-              f => {
+              (f, columnIndex) => {
                 const td = $.El('td', '', [record[f.name]])
                 td.tabIndex = 0
+                td.onfocus = function() {
+                  $style.innerHTML = `
+                    tbody tr:nth-child(${rowIndex + 1}) {
+                      background-color: rgba(var(--color2), .28);
+                    }
+                    tbody td:nth-child(${columnIndex + 2}) {
+                      background-color: rgba(var(--color2), .28);
+                    }
+                  `
+                }
                 return td
               }
             )
           ])
         )
       }
-      this.$el = $.Div('table-wrapper', [table.$el])
+      this.$el = $.Div('table-wrapper', [table.$el, $style])
     }
 
     $('body').append(

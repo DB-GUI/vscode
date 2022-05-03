@@ -11,11 +11,17 @@ html, body {
   padding: 0;
 }
 body {
-  --foreground-color: var(--ppz-color-red), var(--ppz-color-green), var(--ppz-color-blue);
-  --background-color: var(--ppz-background-color-red), var(--ppz-background-color-green), var(--ppz-background-color-blue);
-  --color: rgba(var(var(--foreground-color)), var(--ppz-color-alpha));
-  --border: 1px solid rgba(var(--foreground-color), .5);
-  --border2: 1px solid rgba(var(--foreground-color), .18);
+  --color0: var(--color0-red), var(--color0-green), var(--color0-blue);
+  --true-color0: rgba(var(--color0), var(--color0-alpha));
+  
+  --color1: var(--color1-red), var(--color1-green), var(--color1-blue);
+  --true-color1: rgba(var(--color1), var(--color1-alpha));
+
+  --color2: var(--color2-red), var(--color2-green), var(--color2-blue);
+  --true-color2: rgba(var(--color2), var(--color2-alpha));
+
+  --border: 1px solid rgba(var(--color1), .5);
+  --border2: 1px solid rgba(var(--color1), .18);
   --border-focus: 1px solid var(--vscode-focusBorder);
   --border-radius: .25rem;
   --box-shadow: 0 0 8px 2px rgb(0 0 0 / 18%);

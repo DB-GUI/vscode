@@ -73,10 +73,10 @@
   thead {
     position: sticky;
     top: 0;
-    background: rgba(var(--foreground-color), .1);
+    background: rgba(var(--color1), .1);
   }
   tbody tr:nth-child(even) {
-    background: rgba(var(--foreground-color), .06);
+    background: rgba(var(--color1), .06);
   }
   th, td {
     padding: 0 .5em;
@@ -93,6 +93,9 @@
   }
   td:hover {
     cursor: cell;
-    background: rgba(var(--foreground-color), .1);
+    background: rgba(var(--color1), .1);
+  }
+  td:focus {
+    background: rgba(var(--color2), .1);
   }
 </style>

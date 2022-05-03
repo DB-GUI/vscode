@@ -1,7 +1,7 @@
 import $ from './ppz-query.js'
-import ColorValue from '../../../lib/color-value/index.js'
+import { putComputed } from '../../../lib/color-value/index.js'
 
-ColorValue('color', 'background-color')
+putComputed('color', 'background-color')
 
 // 应保持页面代码量少，不添加类 Composition Api 特性
 export default class Page {

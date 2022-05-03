@@ -114,7 +114,11 @@ new Page({
           record => ([
             $.El('td', 'pre-unit'),
             ...page.state.fields.map(
-              f => record[f.name]
+              f => {
+                const td = $.El('td', '', [record[f.name]])
+                td.tabIndex = 0
+                return td
+              }
             )
           ])
         )

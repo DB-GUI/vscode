@@ -1,5 +1,6 @@
 @import url('./form.css');
 @import url('../../../node_modules/@ppzp/noty/content/index.css');
+@import url('./border-box.css');
 
 html {
   color: var(--vscode-editor-foreground);

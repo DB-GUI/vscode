@@ -1,5 +1,5 @@
 import $ from './ppz-query.js'
-import { putComputed } from '../../../lib/color-value/index.js'
+import { putComputed } from '../../../lib/computed-css/index.js'
 
 putComputed('color', 'background-color')
 

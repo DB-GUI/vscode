@@ -1,4 +1,4 @@
-# ColorValue.js
+# ComputedCss.js
 读取 ```:root``` 里的某些颜色值：
 + ```export putComputed```: 新建一个 ```<style></style>``` 并把颜色值写在里面  
 + ```export getComputed```: 返回 ```{ red: xxx; green: xxx; blue: xxx; alpha: xxx; prop: xxx }```

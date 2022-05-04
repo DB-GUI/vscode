@@ -1,6 +1,7 @@
 import $ from '../../script/ppz-query.js'
 import Page from '../../script/page.js'
 import Pagination, { config } from '../../cmps/pagination.js'
+import TDHelperClosure from './td-helper-closure.js'
 
 new Page({
   async init() {
@@ -97,11 +98,13 @@ new Page({
     }
 
     const table = new function() {
+      const $style = $.El('style')
+      const changingTD = new Set()
+      const TDHelper = TDHelperClosure($, $style, changingTD)
       const table = new $.Table(
         getTHead(),
         getTBody()
       )
-      const $style = $.El('style')
       this.updateData = function() {
         table.thead(getTHead())
         table.tbody(getTBody())
@@ -115,25 +118,13 @@ new Page({
           (record, rowIndex) => ([
             $.El('td', 'pre-unit'),
             ...page.state.fields.map(
-              (f, columnIndex) => {
-                const td = $.El('td', '', [record[f.name]])
-                td.tabIndex = 0
-                td.onfocus = function() {
-                  $style.innerHTML = `
-                    tbody tr:nth-child(${rowIndex + 1}) {
-                      background-color: rgba(var(--color2), .28);
-                    }
-                    tbody td:nth-child(${columnIndex + 2}) {
-                      background-color: rgba(var(--color2), .28);
-                    }
-                  `
-                }
-                return td
-              }
+              (field, columnIndex) =>
+                new TDHelper(record, rowIndex, field, columnIndex).$el
             )
           ])
         )
       }
+
       this.$el = $.Div('table-wrapper', [table.$el, $style])
     }
 

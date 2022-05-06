@@ -41,6 +41,10 @@ button {
 button:hover {
   background-color: var(--vscode-button-hoverBackground);
 }
+button[disabled] {
+  opacity: .5;
+  cursor: default;
+}
 
 .flex-container {
   width: 100%;

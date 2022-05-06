@@ -29,10 +29,6 @@
     background-color: transparent;
     width: auto;
   }
-  header .operations button[disabled] {
-    opacity: .6;
-    cursor: not-allowed;
-  }
   header .operations button:not([disabled]):hover {
     background: var(--vscode-button-hoverBackground);
   }
@@ -45,7 +41,10 @@
     align-items: center;
   }
   header .ppz-pagination button {
-    padding: 0 .18em;
+    padding: 0 .28em;
+  }
+  header .ppz-pagination button.big svg {
+    transform: scale(1.3);
   }
   .ppz-pagination input {
     background-color: transparent;
@@ -68,8 +67,6 @@
   table {
     border-collapse: collapse;
   }
-  .pre-unit {
-  }
   thead {
     position: sticky;
     top: 0;
@@ -82,8 +79,13 @@
     padding: 0 .5em;
     max-width: 16em;
     line-height: 2;
+
     overflow: hidden;
+    white-space: nowrap;
     text-overflow: ellipsis;
+  }
+  th:not(.pre-unit), td:not(.pre-unit) {
+    min-width: 2.8em;
   }
   th {
     text-align: left;

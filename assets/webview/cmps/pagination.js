@@ -59,15 +59,17 @@ export default function Pagination({
     refreshDisabled()
   }
 
-  const Button = (icon, title, onclick) => {
+  const Button = (big, icon, title, onclick) => {
     const btn = $.Button([$.Icon(icon)], onclick)
+    if(big)
+      btn.classList.add('big')
     btn.title = title
     return btn
   }
-  const $leftBtn = Button('arrow-left', '上一页', () => onclickNav(index - 1))
-  const $rightBtn = Button('arrow-right', '下一页', () => onclickNav(index + 1))
-  const $leftBtn2 = Button('arrow-left2', '第一页', () => onclickNav(1))
-  const $rightBtn2 = Button('arrow-right2', '最后一页', () => onclickNav(pageSum()))
+  const $leftBtn = Button(true, 'arrow-left', '上一页', () => onclickNav(index - 1))
+  const $rightBtn = Button(true, 'arrow-right', '下一页', () => onclickNav(index + 1))
+  const $leftBtn2 = Button(true, 'arrow-left2', '第一页', () => onclickNav(1))
+  const $rightBtn2 = Button(true, 'arrow-right2', '最后一页', () => onclickNav(pageSum()))
   refreshDisabled()
 
   function onclickNav(i) { // 处理按钮
@@ -116,7 +118,7 @@ export default function Pagination({
       refreshDisabled()
     },
     $el: $.Div('ppz-pagination', [
-      Button('refresh', '刷新页', refresh),
+      Button(false, 'refresh', '刷新页', refresh),
       $sizeInput,
       $.Span(' 条记录 / 页'),
       $leftBtn2,

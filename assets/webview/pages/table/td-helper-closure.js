@@ -17,7 +17,7 @@ export default function TDHelperClosure($, $style, state, saveState) {
           // 没有不一样的 key，那么就是我的 state
           return true
         }).changed
-      console.log('constructing', state, this.changed)
+      
       if(this.changed && this.changed[this.fieldName]) {
         this.$el = $.El('td', '', [this.changed[this.fieldName]])
         this.$el.style = inputingStyle
@@ -38,6 +38,9 @@ export default function TDHelperClosure($, $style, state, saveState) {
         }
         tbody td:nth-child(${this.columnIndex + 2}) {
           background-color: rgba(var(--color2), .188);
+        }
+        tbody tr:nth-child(${this.rowIndex + 1}) td:nth-child(${this.columnIndex + 2}) {
+          white-space: normal;
         }
       `
     }

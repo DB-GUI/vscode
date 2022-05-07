@@ -45,6 +45,23 @@ new Page({
         })
       }
       
+      const $refreshBtn = Button('刷新', 'light', refreshData)
+      const $fieldFilterBtn = Button('字段选择', 'filter', function() {
+      })
+      const $createBtn = Button('新增', 'add', function() {
+      })
+      const $copyBtn = Button('拷贝当前记录', 'copy', function() {
+      })
+      const $saveBtn = Button('保存', 'save', function() {
+        console.log(state.table)
+      })
+      const $undoBtn = Button('撤销全部', 'undo', function() {
+      })
+      const $deleteBtn = Button('删除当前记录', 'delete', function() {
+      })
+      const $sqlBtn = Button('打开 sql 文件', 'sql', function() {
+      })
+      
       this.$el = $.El('header', '', [
         $.El('nav', '', [
           $.Span(PPZ.initData.connection),
@@ -55,44 +72,14 @@ new Page({
         ]),
         $.Div('operations', [
           $.Div('btns', [
-            // 通过事件来传达各种状态
-            Button('刷新', 'light', refreshData),
-            new function() {
-              const $el = Button('字段选择', 'filter', function() {
-              })
-              return $el
-            },
-            new function() {
-              const $el = Button('新增', 'add', function() {
-              })
-              return $el
-            },
-            new function() {
-              const $el = Button('拷贝当前记录', 'copy', function() {
-              })
-              return $el
-            },
-            new function() {
-              const $el = Button('保存', 'save', function() {
-                console.log(state.table)
-              })
-              return $el
-            },
-            new function() {
-              const $el = Button('撤销全部', 'undo', function() {
-              })
-              return $el
-            },
-            new function() {
-              const $el = Button('删除当前记录', 'delete', function() {
-              })
-              return $el
-            },
-            new function() {
-              const $el = Button('打开 sql 文件', 'sql', function() {
-              })
-              return $el
-            }
+            $refreshBtn,
+            $fieldFilterBtn,
+            $createBtn,
+            $copyBtn,
+            $saveBtn,
+            $undoBtn,
+            $deleteBtn,
+            $sqlBtn
           ]),
           pagination.$el
         ])
@@ -111,6 +98,10 @@ new Page({
         state.table = initTableState(fields, records)
         page.saveState()
         table.updateData()
+      }
+
+      function refreshBtns() { // 数据刷新、state.table.editing、state.table.deleting、保存、取消
+
       }
     }
 

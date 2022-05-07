@@ -38,7 +38,7 @@ button {
   height: 2em;
   width: 6rem;
 }
-button:hover {
+button:not([disabled]):hover {
   background-color: var(--vscode-button-hoverBackground);
 }
 button[disabled] {

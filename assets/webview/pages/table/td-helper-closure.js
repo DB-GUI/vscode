@@ -34,10 +34,10 @@ export default function TDHelperClosure($, $style, state, saveState) {
     onfocus() {
       $style.innerHTML = `
         tbody tr:nth-child(${this.rowIndex + 1}) {
-          background-color: rgba(var(--color2), .188);
+          background-color: rgba(var(--color1), .16);
         }
         tbody td:nth-child(${this.columnIndex + 2}) {
-          background-color: rgba(var(--color2), .188);
+          background-color: rgba(var(--color1), .11);
         }
         tbody tr:nth-child(${this.rowIndex + 1}) td:nth-child(${this.columnIndex + 2}) {
           white-space: normal;

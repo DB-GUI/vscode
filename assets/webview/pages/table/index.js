@@ -58,7 +58,7 @@ new Page({
             // 通过事件来传达各种状态
             Button('刷新', 'light', refreshData),
             new function() {
-              const $el = Button('字段', 'filter', function() {
+              const $el = Button('字段选择', 'filter', function() {
               })
               return $el
             },
@@ -68,7 +68,7 @@ new Page({
               return $el
             },
             new function() {
-              const $el = Button('删除', 'delete', function() {
+              const $el = Button('拷贝当前记录', 'copy', function() {
               })
               return $el
             },
@@ -79,7 +79,17 @@ new Page({
               return $el
             },
             new function() {
-              const $el = Button('取消', 'return', function() {
+              const $el = Button('撤销全部', 'undo', function() {
+              })
+              return $el
+            },
+            new function() {
+              const $el = Button('删除当前记录', 'delete', function() {
+              })
+              return $el
+            },
+            new function() {
+              const $el = Button('打开 sql 文件', 'sql', function() {
               })
               return $el
             }

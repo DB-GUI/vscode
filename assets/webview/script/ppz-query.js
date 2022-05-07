@@ -58,6 +58,9 @@ $.request = Request({
 })
 $.api = Api($.request)
 
+import Noty from '../../../lib/noty/index.js'
+$.noty = Noty($.request)
+
 $.isNil = function(target) {
   if(target == null || target == undefined)
     return true

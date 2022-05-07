@@ -47,6 +47,7 @@ module.exports = class Webview {
     }
     // 处理来自网页的请求
     new WebviewServer(this.panel.webview, Context.subscriptions, Object.assign({
+      noty: ({ type, msg }) => noty[type](msg),
       dispose: () => { // 销毁 webview
         this.panel.dispose()
       },

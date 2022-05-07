@@ -31,6 +31,9 @@ new Page({
     } else
       console.debug('initial state', page.state)
     const state = page.state
+    const isEditing = () => state.table.editing.some(
+      item => Object.entries(item.changed).length
+    )
 
     const header = new function() {
       const pagination = new function() {
@@ -44,24 +47,7 @@ new Page({
           }
         })
       }
-      
-      const $refreshBtn = Button('刷新', 'light', refreshData)
-      const $fieldFilterBtn = Button('字段选择', 'filter', function() {
-      })
-      const $createBtn = Button('新增', 'add', function() {
-      })
-      const $copyBtn = Button('拷贝当前记录', 'copy', function() {
-      })
-      const $saveBtn = Button('保存', 'save', function() {
-        console.log(state.table)
-      })
-      const $undoBtn = Button('撤销全部', 'undo', function() {
-      })
-      const $deleteBtn = Button('删除当前记录', 'delete', function() {
-      })
-      const $sqlBtn = Button('打开 sql 文件', 'sql', function() {
-      })
-      
+
       this.$el = $.El('header', '', [
         $.El('nav', '', [
           $.Span(PPZ.initData.connection),
@@ -72,14 +58,27 @@ new Page({
         ]),
         $.Div('operations', [
           $.Div('btns', [
-            $refreshBtn,
-            $fieldFilterBtn,
-            $createBtn,
-            $copyBtn,
-            $saveBtn,
-            $undoBtn,
-            $deleteBtn,
-            $sqlBtn
+            Button('刷新', 'light', function() {
+              if(isEditing())
+                $.noty.warn('请先保存或撤销全部修改')
+              else
+                refreshData()
+            }),
+            Button('字段选择', 'filter', function() {
+            }),
+            Button('新增', 'add', function() {
+            }),
+            Button('拷贝当前记录', 'copy', function() {
+            }),
+            Button('保存', 'save', function() {
+              console.log(state.table)
+            }),
+            Button('撤销全部', 'undo', function() {
+            }),
+            Button('删除当前记录', 'delete', function() {
+            }),
+            Button('打开 sql 文件', 'sql', function() {
+            })
           ]),
           pagination.$el
         ])
@@ -98,10 +97,6 @@ new Page({
         state.table = initTableState(fields, records)
         page.saveState()
         table.updateData()
-      }
-
-      function refreshBtns() { // 数据刷新、state.table.editing、state.table.deleting、保存、取消
-
       }
     }
 

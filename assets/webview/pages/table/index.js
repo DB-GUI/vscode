@@ -25,6 +25,7 @@ new Page({
         fields,
         records,
         selectParams,
+        focusedCoordinate: {},
         table: initTableState(fields, records)
       }
       this.saveState()
@@ -104,6 +105,7 @@ new Page({
       const $style = $.El('style')
       const TDHelper = TDHelperClosure(
         $, $style,
+        state.focusedCoordinate,
         state.table && state.table.editing, // 表示只有此组件可以改变它
         () => page.saveState()
       )

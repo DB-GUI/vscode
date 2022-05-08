@@ -1,7 +1,7 @@
 const inputingStyle = 'background: rgba(var(--color1), .166);'
 
-// 这种模式，仅使用闭包内的部分对象，是“使用哪些对象”变得明确
-export default function TDHelperClosure($, $style, state, saveState) {
+// 这种模式，仅使用闭包内的部分对象，使“使用哪些对象”变得明确
+export default function TDHelperClosure($, $style, coordinate, state, saveState) {
   return class TDHelper {
     constructor(record, rowIndex, field, columnIndex) {
       this.record = record
@@ -24,7 +24,14 @@ export default function TDHelperClosure($, $style, state, saveState) {
       } else {
         this.$el = $.El('td', '', [record[this.fieldName]])
       }
-      this.$el.onfocus = () => this.onfocus()
+      if(coordinate.x != undefined && coordinate.x == rowIndex && coordinate.y == columnIndex)
+        this.onfocus()
+      this.$el.onfocus = () => {
+        coordinate.x = rowIndex
+        coordinate.y = columnIndex
+        saveState()
+        this.onfocus()
+      }
       if(this.changed) {
         this.$el.contentEditable = true
         this.$el.oninput = evt => this.oninput(evt)

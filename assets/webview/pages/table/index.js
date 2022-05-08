@@ -96,13 +96,18 @@ new Page({
         state.fields = fields
         state.records = records
         state.table = initTableState(fields, records)
+        if(state.focusedCoordinate.x != undefined) {
+          delete state.focusedCoordinate.x
+          delete state.focusedCoordinate.y
+          table.$style.innerHTML = ''
+        }
         page.saveState()
         table.updateData()
       }
     }
 
     const table = new function() {
-      const $style = $.El('style')
+      const $style = this.$style = $.El('style')
       const TDHelper = TDHelperClosure(
         $, $style,
         state.focusedCoordinate,

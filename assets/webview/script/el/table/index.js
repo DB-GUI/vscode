@@ -23,8 +23,8 @@ export function TBody(data) {
 }
 
 export class Table {
-  constructor(fields = [], data = []) {
-    this.$el = El('table', '', [
+  constructor(fields = [], data = [], className) {
+    this.$el = El('table', className, [
       THead(fields),
       TBody(data)
     ])

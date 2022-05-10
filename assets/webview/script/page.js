@@ -16,7 +16,9 @@ export default class Page {
   }
 
   async saveState() {
-    await $.request('saveState', this.state)
+    await $.request('saveState', this.state, {
+      noLoading: true
+    })
   }
 }
 

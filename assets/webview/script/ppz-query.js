@@ -53,13 +53,26 @@ $.loading = Loading($)
 import Request, { Api } from '../../../lib/request/client.js'
 $.request = Request({
   vscode: VSCODE,
-  beforeSend: $.loading.show,
-  afterReturn: $.loading.hide
+  beforeSend({ options }) {
+    if(!options.noLoading)
+      $.loading.show()
+  },
+  afterReturn(res, { options }) {
+    if(!options.noLoading)
+      $.loading.hide()
+  }
 })
 $.api = Api($.request)
 
-import Noty from '../../../lib/noty/index.js'
-$.noty = Noty($.request)
+$.noty = new Proxy({}, {
+  get(target, type) {
+    return (msg, ...btns) => $.api.noty({ type, msg, btns }, {
+      timeout: 0,
+      noLoading: true
+    })
+  }
+})
+
 
 $.isNil = function(target) {
   if(target == null || target == undefined)

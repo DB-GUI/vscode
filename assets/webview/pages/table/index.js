@@ -1,7 +1,7 @@
 import $ from '../../script/ppz-query.js'
 import Page from '../../script/page.js'
 import Pagination, { config } from '../../cmps/pagination.js'
-import TDHelperClosure from './td-helper-closure.js'
+import PNE from './pne-wrapper.js'
 
 // 有些表，没主键，即使理论上可以精准删除、编辑，但复杂度攀升，不做考虑
 new Page({
@@ -25,16 +25,12 @@ new Page({
         fields,
         records,
         selectParams,
-        focusedCoordinate: {},
-        table: initTableState(fields, records)
+        table: null
       }
       this.saveState()
     } else
       console.debug('initial state', page.state)
     const state = page.state
-    const isEditing = () => state.table.editing.some(
-      item => Object.entries(item.changed).length
-    )
 
     const header = new function() {
       const pagination = new function() {
@@ -60,7 +56,7 @@ new Page({
         $.Div('operations', [
           $.Div('btns', [
             Button('刷新', 'light', function() {
-              if(isEditing())
+              if(table.isEditing())
                 $.noty.warn('请先保存或撤销全部修改')
               else
                 refreshData()
@@ -95,51 +91,21 @@ new Page({
         const { fields, records } = await $.api.getData(page.state.selectParams)
         state.fields = fields
         state.records = records
-        state.table = initTableState(fields, records)
-        if(state.focusedCoordinate.x != undefined) {
-          delete state.focusedCoordinate.x
-          delete state.focusedCoordinate.y
-          table.$style.innerHTML = ''
-        }
+        // page.saveState() // 交给 updateData 做
+        table.updateData(fields, records)
+      }
+    }
+
+    const table = PNE(
+      state.fields,
+      state.records,
+      state.table, // state
+      tableState => { // saveState
+        if(tableState)
+          state.table = tableState
         page.saveState()
-        table.updateData()
       }
-    }
-
-    const table = new function() {
-      const $style = this.$style = $.El('style')
-      const TDHelper = TDHelperClosure(
-        $, $style,
-        state.focusedCoordinate,
-        state.table && state.table.editing, // 表示只有此组件可以改变它
-        () => page.saveState()
-      )
-      const table = new $.Table(
-        getTHead(),
-        getTBody()
-      )
-      this.updateData = function() {
-        table.thead(getTHead())
-        table.tbody(getTBody())
-      }
-
-      function getTHead() {
-        return [$.El('th', 'pre-unit'), ...state.fields.map(f => f.name)]
-      }
-      function getTBody() {
-        return state.records.map(
-          (record, rowIndex) => ([
-            $.El('td', 'pre-unit'),
-            ...state.fields.map(
-              (field, columnIndex) =>
-                new TDHelper(record, rowIndex, field, columnIndex).$el
-            )
-          ])
-        )
-      }
-
-      this.$el = $.Div('table-wrapper', [table.$el, $style])
-    }
+    )
 
     $('body').append(
       header.$el,
@@ -147,17 +113,3 @@ new Page({
     )
   }
 })
-
-function initTableState(fields, records) {
-  // 应在 save 或 cancel 时清空，否则至少应该找一个“点”清空
-  const pks = fields.filter(f => f.pk).map(f => f.name)
-  if(pks.length == 0)
-    return null
-  return {
-    editing: records.map(record => ({
-      pk: Object.fromEntries(pks.map(pk => [pk, record[pk]])),
-      changed: {}
-    })),
-    deleting: []
-  }
-}

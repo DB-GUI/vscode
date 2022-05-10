@@ -3,14 +3,14 @@ import $ from '../script/ppz-query.js'
 
 export default class PNE {
   constructor({
-    className,
-    editable = true,
-    oninput,
-    onfocus,
-    color1 = 'black',
-    appendStyle = true,
     fields,
     records,
+    className,
+    editable = true,
+    color1 = 'black',
+    appendStyle = true,
+    oninput,
+    onfocus
   }) {
     this.className = className
     this.editable = editable
@@ -22,18 +22,21 @@ export default class PNE {
     if(appendStyle)
       document.head.append(this.$style)
 
-    this.$el = new $.Table(this._getThead(fields), this._getTbody(fields, records), className)
+    this.table = new $.Table(this._getThead(fields), this._getTbody(fields, records), className)
+    this.$el = this.table.$el
   }
   focused(x, y) {
+    x += 1
+    y += 1
     const selector = this.className ? '.' + this.className : ''
     this.$style.innerHTML = `
-      ${selector} tbody tr:nth-child(${x}) {
+      ${selector} tbody tr:nth-child(${y}) {
         background-color: rgba(var(--color1, ${this.color1}), .16);
       }
-      ${selector} tbody td:nth-child(${y}) {
+      ${selector} tbody td:nth-child(${x}) {
         background-color: rgba(var(--color1, ${this.color1}), .11);
       }
-      ${selector} tbody tr:nth-child(${x}) td:nth-child(${y}) {
+      ${selector} tbody tr:nth-child(${y}) td:nth-child(${x}) {
         white-space: normal;
       }
     `
@@ -62,7 +65,7 @@ export default class PNE {
         fields.map(
           (field, x) => {
             const rawValue = record[field.name]
-            const $td = $.El('td', '', rawValue)
+            const $td = $.El('td', '', [rawValue])
             $td.pneRawValue = rawValue
             if(this.editable)
               $td.contentEditable = true
@@ -93,6 +96,7 @@ export default class PNE {
                   x, y, record, field
                 }, evt)
             }
+            return $td
           }
         )
     )

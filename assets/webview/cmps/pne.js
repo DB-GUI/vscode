@@ -56,7 +56,12 @@ export default class PNE {
 
   _getThead(fields) {
     if(!fields) return []
-    return fields.map(f => f.name)
+    return fields.map(f => {
+      const th = $.El('th', '', [f.name])
+      if(f.type)
+        th.title = f.type
+      return th
+    })
   }
   _getTbody(fields, records) {
     if(!records) return []

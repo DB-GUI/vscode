@@ -12,8 +12,12 @@ export default function PNEWrapper(__fields, records, state, saveState) {
     records,
     editable: editable(),
     appendStyle: false,
-    oninput() {
-
+    oninput({ y, field, value, changed }) {
+      if(changed)
+        state.editing[y].changed[field.name] = value
+      else
+        delete state.editing[y].changed[field.name]
+      saveState()
     },
     onfocus({ x, y }) {
       state.focus = { x, y }

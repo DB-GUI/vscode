@@ -22,8 +22,8 @@ new Page({
       selectParams.pagination.count = count
       
       this.state = {
-        fields,
-        records,
+        __fields: fields,
+        __records: records,
         selectParams,
         table: null
       }
@@ -31,6 +31,14 @@ new Page({
     } else
       console.debug('initial state', page.state)
     const state = page.state
+    const setFields = fields => {
+      state.__fields = fields
+      state.selectParams.fields = fields.map(f => f.name)
+    }
+    const setRecords = (records, count) => {
+      state.__records = records
+      state.selectParams.pagination.count = count
+    }
 
     const header = new function() {
       const pagination = new function() {
@@ -111,17 +119,16 @@ new Page({
       
       async function refreshData() {
         const { fields, records, count } = await $.api.getData(page.state.selectParams)
-        state.fields = fields
-        state.records = records
-        state.selectParams.pagination.count = count
+        setFields(fields)
+        setRecords(records, count)
         // page.saveState() // 交给 updateData 做
         table.updateData(fields, records)
       }
     }
 
     const table = PNE(
-      state.fields,
-      state.records,
+      state.__fields,
+      state.__records,
       state.table, // state
       tableState => { // saveState
         if(tableState)

@@ -54,6 +54,12 @@ export default class PNE {
     $td.pneChanged = false
   }
 
+  thead(fields) {
+    return this.table.thead(this._getThead(fields))
+  }
+  tbody(fields, records) {
+    return this.table.tbody(this._getTbody(fields, records))
+  }
   _getThead(fields) {
     if(!fields) return []
     return fields.map(f => {

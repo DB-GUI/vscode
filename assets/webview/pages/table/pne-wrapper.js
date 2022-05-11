@@ -56,6 +56,8 @@ export default function PNEWrapper(__fields, records, state, saveState) {
     updateData(_fields, _records) {
       setFields(_fields)
       records = _records
+      pne.thead(_fields)
+      pne.tbody(_fields, records)
       state = initState()
       saveState(state)
       pne.$style.innerHTML = ''

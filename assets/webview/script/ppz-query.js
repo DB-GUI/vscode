@@ -79,8 +79,11 @@ $.isNil = function(target) {
     return true
   return false
 }
+$.isNumber = function(target) {
+  return typeof target == 'number' && !isNaN(target)
+}
 $.isInt = function(target) {
-  return typeof target == 'number' && target % 1 == 0
+  return $.isNumber(target) && target % 1 == 0
 }
 $.isUnsignedInt = function(target) {
   return $.isInt(target) && target > 0

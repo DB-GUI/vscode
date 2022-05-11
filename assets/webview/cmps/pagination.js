@@ -11,10 +11,10 @@ export default function Pagination({
   onChange
 }) {
   if(!$.isUnsignedInt(size))
-    throw Error('invalid size')
+    throw Error('invalid size: ' + size)
   checkCount(count)
   if(!($.isUnsignedInt(index) && index <= pageSum()))
-    throw Error('invalid index')
+    throw Error('invalid index: ' + index)
 
   let initSize = size
   const refresh = () => onChange({ index, size })
@@ -81,7 +81,7 @@ export default function Pagination({
   }
   function checkCount(value) {
     if(!($.isInt(value) && value >=0))
-      throw Error('invalid count')
+      throw Error('invalid count: ' + value)
   }
   function pageSum() {
     return Math.ceil(count / size) || 1 // 当 result 为 0 时，设为 1

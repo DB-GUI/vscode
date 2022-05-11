@@ -39,6 +39,9 @@ new Page({
           count, index, size,
           onChange({ index, size }) {
             page.state.selectParams.pagination = { index, size }
+            // page.state.selectParams.pagination.index = index
+            // page.state.selectParams.pagination.size = size
+            // 上面两行代码，看似安全（好像在保护开发者），实则是把 bug 藏得更深了
             // count 在返回后设置，state 在返回后保存
             refreshData()
           }
@@ -107,9 +110,10 @@ new Page({
       }
       
       async function refreshData() {
-        const { fields, records } = await $.api.getData(page.state.selectParams)
+        const { fields, records, count } = await $.api.getData(page.state.selectParams)
         state.fields = fields
         state.records = records
+        state.selectParams.pagination.count = count
         // page.saveState() // 交给 updateData 做
         table.updateData(fields, records)
       }

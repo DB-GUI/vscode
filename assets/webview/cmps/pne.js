@@ -33,7 +33,7 @@ export default class PNE {
       ${selector} tbody tr:nth-child(${y}) {
         background-color: rgba(var(--color1, ${this.color1}), .16);
       }
-      ${selector} tbody td:nth-child(${x}) {
+      ${selector} tr > *:nth-child(${x}) {
         background-color: rgba(var(--color1, ${this.color1}), .11);
       }
       ${selector} tbody tr:nth-child(${y}) td:nth-child(${x}) {

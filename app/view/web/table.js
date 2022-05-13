@@ -19,6 +19,16 @@ class TableWebview extends Webview {
           const fields = await connection.fieldList(table, database)
           const { records, count } = await connection.select(database, table, params)
           return { fields, records, count }
+        },
+        async update(editing) {
+          try {
+            await connection.updateMany(database, table, editing)
+            noty.info('已保存')
+            return true
+          } catch(err) {
+            noty.error(err.toString())
+            return false
+          }
         }
       }
     })

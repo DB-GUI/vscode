@@ -93,12 +93,16 @@ new Page({
             }),
             Button('拷贝当前记录', 'copy', function() {
             }),
-            Button('保存', 'save', function() {
-              if(!table.isEditing()) {
+            Button('保存', 'save', async function() {
+              const editing = table.getEditing()
+              if(editing == null || editing.length == 0) {
                 $.noty.warn('没有待保存的数据')
                 return
               }
-              console.log(state.table)
+              const success = await $.api.update(editing)
+              if(success) {
+                
+              }
             }),
             Button('撤销全部', 'undo', function() {
             }),

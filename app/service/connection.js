@@ -59,6 +59,15 @@ class KnexConnection {
     return this.client.from(table)
   }
 
+  async updateMany(db, tb, changedList) {
+    const table = db? db + '.' + tb : tb
+    return await this.client.transaction(trx =>
+      Promise.all(changedList.map(
+        item => trx(table).where(item.pk).update(item.changed)
+      ))
+    )
+  }
+
   async dbList() {
     throw Error('未实现 dbList 函数')
   }

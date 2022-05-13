@@ -66,6 +66,13 @@ export default function PNEWrapper(__fields, records, state, saveState) {
       return editable() && state.editing.some(
         item => Object.entries(item.changed).length
       )
+    },
+    getEditing() {
+      // null: 不可编辑；[]: 未编辑；others: 正在编辑
+      if(!editable()) return null
+      return state.editing.filter(
+        record => Object.entries(record.changed).length
+      )
     }
   }
 }

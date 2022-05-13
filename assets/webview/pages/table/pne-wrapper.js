@@ -31,6 +31,16 @@ export default function PNEWrapper(__fields, records, state, saveState) {
   } else {
     if(state.focus)
       pne.focused(state.focus.x, state.focus.y)
+    state.editing.forEach(
+      ({ changed }, y) => {
+        __fields.forEach(
+          (f, x) => {
+            if(changed[f.name] !== undefined)
+              pne.inputed(pne.table.tbody().children[y].children[x], changed[f.name])
+          }
+        )
+      }
+    )
   }
 
   function getPKs() {

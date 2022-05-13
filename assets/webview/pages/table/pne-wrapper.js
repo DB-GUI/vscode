@@ -66,6 +66,7 @@ export default function PNEWrapper(__fields, records, state, saveState) {
     updateData(_fields, _records) {
       setFields(_fields)
       records = _records
+      pne.editable = editable()
       pne.thead(_fields)
       pne.tbody(_fields, records)
       state = initState()

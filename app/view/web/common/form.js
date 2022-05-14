@@ -10,9 +10,15 @@ module.exports = class FormWebview extends Webview {
     super(options)
   }
 
+  upsert() {
+    throw Error('FormWebview.prototype.upsert unimplemented')
+  }
+
   async save(data) {
     try {
-      return await this.upsert(data)
+      await this.upsert(data)
+      noty.info('连接已保存')
+      return true
     } catch(err) {
       if(err instanceof FieldWrongDetail) {
         noty.error('保存失败：' + err.name + (
@@ -22,6 +28,7 @@ module.exports = class FormWebview extends Webview {
         ))
       } else
         this.handleErr(err)
+      return false
     }
   }
 }

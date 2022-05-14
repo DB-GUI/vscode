@@ -16,11 +16,12 @@ new Page({
       const saveBtn = $.Button(['保存'], () => save())
       
       async function save(connect) {
-        await $.api.save({
+        const success = await $.api.save({
           connect,
           record: getData(self.state)
         })
-        $.api.dispose()
+        if(success)
+          $.api.dispose()
       }
       return $.Div('form-btns', [connBtn, saveBtn])
     }

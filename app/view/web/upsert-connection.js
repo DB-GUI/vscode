@@ -1,6 +1,5 @@
 const Webview = require('./common/form')
 const service = require('../../service/connection')
-const { noty } = require('../../utils')
 
 module.exports = class UpsertConnectionWebview extends Webview {
   constructor(record) {
@@ -13,6 +12,5 @@ module.exports = class UpsertConnectionWebview extends Webview {
 
   async upsert(data) {
     await service.upsert(data)
-    noty.info('连接已保存')
   }
 }

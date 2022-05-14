@@ -14,7 +14,7 @@ exports.treeviewOptions = TreeviewOptions(root, updateEvent)
 
 // 删除结点
 exports.drop = function(el) {
-  console.debug('删除结点', el)
+  console.debug('删除结点', el.clientType)
   const siblings = el.parent.children
   siblings.splice(siblings.indexOf(el), 1)
   if(el instanceof ConnectionElement && el.connection)

@@ -2,6 +2,7 @@ const vscode = require('vscode')
 const { Type } = require('@ppzp/type')
 
 exports.prompt = require('../lib/prompt')
+exports.confirm = require('../lib/prompt/confirm')
 
 exports.noty = new Proxy({
   info: vscode.window.showInformationMessage,

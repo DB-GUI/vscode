@@ -2,6 +2,7 @@ const Path = require('path')
 const fs = require('fs')
 const vscode = require('vscode')
 const { noty } = require('../../../utils')
+const prompt = require('../../../../lib/prompt/webview/server')
 const WebviewServer = require('../../../../lib/request/server')
 
 module.exports = class Webview {
@@ -52,6 +53,7 @@ module.exports = class Webview {
         if(btns.length)
           return result
       },
+      prompt,
       dispose: () => { // 销毁 webview
         this.panel.dispose()
       },

@@ -71,6 +71,9 @@ $.noty = new Proxy({}, {
   }
 })
 
+import Prompt from '../../../lib/prompt/webview/client.js'
+$.prompt = Prompt(request)
+
 $.isNil = function(target) {
   if(target == null || target == undefined)
     return true

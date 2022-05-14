@@ -108,7 +108,11 @@ new Page({
                 $.noty.warn('未检测到修改内容')
                 return
               }
-              table.reset()
+              $.prompt.warn('是否撤销全部修改', '', {
+                确定() {
+                  table.reset()
+                }
+              })
             }),
             Button('删除当前记录', 'delete', function() {
             }),

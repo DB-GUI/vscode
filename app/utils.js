@@ -1,6 +1,8 @@
 const vscode = require('vscode')
 const { Type } = require('@ppzp/type')
 
+exports.prompt = require('../lib/prompt')
+
 exports.noty = new Proxy({
   info: vscode.window.showInformationMessage,
   warn: vscode.window.showWarningMessage,
@@ -13,7 +15,7 @@ exports.noty = new Proxy({
 })
 
 exports.isNil =
-  target => target == null || target == undefined
+  target => target === null || target === undefined
 
 exports.Type = function(list) {
   return new Type(list.map(function([ name, validate, notNull ]) {

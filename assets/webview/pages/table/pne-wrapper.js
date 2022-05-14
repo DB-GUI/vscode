@@ -2,11 +2,13 @@ import PNE from '../../cmps/pne.js'
 import $ from '../../script/ppz-query.js'
 
 export default function PNEWrapper(__fields, records, state, saveState) {
-  let pks = getPKs()
+  let pks
   const setFields = fields => {
     __fields = fields
     pks = getPKs()
   }
+  setFields(__fields)
+  
   const pne = new PNE({
     fields: __fields,
     records,
@@ -31,19 +33,20 @@ export default function PNEWrapper(__fields, records, state, saveState) {
   } else {
     if(state.focus)
       pne.focused(state.focus.x, state.focus.y)
-    state.editing.forEach(
-      ({ changed }, y) => {
-        __fields.forEach(
-          (f, x) => {
-            if(changed[f.name] !== undefined) {
-              const $td = pne.table.tbody().children[y].children[x]
-              $td.pneChanged = true
-              pne.inputed($td, changed[f.name])
+    if(editable())
+      state.editing.forEach(
+        ({ changed }, y) => {
+          __fields.forEach(
+            (f, x) => {
+              if(changed[f.name] !== undefined) {
+                const $td = pne.table.tbody().children[y].children[x]
+                $td.pneChanged = true
+                pne.inputed($td, changed[f.name])
+              }
             }
-          }
-        )
-      }
-    )
+          )
+        }
+      )
   }
 
   function getPKs() {

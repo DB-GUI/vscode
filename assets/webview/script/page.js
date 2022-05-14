@@ -9,16 +9,14 @@ export default class Page {
     // webview 重新来到前台时（不论是调用 reveal，还是切换 tab）
     // 页面都会重新加载，所以原来的 state 不是现在的 state
     $.run(async () => {
-      this.state = await $.request('getState')
+      this.state = await $.api2.getState()
       if(options.init)
         options.init.apply(this, [{}])
     })
   }
 
   async saveState() {
-    await $.request('saveState', this.state, {
-      noLoading: true
-    })
+    await $.api2.saveState(this.state)
   }
 }
 

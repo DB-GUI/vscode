@@ -1,6 +1,7 @@
 // pne: PNE is Not Excel
 import $ from '../script/ppz-query.js'
 
+// 明确一个组件如何“初始化状态”非常重要（状态不包括配置信息，也就是“不会变的状态”）
 export default class PNE {
   constructor({
     fields,

@@ -70,10 +70,13 @@ export default function PNEWrapper(__fields, records, state, saveState) {
       setFields(_fields)
       records = _records
       pne.editable = editable()
-      pne.thead(_fields)
-      pne.tbody(_fields, records)
+      this.reset()
+    },
+    reset() {
       state = initState()
       saveState(state)
+      pne.thead(__fields)
+      pne.tbody(__fields, records)
       pne.$style.innerHTML = ''
     },
     isEditing() {

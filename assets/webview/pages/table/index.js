@@ -100,11 +100,15 @@ new Page({
                 return
               }
               const success = await $.api.update(editing)
-              if(success) {
-                
-              }
+              if(success)
+                refreshData()
             }),
             Button('撤销全部', 'undo', function() {
+              if(!table.isEditing()) {
+                $.noty.warn('未检测到修改内容')
+                return
+              }
+              table.reset()
             }),
             Button('删除当前记录', 'delete', function() {
             }),

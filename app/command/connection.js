@@ -2,7 +2,7 @@ const UpsertConnectionWebview = require('../view/web/upsert-connection')
 const { ConnectionElement } = require('../view/treeview/connection/element')
 const openTableWebview = require('../view/web/table')
 const service = require('../service/connection')
-const { noty, confirm } = require('../utils')
+const { noty, warn } = require('../utils')
 const connectionTreeview = require('../view/treeview/connection')
 
 exports.openTable = openTableWebview
@@ -23,8 +23,8 @@ exports.editConnection = async function(el) {
 }
 
 exports.deleteConnection = async function(el) {
-  if(!await confirm.warn('确定删除？', '删除后不可恢复', '确定删除'))
-    return
+  if(await warn('确定删除？')) return
+  
   if(el instanceof ConnectionElement) {
     try {
       await service.drop(el.options.id) // 从数据库删除

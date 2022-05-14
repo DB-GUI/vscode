@@ -2,7 +2,11 @@ const vscode = require('vscode')
 const { Type } = require('@ppzp/type')
 
 exports.prompt = require('../lib/prompt')
-exports.confirm = require('../lib/prompt/confirm')
+{ // 大括号仅用来制造块作用域
+  const { confirm, warn } = require('../lib/prompt/confirm')
+  exports.confirm = confirm
+  exports.warn = warn
+}
 
 exports.noty = new Proxy({
   info: vscode.window.showInformationMessage,

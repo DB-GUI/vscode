@@ -21,8 +21,11 @@ export default function PNEWrapper(__fields, records, state, saveState) {
         delete state.editing[y].changed[field.name]
       saveState()
     },
-    onfocus({ x, y }) {
-      state.focus = { x, y }
+    onfocus({ x, y, record }) {
+      const pkValue = {}
+      for(const pk of pks)
+        pkValue[pk] = record[pk]
+      state.focus = { x, y, pkValue }
       saveState()
     }
   })
@@ -82,6 +85,8 @@ export default function PNEWrapper(__fields, records, state, saveState) {
       pne.tbody(__fields, records)
       pne.$style.innerHTML = ''
     },
+    pks: () => pks,
+    editable,
     isEditing() {
       return editable() && state.editing.some(
         item => Object.entries(item.changed).length

@@ -63,7 +63,7 @@ new Page({
             || isDisabledBtn(evt.target.parentElement.parentElement)) return
           
           if(table.isEditing()) {
-            $.noty.warn('请先保存或撤销全部修改')
+            $.noty.warn('请先保存修改内容（或撤销）')
             evt.stopPropagation()
           }
         }, true)
@@ -82,7 +82,7 @@ new Page({
           $.Div('btns', [
             Button('刷新', 'light', function() {
               if(table.isEditing()) {
-                $.noty.warn('请先保存或撤销全部修改')
+                $.noty.warn('请先保存修改内容（或撤销）')
                 return
               }
               refreshData()
@@ -115,6 +115,38 @@ new Page({
               })
             }),
             Button('删除当前记录', 'delete', function() {
+              if(!table.editable()) {
+                $.noty.warn('当前表格不可编辑')
+                return
+              }
+              if(table.isEditing()) {
+                $.noty.warn('请先保存修改内容（或撤销）')
+                return
+              }
+              const _state = state.table.focus
+              if(!_state) {
+                $.noty.warn('请先点击想要删除的记录')
+                return
+              }
+              /* bug 预警 */
+              let warnMsg = []
+              for(const pk of table.pks())
+                if(_state.pkValue[pk] === undefined) {
+                  $.noty.bug('state 不正常，缺少主键的值')
+                  return
+                } else
+                  warnMsg.push(pk + ' 为 ' + _state.pkValue[pk])
+              if(warnMsg.length == 0) {
+                $.noty.bug('逻辑不正常，正在删除没有主键的表记录')
+                return
+              }
+              warnMsg = warnMsg.join(' 且 ')
+              
+              $.prompt.warn('确定删除？', '您正在删除 ' + warnMsg + ' 的记录，删除后不可恢复', {
+                确定() {
+                  console.log('deleting', _state.pkValue)
+                }
+              })
             }),
             Button('打开 sql 文件', 'sql', function() {
             })

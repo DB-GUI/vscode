@@ -26,7 +26,17 @@ class TableWebview extends Webview {
             noty.info('已保存')
             return true
           } catch(err) {
-            noty.error(err.toString())
+            noty.bug(err.toString())
+            return false
+          }
+        },
+        async drop(pkValues) {
+          try {
+            await connection.drop(database, table, pkValues)
+            noty.info('已删除')
+            return true
+          } catch(err) {
+            noty.bug(err.toString())
             return false
           }
         }

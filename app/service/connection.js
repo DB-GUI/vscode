@@ -68,6 +68,12 @@ class KnexConnection {
     )
   }
 
+  async drop(db, tb, where) {
+    if(Object.keys(where).length == 0)
+      throw Error('deleting all data?')
+    return this.queryBuilder(db, tb).where(where).del()
+  }
+
   async dbList() {
     throw Error('未实现 dbList 函数')
   }

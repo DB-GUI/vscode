@@ -143,8 +143,10 @@ new Page({
               warnMsg = warnMsg.join(' 且 ')
               
               $.prompt.warn('确定删除？', '您正在删除 ' + warnMsg + ' 的记录，删除后不可恢复', {
-                确定() {
-                  console.log('deleting', _state.pkValue)
+                async 确定() {
+                  const success = await $.api.drop(_state.pkValue)
+                  if(success)
+                    refreshData()
                 }
               })
             }),

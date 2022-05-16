@@ -170,9 +170,8 @@ new Page({
             return
           }
         }
-        const success = await $.api.newRecord(data)
-        if(success && await $.notyConfirm.info('记录创建成功，是否刷新数据', '刷新'))
-          refreshData()
+        $.api.newRecord(data)
+        // 马上跳转新页面，此页面被 dispose
       }
       function Button(title, icon, handler) {
         const el = $.Button('', [$.Icon(icon)], handler)

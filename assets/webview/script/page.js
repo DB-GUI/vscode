@@ -15,6 +15,7 @@ export default class Page {
     })
   }
 
+  // 不应改成 saveState(state) 的形式，init 方法内的 state 引用将失效
   async saveState() {
     await $.api2.saveState(this.state)
   }

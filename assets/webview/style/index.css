@@ -36,7 +36,8 @@ button {
   
   display: inline-block;
   height: 2em;
-  width: 6rem;
+  min-width: 6em;
+  padding: 0 .8em;
 }
 button:not([disabled]):hover {
   background-color: var(--vscode-button-hoverBackground);
@@ -52,6 +53,7 @@ button[disabled] {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 
 /** iconfont **/

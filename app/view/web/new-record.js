@@ -1,5 +1,4 @@
 const Webview = require('./common/base')
-const Events = require('events')
 const { noty } = require('../../utils')
 
 module.exports = 
@@ -15,7 +14,7 @@ class TableWebview extends Webview {
         insert: async ({ record, closeAfterInserted }) => {
           try {
             await connection.insert(database, table, record)
-            this._evt.emit('created')
+            noty.info('已保存')
             if(closeAfterInserted)
               this.dispose()
             return true
@@ -26,9 +25,5 @@ class TableWebview extends Webview {
         }
       }
     })
-    this._evt = new Events()
-  }
-  onCreated(handler) {
-    this._evt.on('created', handler)
   }
 }

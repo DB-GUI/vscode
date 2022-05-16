@@ -15,11 +15,18 @@ exports.refreshConnections = connectionTreeview.refreshConnections
 exports.refreshConnection = connectionTreeview.refreshConnection
 exports.refreshDatabase = connectionTreeview.refreshDatabase
 
-exports.editConnection = async function(el) {
+exports.editConnection = function(el) {
   if(el instanceof ConnectionElement)
     new UpsertConnectionWebview(el.options)
   else
     noty.error('请从左侧 treeview 里选择并更新连接')
+}
+
+exports.terminal = function(el) {
+  if(el instanceof ConnectionElement)
+    service.terminal(el.options)
+  else
+    noty.error('请从左侧 treeview 里选择并打开交互模式')
 }
 
 exports.deleteConnection = async function(el) {

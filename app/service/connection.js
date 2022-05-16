@@ -27,6 +27,10 @@ service.upsert = async function({ record, connect }) {
     connectionTreeview.add(collection.getByKey(id), connect)
 }
 
+service.terminal = function(options) {
+  
+}
+
 class KnexConnection {
   constructor(clientType, name, connection, useNullAsDefault) {
     this.clientType = clientType

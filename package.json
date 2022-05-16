@@ -86,6 +86,12 @@
 				"title": "Refresh Database",
 				"icon": "$(refresh)",
 				"category": "PPZ"
+			},
+			{
+				"command": "ppz.terminal",
+				"title": "交互模式",
+				"icon": "$(terminal)",
+				"category": "PPZ"
 			}
 		],
 		"menus": {
@@ -105,6 +111,11 @@
 				{
 					"command": "ppz.deleteConnection",
 					"when": "view == connection && viewItem == connection || viewItem == 'sqlite3-connection'"
+				},
+				{
+					"command": "ppz.terminal",
+					"when": "view == connection && viewItem == connection || viewItem == 'sqlite3-connection'",
+					"group": "inline"
 				},
 				{
 					"command": "ppz.editConnection",

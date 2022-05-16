@@ -65,11 +65,33 @@ $.api = Api({
 
 $.noty = new Proxy({}, {
   get(target, type) {
-    return (msg, ...btns) => request('noty', { type, msg, btns }, {
+    return (msg, btns = []) => request('noty', { type, msg, btns }, {
       timeout: 0
     })
   }
 })
+
+$.notyPrompt = new Proxy({}, {
+  get(target, type) {
+    return async (msg, btns) => {
+      const result = await $.noty[type](msg, Object.keys(btns))
+      if(result)
+        btns[result]()
+      return result
+    }
+  }
+})
+
+$.notyConfirm = new Proxy({}, {
+  get(target, type) {
+    return async(msg, btnTxt = '确定') =>
+      btnTxt == await $.noty[type](msg, [btnTxt])
+  }
+})
+
+$.notyWarn = async function(msg, btnTxt) {
+  return !await $.notyConfirm.warn(msg, btnTxt)
+}
 
 import Prompt from '../../../lib/prompt/webview/client.js'
 $.prompt = Prompt(request)

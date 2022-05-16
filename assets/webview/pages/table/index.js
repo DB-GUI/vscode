@@ -89,7 +89,10 @@ new Page({
             }),
             Button('字段选择', 'filter', function() {
             }),
-            Button('新增', 'add', function() {
+            Button('新增', 'add', async function() {
+              const success = await $.api.newRecord()
+              if(success && await $.notyConfirm.info('记录创建成功，是否刷新数据', '刷新'))
+                refreshData()
             }),
             Button('拷贝当前记录', 'copy', function() {
             }),

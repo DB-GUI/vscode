@@ -12,10 +12,10 @@ exports.noty = new Proxy({
   info: vscode.window.showInformationMessage,
   warn: vscode.window.showWarningMessage,
   error: vscode.window.showErrorMessage,
-  fatal: msg => vscode.window.showErrorMessage('[BUG] ' + msg)
+  fatal: (msg, btns) => vscode.window.showErrorMessage('[BUG] ' + msg, btns)
 }, {
   get(target, method) {
-    return msg => target[method]('[PPZ] ' + msg)
+    return (msg, btns = []) => target[method]('[PPZ] ' + msg, ...btns)
   }
 })
 

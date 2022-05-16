@@ -55,7 +55,7 @@ module.exports = class Webview {
       },
       prompt,
       dispose: () => { // 销毁 webview
-        this.panel.dispose()
+        this.dispose()
       },
       saveState: state => { // 保存 state
         this.state = state
@@ -67,6 +67,9 @@ module.exports = class Webview {
     console.debug('webview constructed')
   }
 
+  dispose() {
+    this.panel.dispose()
+  }
   webviewUri(path) {
     return this.panel.webview.asWebviewUri(vscode.Uri.file(
       Path.join(Context.extensionPath, 'assets/webview', path)

@@ -1,6 +1,7 @@
 const Webview = require('./common/base')
 const { noty } = require('../../utils')
 const TableTreeviewElement = require('../treeview/connection/element').TableElement
+const NewRecordWebview = require('./new-record')
 
 class TableWebview extends Webview {
   constructor(database, table, connection) {
@@ -26,7 +27,7 @@ class TableWebview extends Webview {
             noty.info('已保存')
             return true
           } catch(err) {
-            noty.bug(err.toString())
+            noty.fatal(err.toString())
             return false
           }
         },
@@ -36,9 +37,15 @@ class TableWebview extends Webview {
             noty.info('已删除')
             return true
           } catch(err) {
-            noty.bug(err.toString())
+            noty.fatal(err.toString())
             return false
           }
+        },
+        newRecord() {
+          const view = new NewRecordWebview(database, table, connection)
+          return new Promise(res =>
+            view.onCreated(() => res(true))
+          )
         }
       }
     })

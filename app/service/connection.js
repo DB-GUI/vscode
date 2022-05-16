@@ -53,6 +53,10 @@ class KnexConnection {
     }
   }
 
+  async insert(db, tb, record) {
+    return await this.queryBuilder(db, tb).insert(record)
+  }
+
   queryBuilder(database, table) {
     if(database)
       table = database + '.' + table

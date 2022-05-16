@@ -17,7 +17,7 @@ module.exports = class FormWebview extends Webview {
   async save(data) {
     try {
       await this.upsert(data)
-      noty.info('连接已保存')
+      noty.info('已保存')
       return true
     } catch(err) {
       if(err instanceof FieldWrongDetail) {

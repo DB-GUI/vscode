@@ -135,12 +135,12 @@ new Page({
               let warnMsg = []
               for(const pk of table.pks())
                 if(_state.pkValue[pk] === undefined) {
-                  $.noty.bug('state 不正常，缺少主键的值')
+                  $.noty.fatal('state 不正常，缺少主键的值')
                   return
                 } else
                   warnMsg.push(pk + ' 为 ' + _state.pkValue[pk])
               if(warnMsg.length == 0) {
-                $.noty.bug('逻辑不正常，正在删除没有主键的表记录')
+                $.noty.fatal('逻辑不正常，正在删除没有主键的表记录')
                 return
               }
               warnMsg = warnMsg.join(' 且 ')

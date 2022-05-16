@@ -25,7 +25,7 @@ export default function PNEWrapper(__fields, records, state, saveState) {
       const pkValue = {}
       for(const pk of pks)
         pkValue[pk] = record[pk]
-      state.focus = { x, y, pkValue }
+      state.focus = { x, y, record, pkValue }
       saveState()
     }
   })

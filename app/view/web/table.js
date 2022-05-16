@@ -41,8 +41,8 @@ class TableWebview extends Webview {
             return false
           }
         },
-        newRecord() {
-          const view = new NewRecordWebview(database, table, connection)
+        newRecord(data) {
+          const view = new NewRecordWebview(database, table, connection, data)
           return new Promise(res =>
             view.onCreated(() => res(true))
           )

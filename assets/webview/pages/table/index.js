@@ -89,12 +89,11 @@ new Page({
             }),
             Button('字段选择', 'filter', function() {
             }),
-            Button('新增', 'add', async function() {
-              const success = await $.api.newRecord()
-              if(success && await $.notyConfirm.info('记录创建成功，是否刷新数据', '刷新'))
-                refreshData()
+            Button('新增', 'add', function() {
+              newRecord()
             }),
             Button('拷贝当前记录', 'copy', function() {
+              newRecord(true)
             }),
             Button('保存', 'save', async function() {
               const editing = table.getEditing()
@@ -153,13 +152,28 @@ new Page({
                 }
               })
             }),
-            Button('打开 sql 文件', 'sql', function() {
+            Button('交互模式', 'terminal', function() {
             })
           ]),
           pagination.$el
         ])
       ])
-      
+      async function newRecord(copy) {
+        const data = {
+          fields: state.__fields
+        }
+        if(copy) {
+          if(state.table.focus)
+            data.record = state.table.focus.record
+          else {
+            $.noty.warn('请先点击想要拷贝的记录')
+            return
+          }
+        }
+        const success = await $.api.newRecord(data)
+        if(success && await $.notyConfirm.info('记录创建成功，是否刷新数据', '刷新'))
+          refreshData()
+      }
       function Button(title, icon, handler) {
         const el = $.Button('', [$.Icon(icon)], handler)
         el.title = title

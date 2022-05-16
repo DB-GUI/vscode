@@ -78,28 +78,10 @@ class KnexConnection {
     return this.queryBuilder(db, tb).where(where).del()
   }
 
-  async dbList() {
-    throw Error('未实现 dbList 函数')
-  }
-  async tbList() {
-    throw Error('未实现 tbList 函数')
-  }
-  async fieldList() {
-    throw Error('未实现 fieldList 函数')
-  }
-
   async close() {
     console.debug('connection closing...')
     await this.client.destroy()
     console.debug('connection closed')
-  }
-}
-
-class MysqlKnexConnection extends KnexConnection {
-  constructor({ name, host, port, user, password, database }) {
-    super('mysql2', name, {
-      host, port, user, password, database
-    })
   }
 
   async dbList() {
@@ -122,6 +104,14 @@ class MysqlKnexConnection extends KnexConnection {
       default: field.Default,
       pk: field.Key == 'PRI'
     }))
+  }
+}
+
+class MysqlKnexConnection extends KnexConnection {
+  constructor({ name, host, port, user, password, database }) {
+    super('mysql2', name, {
+      host, port, user, password, database
+    })
   }
 }
 

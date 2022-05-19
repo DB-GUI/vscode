@@ -7,7 +7,7 @@ const publicFields = [
 const formsOptions = [ // pivateFields
   {
     client: 'mysql',
-    label: 'MySQL',
+    label: 'MySQL / MariaDB',
     fields: [
       { name: 'host', required: true },
       { name: 'port' },
@@ -23,7 +23,7 @@ const formsOptions = [ // pivateFields
     ]
   }, {
     client: 'postgresql',
-    label: 'PostgreSQL',
+    label: 'PostgreSQL / CockroachDB',
     fields: [
     ]
   },

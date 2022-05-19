@@ -27,6 +27,4 @@ service.upsert = async function({ record, connect }) {
     connectionTreeview.add(collection.getByKey(id), connect)
 }
 
-service.terminal = function(options) {
-  
-}
+service.terminal = require('./terminal')

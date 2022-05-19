@@ -1,35 +1,4 @@
 const Knex = require('knex')
-const collection = require('../model/connection')
-const { clone } = require('../utils')
-const connectionTreeview = require('../view/treeview/connection')
-
-const service = module.exports = Object.create(collection)
-
-service.connect = function(connection) {
-  console.debug('connecting to', connection)
-  connection = clone(connection)
-  switch(connection.client) {
-    case 'mysql':
-      return new MysqlKnexConnection(connection)
-    case 'sqlite3':
-      return new Sqlite3KnexConnection(connection)
-    default:
-      throw Error('意外的连接类型 ' + connection.client)
-  }
-}
-
-service.upsert = async function({ record, connect }) {
-  const rawId = record.id
-  const id = await collection.upsert(record)
-  if(rawId)
-    connectionTreeview.updateConnection(record, connect)
-  else
-    connectionTreeview.add(collection.getByKey(id), connect)
-}
-
-service.terminal = function(options) {
-  
-}
 
 class KnexConnection {
   constructor(clientType, name, connection, useNullAsDefault) {
@@ -111,6 +80,7 @@ class KnexConnection {
   }
 }
 
+exports.MysqlKnexConnection =
 class MysqlKnexConnection extends KnexConnection {
   constructor({ name, host, port, user, password, database }) {
     super('mysql2', name, {
@@ -119,6 +89,7 @@ class MysqlKnexConnection extends KnexConnection {
   }
 }
 
+exports.Sqlite3KnexConnection =
 class Sqlite3KnexConnection extends KnexConnection {
   constructor({ name, filename }) {
     super('sqlite3', name, { filename }, true)

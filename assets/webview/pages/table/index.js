@@ -153,6 +153,7 @@ new Page({
               })
             }),
             Button('交互模式', 'terminal', function() {
+              $.api.openTerminal()
             })
           ]),
           pagination.$el

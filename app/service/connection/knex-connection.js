@@ -1,12 +1,13 @@
 const Knex = require('knex')
 
 class KnexConnection {
-  constructor(clientType, name, connection, useNullAsDefault) {
-    this.clientType = clientType
+  constructor(clientName, knexClient, name, connection, useNullAsDefault) {
+    this.clientName = clientName
+    this.clientType = knexClient
     this.name = name
     this.options = connection
     this.client = Knex({
-      client: clientType,
+      client: knexClient,
       connection,
       useNullAsDefault,
       acquireConnectionTimeout: 10000,
@@ -83,7 +84,7 @@ class KnexConnection {
 exports.MysqlKnexConnection =
 class MysqlKnexConnection extends KnexConnection {
   constructor({ name, host, port, user, password, database }) {
-    super('mysql2', name, {
+    super('mysql', 'mysql2', name, {
       host, port, user, password, database
     })
   }
@@ -92,7 +93,7 @@ class MysqlKnexConnection extends KnexConnection {
 exports.Sqlite3KnexConnection =
 class Sqlite3KnexConnection extends KnexConnection {
   constructor({ name, filename }) {
-    super('sqlite3', name, { filename }, true)
+    super('sqlite3', 'sqlite3', name, { filename }, true)
   }
   
   async tbList() {

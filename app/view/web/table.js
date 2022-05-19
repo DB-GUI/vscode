@@ -2,6 +2,7 @@ const Webview = require('./common/base')
 const { noty } = require('../../utils')
 const TableTreeviewElement = require('../treeview/connection/element').TableElement
 const NewRecordWebview = require('./new-record')
+const service = require('../../service/connection')
 
 class TableWebview extends Webview {
   constructor(database, table, connection) {
@@ -43,6 +44,12 @@ class TableWebview extends Webview {
         },
         newRecord(data) {
           new NewRecordWebview(database, table, connection, data)
+        },
+        openTerminal() {
+          service.terminal(Object.assign({}, connection.options, {
+            name: connection.name,
+            client: connection.clientName
+          }))
         }
       }
     })

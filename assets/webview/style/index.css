@@ -37,7 +37,7 @@ button {
   display: inline-block;
   height: 2em;
   min-width: 6em;
-  padding: 0 .8em;
+  padding: 0 1em;
 }
 button:not([disabled]):hover {
   background-color: var(--vscode-button-hoverBackground);

@@ -56,7 +56,7 @@ const request = Request({
   vscode: VSCODE
 })
 
-$.api2 = Api(request)
+$.api2 = Api(request) // 不 loading 的 request
 $.api = Api({
   vscode: VSCODE,
   beforeSend: $.loading.show,

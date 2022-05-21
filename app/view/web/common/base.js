@@ -4,6 +4,7 @@ const vscode = require('vscode')
 const { noty } = require('../../../utils')
 const prompt = require('../../../../lib/prompt/webview/server')
 const WebviewServer = require('../../../../lib/request/server')
+const selectFile = require('../../../../lib/file-selector/server')
 
 module.exports = class Webview {
   constructor({
@@ -54,6 +55,7 @@ module.exports = class Webview {
           return result
       },
       prompt,
+      selectFile,
       dispose: () => { // 销毁 webview
         this.dispose()
       },

@@ -1,11 +1,4 @@
 import { El, Span } from '../index.js'
-import { TextInput, SelectInput, FileInput } from './input.js'
-
-const InputMap = {
-  input: TextInput,
-  select: SelectInput,
-  file: FileInput,
-}
 
 export default class Form {
   constructor(data, fields) {
@@ -13,7 +6,7 @@ export default class Form {
     this.fields = fields
     this.inputs = {}
     this.$elList = fields.map(field => {
-      const input = new InputMap[field.type || 'input'](field, data)
+      const input = new field.type(field.name, data, field.options)
       this.inputs[field.name] = input
       return El(
         'label',

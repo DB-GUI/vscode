@@ -1,4 +1,5 @@
 import { Button, Form, Div } from '../../../../lib/dom/index.js'
+import FileInput from '../../cmps/file-input.js'
 
 const publicFields = [
   { name: 'name' }
@@ -19,7 +20,7 @@ const formsOptions = [ // pivateFields
     client: 'sqlite3',
     label: 'SQLite3',
     fields: [
-      { name: 'filename', required: true, file: true }
+      { name: 'filename', required: true, Input: FileInput }
     ]
   }, {
     client: 'postgresql',

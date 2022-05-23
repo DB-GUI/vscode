@@ -176,7 +176,7 @@ new class extends Page {
         // 马上跳转新页面，此页面被 dispose
       }
       function Button(title, icon, handler) {
-        const el = _Button('', [Icon(icon)], handler)
+        const el = _Button([Icon(icon)], handler)
         el.title = title
         return el
       }

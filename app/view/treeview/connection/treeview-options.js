@@ -1,6 +1,6 @@
 const vscode = require('vscode')
 const Path = require('path')
-const { noty } = require('../../../utils')
+const noty = require('../../../../lib/vscode-utils/noty')
 const connectionService = require('../../../service/connection')
 const {
   ConnectionElement, DatabaseElement, TableElement

@@ -1,10 +1,10 @@
-import $ from '../../script/ppz-query.js'
+import { $, Button, Div } from '../../../../lib/dom/index.js'
 import Page from '../../script/page.js'
 import { initState, Forms, getData } from './form.js'
 
-new Page({
+new class extends Page {
   init() {
-    const self = this
+    const page = this
     if(!this.state) {
       this.state = initState(PPZ.initData)
       this.saveState() // 这样虽然繁琐，但省掉了“理解”成本
@@ -12,19 +12,19 @@ new Page({
     const $forms = Forms(this.state, () => this.saveState())
 
     const btns = new function() {
-      const connBtn = $.Button(['保存并连接'], () => save(true))
-      const saveBtn = $.Button(['保存'], () => save())
+      const connBtn = Button(['保存并连接'], () => save(true))
+      const saveBtn = Button(['保存'], () => save())
       
       async function save(connect) {
-        await $.api.save({
+        await page.api.save({
           connect,
-          record: getData(self.state)
+          record: getData(page.state)
         })
       }
-      return $.Div('form-btns', [connBtn, saveBtn])
+      return Div('form-btns', [connBtn, saveBtn])
     }
 
     $('body').classList.add('flex-container')
     $('body').append($forms, btns)
   }
-})
+}

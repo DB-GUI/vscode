@@ -1,4 +1,5 @@
-import $ from '../script/ppz-query.js'
+import { Input, Button as _Button, Div, Span } from '../../../lib/dom/index.js'
+import Icon from './icon/index.js'
 
 export const config = {
   size: 16
@@ -10,16 +11,16 @@ export default function Pagination({
   count = 0,
   onChange
 }) {
-  if(!$.isUnsignedInt(size))
+  if(!isUnsignedInt(size))
     throw Error('invalid size: ' + size)
   checkCount(count)
-  if(!($.isUnsignedInt(index) && index <= pageSum()))
+  if(!(isUnsignedInt(index) && index <= pageSum()))
     throw Error('invalid index: ' + index)
 
   let initSize = size
   const refresh = () => onChange({ index, size })
 
-  const $sizeInput = $.Input() // 值的改变来源于：输入
+  const $sizeInput = Input() // 值的改变来源于：输入
   $sizeInput.value = size
   $sizeInput.oninput = function() {
     const value = $sizeInput.value
@@ -39,7 +40,7 @@ export default function Pagination({
     refreshDisabled()
   }
 
-  const $indexInput = $.Input() // 值的改变来源于：输入，按钮
+  const $indexInput = Input() // 值的改变来源于：输入，按钮
   $indexInput.value = index
   $indexInput.oninput = function() { // 处理输入值
     const value = $indexInput.value
@@ -60,7 +61,7 @@ export default function Pagination({
   }
 
   const Button = (big, icon, title, onclick) => {
-    const btn = $.Button([$.Icon(icon)], onclick)
+    const btn = _Button([Icon(icon)], onclick)
     if(big)
       btn.classList.add('big')
     btn.title = title
@@ -80,7 +81,7 @@ export default function Pagination({
     refresh()
   }
   function checkCount(value) {
-    if(!($.isInt(value) && value >=0))
+    if(!(isInt(value) && value >=0))
       throw Error('invalid count: ' + value)
   }
   function pageSum() {
@@ -117,10 +118,10 @@ export default function Pagination({
       count = value
       refreshDisabled()
     },
-    $el: $.Div('ppz-pagination', [
+    $el: Div('ppz-pagination', [
       Button(false, 'refresh', '刷新页', refresh),
       $sizeInput,
-      $.Span(' 条记录 / 页'),
+      Span(' 条记录 / 页'),
       $leftBtn2,
       $leftBtn,
       $indexInput,
@@ -128,4 +129,13 @@ export default function Pagination({
       $rightBtn2
     ])
   }
+}
+
+function isInt(target) {
+  return typeof target == 'number' && !isNaN(target)
+    && target % 1 == 0
+}
+
+function isUnsignedInt(target) {
+  return isInt(target) && target > 0
 }

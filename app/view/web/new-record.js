@@ -1,5 +1,5 @@
 const Webview = require('./common/base')
-const { noty } = require('../../utils')
+const noty = require('../../../lib/vscode-utils/noty')
 
 module.exports = 
 class TableWebview extends Webview {
@@ -7,6 +7,7 @@ class TableWebview extends Webview {
     console.debug('NewRecordWebview constructing', { database, table })
     super({
       filename: 'new-record',
+      title: table + ' 新记录',
       initData: {
         data
       },

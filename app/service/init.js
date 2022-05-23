@@ -2,7 +2,7 @@ const system = require('../model/system')
 const Collection = require('../model/collection/index')
 const initTreeview = require('../view/treeview')
 const initCommand = require('../command')
-const { noty } = require('../utils')
+const noty = require('../../lib/vscode-utils/noty')
 
 async function init() {
   // 注册命令

@@ -1,5 +1,5 @@
-import PNE from '../../cmps/pne.js'
-import $ from '../../script/ppz-query.js'
+import { Div } from '../../../../lib/dom/index.js'
+import PNE from '../../../../lib/dom/pne.js'
 
 export default function PNEWrapper(__fields, records, state, saveState) {
   let pks
@@ -71,7 +71,7 @@ export default function PNEWrapper(__fields, records, state, saveState) {
   }
 
   return {
-    $el: $.Div('table-wrapper', [pne.$el, pne.$style]),
+    $el: Div('table-wrapper', [pne.$el, pne.$style]),
     updateData(_fields, _records) {
       setFields(_fields)
       records = _records

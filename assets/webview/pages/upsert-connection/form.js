@@ -1,4 +1,4 @@
-import $ from '../../script/ppz-query.js'
+import { Button, Form, Div } from '../../../../lib/dom/index.js'
 
 const publicFields = [
   { name: 'name' }
@@ -60,7 +60,7 @@ export function initState(initData) {
 
 export function Forms(state, saveState) {
   const forms = formsOptions.map((options, index) => {
-    const $btn = $.Button([options.label], () => {
+    const $btn = Button([options.label], () => {
       if(state.current == index) return // 重复选
       // 原来的，unselect
       forms[state.current].$btn.classList.remove('selected')
@@ -71,9 +71,9 @@ export function Forms(state, saveState) {
       $btn.classList.add('selected')
       $form.classList.add('selected')
     })
-    const privateForm = new $.Form(state.data[index], formsOptions[index].fields)
+    const privateForm = new Form(state.data[index], formsOptions[index].fields)
     privateForm.onChange(saveState)
-    const $form = $.Div(
+    const $form = Div(
       'private form',
       privateForm.$elList
     )
@@ -83,13 +83,13 @@ export function Forms(state, saveState) {
     }
     return { $btn, $form }
   })
-  const publicForm = new $.Form(state.public, publicFields)
+  const publicForm = new Form(state.public, publicFields)
   publicForm.onChange(saveState)
-  return $.Div('form-container', [
-    $.Div('client-selector', forms.map(form => form.$btn)),
-    $.Div('forms', [
-      $.Div('public form', publicForm.$elList),
-      $.Div(null, forms.map(form => form.$form))
+  return Div('form-container', [
+    Div('client-selector', forms.map(form => form.$btn)),
+    Div('forms', [
+      Div('public form', publicForm.$elList),
+      Div(null, forms.map(form => form.$form))
     ])
   ])
 }

@@ -2,7 +2,8 @@ const UpsertConnectionWebview = require('../view/web/upsert-connection')
 const { ConnectionElement } = require('../view/treeview/connection/element')
 const openTableWebview = require('../view/web/table')
 const service = require('../service/connection')
-const { noty, warn } = require('../utils')
+const noty = require('../../lib/vscode-utils/noty')
+const warn = require('../../lib/vscode-utils/prompt/confirm').warn
 const connectionTreeview = require('../view/treeview/connection')
 
 exports.openTable = openTableWebview

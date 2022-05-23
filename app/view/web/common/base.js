@@ -1,10 +1,10 @@
 const Path = require('path')
 const fs = require('fs')
 const vscode = require('vscode')
-const { noty } = require('../../../utils')
-const prompt = require('../../../../lib/prompt/webview/server')
-const WebviewServer = require('../../../../lib/request/server')
-const selectFile = require('../../../../lib/file-selector/server')
+const noty = require('../../../../lib/vscode-utils/noty')
+const prompt = require('../../../../lib/vscode-utils/prompt/webview/server')
+const WebviewServer = require('../../../../lib/vscode-utils/request/server')
+const selectFile = require('../../../../lib/vscode-utils/file-selector/server')
 
 module.exports = class Webview {
   constructor({

@@ -1,6 +1,6 @@
 const Webview = require('./base')
 const { NilField, FieldWrongDetail } = require('@ppzp/type')
-const { noty } = require('../../../utils')
+const noty = require('../../../../lib/vscode-utils/noty')
 
 module.exports = class FormWebview extends Webview {
   constructor(options) {

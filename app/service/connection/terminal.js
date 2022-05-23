@@ -1,5 +1,5 @@
 const vscode = require('vscode')
-const { noty } = require('../../utils')
+const noty = require('../../../lib/vscode-utils/noty')
 
 module.exports = function(options) {
   try {

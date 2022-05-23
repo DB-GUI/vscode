@@ -1,10 +1,11 @@
-import $ from '../../script/ppz-query.js'
+import { $, El, Div, Span, Button as _Button } from '../../../../lib/dom/index.js'
+import Icon from '../../cmps/icon/index.js'
+import PNE from './pne-wrapper.js'
 import Page from '../../script/page.js'
 import Pagination, { config } from '../../cmps/pagination.js'
-import PNE from './pne-wrapper.js'
 
 // 有些表，没主键，即使理论上可以精准删除、编辑，但复杂度攀升，不做考虑
-new Page({
+new class extends Page {
   async init() {
     const page = this
     if(!this.state) {
@@ -17,7 +18,7 @@ new Page({
           count: 0
         }
       }
-      const { fields, records, count } = await $.api.getData(selectParams)
+      const { fields, records, count } = await page.api.getData(selectParams)
       selectParams.fields = fields.map(f => f.name)
       selectParams.pagination.count = count
       
@@ -63,26 +64,26 @@ new Page({
             || isDisabledBtn(evt.target.parentElement.parentElement)) return
           
           if(table.isEditing()) {
-            $.noty.warn('请先保存修改内容（或撤销）')
+            page.noty.warn('请先保存修改内容（或撤销）')
             evt.stopPropagation()
           }
         }, true)
         return p
       }
 
-      this.$el = $.El('header', '', [
-        $.El('nav', '', [
-          $.Span(PPZ.initData.connection),
-          $.Icon('arrow-right'),
-          $.Span(PPZ.initData.database),
-          $.Icon('arrow-right'),
-          $.Span(PPZ.initData.table)
+      this.$el = El('header', '', [
+        El('nav', '', [
+          Span(PPZ.initData.connection),
+          Icon('arrow-right'),
+          Span(PPZ.initData.database),
+          Icon('arrow-right'),
+          Span(PPZ.initData.table)
         ]),
-        $.Div('operations', [
-          $.Div('btns', [
+        Div('operations', [
+          Div('btns', [
             Button('刷新', 'light', function() {
               if(table.isEditing()) {
-                $.noty.warn('请先保存修改内容（或撤销）')
+                page.noty.warn('请先保存修改内容（或撤销）')
                 return
               }
               refreshData()
@@ -98,19 +99,19 @@ new Page({
             Button('保存', 'save', async function() {
               const editing = table.getEditing()
               if(editing == null || editing.length == 0) {
-                $.noty.warn('没有待保存的数据')
+                page.noty.warn('没有待保存的数据')
                 return
               }
-              const success = await $.api.update(editing)
+              const success = await page.api.update(editing)
               if(success)
                 refreshData()
             }),
             Button('撤销全部', 'undo', function() {
               if(!table.isEditing()) {
-                $.noty.warn('未检测到修改内容')
+                page.noty.warn('未检测到修改内容')
                 return
               }
-              $.prompt.warn('是否撤销全部修改', '', {
+              page.prompt.warn('是否撤销全部修改', '', {
                 确定() {
                   table.reset()
                 }
@@ -118,42 +119,42 @@ new Page({
             }),
             Button('删除当前记录', 'delete', function() {
               if(!table.editable()) {
-                $.noty.warn('当前表格不可编辑')
+                page.noty.warn('当前表格不可编辑')
                 return
               }
               if(table.isEditing()) {
-                $.noty.warn('请先保存修改内容（或撤销）')
+                page.noty.warn('请先保存修改内容（或撤销）')
                 return
               }
               const _state = state.table.focus
               if(!_state) {
-                $.noty.warn('请先点击想要删除的记录')
+                page.noty.warn('请先点击想要删除的记录')
                 return
               }
               /* bug 预警 */
               let warnMsg = []
               for(const pk of table.pks())
                 if(_state.pkValue[pk] === undefined) {
-                  $.noty.fatal('state 不正常，缺少主键的值')
+                  page.noty.fatal('state 不正常，缺少主键的值')
                   return
                 } else
                   warnMsg.push(pk + ' 为 ' + _state.pkValue[pk])
               if(warnMsg.length == 0) {
-                $.noty.fatal('逻辑不正常，正在删除没有主键的表记录')
+                page.noty.fatal('逻辑不正常，正在删除没有主键的表记录')
                 return
               }
               warnMsg = warnMsg.join(' 且 ')
               
-              $.prompt.warn('确定删除？', '您正在删除 ' + warnMsg + ' 的记录，删除后不可恢复', {
+              page.prompt.warn('确定删除？', '您正在删除 ' + warnMsg + ' 的记录，删除后不可恢复', {
                 async 确定() {
-                  const success = await $.api.drop(_state.pkValue)
+                  const success = await page.api.drop(_state.pkValue)
                   if(success)
                     refreshData()
                 }
               })
             }),
             Button('交互模式', 'terminal', function() {
-              $.api.openTerminal()
+              page.api2.openTerminal()
             })
           ]),
           pagination.$el
@@ -167,21 +168,21 @@ new Page({
           if(state.table.focus)
             data.record = state.table.focus.record
           else {
-            $.noty.warn('请先点击想要拷贝的记录')
+            page.noty.warn('请先点击想要拷贝的记录')
             return
           }
         }
-        $.api.newRecord(data)
+        page.api.newRecord(data)
         // 马上跳转新页面，此页面被 dispose
       }
       function Button(title, icon, handler) {
-        const el = $.Button('', [$.Icon(icon)], handler)
+        const el = _Button('', [Icon(icon)], handler)
         el.title = title
         return el
       }
       
       async function refreshData() {
-        const { fields, records, count } = await $.api.getData(page.state.selectParams)
+        const { fields, records, count } = await page.api.getData(page.state.selectParams)
         setFields(fields)
         setRecords(records, count)
         // page.saveState() // 交给 updateData 做
@@ -205,4 +206,4 @@ new Page({
       table.$el
     )
   }
-})
+}

@@ -1,5 +1,5 @@
 const vscode = require('vscode')
-const { noty } = require('../../../utils')
+const noty = require('../../../../lib/vscode-utils/noty')
 const TreeviewOptions = require('./treeview-options')
 const {
   RootElement, ConnectionElement, DatabaseElement

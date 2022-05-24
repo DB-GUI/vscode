@@ -75,7 +75,7 @@ new class extends Page {
         El('nav', '', [
           Span(PPZ.initData.connection),
           Icon('arrow-right'),
-          Span(PPZ.initData.database),
+          Span(PPZ.initData.database || 'database'),
           Icon('arrow-right'),
           Span(PPZ.initData.table)
         ]),
@@ -191,6 +191,7 @@ new class extends Page {
     }
 
     const table = PNE(
+      page,
       state.__fields,
       state.__records,
       state.table, // state

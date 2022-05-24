@@ -1,14 +1,25 @@
 import { Div } from '../../../../lib/dom/index.js'
 import PNE from '../../../../lib/dom/pne.js'
+import { changed } from '../../script/utils.js'
 
-export default function PNEWrapper(__fields, records, state, saveState) {
+export default function PNEWrapper(page, __fields, records, state, saveState) {
   let pks
   const setFields = fields => {
     __fields = fields
-    pks = getPKs()
+    pks = fields.filter(f => f.pk).map(f => f.name)
   }
   setFields(__fields)
   
+  // 在 noState（新打开页面）和 updateData（更新数据）时检测
+  const checkUneditable = new function() {
+    const editableChanged = changed()
+    return function() {
+      const _e = editable()
+      if(!_e && editableChanged(_e)) // 不能编辑 && 变了
+        page.noty.info(PPZ.initData.table + ' 表因没有主键，而不能修改、删除记录')
+    }
+  }
+
   const pne = new PNE({
     fields: __fields,
     records,
@@ -33,6 +44,7 @@ export default function PNEWrapper(__fields, records, state, saveState) {
   if(!state) {
     state = initState()
     saveState(state)
+    checkUneditable()
   } else {
     if(state.focus)
       pne.focused(state.focus.x, state.focus.y)
@@ -52,9 +64,6 @@ export default function PNEWrapper(__fields, records, state, saveState) {
       )
   }
 
-  function getPKs() {
-    return __fields.filter(f => f.pk).map(f => f.name)
-  }
   function editable() {
     return pks.length > 0
   }
@@ -76,6 +85,7 @@ export default function PNEWrapper(__fields, records, state, saveState) {
       setFields(_fields)
       records = _records
       pne.editable = editable()
+      checkUneditable()
       this.reset()
     },
     reset() {

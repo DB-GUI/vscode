@@ -30,8 +30,9 @@ export default class Page {
     // webview 重新来到前台时（不论是调用 reveal，还是切换 tab）
     // 页面都会重新加载，所以原来的 state 不是现在的 state
     this.state = await this.api2.getState()
-    if(this.init)
-      this.init.apply(this, [{}])
+    // noState 往往意味着是新打开而不是 dispose 之后重新打开的页面
+    this.noState = this.state === undefined
+    this.init()
   }
 
   // 不应改成 saveState(state) 的形式，init 方法内的 state 引用将失效

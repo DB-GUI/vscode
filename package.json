@@ -3,7 +3,8 @@
 	"displayName": "ppz",
 	"description": "",
 	"version": "0.0.0",
-	"publisher": "ppzbaba",
+	"publisher": "ppz",
+	"icon": "./assets/icon.png",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ppz-pro/ppz.vscode.git"

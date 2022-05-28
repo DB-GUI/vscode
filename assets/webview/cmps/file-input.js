@@ -5,21 +5,24 @@ export default
 class extends Form.Input {
   getEl() {
     const $input = this._$input = El('input')
-    const $btn = Button('···', async () => {
-      const file = await selectFile()
-      if(!file) return
-      this._value = file[0].path
-      this._setInput()
-      this._emitChange()
-    })
     $input.oninput = e => {
       this._value = e.target.value
       this._emitChange()
     }
+    $input.onfocus = () => this._selectFile()
+    const $btn = Button('···', () => this._selectFile())
     return El('span', 'file-input', [
       $input,
       $btn
     ])
+  }
+
+  async _selectFile() {
+    const file = await selectFile()
+    if(!file) return
+    this._value = file[0].path
+    this._setInput()
+    this._emitChange()
   }
 
   _setInput() {

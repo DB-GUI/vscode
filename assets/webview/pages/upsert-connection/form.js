@@ -22,11 +22,16 @@ const formsOptions = [ // pivateFields
     fields: [
       { name: 'filename', required: true, Input: FileInput }
     ]
-  }, {
-    client: 'postgresql',
-    label: 'PostgreSQL / CockroachDB',
-    fields: [
-    ]
+  // }, {
+  //   client: 'postgresql',
+  //   label: 'PostgreSQL / CockroachDB',
+  //   fields: [
+  //     { name: 'host', required: true },
+  //     { name: 'port' },
+  //     { name: 'user', required: true },
+  //     { name: 'password', required: true },
+  //     { name: 'database' }
+  //   ]
   },
 ]
 

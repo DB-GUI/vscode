@@ -13,6 +13,14 @@ const type = {
   sqlite3: Type([
     ['name', 'string'],
     ['filename', 'truestring', true]
+  ]),
+  postgresql: Type([
+    ['name', 'string'],
+    ['host', 'truestring', true],
+    ['port', 'string'],
+    ['user', 'truestring', true],
+    ['password', 'truestring', true],
+    ['database', 'string']
   ])
 }
 

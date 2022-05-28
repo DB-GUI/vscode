@@ -58,15 +58,12 @@ class KnexConnection {
     console.debug('connection closed')
   }
 
-  async dbList() {
-    const result = await this.client.raw('show databases;')
-    return result[0].map(item => item.Database)
+  dbList() {
+    throw Error('unimplemented method')
   }
   
-  async tbList(database) {
-    await this.client.raw('use `' + database + '`')
-    const result = await this.client.raw('show tables;')
-    return result[0].map(item => item['Tables_in_' + database])
+  tbList(database) {
+    throw Error('unimplemented method')
   }
 
   async fieldList(table, database) {
@@ -88,6 +85,33 @@ class MysqlKnexConnection extends KnexConnection {
       host, port, user, password, database
     })
   }
+  async dbList() {
+    const result = await this.client.raw('show databases;')
+    return result[0].map(item => item.Database)
+  }
+  async tbList(database) {
+    await this.client.raw('use `' + database + '`')
+    const result = await this.client.raw('show tables;')
+    return result[0].map(item => item['Tables_in_' + database])
+  }
+}
+
+exports.PostgreSQLKnexConnection =
+class PostgreSQLKnexConnection extends KnexConnection {
+  constructor({ name, host, port, user, password, database }) {
+    super('postgresql', 'pg', name, {
+      host, port, user, password, database
+    })
+  }
+  async dbList() {
+    const result = await this.client.raw('SELECT datname FROM pg_database;')
+    return result.rows.map(db => db.datname)
+  }
+
+  // async tbList(dbname) {
+  //   const result = await this.client.raw(`SELECT table_name FROM information_schema.tables WHERE table_schema='${dbname}';`)
+  //   return result.rows.map(db => db.datname)
+  // }
 }
 
 exports.Sqlite3KnexConnection =

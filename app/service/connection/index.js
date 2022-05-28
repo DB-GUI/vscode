@@ -1,7 +1,7 @@
 const collection = require('../../model/connection')
 const { clone } = require('../../utils')
 const connectionTreeview = require('../../view/treeview/connection')
-const { MysqlKnexConnection, Sqlite3KnexConnection } = require('./knex-connection')
+const { MysqlKnexConnection, PostgreSQLKnexConnection, Sqlite3KnexConnection } = require('./knex-connection')
 
 const service = module.exports = Object.create(collection)
 
@@ -11,6 +11,8 @@ service.connect = function(connection) {
   switch(connection.client) {
     case 'mysql':
       return new MysqlKnexConnection(connection)
+    case 'postgresql':
+      return new PostgreSQLKnexConnection(connection)
     case 'sqlite3':
       return new Sqlite3KnexConnection(connection)
     default:

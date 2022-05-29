@@ -1,13 +1,13 @@
 /* input */
-input {
+input:not([type]) {
   background: var(--vscode-input-background);
-  border: 1px solid #00000000;
+  border: 1px solid transparent;
   color: var(--vscode-foreground);
   height: 2em;
-  padding: 0 .6em;
+  padding: 0 .5em;
   outline: none !important;
 }
-input:focus {
+input:not([type]):focus {
   border: var(--border-focus);
 }
 /* checkbox */

@@ -4,3 +4,10 @@ dialog {
   border-radius: .25rem;
   border: none;
 }
+label.checkbox {
+  display: flex;
+  align-items: center;
+}
+label.checkbox > input {
+  margin-right: .28em;
+}

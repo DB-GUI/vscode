@@ -1,0 +1,6 @@
+dialog {
+  color: var(--true-color1);
+  background: rgba(var(--color0), .8);
+  border-radius: .25rem;
+  border: none;
+}

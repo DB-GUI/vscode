@@ -5,10 +5,10 @@
 	"version": "0.0.0",
 	"publisher": "ppz",
 	"icon": "./assets/icon.png",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ppz-pro/ppz.vscode.git"
-  },
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ppz-pro/ppz.vscode.git"
+	},
 	"engines": {
 		"vscode": "^1.66.2"
 	},
@@ -145,7 +145,6 @@
 	},
 	"dependencies": {
 		"@ppzp/mixin": "^0.0.0",
-		"@ppzp/noty": "^0.0.5",
 		"@ppzp/type": "^0.0.4",
 		"knex": "^2.0.0",
 		"mysql2": "^2.3.3",

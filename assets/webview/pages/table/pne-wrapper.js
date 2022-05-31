@@ -32,9 +32,9 @@ export default function PNEWrapper(page, __fields, records, state, saveState) {
     appendStyle: false,
     oninput({ y, field, value, changed }) {
       if(changed)
-        state.editing[y].changed[field.name] = value
+        state.editing[y].changed[field.key] = value
       else
-        delete state.editing[y].changed[field.name]
+        delete state.editing[y].changed[field.key]
       saveState()
     },
     onfocus({ x, y, record }) {

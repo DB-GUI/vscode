@@ -58,10 +58,10 @@ export default function PNEWrapper(page, __fields, records, state, saveState) {
         ({ changed }, y) => {
           __fields.forEach(
             (f, x) => {
-              if(changed[f.name] !== undefined) {
+              if(changed[f.key] !== undefined) {
                 const $td = pne.table.tbody().children[y].children[x]
                 $td.pneChanged = true
-                pne.inputed($td, changed[f.name])
+                pne.inputed($td, changed[f.key])
               }
             }
           )

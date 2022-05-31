@@ -2,7 +2,7 @@
 	"name": "ppz",
 	"displayName": "ppz",
 	"description": "",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"publisher": "ppz",
 	"icon": "assets/icon.png",
 	"repository": {
@@ -148,7 +148,6 @@
 		"@ppzp/type": "^0.0.4",
 		"knex": "^2.0.0",
 		"mysql2": "^2.3.3",
-		"pg": "^8.7.3",
 		"sqlite3": "^5.0.5",
 		"uuid": "^8.3.2"
 	}

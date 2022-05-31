@@ -5,7 +5,12 @@ import { changed } from '../../script/utils.js'
 export default function PNEWrapper(page, __fields, records, state, saveState) {
   let pks
   const setFields = fields => {
-    __fields = fields
+    __fields = fields.map(f => ({
+      key: f.name,
+      label: f.name,
+      title: f.type,
+      show: f.show
+    }))
     pks = fields.filter(f => f.pk).map(f => f.name)
   }
   setFields(__fields)
@@ -91,8 +96,13 @@ export default function PNEWrapper(page, __fields, records, state, saveState) {
     reset() {
       state = initState()
       saveState(state)
+      this.render()
+    },
+    render(fields) {
+      if(fields)
+        setFields(fields)
       pne.thead(__fields)
-      pne.tbody(__fields, records)
+      pne.tbody(records, __fields)
       pne.$style.innerHTML = ''
     },
     pks: () => pks,

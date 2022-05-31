@@ -1,4 +1,4 @@
-import { $, El, Div, Span, Button as _Button } from '../../../../lib/dom/index.js'
+import { $, El, Div, Span, Button as _Button, Dialog, Checkbox } from '../../../../lib/dom/index.js'
 import Icon from '../../cmps/icon/index.js'
 import PNE from './pne-wrapper.js'
 import Page from '../../script/page.js'
@@ -8,49 +8,52 @@ import Pagination, { config } from '../../cmps/pagination.js'
 new class extends Page {
   async init() {
     const page = this
+    const setFields = neW => {
+      const old = this.state.__fields
+      for(let i in neW)
+        //            initing page      || new field            || old value
+        neW[i].show = old === undefined || old[i] === undefined || old[i].show
+      this.state.__fields = neW
+      console.debug('__fields', neW)
+    }
+    const setRecords = (records, count) => {
+      this.state.__records = records
+      this.state.pagination.count = count
+    }
+    const loadData = () => {
+      return this.api.getData({
+        pagination: this.state.pagination
+      })
+    }
     if(!this.state) {
       // 恢复 state 仅考虑恢复原来的页面，如果页面上的真实数据变了，不应在恢复 state 时处理
       // 因为页面在一直运行的过程中，真实数据也在变化
-      const selectParams = {
+      this.state = {
         pagination: {
           index: 1,
           size: config.size,
           count: 0
-        }
-      }
-      const { fields, records, count } = await page.api.getData(selectParams)
-      selectParams.fields = fields.map(f => f.name)
-      selectParams.pagination.count = count
-      
-      this.state = {
-        __fields: fields,
-        __records: records,
-        selectParams,
+        },
         table: null
       }
+      const { fields, records, count } = await loadData()
+      setFields(fields)
+      setRecords(records, count)
       this.saveState()
     } else
       console.debug('initial state', page.state)
     const state = page.state
-    const setFields = fields => {
-      state.__fields = fields
-      state.selectParams.fields = fields.map(f => f.name)
-    }
-    const setRecords = (records, count) => {
-      state.__records = records
-      state.selectParams.pagination.count = count
-    }
 
     const header = new function() {
       const pagination = new function() {
-        const { count, index, size } = page.state.selectParams.pagination
+        const { count, index, size } = page.state.pagination
         const p = Pagination({
           count, index, size,
           onChange({ index, size }) {
-            page.state.selectParams.pagination = { index, size }
-            // page.state.selectParams.pagination.index = index
-            // page.state.selectParams.pagination.size = size
-            // 上面两行代码，看似安全（好像在保护开发者），实则是把 bug 藏得更深了
+            page.state.pagination = { index, size }
+            // page.state.pagination.index = index
+            // page.state.pagination.size = size
+            // 上面两行代码，看似安全（好像在保护开发者（保留 count）），实则是把 bug 藏得更深了
             // count 在返回后设置，state 在返回后保存
             refreshData()
           }
@@ -71,6 +74,32 @@ new class extends Page {
         return p
       }
 
+      const fieldSelector = new function() {
+        const $el = Dialog()
+        populateFields()
+        function populateFields() {
+          $el.append(...state.__fields.map(
+            field => new function() {
+              const checkbox = new Checkbox(field.name, {
+                onchange() {
+                  field.show = checkbox.value
+                  table.render(state.__fields)
+                }
+              })
+              checkbox.value = field.show
+              return checkbox.$el
+            }
+          ))
+        }
+        return {
+          $el,
+          populateFields,
+          show() {
+            $el.showModal()
+          }
+        }
+      }
+
       this.$el = El('header', '', [
         El('nav', '', [
           Span(PPZ.initData.connection),
@@ -88,8 +117,7 @@ new class extends Page {
               }
               refreshData()
             }),
-            Button('字段选择', 'filter', function() {
-            }),
+            Button('字段选择', 'filter', fieldSelector.show),
             Button('新增', 'add', function() {
               newRecord()
             }),
@@ -158,8 +186,10 @@ new class extends Page {
             })
           ]),
           pagination.$el
-        ])
+        ]),
+        fieldSelector.$el
       ])
+
       async function newRecord(copy) {
         const data = {
           fields: state.__fields
@@ -182,7 +212,7 @@ new class extends Page {
       }
       
       async function refreshData() {
-        const { fields, records, count } = await page.api.getData(page.state.selectParams)
+        const { fields, records, count } = await loadData()
         setFields(fields)
         setRecords(records, count)
         // page.saveState() // 交给 updateData 做

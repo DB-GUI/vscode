@@ -20,7 +20,7 @@ body {
   --color2: var(--color2-red), var(--color2-green), var(--color2-blue);
   --true-color2: rgba(var(--color2), var(--color2-alpha));
 
-  --border: 1px solid rgba(var(--color1), .5);
+  --border1: 1px solid rgba(var(--color1), .5);
   --border2: 1px solid rgba(var(--color1), .18);
   --border-focus: 1px solid var(--vscode-focusBorder);
   --border-radius: .25rem;
@@ -33,6 +33,7 @@ button {
   border: none;
   background-color: var(--vscode-button-background);
   color: var(--vscode-button-foreground);
+  border-radius: 1px;
   
   display: inline-block;
   height: 2em;

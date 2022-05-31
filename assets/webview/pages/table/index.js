@@ -14,7 +14,6 @@ new class extends Page {
         //            initing page      || new field            || old value
         neW[i].show = old === undefined || old[i] === undefined || old[i].show
       this.state.__fields = neW
-      console.debug('__fields', neW)
     }
     const setRecords = (records, count) => {
       this.state.__records = records
@@ -75,14 +74,25 @@ new class extends Page {
       }
 
       const fieldSelector = new function() {
-        const $el = Dialog()
+        const $fields = Div('fields')
+        const $el = Dialog([
+          $fields,
+          Div('btns', [
+            _Button('关闭', () => {
+              $el.close()
+            })
+          ])
+        ])
         populateFields()
         function populateFields() {
-          $el.append(...state.__fields.map(
+          // $fields.replaceChildren 由于未知原因而不行
+          $fields.innerHTML = ''
+          $fields.append(...state.__fields.map(
             field => new function() {
               const checkbox = new Checkbox(field.name, {
                 onchange() {
                   field.show = checkbox.value
+                  page.saveState()
                   table.render(state.__fields)
                 }
               })
@@ -215,6 +225,7 @@ new class extends Page {
         const { fields, records, count } = await loadData()
         setFields(fields)
         setRecords(records, count)
+        fieldSelector.populateFields()
         // page.saveState() // 交给 updateData 做
         table.updateData(fields, records)
       }

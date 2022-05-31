@@ -2,7 +2,7 @@
 	"name": "ppz",
 	"displayName": "ppz",
 	"description": "",
-	"version": "0.0.0",
+	"version": "0.0.1",
 	"publisher": "ppz",
 	"icon": "./assets/icon.png",
 	"repository": {
@@ -10,7 +10,7 @@
 		"url": "git+https://github.com/ppz-pro/ppz.vscode.git"
 	},
 	"engines": {
-		"vscode": "^1.66.2"
+    "vscode": "^1.47.3"
 	},
 	"categories": [
 		"Other"

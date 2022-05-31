@@ -1,11 +1,12 @@
 dialog {
+  padding: 0;
   color: var(--true-color1);
   background: rgba(var(--color0), .8);
   border-radius: .25rem;
   border: none;
 }
 label.checkbox {
-  display: flex;
+  display: inline-flex;
   align-items: center;
 }
 label.checkbox > input {

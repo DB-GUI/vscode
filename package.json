@@ -57,6 +57,12 @@
 				"category": "PPZ"
 			},
 			{
+				"command": "ppz.github",
+				"title": "to ppz.vscode github",
+				"icon": "$(github-inverted)",
+				"category": "PPZ"
+			},
+			{
 				"command": "ppz.editConnection",
 				"title": "更新连接",
 				"icon": "$(edit)",
@@ -101,6 +107,11 @@
 		],
 		"menus": {
 			"view/title": [
+				{
+					"command": "ppz.github",
+					"when": "view == about",
+					"group": "navigation"
+				},
 				{
 					"command": "ppz.addConnection",
 					"when": "view == connection",

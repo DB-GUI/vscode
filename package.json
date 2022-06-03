@@ -37,8 +37,8 @@
 					"icon": "assets/logo.svg"
 				},
 				{
-					"id": "about",
-					"name": "关于",
+					"id": "help",
+					"name": "帮助和反馈",
 					"icon": "assets/logo.svg"
 				}
 			]
@@ -109,7 +109,7 @@
 			"view/title": [
 				{
 					"command": "ppz.github",
-					"when": "view == about",
+					"when": "view == help",
 					"group": "navigation"
 				},
 				{

@@ -9,11 +9,15 @@ const selectFile = require('../../../../lib/vscode-utils/file-selector/server')
 module.exports = class Webview {
   constructor({
     filename,
+    noJS = false,
+    noCSS = false,
     category = 'ppz',
     title = 'ppz',
     initData,
     webviewServerHandlers
   }) {
+    this.noJS = noJS
+    this.noCSS = noCSS
     console.debug('webview constructing', filename)
     // html 文件路径
     const path = this.localPath('webview/pages/' + filename + '/index.html')
@@ -107,17 +111,22 @@ module.exports = class Webview {
       <html>
         <head>
           <title>${title}</title>
-          <link rel="stylesheet" href="${this.webviewUri('style/index.css')}">
+          ${this.noCSS ? '' :
+            `<link rel="stylesheet" href="${this.webviewUri('style/index.css')}"></link>`
+          }
         </head>
         <body>
-          ${body}
           <script>
             window.VSCODE = acquireVsCodeApi()
             window.PPZ = {
               initData: ${JSON.stringify(this.initData)},
             }
           </script>
-          <script type="module" src="${this.webviewUri(`pages/${filename}/index.js`)}"></script>
+          ${body}
+          
+          ${this.noJS ? '' :
+            `<script type="module" src="${this.webviewUri(`pages/${filename}/index.js`)}"></script>`
+          }
         </body>
       </html>
     `

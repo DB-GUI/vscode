@@ -2,13 +2,13 @@
 [![license](https://img.shields.io/github/license/ppz-pro/ppz.vscode)](https://github.com/ppz-pro/ppz.vscode/blob/main/LICENSE)
 [![release](https://img.shields.io/github/release/ppz-pro/ppz.vscode)](https://github.com/ppz-pro/ppz.vscode/releases)
 
-**ppz.vscode** 是一个 vscode 插件，提供操作数据库的图形界面，详情请参考[使用文档](https://github.com/ppz-pro/ppz.vscode/wiki/%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3)  
+[**ppz.vscode**](https://marketplace.visualstudio.com/items?itemName=ppz.ppz) 是一个 vscode 插件，提供操作数据库的图形界面，详情请参考[使用文档](https://github.com/ppz-pro/ppz.vscode/wiki/%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3)  
 目前支持 MySQL、MariaDB、SQLite3(SQLite3 仅支持 windows)  
 
 > ppz 将来会支持 PostgreSQL、CockroachDB、Oracledb、MSSQL  
 > 但目前不考虑支持非关系型数据库，比如 MongoDB，推荐使用 [MongoDB for VS Code](https://github.com/mongodb-js/vscode)（官方出品，质量有保证、功能全面）
 
-![ppz.vscode](./assets/ppz.vscode.gif)
+![ppz.vscode](./other-files/ppz.vscode.gif)
 
 ## why ppz?
 市面上，有很多优秀的软件  

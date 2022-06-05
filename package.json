@@ -1,10 +1,13 @@
 {
 	"name": "ppz",
 	"displayName": "ppz",
-	"description": "",
-	"version": "0.0.3",
+	"description": "UI for database management",
+	"version": "0.0.4",
 	"publisher": "ppz",
 	"icon": "assets/icon.png",
+	"keywords": [
+		"database", "sql", "ppz", "navicat", "mysql", "sqlite", "dbms", "vscode", "db", "Postgresql"
+	],
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/ppz-pro/ppz.vscode.git"
@@ -50,7 +53,7 @@
 			},
 			{
 				"view": "help",
-				"contents": "[ppz.vscode](https://github.com/ppz-pro/ppz.vscode) 提供管理数据库的图形界面，类似于极简版的 navicat（或者说“极简陋版”）\n当前版本：v0.0.3-beta\n[$(preview)使用文档](https://github.com/ppz-pro/ppz.vscode/wiki/%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3)\n[$(comment)意见反馈](https://github.com/ppz-pro/ppz.vscode/issues/new)\n[$(bug)发现 bug！](https://github.com/ppz-pro/ppz.vscode/issues)\n[$(trash)清空 ppz](command:ppz.empty)"
+				"contents": "[ppz.vscode](https://github.com/ppz-pro/ppz.vscode) 提供管理数据库的图形界面，类似于极简版的 navicat（或者说“极简陋版”）\n当前版本：v0.0.4-beta\n[$(preview)使用文档](https://github.com/ppz-pro/ppz.vscode/wiki/%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3)\n[$(comment)意见反馈](https://github.com/ppz-pro/ppz.vscode/issues/new)\n[$(bug)发现 bug！](https://github.com/ppz-pro/ppz.vscode/issues)\n[$(trash)清空 ppz](command:ppz.empty)"
 			}
 		],
 		"commands": [

@@ -8,30 +8,40 @@ const publicFields = [
 const formsOptions = [ // pivateFields
   {
     client: 'mysql',
-    label: 'MySQL / MariaDB',
-    fields: [
-      { name: 'host', required: true },
-      { name: 'port' },
-      { name: 'user', required: true },
-      { name: 'password', required: true },
-      { name: 'database' }
-    ]
+    label: 'MySQL',
+    fields: {
+      parameters: [
+        { name: 'host', required: true },
+        { name: 'port' },
+        { name: 'user', required: true },
+        { name: 'password', required: true },
+        { name: 'database' }
+      ],
+      'connection url': [
+        { name: 'connURL', required: true }
+      ]
+    }
   }, {
     client: 'sqlite3',
     label: 'SQLite3',
     fields: [
       { name: 'filename', required: true, Input: FileInput }
     ]
-  // }, {
-  //   client: 'postgresql',
-  //   label: 'PostgreSQL / CockroachDB',
-  //   fields: [
-  //     { name: 'host', required: true },
-  //     { name: 'port' },
-  //     { name: 'user', required: true },
-  //     { name: 'password', required: true },
-  //     { name: 'database' }
-  //   ]
+  }, {
+    client: 'postgresql',
+    label: 'PostgreSQL',
+    fields: {
+      parameters: [
+        { name: 'host', required: true },
+        { name: 'port' },
+        { name: 'user', required: true },
+        { name: 'password', required: true },
+        { name: 'database' },
+      ],
+      'connection url': [
+        { name: 'connURL', required: true }
+      ]
+    }
   },
 ]
 

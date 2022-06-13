@@ -57,25 +57,6 @@ class KnexConnection {
     await this.client.destroy()
     console.debug('connection closed')
   }
-
-  dbList() {
-    throw Error('unimplemented method')
-  }
-  
-  tbList(database) {
-    throw Error('unimplemented method')
-  }
-
-  async fieldList(table, database) {
-    const result = await this.client.raw(`desc \`${database}\`.\`${table}\``)
-    return result[0].map(field => ({
-      name: field.Field,
-      type: field.Type,
-      notNull: field.Null == 'NO',
-      default: field.Default,
-      pk: field.Key == 'PRI'
-    }))
-  }
 }
 
 exports.MysqlKnexConnection =
@@ -94,6 +75,17 @@ class MysqlKnexConnection extends KnexConnection {
     const result = await this.client.raw('show tables;')
     return result[0].map(item => item['Tables_in_' + database])
   }
+  
+  async fieldList(table, database) {
+    const result = await this.client.raw(`desc \`${database}\`.\`${table}\``)
+    return result[0].map(field => ({
+      name: field.Field,
+      type: field.Type,
+      notNull: field.Null == 'NO',
+      default: field.Default,
+      pk: field.Key == 'PRI'
+    }))
+  }
 }
 
 exports.PostgreSQLKnexConnection =
@@ -104,14 +96,17 @@ class PostgreSQLKnexConnection extends KnexConnection {
     })
   }
   async dbList() {
-    const result = await this.client.raw('SELECT datname FROM pg_database;')
+    const result = await this.client.raw('SELECT datname FROM pg_database WHERE datistemplate=false;')
     return result.rows.map(db => db.datname)
   }
-
-  // async tbList(dbname) {
-  //   const result = await this.client.raw(`SELECT table_name FROM information_schema.tables WHERE table_schema='${dbname}';`)
-  //   return result.rows.map(db => db.datname)
-  // }
+  async schemaList() {
+    const result = await this.client.raw('select schema_name from information_schema.schemata;')
+    return result.rows.map(row => row.schema_name)
+  }
+  async tbList(schemaName) {
+    const result = await this.client.raw(`SELECT table_name FROM information_schema.tables WHERE table_schema='${schemaName}';`)
+    return result.rows.map(db => db.table_name)
+  }
 }
 
 exports.Sqlite3KnexConnection =

@@ -1,16 +1,24 @@
 const vscode = require('vscode')
 const noty = require('../../../../lib/vscode-utils/noty')
-const TreeviewOptions = require('./treeview-options')
-const {
-  RootElement, ConnectionElement, DatabaseElement
-} = require('./element')
+const Tree = require('./tree')
 
 // 根结点
-const root = new RootElement()
+const root = new Tree()
 // 更新 treeview
 const updateEvent = new vscode.EventEmitter()
 // treeview
-exports.treeviewOptions = TreeviewOptions(root, updateEvent)
+exports.treeviewOptions = {
+  showCollapseAll: true,
+  treeDataProvider: {
+    onDidChangeTreeData: updateEvent.event,
+    getChildren(el = root) {
+      return el.getChildren()
+    },
+    getTreeItem(el) {
+      return el.getTreeItem()
+    }
+  }
+}
 
 // 删除结点
 exports.drop = function(el) {

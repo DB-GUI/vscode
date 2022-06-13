@@ -65,7 +65,7 @@ new class extends Page {
             client: form.key,
             name: this.publicForm.name
           }
-          if(PPZ.initData)
+          if(PPZ.initData.editing)
             result.id = PPZ.initData.editing.id
           for(const field of form.fields)
             result[field.name] = field.value

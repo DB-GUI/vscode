@@ -34,9 +34,7 @@ module.exports = function(root, updateEvent) {
                 name => new DatabaseElement(el, el.connection, name)
               )
             } catch(err) {
-              const msg = '连接建立失败，请检查连接信息和数据库服务器的设置'
-              console.error(msg, el.options, err)
-              noty.error(msg)
+              noty.error('连接建立失败，请检查连接信息和服务器设置 ' + err)
               return []
             }
           case 'sqlite3-connection':
@@ -47,9 +45,7 @@ module.exports = function(root, updateEvent) {
                 name => new TableElement(el, el.connection, name)
               )
             } catch(err) {
-              const msg = 'SQLite3 连接建立失败，请检查数据库文件路径'
-              console.error(msg, el.options, err)
-              noty.error(msg)
+              noty.error('SQLite3 连接建立失败，请检查数据库文件路径 ' + err)
               return []
             }
           case 'database':
@@ -59,9 +55,7 @@ module.exports = function(root, updateEvent) {
                 name => new TableElement(el, el.connection, name)
               )
             } catch(err) {
-              const msg = '获取 table 列表时发生异常，可尝试刷新连接'
-              console.error(msg, `[database ${el.name}]`, err)
-              noty.error(msg)
+              noty.error('获取 table 列表时发生异常，可尝试刷新连接 ' + err)
               return []
             }
           default:

@@ -10,4 +10,5 @@ vsc-extension-quickstart.md
 **/*.map
 **/.eslintrc.json
 
+*.test.js
 other-files

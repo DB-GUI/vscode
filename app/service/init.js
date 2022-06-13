@@ -21,7 +21,7 @@ async function init() {
     try {
       ins.validate(data)
     } catch(e) {
-      noty.error('数据校验失败')
+      noty.fatal('数据校验失败')
       console.error('数据校验失败', data)
       throw e
     }

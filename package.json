@@ -6,14 +6,23 @@
 	"publisher": "ppz",
 	"icon": "assets/icon.png",
 	"keywords": [
-		"database", "sql", "ppz", "navicat", "mysql", "sqlite", "dbms", "vscode", "db", "Postgresql"
+		"database",
+		"sql",
+		"ppz",
+		"navicat",
+		"mysql",
+		"sqlite",
+		"dbms",
+		"vscode",
+		"db",
+		"Postgresql"
 	],
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/ppz-pro/ppz.vscode.git"
 	},
 	"engines": {
-    "vscode": "^1.47.3"
+		"vscode": "^1.47.3"
 	},
 	"categories": [
 		"Other"
@@ -166,6 +175,7 @@
 		"@ppzp/type": "^0.0.4",
 		"knex": "^2.0.0",
 		"mysql2": "^2.3.3",
+		"pg": "^8.7.3",
 		"sqlite3": "^5.0.5",
 		"uuid": "^8.3.2"
 	}

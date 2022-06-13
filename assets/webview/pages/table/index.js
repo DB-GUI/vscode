@@ -110,8 +110,8 @@ new class extends Page {
         }
       }
 
-      this.$el = El('header', '', [
-        El('nav', '', [
+      this.$el = El('header', [
+        El('nav', [
           Span(PPZ.initData.connection || 'connection'),
           Icon('arrow-right'),
           Span(PPZ.initData.database || 'database'),

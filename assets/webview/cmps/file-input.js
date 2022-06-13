@@ -11,10 +11,12 @@ class extends Form.Input {
     }
     $input.onfocus = () => this._selectFile()
     const $btn = Button('···', () => this._selectFile())
-    return El('span', 'file-input', [
+    const $el = El('span', [
       $input,
       $btn
     ])
+    $el.className = 'file-input'
+    return $el
   }
 
   async _selectFile() {

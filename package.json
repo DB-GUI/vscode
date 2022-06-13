@@ -6,7 +6,16 @@
 	"publisher": "ppz",
 	"icon": "assets/icon.png",
 	"keywords": [
-		"database", "sql", "ppz", "navicat", "mysql", "sqlite", "dbms", "vscode", "db", "Postgresql"
+		"database",
+    "sql",
+    "ppz",
+    "navicat",
+    "mysql",
+    "sqlite",
+    "dbms",
+    "vscode",
+    "db",
+    "Postgresql"
 	],
 	"repository": {
 		"type": "git",

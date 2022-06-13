@@ -32,7 +32,7 @@ export default class Page {
     this.state = await this.api2.getState()
     // noState 往往意味着是新打开而不是 dispose 之后重新打开的页面
     this.noState = this.state === undefined
-    this.init()
+    this.init(this)
   }
 
   // 不应改成 saveState(state) 的形式，init 方法内的 state 引用将失效

@@ -83,6 +83,7 @@ class ConnectionElement extends TreeviewElement {
 }
 exports.ConnectionElement = ConnectionElement
 
+// TODO 实现各驱动的 TableElement
 class TableElement extends TreeviewElement {
   constructor(parent, tbName) {
     super({

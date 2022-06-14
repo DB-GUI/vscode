@@ -54,7 +54,7 @@ class KnexConnection {
   }
 
   async close() {
-    console.debug('connection closing...')
+    console.debug('connection closing...', this.name)
     await this.client.destroy()
     console.debug('connection closed')
   }

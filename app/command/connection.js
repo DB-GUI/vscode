@@ -12,9 +12,8 @@ exports.addConnection = function() {
   new UpsertConnectionWebview()
 }
 
-exports.refreshConnections = connectionTreeview.refreshConnections
-exports.refreshConnection = connectionTreeview.refreshConnection
-exports.refreshDatabase = connectionTreeview.refreshDatabase
+exports.refreshConnections = () => connectionTreeview.refresh()
+exports.refreshTreeChildren = connectionTreeview.refresh
 
 exports.editConnection = function(el) {
   if(el instanceof ConnectionElement)

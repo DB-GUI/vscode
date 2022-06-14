@@ -22,12 +22,15 @@ class TreeviewElement {
   }
 
   async getChildren() {
-    if(!this._children)
-      this._children = await this._getChildren()
-    return this._children
+    console.debug('getChildren', this)
+    return this._children = await this._getChildren()
   }
   getIconPath(path) {
     return Path.join(__filename, '../../../../../assets/icon/', path)
+  }
+
+  refresh(updateEvent) {
+    updateEvent.fire(this)
   }
 }
 
@@ -39,6 +42,11 @@ class RootElement extends TreeviewElement {
     return connectionService.getAllData().map(
       options => new connMap[options.client](this, options)
     )
+  }
+  refresh(updateEvent) {
+    for(const child of this._children)
+      child.close()
+    updateEvent.fire()
   }
 }
 exports.Tree = RootElement
@@ -66,6 +74,11 @@ class ConnectionElement extends TreeviewElement {
       console.error('连接失败', err)
       util.fatal('连接失败 ' + err)
     }
+  }
+
+  close() {
+    if(this.connection)
+      this.connection.close()
   }
 }
 exports.ConnectionElement = ConnectionElement
@@ -121,6 +134,12 @@ class PgsqlElement extends ConnectionElement {
     const dbList = await this.connection.dbList()
     return dbList.map(name => new PgsqlDatabaseElement(this, name, this.options.database == name))
   }
+  close() {
+    super.close()
+    if(this._children)
+      for(const db of this._children)
+        db.close()
+  }
 }
 class PgsqlDatabaseElement extends TreeviewElement {
   constructor(connEl, dbName, isDefault) {
@@ -143,6 +162,11 @@ class PgsqlDatabaseElement extends TreeviewElement {
         database: this.name
       }))
     return this.connection
+  }
+
+  close() {
+    if(this.connection)
+      this.connection.close()
   }
 }
 class PgsqlSchemaElement extends TreeviewElement {

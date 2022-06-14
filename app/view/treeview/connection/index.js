@@ -20,6 +20,10 @@ exports.treeviewOptions = {
   }
 }
 
+exports.refresh = function(el = root) {
+  el.refresh(updateEvent)
+}
+
 // 删除结点
 exports.drop = function(el) {
   console.debug('删除结点', el.clientType)
@@ -39,16 +43,6 @@ exports.add = function(options, connect) {
   updateEvent.fire()
 }
 
-// 刷新 treeview
-exports.refreshConnections = async function() {
-  console.debug('connections refreshing')
-  for(const conn of root.children)
-    if(conn.connection)
-      await conn.connection.close()
-  root.children = null
-  updateEvent.fire()
-  console.debug('connections refreshed')
-}
 // 刷新 connection
 exports.refreshConnection = async function(connEl) {
   console.debug('connection refreshing')

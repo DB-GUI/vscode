@@ -1,6 +1,6 @@
 const vscode = require('vscode')
 const noty = require('../../../../lib/vscode-utils/noty')
-const Tree = require('./tree')
+const { Tree } = require('./tree')
 
 // 根结点
 const root = new Tree()

@@ -6,14 +6,19 @@ const util = require('../../../../lib/vscode-utils/noty')
 class TreeviewElement {
   constructor({
     parent,
+    contextValue,
     collapse = vscode.TreeItemCollapsibleState.Collapsed
   }) {
     this.parent = parent
+    this.contextValue = contextValue
     this.collapse = collapse
   }
 
   getTreeItem(label = this.name) {
-    return new vscode.TreeItem(label, this.collapse)
+    const result = new vscode.TreeItem(label, this.collapse)
+    if(this.contextValue)
+      result.contextValue = this.contextValue
+    return result
   }
 
   async getChildren() {
@@ -36,11 +41,13 @@ class RootElement extends TreeviewElement {
     )
   }
 }
+exports.Tree = RootElement
 
 class ConnectionElement extends TreeviewElement {
   constructor(rootElement, options) {
     super({
-      parent: rootElement
+      parent: rootElement,
+      contextValue: 'connection'
     })
     this.options = options
   }
@@ -61,6 +68,7 @@ class ConnectionElement extends TreeviewElement {
     }
   }
 }
+exports.ConnectionElement = ConnectionElement
 
 class TableElement extends TreeviewElement {
   constructor(parent, tbName) {
@@ -88,7 +96,8 @@ class MysqlElement extends ConnectionElement {
 class MysqlDatabaseElement extends TreeviewElement {
   constructor(connectionElement, dbName) {
     super({
-      parent: connectionElement
+      parent: connectionElement,
+      contextValue: 'parentEl'
     })
     this.name = dbName
   }
@@ -116,7 +125,8 @@ class PgsqlElement extends ConnectionElement {
 class PgsqlDatabaseElement extends TreeviewElement {
   constructor(connEl, dbName, isDefault) {
     super({
-      parent: connEl
+      parent: connEl,
+      contextValue: 'pgDatabase'
     })
     this.name = dbName
     this.isDefault = isDefault
@@ -138,7 +148,8 @@ class PgsqlDatabaseElement extends TreeviewElement {
 class PgsqlSchemaElement extends TreeviewElement {
   constructor(connEl, schemaName) {
     super({
-      parent: connEl
+      parent: connEl,
+      contextValue: 'parentEl'
     })
     this.name = schemaName
   }
@@ -154,4 +165,3 @@ const connMap = {
   sqlite3: Sqlite3Element,
   postgresql: PgsqlElement
 }
-module.exports = RootElement

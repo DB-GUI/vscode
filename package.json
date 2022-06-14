@@ -103,14 +103,8 @@
 				"category": "PPZ"
 			},
 			{
-				"command": "ppz.refreshConnection",
-				"title": "Refresh Connection",
-				"icon": "$(refresh)",
-				"category": "PPZ"
-			},
-			{
-				"command": "ppz.refreshDatabase",
-				"title": "Refresh Database",
+				"command": "ppz.refreshTreeChildren",
+				"title": "Refresh Children",
 				"icon": "$(refresh)",
 				"category": "PPZ"
 			},
@@ -142,25 +136,20 @@
 			"view/item/context": [
 				{
 					"command": "ppz.deleteConnection",
-					"when": "view == connection && viewItem == connection || viewItem == 'sqlite3-connection'"
+					"when": "view == connection && viewItem == connection"
 				},
 				{
 					"command": "ppz.terminal",
-					"when": "view == connection && viewItem == connection || viewItem == 'sqlite3-connection'",
+					"when": "view == connection && viewItem == connection || viewItem == pgDatabase",
 					"group": "inline"
 				},
 				{
 					"command": "ppz.editConnection",
-					"when": "view == connection && viewItem == connection || viewItem == 'sqlite3-connection'"
+					"when": "view == connection && viewItem == connection"
 				},
 				{
-					"command": "ppz.refreshConnection",
-					"when": "view == connection && viewItem == connection || viewItem == 'sqlite3-connection'",
-					"group": "inline"
-				},
-				{
-					"command": "ppz.refreshDatabase",
-					"when": "view == connection && viewItem == database",
+					"command": "ppz.refreshTreeChildren",
+					"when": "view == connection && viewItem == connection || viewItem == pgDatabase viewItem == parentEl",
 					"group": "inline"
 				}
 			]

@@ -1,6 +1,6 @@
 const Webview = require('./common/base')
 const noty = require('../../../lib/vscode-utils/noty')
-const TableTreeviewElement = require('../treeview/connection/element').TableElement
+const TableTreeviewElement = require('../treeview/connection/tree').TableElement
 const NewRecordWebview = require('./new-record')
 const service = require('../../service/connection')
 

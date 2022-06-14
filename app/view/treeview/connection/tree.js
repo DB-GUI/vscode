@@ -95,9 +95,15 @@ class TableElement extends TreeviewElement {
   getTreeItem() {
     const result = super.getTreeItem()
     result.iconPath = this.getIconPath('table.svg')
+    result.command = {
+      command: 'ppz.openTable',
+      title: 'Open Table',
+      arguments: [this]
+    }
     return result
   }
 }
+exports.TableElement = TableElement
 
 // mysql
 class MysqlElement extends ConnectionElement {
@@ -136,9 +142,16 @@ class PgsqlElement extends ConnectionElement {
   }
   close() {
     super.close()
+    this.closeChildren()
+  }
+  closeChildren() {
     if(this._children)
       for(const db of this._children)
         db.close()
+  }
+  refresh(updateEvent) {
+    this.closeChildren()
+    super.refresh(updateEvent)
   }
 }
 class PgsqlDatabaseElement extends TreeviewElement {

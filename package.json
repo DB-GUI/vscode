@@ -149,7 +149,7 @@
 				},
 				{
 					"command": "ppz.refreshTreeChildren",
-					"when": "view == connection && viewItem == connection || viewItem == pgDatabase viewItem == parentEl",
+					"when": "view == connection && viewItem == connection || viewItem == pgDatabase || viewItem == parentEl",
 					"group": "inline"
 				}
 			]

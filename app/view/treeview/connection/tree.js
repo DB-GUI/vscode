@@ -1,6 +1,7 @@
 const connectionService = require('../../../service/connection')
 const vscode = require('vscode')
 const Path = require('path')
+const util = require('../../../../lib/vscode-utils/noty')
 
 class TreeviewElement {
   constructor({
@@ -11,14 +12,13 @@ class TreeviewElement {
     this.collapse = collapse
   }
 
-  
   getTreeItem(label = this.name) {
     return new vscode.TreeItem(label, this.collapse)
   }
 
-  getChildren() {
+  async getChildren() {
     if(!this._children)
-      this._children = this._getChildren()
+      this._children = await this._getChildren()
     return this._children
   }
   getIconPath(path) {
@@ -50,10 +50,15 @@ class ConnectionElement extends TreeviewElement {
     return result
   }
   
-  _getChildren() {
+  async _getChildren() {
     if(!this.connection)
       this.connection = connectionService.connect(this.options)
-    return this._getChildren2()
+    try {
+      return await this._getChildren2()
+    } catch(err) {
+      console.error('连接失败', err)
+      util.fatal('连接失败 ' + err)
+    }
   }
 }
 

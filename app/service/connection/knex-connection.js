@@ -1,4 +1,5 @@
 const Knex = require('knex')
+const noty = require('../../../lib/vscode-utils/noty')
 
 class KnexConnection {
   constructor(clientName, knexClient, name, connection, useNullAsDefault) {
@@ -59,6 +60,10 @@ class KnexConnection {
   }
 }
 
+const notyConnErr = err => {
+  noty.error('连接失败，请检查连接信息或服务器 ' + err)
+}
+
 exports.MysqlKnexConnection =
 class MysqlKnexConnection extends KnexConnection {
   constructor({ name, host, port, user, password, database }) {
@@ -67,8 +72,13 @@ class MysqlKnexConnection extends KnexConnection {
     })
   }
   async dbList() {
-    const result = await this.client.raw('show databases;')
-    return result[0].map(item => item.Database)
+    try {
+      const result = await this.client.raw('show databases;')
+      return result[0].map(item => item.Database)
+    } catch(err) {
+      notyConnErr(err)
+      return []
+    }
   }
   async tbList(database) {
     await this.client.raw('use `' + database + '`')
@@ -96,8 +106,13 @@ class PostgreSQLKnexConnection extends KnexConnection {
     })
   }
   async dbList() {
-    const result = await this.client.raw('SELECT datname FROM pg_database WHERE datistemplate=false;')
-    return result.rows.map(db => db.datname)
+    try {
+      const result = await this.client.raw('SELECT datname FROM pg_database WHERE datistemplate=false;')
+      return result.rows.map(db => db.datname)
+    } catch(err) {
+      notyConnErr(err)
+      return []
+    }
   }
   async schemaList() {
     const result = await this.client.raw('select schema_name from information_schema.schemata;')
@@ -116,9 +131,14 @@ class Sqlite3KnexConnection extends KnexConnection {
   }
   
   async tbList() {
-    return (await this.client.raw('Pragma table_list'))
-      .filter(tb => tb.type == 'table' && tb.schema == 'main' && tb.name.indexOf('sqlite_') != 0)
-      .map(tb => tb.name)
+    try {
+      return (await this.client.raw('Pragma table_list'))
+        .filter(tb => tb.type == 'table' && tb.schema == 'main' && tb.name.indexOf('sqlite_') != 0)
+        .map(tb => tb.name)
+    } catch(err) {
+      notyConnErr(err)
+      return []
+    }
   }
 
   async fieldList(name) {

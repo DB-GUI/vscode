@@ -1,47 +1,38 @@
+const { tree } = require('../view/treeview/connection')
+const { TreeviewElement } = require('../view/treeview/connection/tree/base')
 const UpsertConnectionWebview = require('../view/web/upsert-connection')
-const { ConnectionElement } = require('../view/treeview/connection/tree')
 const openTableWebview = require('../view/web/table')
-const service = require('../service/connection')
 const noty = require('../../lib/vscode-utils/noty')
-const warn = require('../../lib/vscode-utils/prompt/confirm').warn
-const connectionTreeview = require('../view/treeview/connection')
 
 exports.openTable = openTableWebview
 
+// 点击“添加按钮”，开始填“连接信息”，此时还未添加完成
 exports.addConnection = function() {
   new UpsertConnectionWebview()
 }
 
-exports.refreshConnections = () => connectionTreeview.refresh()
-exports.refreshTreeChildren = connectionTreeview.refresh
-
-exports.editConnection = function(el) {
-  if(el instanceof ConnectionElement)
-    new UpsertConnectionWebview(el.options)
-  else
-    noty.error('请从左侧 treeview 里选择并更新连接')
+exports.refreshTreeChildren = function(el = tree) {
+  checkEl(el)
+  el.refresh()
 }
-
+// 点击“编辑按钮”，开始填“连接信息”，此时还未编辑完成
+exports.editTreeItem = function(el) {
+  checkEl(el)
+  el.edit()
+}
 exports.terminal = function(el) {
-  if(el instanceof ConnectionElement)
-    service.terminal(el.options)
-  else
-    noty.error('请从左侧 treeview 里选择并打开交互模式')
+  checkEl(el)
+  el.terminal()
+}
+// 点击“删除按钮”，此时还未删除
+exports.deleteTreeItem = async function(el) {
+  checkEl(el)
+  el.drop()
 }
 
-exports.deleteConnection = async function(el) {
-  if(await warn('确定删除？')) return
+function checkEl(el) {
+  if(el instanceof TreeviewElement)
+    return
   
-  if(el instanceof ConnectionElement) {
-    try {
-      await service.drop(el.options.id) // 从数据库删除
-      connectionTreeview.drop(el) // 更新 treeview
-    } catch(err) {
-      const msg = '连接删除时发生意外'
-      console.error(msg, err)
-      noty.fatal(msg)
-    }
-  } else {
-    noty.error('请从左侧 treeview 里删除连接')
-  }
+  noty.warn('请从左侧 PPZ 视图里操作')
 }

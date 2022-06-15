@@ -41,7 +41,7 @@ module.exports = class ArrayCollection extends Collection {
   }
   
   getByKey(key) {
-    return this.getAllData().find(record => record[this.pkField] == key)
+    return this.getAll().find(record => record[this.pkField] == key)
   }
 
   save(data) {
@@ -52,7 +52,7 @@ module.exports = class ArrayCollection extends Collection {
   async upsert(record) {
     if(isNil(record))
       this.err('upsert error: record is nil')
-    const list = this.getAllData()
+    const list = this.getAll()
     let pk = record[this.pkField]
     if(pk) { // update
       const index = list.findIndex(record => record[this.pkField] == pk)
@@ -68,7 +68,7 @@ module.exports = class ArrayCollection extends Collection {
   }
 
   drop(key) {
-    const list = this.getAllData()
+    const list = this.getAll()
     const index = list.findIndex(record => record[this.pkField] == key)
     if(index == -1)
       throw Error('deleting record which not exist')

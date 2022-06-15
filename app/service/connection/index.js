@@ -24,9 +24,9 @@ service.upsert = async function({ record, connect }) {
   const rawId = record.id
   const id = await collection.upsert(record)
   if(rawId)
-    connectionTreeview.updateConnection(record, connect)
+    connectionTreeview.tree.updateChild(collection.getByKey(id), connect)
   else
-    connectionTreeview.add(collection.getByKey(id), connect)
+    connectionTreeview.tree.addChild(record, connect)
 }
 
 service.terminal = require('./terminal')

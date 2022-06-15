@@ -6,7 +6,7 @@ class Collection {
     this.name = name
   }
   
-  getAllData() {
+  getAll() {
     let data = Context.globalState.get(this.name)
     if(isNil(data))
       data = this.initData()

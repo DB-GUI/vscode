@@ -17,7 +17,7 @@ async function init() {
   
   // 检查数据
   Collection.instances.forEach(ins => {
-    const data = ins.getAllData()
+    const data = ins.getAll()
     try {
       ins.validate(data)
     } catch(e) {
@@ -27,7 +27,7 @@ async function init() {
     }
   })
 
-  const systemInfo = system.getAllData()
+  const systemInfo = system.getAll()
   console.log('system info', systemInfo)
 
   // 左侧的 treeview

@@ -79,14 +79,14 @@
 				"category": "PPZ"
 			},
 			{
-				"command": "ppz.editConnection",
-				"title": "更新连接",
+				"command": "ppz.editTreeItem",
+				"title": "更新节点",
 				"icon": "$(edit)",
 				"category": "PPZ"
 			},
 			{
-				"command": "ppz.deleteConnection",
-				"title": "删除连接",
+				"command": "ppz.deleteTreeItem",
+				"title": "删除节点",
 				"icon": "$(trash)",
 				"category": "PPZ"
 			},
@@ -94,12 +94,6 @@
 				"command": "ppz.empty",
 				"title": "Empty PPZ",
 				"icon": "$(trash)",
-				"category": "PPZ"
-			},
-			{
-				"command": "ppz.refreshConnections",
-				"title": "刷新连接",
-				"icon": "$(refresh)",
 				"category": "PPZ"
 			},
 			{
@@ -128,14 +122,14 @@
 					"group": "navigation"
 				},
 				{
-					"command": "ppz.refreshConnections",
+					"command": "ppz.refreshTreeChildren",
 					"when": "view == connection",
 					"group": "navigation"
 				}
 			],
 			"view/item/context": [
 				{
-					"command": "ppz.deleteConnection",
+					"command": "ppz.deleteTreeItem",
 					"when": "view == connection && viewItem == connection"
 				},
 				{
@@ -144,7 +138,7 @@
 					"group": "inline"
 				},
 				{
-					"command": "ppz.editConnection",
+					"command": "ppz.editTreeItem",
 					"when": "view == connection && viewItem == connection"
 				},
 				{

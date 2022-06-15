@@ -1,6 +1,6 @@
 const Webview = require('./common/base')
 const noty = require('../../../lib/vscode-utils/noty')
-const TableTreeviewElement = require('../treeview/connection/tree').TableElement
+const { TableElement } = require('../treeview/connection/tree/base')
 const NewRecordWebview = require('./new-record')
 const service = require('../../service/connection')
 
@@ -59,8 +59,8 @@ class TableWebview extends Webview {
 const map = new Map()
 
 module.exports = function openTableWebview(tableEl) {
-  if(!(tableEl instanceof TableTreeviewElement))
-    throw Error('cant create a TableWebview from a non-TableTreeviewElement')
+  if(!(tableEl instanceof TableElement))
+    throw Error('cant create a TableWebview from a non-TableElement')
   
   if(map.has(tableEl)) {
     console.debug('[openTableWebview] reveal tableWebview')

@@ -27,7 +27,7 @@ exports.terminal = function(el) {
 // 点击“删除按钮”，此时还未删除
 exports.deleteTreeItem = async function(el) {
   checkEl(el)
-  el.drop()
+  el.startDrop()
 }
 
 function checkEl(el) {

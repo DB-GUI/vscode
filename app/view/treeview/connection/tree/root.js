@@ -40,4 +40,9 @@ class RootElement extends TreeviewElement {
     this._children.splice(index, 1, newChild)
     this.updateEvent.fire()
   }
+  dropChild(el) {
+    const index = this._children.indexOf(el)
+    this._children.splice(index, 1)
+    this.updateEvent.fire()
+  }
 }

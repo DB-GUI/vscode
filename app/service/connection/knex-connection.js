@@ -124,12 +124,16 @@ class PostgreSQLKnexConnection extends KnexConnection {
   }
   async fieldList(schemaName, tableName) {
     const result = await this.client.raw(`SELECT * FROM information_schema.COLUMNS WHERE table_schema='${schemaName}' and table_name='${tableName}';`)
+    const pks = await this.client.raw(`SELECT a.attname
+      FROM   pg_index i JOIN pg_attribute a ON a.attrelid = i.indrelid AND a.attnum = ANY(i.indkey)
+      WHERE  i.indrelid = '${schemaName}.${tableName}'::regclass AND i.indisprimary;`)
+    const pkNames = pks.rows.map(row => row.attname)
     return result.rows.map(field => ({
       name: field.column_name,
       type: field.udt_name,
       notNull: !Boolean(field.is_nullable),
       default: field.column_default,
-      pk: false
+      pk: pkNames.indexOf(field.column_name) != -1
     }))
   }
 }

@@ -18,7 +18,7 @@ exports.refreshTreeChildren = function(el = tree) {
 // 点击“编辑按钮”，开始填“连接信息”，此时还未编辑完成
 exports.editTreeItem = function(el) {
   checkEl(el)
-  el.edit()
+  new UpsertConnectionWebview(el.options)
 }
 exports.terminal = function(el) {
   checkEl(el)

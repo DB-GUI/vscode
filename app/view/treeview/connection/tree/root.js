@@ -16,11 +16,13 @@ class RootElement extends TreeviewElement {
       options => getConEl(this, options)
     )
   }
-  refresh(updateEvent) {
-    this._children = null
-    for(const child of this._children)
-      child.close()
-    updateEvent.fire()
+  refresh() {
+    if(this._children) {
+      for(const child of this._children)
+        child.close()
+      this._children = null
+      this.updateEvent.fire()
+    }
   }
 
   addChild(options, connect) {
@@ -29,7 +31,13 @@ class RootElement extends TreeviewElement {
     this._children.push(child)
     this.updateEvent.fire()
   }
-  // updateChild(options, connect) {
-
-  // }
+  updateChild(options, connect) {
+    // 更新入口在 treeview，此时 treeview 一定展开过，this._children 一定存在
+    const index = this._children.findIndex(conn => conn.options.id == options.id)
+    this._children[index].close()
+    const newChild = getConEl(this, options)
+    newChild.collapse = vscode.TreeItemCollapsibleState[connect?'Expanded':'Collapsed']
+    this._children.splice(index, 1, newChild)
+    this.updateEvent.fire()
+  }
 }

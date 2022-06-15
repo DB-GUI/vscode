@@ -16,12 +16,12 @@ class KnexConnection {
     })
   }
   
-  async select(database, table, { pagination, fields = ['*'], }) {
-    console.debug('sql select', { database, table })
-    const records = await this.queryBuilder(database, table)
+  async select(schema, table, { pagination, fields = ['*'], }) {
+    console.debug('sql select', { schema, table })
+    const records = await this.queryBuilder(schema, table)
       .select(...fields)
       .offset((pagination.index - 1) * pagination.size).limit(pagination.size)
-    const count = await this.queryBuilder(database, table).count()
+    const count = await this.queryBuilder(schema, table).count()
     return {
       records,
       count: count[0]['count(*)']
@@ -32,9 +32,9 @@ class KnexConnection {
     return await this.queryBuilder(db, tb).insert(record)
   }
 
-  queryBuilder(database, table) {
-    if(database)
-      table = database + '.' + table
+  queryBuilder(schema, table) {
+    if(schema)
+      table = schema + '.' + table
     return this.client.from(table)
   }
 
@@ -80,14 +80,14 @@ class MysqlKnexConnection extends KnexConnection {
       return []
     }
   }
-  async tbList(database) {
-    await this.client.raw('use `' + database + '`')
+  async tbList(schema) {
+    await this.client.raw('use `' + schema + '`')
     const result = await this.client.raw('show tables;')
-    return result[0].map(item => item['Tables_in_' + database])
+    return result[0].map(item => item['Tables_in_' + schema])
   }
   
-  async fieldList(table, database) {
-    const result = await this.client.raw(`desc \`${database}\`.\`${table}\``)
+  async fieldList(schema, table) {
+    const result = await this.client.raw(`desc \`${schema}\`.\`${table}\``)
     return result[0].map(field => ({
       name: field.Field,
       type: field.Type,
@@ -141,8 +141,8 @@ class Sqlite3KnexConnection extends KnexConnection {
     }
   }
 
-  async fieldList(name) {
-    return (await this.client.raw(`Pragma table_info(\`${name}\`)`))
+  async fieldList(schema, table) {
+    return (await this.client.raw(`Pragma table_info(\`${table}\`)`))
       .map(field => ({
         name: field.name,
         type: field.Type,

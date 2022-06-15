@@ -42,14 +42,16 @@ class TreeviewElement {
 }
 exports.TreeviewElement = TreeviewElement
 
-// TODO 实现各驱动的 TableElement
 class TableElement extends TreeviewElement {
-  constructor(parent, tbName) {
+  constructor(parent, schemaName, tbName, names, connection) {
     super({
       parent,
       name: tbName,
       collapse: vscode.TreeItemCollapsibleState.None
     })
+    this.schemaName = schemaName
+    this.names = names
+    this.connection = connection
   }
 
   getTreeItem() {

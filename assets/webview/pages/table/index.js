@@ -111,13 +111,13 @@ new class extends Page {
       }
 
       this.$el = El('header', [
-        El('nav', [
-          Span(PPZ.initData.connection || 'connection'),
-          Icon('arrow-right'),
-          Span(PPZ.initData.database || 'database'),
-          Icon('arrow-right'),
-          Span(PPZ.initData.table)
-        ]),
+        El('nav', new function() {
+          const names = PPZ.initData.names.map(Span)
+          const result = [names.shift()]
+          for(const name of names)
+            result.push(Icon('arrow-right'), name)
+          return result
+        }),
         Div('operations', [
           Div('btns', [
             Button('刷新', 'light', function() {

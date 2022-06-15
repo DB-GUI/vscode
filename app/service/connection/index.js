@@ -31,5 +31,3 @@ service.upsert = async function({ record, connect }) {
   else
     connectionTreeview.tree.addChild(record, connect)
 }
-
-service.terminal = require('./terminal')

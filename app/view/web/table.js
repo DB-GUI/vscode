@@ -2,29 +2,25 @@ const Webview = require('./common/base')
 const noty = require('../../../lib/vscode-utils/noty')
 const { TableElement } = require('../treeview/connection/tree/base')
 const NewRecordWebview = require('./new-record')
-const service = require('../../service/connection')
 
 class TableWebview extends Webview {
-  constructor(database, table, connection) {
-    console.debug('TableWebview constructing', { database, table })
+  constructor(schemaName, tableName, names, connection) {
+    console.debug('TableWebview constructing', names)
     super({
       filename: 'table',
-      title: table,
+      title: tableName,
       initData: {
-        connection: connection.name,
-        database,
-        table,
-        connectionOptions: connection.options
+        names
       },
       webviewServerHandlers: {
         async getData(params) {
-          const fields = await connection.fieldList(table, database)
-          const { records, count } = await connection.select(database, table, params)
+          const fields = await connection.fieldList(schemaName, tableName)
+          const { records, count } = await connection.select(schemaName, tableName, params)
           return { fields, records, count }
         },
         async update(editing) {
           try {
-            await connection.updateMany(database, table, editing)
+            await connection.updateMany(schemaName, tableName, editing)
             noty.info('已保存')
             return true
           } catch(err) {
@@ -34,7 +30,7 @@ class TableWebview extends Webview {
         },
         async drop(pkValues) {
           try {
-            await connection.drop(database, table, pkValues)
+            await connection.drop(schemaName, tableName, pkValues)
             noty.info('已删除')
             return true
           } catch(err) {
@@ -43,13 +39,10 @@ class TableWebview extends Webview {
           }
         },
         newRecord(data) {
-          new NewRecordWebview(database, table, connection, data)
+          new NewRecordWebview(schemaName, tableName, connection, data)
         },
         openTerminal() {
-          service.terminal(Object.assign({}, connection.options, {
-            name: connection.name,
-            client: connection.clientName
-          }))
+          connection.terminal()
         }
       }
     })
@@ -69,7 +62,7 @@ module.exports = function openTableWebview(tableEl) {
   }
 
   console.debug('[openTableWebview] create tableWebview')
-  const view = new TableWebview(tableEl.parent.name, tableEl.name, tableEl.connection)
+  const view = new TableWebview(tableEl.schemaName, tableEl.name, tableEl.names, tableEl.connection)
   map.set(tableEl, view)
   view.panel.onDidDispose(() => {
     map.delete(tableEl)

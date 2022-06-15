@@ -21,7 +21,7 @@ export default function PNEWrapper(page, __fields, records, state, saveState) {
     return function() {
       const _e = editable()
       if(!_e && editableChanged(_e)) // 不能编辑 && 变了
-        page.noty.info(PPZ.initData.table + ' 表因没有主键，而不能修改、删除记录')
+        page.noty.info(PPZ.initData.names[PPZ.initData.names.length - 1] + ' 表没有主键，而不能修改、删除记录')
     }
   }
 

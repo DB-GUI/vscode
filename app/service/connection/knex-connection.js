@@ -122,6 +122,16 @@ class PostgreSQLKnexConnection extends KnexConnection {
     const result = await this.client.raw(`SELECT table_name FROM information_schema.tables WHERE table_schema='${schemaName}';`)
     return result.rows.map(db => db.table_name)
   }
+  async fieldList(schemaName, tableName) {
+    const result = await this.client.raw(`SELECT * FROM information_schema.COLUMNS WHERE table_schema='${schemaName}' and table_name='${tableName}';`)
+    return result.rows.map(field => ({
+      name: field.column_name,
+      type: field.udt_name,
+      notNull: !Boolean(field.is_nullable),
+      default: field.column_default,
+      pk: false
+    }))
+  }
 }
 
 exports.Sqlite3KnexConnection =

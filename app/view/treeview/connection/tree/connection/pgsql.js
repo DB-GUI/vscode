@@ -61,6 +61,9 @@ class PgsqlSchemaElement extends TreeviewElement {
   }
   async _getChildren() {
     const tbList = await this.parent.getConn().tbList(this.name)
-    return tbList.map(tbName => new TableElement(this, tbName))
+    return tbList.map(tbName => new TableElement(this, this.name, tbName,
+      [this.parent.parent.name, this.parent.name, this.name, tbName],
+      this.parent.connection || this.parent.parent.connection
+    ))
   }
 }

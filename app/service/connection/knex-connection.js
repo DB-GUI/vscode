@@ -1,3 +1,4 @@
+const vscode = require('vscode')
 const Knex = require('knex')
 const noty = require('../../../lib/vscode-utils/noty')
 
@@ -61,6 +62,13 @@ class KnexConnection {
     await this.client.destroy()
     console.debug('connection closed')
   }
+
+  terminal(...cmds) {
+    const terminal = vscode.window.createTerminal()
+    for(const cmd of cmds)
+      terminal.sendText(cmd)
+    terminal.show()
+  }
 }
 
 const notyConnErr = err => {
@@ -98,6 +106,12 @@ class MysqlKnexConnection extends KnexConnection {
       default: field.Default,
       pk: field.Key == 'PRI'
     }))
+  }
+
+  terminal() {
+    super.terminal(`mysql -h${this.options.host}${
+      this.options.port ? ':' + this.options.port : ''
+    } -u${this.options.user} -p${this.options.password}`)
   }
 }
 
@@ -143,6 +157,16 @@ class PostgreSQLKnexConnection extends KnexConnection {
   getCount(count) {
     return parseInt(count[0]['count'])
   }
+
+  terminal() {
+    let cmd = `psql -h ${this.options.host} -U ${this.options.user}`
+    if(this.options.port)
+      cmd += ' -p ' + this.options.port
+    if(this.options.database)
+      cmd += ' -d ' + this.options.database
+    
+    super.terminal(cmd)
+  }
 }
 
 exports.Sqlite3KnexConnection =
@@ -171,5 +195,9 @@ class Sqlite3KnexConnection extends KnexConnection {
         default: field.dflt_value,
         pk: Boolean(field.pk)
       }))
+  }
+
+  terminal() {
+    super.terminal('sqlite3 ' + this.options.filename)
   }
 }

@@ -50,6 +50,10 @@ class PgsqlDatabaseElement extends TreeviewElement {
     if(this.connection)
       this.connection.close()
   }
+  
+  terminal() {
+    this.getConn().terminal()
+  }
 }
 class PgsqlSchemaElement extends TreeviewElement {
   constructor(connEl, schemaName) {

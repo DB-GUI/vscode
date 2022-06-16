@@ -51,4 +51,10 @@ class ConnectionElement extends TreeviewElement {
     this.close()
     console.debug('已删除 treeview 元素', this.name)
   }
+
+  terminal() {
+    if(!this.connection) // 打开终端也会开启连接……日后改
+      this.connection = connectionService.connect(this.options)
+    this.connection.terminal()
+  }
 }

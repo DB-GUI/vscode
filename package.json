@@ -2,7 +2,7 @@
 	"name": "ppz",
 	"displayName": "ppz",
 	"description": "UI for database management",
-	"version": "0.0.4",
+	"version": "0.1.0",
 	"publisher": "ppz",
 	"icon": "assets/icon.png",
 	"keywords": [
@@ -62,7 +62,7 @@
 			},
 			{
 				"view": "help",
-				"contents": "简介：管理数据库的图形化界面\n当前版本：v0.0.4-beta\n[$(preview)使用帮助](https://github.com/ppz-pro/ppz.vscode/wiki/%E4%BD%BF%E7%94%A8%E5%B8%AE%E5%8A%A9)\n[$(comment)意见反馈](https://github.com/ppz-pro/ppz.vscode/issues/new)\n[$(bug)发现 bug！](https://github.com/ppz-pro/ppz.vscode/issues)\n[$(trash)清空 ppz](command:ppz.empty)"
+				"contents": "简介：管理数据库的图形化界面\n当前版本：v0.1.0-beta\n[$(preview)使用帮助](https://github.com/ppz-pro/ppz.vscode/wiki/%E4%BD%BF%E7%94%A8%E5%B8%AE%E5%8A%A9)\n[$(comment)意见反馈](https://github.com/ppz-pro/ppz.vscode/issues/new)\n[$(bug)发现 bug！](https://github.com/ppz-pro/ppz.vscode/issues)\n[$(trash)清空 ppz](command:ppz.empty)"
 			}
 		],
 		"commands": [
@@ -80,13 +80,13 @@
 			},
 			{
 				"command": "ppz.editTreeItem",
-				"title": "更新节点",
+				"title": "编辑",
 				"icon": "$(edit)",
 				"category": "PPZ"
 			},
 			{
 				"command": "ppz.deleteTreeItem",
-				"title": "删除节点",
+				"title": "删除",
 				"icon": "$(trash)",
 				"category": "PPZ"
 			},
@@ -104,7 +104,7 @@
 			},
 			{
 				"command": "ppz.terminal",
-				"title": "交互模式",
+				"title": "打开终端",
 				"icon": "$(terminal)",
 				"category": "PPZ"
 			}
@@ -134,8 +134,7 @@
 				},
 				{
 					"command": "ppz.terminal",
-					"when": "view == connection && viewItem == connection || viewItem == pgDatabase",
-					"group": "inline"
+					"when": "view == connection && viewItem == connection || viewItem == pgDatabase"
 				},
 				{
 					"command": "ppz.editTreeItem",

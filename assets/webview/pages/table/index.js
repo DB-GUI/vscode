@@ -191,7 +191,7 @@ new class extends Page {
                 }
               })
             }),
-            Button('交互模式', 'terminal', function() {
+            Button('打开终端', 'terminal', function() {
               page.api2.openTerminal()
             })
           ]),

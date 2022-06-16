@@ -35,7 +35,8 @@ new class extends Page {
                 <div class="private form" v-show="form.key == current">
                   <label v-for="field in form.fields">
                     <span>{{field.name}}</span>
-                    <input v-model="field.value" />
+                    <file-input v-if="field.type == 'file'" v-model="field.value" />
+                    <input v-else v-model="field.value" />
                   </label>
                 </div>
               </template>

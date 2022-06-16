@@ -7,15 +7,15 @@
 	"icon": "assets/icon.png",
 	"keywords": [
 		"database",
-    "sql",
-    "ppz",
-    "navicat",
-    "mysql",
-    "sqlite",
-    "dbms",
-    "vscode",
-    "db",
-    "Postgresql"
+		"sql",
+		"ppz",
+		"navicat",
+		"mysql",
+		"sqlite",
+		"dbms",
+		"vscode",
+		"db",
+		"Postgresql"
 	],
 	"repository": {
 		"type": "git",

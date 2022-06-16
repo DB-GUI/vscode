@@ -16,6 +16,9 @@ class KnexConnection {
     })
   }
   
+  getCount(count) {
+    return count[0]['count(*)']
+  }
   async select(schema, table, { pagination, fields = ['*'], }) {
     console.debug('sql select', { schema, table })
     const records = await this.queryBuilder(schema, table)
@@ -24,7 +27,7 @@ class KnexConnection {
     const count = await this.queryBuilder(schema, table).count()
     return {
       records,
-      count: count[0]['count(*)']
+      count: this.getCount(count)
     }
   }
 
@@ -135,6 +138,10 @@ class PostgreSQLKnexConnection extends KnexConnection {
       default: field.column_default,
       pk: pkNames.indexOf(field.column_name) != -1
     }))
+  }
+
+  getCount(count) {
+    return parseInt(count[0]['count'])
   }
 }
 

@@ -1,3 +1,4 @@
+const Wechat = require('../view/web/wechat')
 const noty = require('../../lib/vscode-utils/noty')
 const warn = require('../../lib/vscode-utils/prompt/confirm').warn
 const cp = require('child_process')
@@ -16,4 +17,8 @@ exports.empty = async function() {
 
 exports.github = async function() {
   cp.exec('start https://github.com/ppz-pro/ppz.vscode')
+}
+
+exports.wechat = async function() {
+  new Wechat()
 }

@@ -36,4 +36,4 @@ DBeaver 就我的使用体验来说，有一点“卡卡的”
 + [发现一个 bug！](https://github.com/ppz-pro/ppz.vscode/issues)
 
 ##### 微信群
-![PPZ.vscode wechat](https://files20220620.oss-cn-shanghai.aliyuncs.com/ppz.vscode.jpg)
+<img src="https://files20220620.oss-cn-shanghai.aliyuncs.com/ppz.vscode.jpg" alt="PPZ.vscode wechat" width=368 />

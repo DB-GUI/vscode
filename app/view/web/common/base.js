@@ -9,15 +9,11 @@ const selectFile = require('../../../../lib/vscode-utils/file-selector/server')
 module.exports = class Webview {
   constructor({
     filename,
-    noJS = false,
-    noCSS = false,
     category = 'ppz',
     title = 'ppz',
     initData,
     webviewServerHandlers
   }) {
-    this.noJS = noJS
-    this.noCSS = noCSS
     console.debug('webview constructing', filename)
     // html 文件路径
     const path = this.localPath('webview/pages/' + filename + '/index.html')
@@ -106,14 +102,17 @@ module.exports = class Webview {
     title,
     body
   }) {
+    if(fs.existsSync(this.localPath(`webview/pages/${filename}/index.css`)))
+      var css = this.webviewUri(`pages/${filename}/index.css`)
+    if(fs.existsSync(this.localPath(`webview/pages/${filename}/index.js`)))
+      var js = this.webviewUri(`pages/${filename}/index.js`)
     return `
       <!DOCTYPE html>
       <html>
         <head>
           <title>${title}</title>
-          ${this.noCSS ? '' :
-            `<link rel="stylesheet" href="${this.webviewUri('style/index.css')}"></link>`
-          }
+          <link rel="stylesheet" href="${this.webviewUri('style/index.css')}"></link>
+          ${css ? `<link rel="stylesheet" href="${css}"></link>` : ''}
         </head>
         <body>
           <script>
@@ -123,10 +122,7 @@ module.exports = class Webview {
             }
           </script>
           ${body}
-          
-          ${this.noJS ? '' :
-            `<script type="module" src="${this.webviewUri(`pages/${filename}/index.js`)}"></script>`
-          }
+          ${js ? `<script type="module" src="${js}"></script>` : ''}
         </body>
       </html>
     `

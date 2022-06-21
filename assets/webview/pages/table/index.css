@@ -1,0 +1,118 @@
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  --padding-h: .88em;
+}
+header nav{
+  padding: .38em var(--padding-h);
+}
+header nav span {
+  font-size: .9em;
+}
+header nav svg {
+  margin: 0 .3em;
+}
+
+header .operations {
+  padding: 0 var(--padding-h);
+
+  background: var(--vscode-button-background);
+  display: flex;
+  justify-content: space-between;
+}
+
+header .operations button {
+  line-height: 2;
+  padding: 0 .58em;
+  background-color: transparent;
+  min-width: auto;
+}
+
+.ppz-pagination {
+  display: flex;
+  align-items: center;
+}
+header .ppz-pagination button {
+  padding: 0 .28em;
+}
+header .ppz-pagination button.big svg {
+  transform: scale(1.3);
+}
+.ppz-pagination input {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  width: 1.8em;
+  padding: 0;
+  height: 1em;
+  color: inherit;
+  text-align: center;
+}
+.ppz-pagination span {
+  font-size: .8em;
+  margin-right: 1em;
+}
+.table-wrapper {
+  flex: 1;
+  overflow: auto;
+}
+table {
+  border-collapse: collapse;
+}
+thead {
+  position: sticky;
+  top: 0;
+  background: rgba(var(--color1), .1);
+}
+tbody tr:nth-child(even) {
+  background: rgba(var(--color1), .06);
+}
+tr > *:first-child {
+  padding-left: 1em;
+}
+th, td {
+  padding: 0 .5em;
+  max-width: 16em;
+  height: 2em;
+  line-height: 2;
+
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+th {
+  text-align: left;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+td {
+  cursor: cell;
+  outline: none;
+}
+td:hover {
+  background: rgba(var(--color1), .1);
+}
+
+dialog {
+  padding: 0;
+  max-width: 38em;
+  border: 1px solid rgba(var(--color1), .05);
+}
+dialog .fields {
+  padding: 1.8em 1.8em 1.6em;
+  border-bottom: 1px solid rgba(var(--color1), .05);
+  text-align: center;
+}
+dialog label {
+  padding: .3em .6em;
+  margin: .5em .6em;
+  background: rgba(var(--color0), 1);
+  border: 1px solid rgba(var(--color1), .1);
+  border-radius: 1px;
+}
+dialog .btns {
+  padding: .8em 1.8em 1em;
+  text-align: center;
+}

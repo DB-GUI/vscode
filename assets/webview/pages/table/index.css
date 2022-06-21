@@ -32,6 +32,7 @@ header .operations button {
 .ppz-pagination {
   display: flex;
   align-items: center;
+  color: var(--vscode-button-foreground);
 }
 header .ppz-pagination button {
   padding: 0 .28em;

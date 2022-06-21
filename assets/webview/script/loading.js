@@ -1,5 +1,5 @@
 import { $, Div } from '../../../lib/dom/index.js'
-import Icon from '../cmps/icon/index.js'
+import Icon from './icon/index.js'
 
 let loading = 0
 

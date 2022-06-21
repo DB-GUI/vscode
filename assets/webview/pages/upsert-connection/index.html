@@ -36,7 +36,7 @@
       <template v-for="form in forms">
         <div class="private form" v-show="form.key == current">
           <label v-for="field in form.fields">
-            <span>{{field.name}}</span>
+            <span>{{field.required?'*':''}} {{field.name}}</span>
             <file-input v-if="field.type == 'file'" v-model="field.value"></file-input>
             <input v-else v-model="field.value">
           </label>

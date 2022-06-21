@@ -10,7 +10,7 @@ export default function FormOptions(editing) {
         Field('port'),
         Field('user', true),
         Field('password', true),
-        Field('database', true),
+        Field('database'),
       ]),
       Form('sqlite3', 'SQLite3', [
         FileField('filename', true)
@@ -20,7 +20,7 @@ export default function FormOptions(editing) {
         Field('port'),
         Field('user', true),
         Field('password', true),
-        Field('database', true),
+        Field('database'),
       ])
     ]
   }

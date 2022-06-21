@@ -4,8 +4,8 @@ import { ref, watch } from './vue.esm-browser.prod.js'
 export default {
   template: `
     <span class="file-input">
-      <input v-model="value" @input="onInput">
-      <button @click="clickBtn">···</button>
+      <input v-model="value" @focus="select" @input="onInput">
+      <button @click="select">···</button>
     </span>
   `,
   props: ['modelValue'],
@@ -18,7 +18,7 @@ export default {
 
     return {
       value,
-      async clickBtn() {
+      async select() {
         const file = await selectFile()
         if(!file) return
         const path = file[0].path

@@ -20,11 +20,11 @@ class KnexConnection {
   getCount(count) {
     return count[0]['count(*)']
   }
-  async select(schema, table, { pagination, fields = ['*'], }) {
+  async select(schema, table, { page, fields = ['*'], }) {
     console.debug('sql select', { schema, table })
     const records = await this.queryBuilder(schema, table)
       .select(...fields)
-      .offset((pagination.index - 1) * pagination.size).limit(pagination.size)
+      .offset((page.index - 1) * page.size).limit(page.size)
     const count = await this.queryBuilder(schema, table).count()
     return {
       records,

@@ -11,13 +11,24 @@ VuePage(function(page) {
             size: 16,
             index: 1
           }
-        }
+        },
+        fields: [],
+        records: []
       }
     },
     methods: {
       refresh() {
         console.log('refreshing')
+      },
+      async putData() {
+        const { fields, records, count } = await page.api.getData(this.selectParams)
+        this.selectParams.page.count = count
+        this.fields = fields
+        this.records = records
       }
+    },
+    mounted() {
+      this.putData()
     }
   }
 }, Nav)

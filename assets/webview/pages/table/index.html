@@ -3,14 +3,14 @@
     <ppz-nav></ppz-nav>
     <div class="operations">
       <div class="btns">
-        <icon-btn iid="light" @click="refresh"></icon-btn>
-        <icon-btn iid="filter" @click="refresh"></icon-btn>
-        <icon-btn iid="add" @click="refresh"></icon-btn>
-        <icon-btn iid="copy" @click="refresh"></icon-btn>
-        <icon-btn iid="save" @click="refresh"></icon-btn>
-        <icon-btn iid="undo" @click="refresh"></icon-btn>
-        <icon-btn iid="delete" @click="refresh"></icon-btn>
-        <icon-btn iid="terminal" @click="refresh"></icon-btn>
+        <icon-btn iid="light" @click="refresh" title="刷新"></icon-btn>
+        <icon-btn iid="filter" @click="refresh" title="字段选择"></icon-btn>
+        <icon-btn iid="add" @click="refresh" title="插入"></icon-btn>
+        <icon-btn iid="copy" @click="refresh" title="拷贝"></icon-btn>
+        <icon-btn iid="save" @click="refresh" title="保存"></icon-btn>
+        <icon-btn iid="undo" @click="refresh" title="撤销全部"></icon-btn>
+        <icon-btn iid="delete" @click="refresh" title="删除"></icon-btn>
+        <icon-btn iid="terminal" @click="refresh" title="打开终端"></icon-btn>
       </div>
       <ppz-pagination :count="selectParams.page.count"
         v-model:index="selectParams.page.index"

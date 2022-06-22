@@ -17,9 +17,6 @@ VuePage(function(page) {
       }
     },
     methods: {
-      refresh() {
-        console.log('refreshing')
-      },
       async putData() {
         const { fields, records, count } = await page.api.getData(this.selectParams)
         this.selectParams.page.count = count

@@ -3,7 +3,7 @@
     <ppz-nav></ppz-nav>
     <div class="operations">
       <div class="btns">
-        <icon-btn iid="light" @click="refresh" title="刷新"></icon-btn>
+        <icon-btn iid="light" @click="putData" title="刷新"></icon-btn>
         <icon-btn iid="filter" @click="refresh" title="字段选择"></icon-btn>
         <icon-btn iid="add" @click="refresh" title="插入"></icon-btn>
         <icon-btn iid="copy" @click="refresh" title="拷贝"></icon-btn>
@@ -15,6 +15,7 @@
       <ppz-pagination :count="selectParams.page.count"
         v-model:index="selectParams.page.index"
         v-model:size="selectParams.page.size"
+        @change="putData"
         ></ppz-pagination>
     </div>
   </header>

@@ -1,16 +1,3 @@
-/* input */
-input:not([type]) {
-  background: var(--vscode-input-background);
-  border: 1px solid var(--vscode-settings-textInputBorder);
-  color: var(--vscode-foreground);
-  height: 2em;
-  padding: 0 .5em;
-  outline: none !important;
-}
-input:not([type]):focus {
-  border: var(--border-focus);
-}
-
 /* .form */
 .form {
   margin: 0 3.8em;

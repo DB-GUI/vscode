@@ -26,11 +26,11 @@ export const options = {
       <icon-btn @click="refresh" iid="refresh" />
       <ppz-input v-model.trim="inputingSize" />
       <span>条记录 / 页 共 {{count}} 条 {{pageCount}} 页</span>
-      <icon-btn :disabled="index <= 1" @click="incr(-2)" iid="arrow-left2" />
-      <icon-btn :disabled="index <= 1" @click="incr(-1)" iid="arrow-left" />
+      <icon-btn class="big" :disabled="index <= 1" @click="incr(-2)" iid="arrow-left2" />
+      <icon-btn class="big" :disabled="index <= 1" @click="incr(-1)" iid="arrow-left" />
       <ppz-input v-model.trim="inputingIndex" />
-      <icon-btn :disabled="index >= pageCount" @click="incr(1)" iid="arrow-right" />
-      <icon-btn :disabled="index >= pageCount" @click="incr(2)" iid="arrow-right2" />
+      <icon-btn class="big" :disabled="index >= pageCount" @click="incr(1)" iid="arrow-right" />
+      <icon-btn class="big" :disabled="index >= pageCount" @click="incr(2)" iid="arrow-right2" />
     </div>
   `,
   methods: {
@@ -89,6 +89,16 @@ export const options = {
 }
 
 export const style = `
+  .ppz-pagination {
+    display: flex;
+    align-items: center;
+  }
+  .ppz-pagination button {
+    padding: 0 .28em;
+  }
+  .ppz-pagination button.big svg {
+    transform: scale(1.3);
+  }
   .ppz-pagination input {
     width: 2.2em;
     text-align: center;

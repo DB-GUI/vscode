@@ -4,7 +4,18 @@
     <div class="operations">
       <div class="btns">
         <icon-btn iid="light" @click="refresh"></icon-btn>
+        <icon-btn iid="filter" @click="refresh"></icon-btn>
+        <icon-btn iid="add" @click="refresh"></icon-btn>
+        <icon-btn iid="copy" @click="refresh"></icon-btn>
+        <icon-btn iid="save" @click="refresh"></icon-btn>
+        <icon-btn iid="undo" @click="refresh"></icon-btn>
+        <icon-btn iid="delete" @click="refresh"></icon-btn>
+        <icon-btn iid="terminal" @click="refresh"></icon-btn>
       </div>
+      <ppz-pagination :count="selectParams.page.count"
+        v-model:index="selectParams.page.index"
+        v-model:size="selectParams.page.size"
+        ></ppz-pagination>
     </div>
   </header>
 </div>

@@ -14,10 +14,6 @@ header .operations {
   color: var(--vscode-button-foreground);
 }
 
-.ppz-pagination span {
-  font-size: .8em;
-  margin-right: 1em;
-}
 .table-wrapper {
   flex: 1;
   overflow: auto;

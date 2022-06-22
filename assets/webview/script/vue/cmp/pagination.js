@@ -23,24 +23,14 @@ export const options = {
   },
   template: `
     <div class="ppz-pagination">
-      <button class="reset-style" @click="refresh">
-        <ppz-icon id="refresh" />
-      </button>
+      <icon-btn @click="refresh" iid="refresh" />
       <ppz-input v-model.trim="inputingSize" />
       <span>条记录 / 页 共 {{count}} 条 {{pageCount}} 页</span>
-      <button class="reset-style" :disabled="index <= 1" @click="incr(-2)">
-        <ppz-icon id="arrow-left2" />
-      </button>
-      <button class="reset-style" :disabled="index <= 1" @click="incr(-1)">
-        <ppz-icon id="arrow-left" />
-      </button>
+      <icon-btn :disabled="index <= 1" @click="incr(-2)" iid="arrow-left2" />
+      <icon-btn :disabled="index <= 1" @click="incr(-1)" iid="arrow-left" />
       <ppz-input v-model.trim="inputingIndex" />
-      <button class="reset-style" :disabled="index >= pageCount" @click="incr(1)">
-        <ppz-icon id="arrow-right" />
-      </button>
-      <button class="reset-style" :disabled="index >= pageCount" @click="incr(2)">
-        <ppz-icon id="arrow-right2" />
-      </button>
+      <icon-btn :disabled="index >= pageCount" @click="incr(1)" iid="arrow-right" />
+      <icon-btn :disabled="index >= pageCount" @click="incr(2)" iid="arrow-right2" />
     </div>
   `,
   methods: {

@@ -5,6 +5,11 @@ VuePage(function(page) {
   return {
     initData() {
       return {}
+    },
+    methods: {
+      refresh() {
+        console.log('refreshing')
+      }
     }
   }
 }, Nav)

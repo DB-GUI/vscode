@@ -5,7 +5,7 @@ export const options = {
     <nav>
       <template v-for="(name, index) in names">
         <span>{{name}}</span>
-        <ppz-icon v-if="index + 1 < names.length" id="arrow-right"></ppz-icon>
+        <ppz-icon v-if="index + 1 < names.length" iid="arrow-right"></ppz-icon>
       </template>
     </nav>
   `,

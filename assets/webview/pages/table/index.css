@@ -4,15 +4,6 @@ body {
   height: 100vh;
   --padding-h: .88em;
 }
-header nav{
-  padding: .38em var(--padding-h);
-}
-header nav span {
-  font-size: .9em;
-}
-header nav svg {
-  margin: 0 .3em;
-}
 
 header .operations {
   padding: 0 var(--padding-h);

@@ -8,7 +8,7 @@ import { paginationOptions, paginationStyle } from './cmp/pagination.js'
 import Style from './style.js'
 
 export default
-function VuePage(getVueOptions) {
+function VuePage(getVueOptions, ...cmps) {
   new class extends Page {
     init(page) {
       const options = getVueOptions(page)
@@ -29,7 +29,13 @@ function VuePage(getVueOptions) {
       app.component('ppz-icon', Icon)
       app.component('ppz-input', inputOptions)
       app.component('ppz-pagination', paginationOptions)
+      const styles = []
+      for(const cmp of cmps) {
+        app.component(cmp.name, cmp.options)
+        styles.push(cmp.style)
+      }
       Style(
+        ...styles,
         inputStyle,
         paginationStyle
       )

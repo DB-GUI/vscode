@@ -23,12 +23,21 @@ VuePage(function(page) {
       async putData() {
         const { fields, records, count } = await page.api.getData(this.selectParams)
         this.selectParams.page.count = count
+        this.setFields(fields)
+        this.setRecords(records)
+      },
+      setFields(fields) {
+        for(const f of fields)
+          f.show = true
         this.fields = fields
+      },
+      setRecords(records) {
         this.records = records
       }
     },
     mounted() {
-      this.putData()
+      if(page.noState)
+        this.putData()
     }
   }
 }, Nav)

@@ -2,6 +2,8 @@ import Page from '../page.js'
 import { createApp } from './vue.esm-browser.prod.js'
 import FileInput from './file-input.js'
 import Icon from './icon/index.js'
+import { inputOptions, inputStyle } from './cmp/input.js'
+import Style from './style.js'
 
 export default
 function VuePage(getVueOptions) {
@@ -23,6 +25,10 @@ function VuePage(getVueOptions) {
       const app = createApp(options)
       app.component('file-input', FileInput)
       app.component('ppz-icon', Icon)
+      app.component('ppz-input', inputOptions)
+      Style(
+        inputStyle,
+      )
       app.mount('#vue-app')
     }
   }

@@ -10,5 +10,6 @@ vsc-extension-quickstart.md
 **/*.map
 **/.eslintrc.json
 
+vue.test.html
 *.test.js
 other-files

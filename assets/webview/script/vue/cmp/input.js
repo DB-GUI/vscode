@@ -1,4 +1,6 @@
-export const inputOptions = {
+export const name = 'ppz-input'
+
+export const options = {
   props: ['modelValue'],
   template: `
     <span class="ppz-input">
@@ -7,7 +9,7 @@ export const inputOptions = {
   `
 }
 
-export const inputStyle = `
+export const style = `
   .ppz-input {
     position: relative;
   }

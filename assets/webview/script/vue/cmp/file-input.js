@@ -1,7 +1,9 @@
-import selectFile from '../../../../lib/vscode-utils/file-selector/client.js'
-import { ref, watch } from './vue.esm-browser.prod.js'
+import selectFile from '../../../../../lib/vscode-utils/file-selector/client.js'
+import { ref, watch } from '../vue.esm-browser.prod.js'
 
-export default {
+export const name = 'file-input'
+
+export const options = {
   template: `
     <span class="file-input">
       <input v-model="value" @focus="select" @input="onInput">
@@ -27,3 +29,16 @@ export default {
     }
   }
 }
+
+export const style = `
+  .file-input > input {
+    width: 8rem;
+    margin-left: 1rem;
+    margin-right: .36rem;
+  }
+  .file-input > button {
+    padding: 0;
+    width: 2em;
+    min-width: 2em;
+  }
+`

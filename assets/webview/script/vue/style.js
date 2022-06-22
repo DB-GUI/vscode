@@ -1,4 +1,4 @@
-export default function(...styles) {
+export default function(styles) {
   styles.push(`
     .reset-style {
       border: none;
@@ -8,7 +8,7 @@ export default function(...styles) {
       background: transparent;
     }
   `)
-  styles = styles.join('\n')
+  styles = styles.filter(style => style).join('\n')
   
   const style = document.createElement('style')
   style.innerHTML = styles

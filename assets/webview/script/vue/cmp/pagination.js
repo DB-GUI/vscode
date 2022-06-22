@@ -1,17 +1,12 @@
-export const paginationStyle = `
-  .ppz-pagination input {
-    width: 2.2em;
-    text-align: center;
-  }
-`
+export const name = 'ppz-pagination'
 
-export const paginationDefaults = { // 全局配置
+export const defaults = { // 全局配置
   size: 16
 }
 
-export const paginationOptions = {
+export const options = {
   props: { // 局部配置
-    size: { type: Number, default: paginationDefaults.size },
+    size: { type: Number, default: defaults.size },
     index: { type: Number, default: 1 },
     count: { type: Number, default: 0 }
   },
@@ -102,3 +97,10 @@ export const paginationOptions = {
     }
   }
 }
+
+export const style = `
+  .ppz-pagination input {
+    width: 2.2em;
+    text-align: center;
+  }
+`

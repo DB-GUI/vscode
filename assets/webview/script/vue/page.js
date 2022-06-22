@@ -1,9 +1,9 @@
 import Page from '../page.js'
 import { createApp } from './vue.esm-browser.prod.js'
-import FileInput from './file-input.js'
-import Icon from './icon/index.js'
-import { inputOptions, inputStyle } from './cmp/input.js'
-import { paginationOptions, paginationStyle } from './cmp/pagination.js'
+import * as FileInput from './cmp/file-input.js'
+import * as Icon from './cmp/icon.js'
+import * as Input from './cmp/input.js'
+import * as Pagination from './cmp/pagination.js'
 
 import Style from './style.js'
 
@@ -25,20 +25,13 @@ function VuePage(getVueOptions, ...cmps) {
       }
       
       const app = createApp(options)
-      app.component('file-input', FileInput)
-      app.component('ppz-icon', Icon)
-      app.component('ppz-input', inputOptions)
-      app.component('ppz-pagination', paginationOptions)
+      cmps.push(Icon, FileInput, Input, Pagination)
       const styles = []
       for(const cmp of cmps) {
         app.component(cmp.name, cmp.options)
         styles.push(cmp.style)
       }
-      Style(
-        ...styles,
-        inputStyle,
-        paginationStyle
-      )
+      Style(styles)
       app.mount('#vue-app')
     }
   }

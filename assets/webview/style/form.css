@@ -39,14 +39,3 @@ input:not([type]):focus {
   margin-left: 1rem;
   width: 10rem;
 }
-
-.form > label .file-input > input {
-  width: 8rem;
-  margin-left: 1rem;
-  margin-right: .36rem;
-}
-.form > label .file-input > button {
-  padding: 0;
-  width: 2em;
-  min-width: 2em;
-}

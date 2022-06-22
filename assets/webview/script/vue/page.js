@@ -3,6 +3,8 @@ import { createApp } from './vue.esm-browser.prod.js'
 import FileInput from './file-input.js'
 import Icon from './icon/index.js'
 import { inputOptions, inputStyle } from './cmp/input.js'
+import { paginationOptions, paginationStyle } from './cmp/pagination.js'
+
 import Style from './style.js'
 
 export default
@@ -26,8 +28,10 @@ function VuePage(getVueOptions) {
       app.component('file-input', FileInput)
       app.component('ppz-icon', Icon)
       app.component('ppz-input', inputOptions)
+      app.component('ppz-pagination', paginationOptions)
       Style(
         inputStyle,
+        paginationStyle
       )
       app.mount('#vue-app')
     }

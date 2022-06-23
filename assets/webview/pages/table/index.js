@@ -16,11 +16,13 @@ VuePage(function(page) {
       }
     },
     methods: {
-      async putData() {
+      async putData(isRefresh) {
         const { fields, records, count } = await page.api.getData(this.selectParams)
         this.selectParams.page.count = count
         this.setFields(fields)
         this.setRecords(records)
+        if(isRefresh === true)
+          page.noty.info('数据已刷新')
       },
       setFields(fields) {
         for(const f of fields)
@@ -35,6 +37,11 @@ VuePage(function(page) {
         this.records = records
       },
 
+      refresh() {
+        if(this.isEditing) // 这里不能把按钮变灰，要不然用户不知道为什么灰
+          return page.noty.warn('请先保存或撤销修改')
+        this.putData(true)
+      },
       newRecord(copy) {
         const data = {
           fields: this.fields
@@ -44,6 +51,8 @@ VuePage(function(page) {
         page.api.newRecord(data)
       },
       drop() {
+        if(this.isEditing)
+          return page.noty.warn('请先保存或撤销修改')
         const warning = this.pkNames
           .map(name => `${name} 为 ${this.focusedRecord[name]}`)
           .join(' 且 ')
@@ -80,6 +89,9 @@ VuePage(function(page) {
         for(const name of this.pkNames)
           result[name] = this.focusedRecord[name]
         return result
+      },
+      isEditing() { // 在状态改变时计算，不影响性能
+        return this.pneOptions.editing.size > 0
       }
     },
     watch: {

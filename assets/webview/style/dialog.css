@@ -11,6 +11,17 @@ dialog.middle {
   max-width: 38em;
 }
 
+dialog .modal {
+  position: fixed;
+  z-index: -1;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(var(--color0), .3);
+  animation: fadeIn .3s ease;
+}
+
 dialog .title {
   padding: .8em 1.8em .6em;
   font-size: .95em;

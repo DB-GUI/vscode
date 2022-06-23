@@ -1,25 +1,43 @@
 export const name = 'ppz-pne'
 
 export const options = {
-  props: ['fields', 'records'],
+  props: ['fields', 'records', 'options'],
+  beforeCreate() {
+    if(this.options.yes) return
+    this.options.yes = true
+
+    this.options.focus = {}
+    this.options.editing = new Map()
+  },
   template: `
     <table class="pne">
       <thead>
         <tr>
-          <template v-for="field in fields">
-            <th v-if="field.show" :title="field.type">{{field.name}}</th>
+          <template v-for="(f, i) in fields">
+            <th v-if="f.show" :title="f.type" :class="{ highlight: options.focus.x == i }">{{f.name}}</th>
           </template>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="record in records">
-          <template v-for="field in fields">
-            <td v-if="field.show" :title="field.name + ': ' + field.type">{{record[field.name]}}</td>
+        <tr v-for="(record, j) in records" :class="{ highlight: options.focus.y == j }">
+          <template v-for="(f, i) in fields">
+            <td
+              v-if="f.show"
+              @click="setFocus(i, j)"
+              :class="{ highlight: options.focus.x == i }"
+              :title="f.name + ': ' + f.type"
+            >{{record[f.name]}}</td>
           </template>
         </tr>
       </tbody>
     </table>
-  `
+  `,
+  methods: {
+    setFocus(i, j) {
+      this.options.focus.x = i
+      this.options.focus.y = j
+    }
+  }
 }
 
 export const style = `
@@ -58,6 +76,13 @@ export const style = `
     outline: none;
   }
   .pne td:hover {
+    background: rgba(var(--color1), .1);
+  }
+
+  .pne tr.highlight {
+    background: rgba(var(--color1), .1) !important;
+  }
+  .pne th.highlight, .pne td.highlight {
     background: rgba(var(--color1), .1);
   }
 `

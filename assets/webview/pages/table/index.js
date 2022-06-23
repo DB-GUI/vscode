@@ -9,7 +9,8 @@ VuePage(function(page) {
           page: { count: 0, size: 16, index: 1 }
         },
         fields: [],
-        records: []
+        records: [],
+        pneOptions: {}
       }
     },
     methods: {

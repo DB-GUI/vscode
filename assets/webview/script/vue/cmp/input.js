@@ -27,9 +27,10 @@ export const style = `
     opacity: .05;
   }
   .ppz-input input {
-    border: 1px solid var(--vscode-settings-textInputBorder);
+    border: 1px solid transparent;
     color: inherit;
     height: 2em;
+    width: 100%;
     padding: 0 .5em;
     outline: none;
   }

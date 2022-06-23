@@ -15,14 +15,14 @@
   align-items: center;
   justify-content: flex-end;
   
-  width: 18rem;
+  min-width: 18rem;
   margin: .5rem 1rem;
 }
 .form > .required span:first-child:before {
   content: '* ';
 }
 
-.form > label > input {
+.form > label > .ppz-input {
   margin-left: 1rem;
   width: 10rem;
 }

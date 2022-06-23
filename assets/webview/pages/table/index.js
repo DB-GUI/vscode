@@ -6,11 +6,7 @@ VuePage(function(page) {
     initData() {
       return {
         selectParams: {
-          page: {
-            count: 0,
-            size: 16,
-            index: 1
-          }
+          page: { count: 0, size: 16, index: 1 }
         },
         fields: [],
         records: []
@@ -30,6 +26,21 @@ VuePage(function(page) {
       },
       setRecords(records) {
         this.records = records
+      },
+
+      newRecord(copy) {
+        const data = {
+          fields: this.fields
+        }
+        if(copy) {
+          if(state.table.focus)
+            data.record = state.table.focus.record
+          else {
+            page.noty.warn('请先点击想要拷贝的记录')
+            return
+          }
+        }
+        page.api.newRecord(data)
       }
     },
     mounted() {

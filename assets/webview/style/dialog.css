@@ -1,0 +1,29 @@
+dialog {
+  padding: 0;
+  color: var(--true-color1);
+  background: rgba(var(--color0), .95);
+  border-radius: .8em;
+  border: none;
+  outline: none;
+}
+
+dialog.middle {
+  max-width: 38em;
+}
+
+dialog .title {
+  padding: .8em 1.8em .6em;
+  font-size: .95em;
+  font-weight: bold;
+  opacity: .9;
+  text-align: center;
+  border-bottom: var(--border1-18);
+}
+dialog .body {
+  padding: .8em 1.8em;
+}
+dialog .btns {
+  padding: .8em 1.8em 1em;
+  text-align: center;
+  border-top: var(--border1-18);
+}

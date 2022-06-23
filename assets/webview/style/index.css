@@ -1,6 +1,6 @@
 @import url('./form.css');
 @import url('./border-box.css');
-@import url('../../../lib/dom/index.css');
+@import url('./dialog.css');
 
 html {
   color: var(--vscode-editor-foreground);
@@ -20,8 +20,8 @@ body {
   --color2: var(--color2-red), var(--color2-green), var(--color2-blue);
   --true-color2: rgba(var(--color2), var(--color2-alpha));
 
-  --border1: 1px solid rgba(var(--color1), .5);
-  --border2: 1px solid rgba(var(--color1), .18);
+  --border1-50: 1px solid rgba(var(--color1), .5);
+  --border1-18: 1px solid rgba(var(--color1), .18);
   --border-focus: 1px solid var(--vscode-focusBorder);
   --border-radius: .25rem;
   --box-shadow: 0 0 8px 2px rgb(0 0 0 / 18%);
@@ -35,6 +35,7 @@ button {
   color: var(--vscode-button-foreground);
   border-radius: 1px;
   
+  font-size: .95em;
   display: inline-block;
   height: 2em;
   min-width: 6em;

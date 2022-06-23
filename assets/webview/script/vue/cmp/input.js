@@ -28,7 +28,7 @@ export const style = `
   }
   .ppz-input input {
     border: 1px solid var(--vscode-settings-textInputBorder);
-    color: var(--vscode-foreground);
+    color: inherit;
     height: 2em;
     padding: 0 .5em;
     outline: none;

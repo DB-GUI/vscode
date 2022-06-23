@@ -4,7 +4,14 @@
     <div class="operations">
       <div class="btns">
         <icon-btn iid="light" @click="putData" title="刷新"></icon-btn>
-        <icon-btn iid="filter" @click="refresh" title="字段选择"></icon-btn>
+        <icon-btn iid="filter" @click="$refs.fieldSelector.showModal()" title="字段选择"></icon-btn>
+        <dialog class="middle" ref="fieldSelector">
+          <div class="title">字段选择</div>
+          <div class="body"></div>
+          <div class="btns">
+            <button @click="$refs.fieldSelector.close()">关闭</button>
+          </div>
+        </dialog>
         <icon-btn iid="add" @click="refresh" title="插入"></icon-btn>
         <icon-btn iid="copy" @click="refresh" title="拷贝"></icon-btn>
         <icon-btn iid="save" @click="refresh" title="保存"></icon-btn>

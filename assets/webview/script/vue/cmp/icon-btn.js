@@ -11,6 +11,7 @@ export const options = {
 
 export const style = `
   button.icon-btn {
+    font-size: 1em;
     line-height: 2;
     padding: 0 0.58em;
     min-width: auto;

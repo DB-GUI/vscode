@@ -55,25 +55,3 @@ td {
 td:hover {
   background: rgba(var(--color1), .1);
 }
-
-dialog {
-  padding: 0;
-  max-width: 38em;
-  border: 1px solid rgba(var(--color1), .05);
-}
-dialog .fields {
-  padding: 1.8em 1.8em 1.6em;
-  border-bottom: 1px solid rgba(var(--color1), .05);
-  text-align: center;
-}
-dialog label {
-  padding: .3em .6em;
-  margin: .5em .6em;
-  background: rgba(var(--color0), 1);
-  border: 1px solid rgba(var(--color1), .1);
-  border-radius: 1px;
-}
-dialog .btns {
-  padding: .8em 1.8em 1em;
-  text-align: center;
-}

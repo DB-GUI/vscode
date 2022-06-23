@@ -32,6 +32,11 @@ function VuePage(getVueOptions, ...cmps) {
       )
       const styles = []
       for(const cmp of cmps) {
+        if(!cmp.options.methods)
+          cmp.options.methods = {}
+        // 子组件不会触发 updated 的，需手动 save
+        cmp.options.methods.$$saveState = () => page.saveState()
+        
         app.component(cmp.name, cmp.options)
         styles.push(cmp.style)
       }

@@ -2,13 +2,6 @@ export const name = 'ppz-pne'
 
 export const options = {
   props: ['fields', 'records', 'options'],
-  beforeCreate() {
-    if(this.options.yes) return
-    this.options.yes = true
-
-    this.options.focus = {}
-    this.options.editing = new Map()
-  },
   template: `
     <table class="pne">
       <thead>
@@ -36,6 +29,7 @@ export const options = {
     setFocus(i, j) {
       this.options.focus.x = i
       this.options.focus.y = j
+      this.$$saveState()
     }
   }
 }

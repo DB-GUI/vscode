@@ -10,7 +10,7 @@ VuePage(function(page) {
         },
         fields: [],
         records: [],
-        pneOptions: {}
+        pneOptions: null
       }
     },
     methods: {
@@ -26,6 +26,10 @@ VuePage(function(page) {
         this.fields = fields
       },
       setRecords(records) {
+        this.pneOptions = {
+          focus: {},
+          editing: new Map()
+        }
         this.records = records
       },
 
@@ -34,8 +38,8 @@ VuePage(function(page) {
           fields: this.fields
         }
         if(copy) {
-          if(state.table.focus)
-            data.record = state.table.focus.record
+          if(this.pneOptions.focus.y !== undefined)
+            data.record = this.records[this.pneOptions.focus.y]
           else {
             page.noty.warn('请先点击想要拷贝的记录')
             return

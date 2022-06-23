@@ -1,0 +1,12 @@
+<div id="vue-app" class="flex-container">
+  <div class="form">
+    <label v-for="f in fields" :class="{ required: f.notNull }">
+      <span>{{f.name}}</span>
+      <ppz-input v-model="record[f.name]"></ppz-input>
+    </label>
+  </div>
+  <div class="form-btns">
+    <button @click="save(true)">保存并关闭</button>
+    <button @click="save()">保存</button>
+  </div>
+</div>

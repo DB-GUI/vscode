@@ -2,6 +2,8 @@ import VuePage from '../../script/vue/page.js'
 import * as Nav from './nav.js'
 
 VuePage(function(page) {
+  const tableName = PPZ.initData.names[PPZ.initData.names.length - 1]
+
   return {
     initData() {
       return {
@@ -46,6 +48,19 @@ VuePage(function(page) {
           }
         }
         page.api.newRecord(data)
+      }
+    },
+    computed: {
+      hasPK() {
+        if(this.fields.length == 0)
+          return null
+        return this.fields.some(f => f.pk)
+      }
+    },
+    watch: {
+      hasPK(nv) {
+        if(nv === false)
+          page.noty.warn(tableName + ' 表缺少主键，不能进行编辑、删除操作')
       }
     },
     mounted() {

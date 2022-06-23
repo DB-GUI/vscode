@@ -30,19 +30,6 @@
     </div>
   </header>
   <div class="table-wrapper">
-    <table class="pne">
-      <thead>
-        <tr>
-          <th v-for="field in fields" :title="field.type">{{field.name}}</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="record in records">
-          <template v-for="field in fields">
-            <td v-if="field.show" :title="field.name + ': ' + field.type">{{record[field.name]}}</td>
-          </template>
-        </tr>
-      </tbody>
-    </table>
+    <ppz-pne :fields="fields" :records="records"></ppz-pne>
   </div>
 </div>

@@ -14,6 +14,14 @@ header .operations {
   color: var(--vscode-button-foreground);
 }
 
+.operations dialog .body {
+  padding: 1.5em .6em .6em 2em;
+}
+.operations dialog .ppz-checkbox {
+  margin-right: 1.2em;
+  margin-bottom: .68em;
+}
+
 .table-wrapper {
   flex: 1;
   overflow: auto;

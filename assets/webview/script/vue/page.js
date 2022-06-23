@@ -5,6 +5,7 @@ import * as Icon from './cmp/icon.js'
 import * as Input from './cmp/input.js'
 import * as Pagination from './cmp/pagination.js'
 import * as IconBtn from './cmp/icon-btn.js'
+import * as Checkbox from './cmp/checkbox.js'
 import Style from './style.js'
 
 export default
@@ -25,7 +26,7 @@ function VuePage(getVueOptions, ...cmps) {
       }
       
       const app = createApp(options)
-      cmps.push(Icon, IconBtn, FileInput, Input, Pagination)
+      cmps.push(Icon, IconBtn, FileInput, Input, Pagination, Checkbox)
       const styles = []
       for(const cmp of cmps) {
         app.component(cmp.name, cmp.options)

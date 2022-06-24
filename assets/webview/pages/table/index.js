@@ -36,7 +36,7 @@ VuePage(function(page) {
       setRecords(records) {
         this.pneOptions = {
           focus: {},
-          editing: new Map()
+          editing: {}
         }
         this.records = records
       },
@@ -107,7 +107,7 @@ VuePage(function(page) {
         return result
       },
       isEditing() { // 在状态改变时计算，不影响性能
-        return this.pneOptions.editing.size > 0
+        return Object.entries(this.pneOptions.editing).length > 0
       }
     },
     watch: {

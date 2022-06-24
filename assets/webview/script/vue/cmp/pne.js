@@ -1,7 +1,7 @@
 export const name = 'ppz-pne'
 
 export const options = {
-  props: ['fields', 'records', 'options'],
+  props: ['fields', 'records', 'options', 'editable'],
   template: `
     <table class="pne">
       <thead>
@@ -19,6 +19,8 @@ export const options = {
               @click="setFocus(i, j)"
               :class="{ highlight: options.focus.x == i }"
               :title="f.name + ': ' + f.type"
+              :contenteditable="editable"
+              @input="input(j, f.name, $event.target.innerText)"
             >{{record[f.name]}}</td>
           </template>
         </tr>
@@ -30,6 +32,11 @@ export const options = {
       this.options.focus.x = i
       this.options.focus.y = j
       this.$$saveState()
+    },
+    input(y, fieldName, value) {
+      if(!this.options.editing[y])
+        this.options.editing[y] = {}
+      this.options.editing[y][fieldName] = value
     }
   }
 }

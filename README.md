@@ -4,7 +4,7 @@
 
 [国内仓库](https://gitee.com/ppz-pro/ppz.vscode) | [github 仓库](https://github.com/ppz-pro/ppz.vscode)
 
-[**PPZ**](https://marketplace.visualstudio.com/items?itemName=ppz.ppz) 是一个 vscode 插件，提供操作数据库的图形界面，详情请参考[使用文档](https://github.com/ppz-pro/ppz.vscode/wiki/%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3)  
+[**PPZ**](https://marketplace.visualstudio.com/items?itemName=ppz.ppz) 是一个 vscode 插件，提供操作数据库的图形界面，详情请参考[使用帮助](https://github.com/ppz-pro/ppz.vscode/wiki/%E4%BD%BF%E7%94%A8%E5%B8%AE%E5%8A%A9)  
 目前支持 MySQL、MariaDB、SQLite3(SQLite3 仅支持 windows)、PostgreSQL、CockroachDB  
 
 > PPZ 将来会支持 Oracledb、MSSQL  

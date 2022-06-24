@@ -27,7 +27,7 @@
           :disabled="!hasPK || !isEditing"></icon-btn>
         <icon-btn iid="delete" @click="drop" title="删除"
           :disabled="!hasPK || pneOptions.focus.y === undefined"></icon-btn>
-        <icon-btn iid="terminal" @click="refresh" title="打开终端"></icon-btn>
+        <icon-btn iid="terminal" @click="terminal" title="打开终端"></icon-btn>
       </div>
       <ppz-pagination :count="selectParams.page.count"
         v-model:index="selectParams.page.index"

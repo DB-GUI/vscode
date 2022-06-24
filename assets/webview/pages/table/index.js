@@ -80,6 +80,9 @@ VuePage(function(page) {
       },
       select_1() { // -1
         this.fields.forEach( f => f.show = !f.show )
+      },
+      terminal() {
+        page.api2.openTerminal()
       }
     },
     computed: {

@@ -25,8 +25,12 @@ VuePage(function(page) {
           page.noty.info('数据已刷新')
       },
       setFields(fields) {
+        const oldMap = {}
+        for(const f of this.fields)
+          oldMap[f.name] = f
         for(const f of fields)
-          f.show = true
+          f.show = oldMap[f.name] === undefined // 原来没有的要显示
+                || oldMap[f.name].show // 原来显示的要显示
         this.fields = fields
       },
       setRecords(records) {
@@ -67,6 +71,15 @@ VuePage(function(page) {
             }
           }
         )
+      },
+      select1() { // 1
+        this.fields.forEach( f => f.show = true )
+      },
+      select0() { // 0
+        this.fields.forEach( f => f.show = false )
+      },
+      select_1() { // -1
+        this.fields.forEach( f => f.show = !f.show )
       }
     },
     computed: {

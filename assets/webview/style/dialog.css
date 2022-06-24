@@ -11,7 +11,7 @@ dialog.middle {
   max-width: 38em;
 }
 
-dialog .modal {
+dialog > .modal {
   position: fixed;
   z-index: -1;
   left: 0;
@@ -22,7 +22,7 @@ dialog .modal {
   animation: fadeIn .3s ease;
 }
 
-dialog .title {
+dialog > .title {
   padding: .8em 1.8em .6em;
   font-size: .95em;
   font-weight: bold;
@@ -30,11 +30,14 @@ dialog .title {
   text-align: center;
   border-bottom: var(--border1-18);
 }
-dialog .body {
+dialog > .body {
   padding: .8em 1.8em;
 }
-dialog .btns {
+dialog > .btns {
   padding: .8em 1.8em 1em;
   text-align: center;
   border-top: var(--border1-18);
+}
+dialog > .btns button {
+  margin: 0 .3em;
 }

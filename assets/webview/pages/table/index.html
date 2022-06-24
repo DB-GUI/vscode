@@ -12,6 +12,9 @@
             <ppz-checkbox v-for="f in fields" v-model="f.show" :label="f.name"></ppz-checkbox>
           </div>
           <div class="btns">
+            <button @click="select1()">全选</button>
+            <button @click="select_1">反选</button>
+            <button @click="select0">全不选</button>
             <button @click="$refs.fieldSelector.close()">关闭</button>
           </div>
         </dialog>

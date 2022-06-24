@@ -22,8 +22,8 @@ export const options = {
               :contenteditable="editable"
               @input="input(j, f.name, $event.target.innerText)"
             >{{
-              (options.editing[y] && options.editing[y][f.name] !== undefined)
-              ? options.editing[y][f.name]
+              (options.editing[j] && (options.editing[j][f.name] !== undefined))
+              ? options.editing[j][f.name]
               : record[f.name]
             }}</td>
           </template>

@@ -23,7 +23,7 @@
           :disabled="!pneOptions || pneOptions.focus.y === undefined"></icon-btn>
         <icon-btn iid="save" @click="refresh" title="保存"
           :disabled="!hasPK || !isEditing"></icon-btn>
-        <icon-btn iid="undo" @click="refresh" title="撤销全部"
+        <icon-btn iid="undo" @click="undo" title="撤销全部"
           :disabled="!hasPK || !isEditing"></icon-btn>
         <icon-btn iid="delete" @click="drop" title="删除"
           :disabled="!hasPK || pneOptions.focus.y === undefined"></icon-btn>

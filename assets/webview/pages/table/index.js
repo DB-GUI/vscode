@@ -83,6 +83,17 @@ VuePage(function(page) {
       },
       terminal() {
         page.api2.openTerminal()
+      },
+      undo() {
+        page.prompt.warn(
+          '撤销全部？',
+          '您可以使用 ctrl-z(windows) 或 cmd-z(macos) 来撤销一小步', 
+          {
+            确定: async () => {
+              this.pneOptions.editing = {}
+            }
+          }
+        )
       }
     },
     computed: {

@@ -84,16 +84,34 @@ VuePage(function(page) {
       terminal() {
         page.api2.openTerminal()
       },
+      _undo() {
+        this.pneOptions.editing = {}
+      },
       undo() {
         page.prompt.warn(
           '撤销全部？',
           '您可以使用 ctrl-z(windows) 或 cmd-z(macos) 来撤销一小步', 
           {
-            确定: async () => {
-              this.pneOptions.editing = {}
-            }
+            确定: async () => this._undo()
           }
         )
+      },
+      async save() {
+        if(!this.isEditing)
+          return page.noty.fatal('没有待保存的数据')
+        const records = Object.entries(this.pneOptions.editing).map(
+          ([y, changed]) => {
+            const pk = {}
+            for(const pkName of this.pkNames)
+              pk[pkName] = this.records[y][pkName]
+            return { pk, changed }
+          }
+        )
+        const success = await page.api.update(records)
+        if(success) {
+          this._undo()
+          this.refresh()
+        }
       }
     },
     computed: {

@@ -106,6 +106,7 @@ export const style = `
   }
   .ppz-pagination input {
     width: 2.2em;
+    padding: 0 0.16em;
     text-align: center;
   }
 `

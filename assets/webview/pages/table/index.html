@@ -21,7 +21,7 @@
         <icon-btn iid="add" @click="newRecord()" title="插入"></icon-btn>
         <icon-btn iid="copy" @click="newRecord(true)" title="拷贝"
           :disabled="!pneOptions || pneOptions.focus.y === undefined"></icon-btn>
-        <icon-btn iid="save" @click="refresh" title="保存"
+        <icon-btn iid="save" @click="save" title="保存"
           :disabled="!hasPK || !isEditing"></icon-btn>
         <icon-btn iid="undo" @click="undo" title="撤销全部"
           :disabled="!hasPK || !isEditing"></icon-btn>

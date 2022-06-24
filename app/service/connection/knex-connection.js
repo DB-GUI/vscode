@@ -190,7 +190,7 @@ class Sqlite3KnexConnection extends KnexConnection {
     return (await this.client.raw(`Pragma table_info(\`${table}\`)`))
       .map(field => ({
         name: field.name,
-        type: field.Type,
+        type: field.type,
         notNull: Boolean(field.notnull),
         default: field.dflt_value,
         pk: Boolean(field.pk)

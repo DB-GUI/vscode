@@ -21,7 +21,11 @@ export const options = {
               :title="f.name + ': ' + f.type"
               :contenteditable="editable"
               @input="input(j, f.name, $event.target.innerText)"
-            >{{record[f.name]}}</td>
+            >{{
+              (options.editing[y] && options.editing[y][f.name] !== undefined)
+              ? options.editing[y][f.name]
+              : record[f.name]
+            }}</td>
           </template>
         </tr>
       </tbody>
@@ -31,12 +35,13 @@ export const options = {
     setFocus(i, j) {
       this.options.focus.x = i
       this.options.focus.y = j
-      this.$$saveState()
+      this.$$page().saveState()
     },
     input(y, fieldName, value) {
       if(!this.options.editing[y])
         this.options.editing[y] = {}
       this.options.editing[y][fieldName] = value
+      this.$$page().saveState()
     }
   }
 }

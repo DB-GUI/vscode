@@ -30,6 +30,7 @@
         <icon-btn iid="terminal" @click="terminal" title="打开终端"></icon-btn>
       </div>
       <ppz-pagination :count="selectParams.page.count"
+        @click.capture="beforePage"
         v-model:index="selectParams.page.index"
         v-model:size="selectParams.page.size"
         @change="putData"

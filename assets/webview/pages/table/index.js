@@ -41,6 +41,13 @@ VuePage(function(page) {
         this.records = records
       },
 
+      beforePage(evt) {
+        if(this.isEditing) {
+          evt.stopPropagation()
+          return page.noty.warn('请先保存或撤销修改')
+        }
+      },
+
       refresh() {
         if(this.isEditing) // 这里不能把按钮变灰，要不然用户不知道为什么灰
           return page.noty.warn('请先保存或撤销修改')

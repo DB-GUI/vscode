@@ -1,5 +1,5 @@
 const { tree } = require('../view/treeview/connection')
-const { TreeviewElement } = require('../view/treeview/connection/tree/base')
+const { TreeviewElement, TableElement } = require('../view/treeview/connection/tree/base')
 const UpsertConnectionWebview = require('../view/web/upsert-connection')
 const openTableWebview = require('../view/web/table')
 const noty = require('../../lib/vscode-utils/noty')
@@ -29,10 +29,23 @@ exports.deleteTreeItem = async function(el) {
   checkEl(el)
   el.startDrop()
 }
+// 导出数据
+exports.exportData = async function(el) {
+  checkTableEl(el)
+  el.connection.export(el.schemaName, el.name)
+}
 
 function checkEl(el) {
   if(el instanceof TreeviewElement)
     return
   
   noty.warn('请从左侧 PPZ 视图里操作')
+  throw Error('用户可能直接执行了命令')
+}
+function checkTableEl(el) {
+  if(el instanceof TableElement)
+    return
+  
+  noty.warn('请从左侧 PPZ 视图里操作')
+  throw Error('用户可能直接执行了命令')
 }

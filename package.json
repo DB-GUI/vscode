@@ -107,6 +107,12 @@
 				"title": "打开终端",
 				"icon": "$(terminal)",
 				"category": "PPZ"
+			},
+			{
+				"command": "ppz.exportData",
+				"title": "导出数据",
+				"icon": "$(export)",
+				"category": "PPZ"
 			}
 		],
 		"menus": {
@@ -139,6 +145,10 @@
 				{
 					"command": "ppz.editTreeItem",
 					"when": "view == connection && viewItem == connection"
+				},
+				{
+					"command": "ppz.exportData",
+					"when": "view == connection && viewItem == table"
 				},
 				{
 					"command": "ppz.refreshTreeChildren",

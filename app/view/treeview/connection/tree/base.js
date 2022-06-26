@@ -47,6 +47,7 @@ class TableElement extends TreeviewElement {
     super({
       parent,
       name: tbName,
+      contextValue: 'table',
       collapse: vscode.TreeItemCollapsibleState.None
     })
     this.schemaName = schemaName

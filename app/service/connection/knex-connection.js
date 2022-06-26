@@ -69,6 +69,15 @@ class KnexConnection {
       terminal.sendText(cmd)
     terminal.show()
   }
+
+  async export(schema, table, params) {
+    const result = await this.queryBuilder(schema, table)
+    const doc = await vscode.workspace.openTextDocument({
+      content: this.queryBuilder(schema, table).insert(result).toString(),
+      language: 'sql'
+    })
+    vscode.window.showTextDocument(doc)
+  }
 }
 
 const notyConnErr = err => {

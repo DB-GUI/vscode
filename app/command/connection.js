@@ -30,9 +30,14 @@ exports.deleteTreeItem = async function(el) {
   el.startDrop()
 }
 // 导出数据
-exports.exportData = async function(el) {
+exports.exportDQL = async function(el) {
   checkTableEl(el)
-  el.connection.export(el.schemaName, el.name)
+  el.connection.exportDQL(el.schemaName, el.name)
+}
+// 导出表结构
+exports.exportDDL = async function(el) {
+  checkTableEl(el)
+  el.connection.exportDDL(el.schemaName, el.name)
 }
 
 function checkEl(el) {

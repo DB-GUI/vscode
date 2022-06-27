@@ -109,8 +109,14 @@
 				"category": "PPZ"
 			},
 			{
-				"command": "ppz.exportData",
-				"title": "导出数据",
+				"command": "ppz.exportDQL",
+				"title": "导出数据(DQL)",
+				"icon": "$(export)",
+				"category": "PPZ"
+			},
+			{
+				"command": "ppz.exportDDL",
+				"title": "导出表结构(DDL)",
 				"icon": "$(export)",
 				"category": "PPZ"
 			}
@@ -147,7 +153,11 @@
 					"when": "view == connection && viewItem == connection"
 				},
 				{
-					"command": "ppz.exportData",
+					"command": "ppz.exportDQL",
+					"when": "view == connection && viewItem == table"
+				},
+				{
+					"command": "ppz.exportDDL",
 					"when": "view == connection && viewItem == table"
 				},
 				{

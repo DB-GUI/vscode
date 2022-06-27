@@ -1,6 +1,7 @@
 const vscode = require('vscode')
 const Knex = require('knex')
 const noty = require('../../../lib/vscode-utils/noty')
+const untitledFile = require('../../../lib/vscode-utils/untitled-file')
 
 class KnexConnection {
   constructor(clientName, knexClient, name, connection, useNullAsDefault) {
@@ -17,6 +18,10 @@ class KnexConnection {
     })
   }
   
+  getTarget(schema, table) {
+    return '`' + schema + '`.`' + table + '`'
+  }
+
   getCount(count) {
     return count[0]['count(*)']
   }
@@ -70,13 +75,10 @@ class KnexConnection {
     terminal.show()
   }
 
-  async export(schema, table, params) {
+  // Data Query Language
+  async exportDQL(schema, table, params) {
     const result = await this.queryBuilder(schema, table)
-    const doc = await vscode.workspace.openTextDocument({
-      content: this.queryBuilder(schema, table).insert(result).toString(),
-      language: 'sql'
-    })
-    vscode.window.showTextDocument(doc)
+    untitledFile.sql(this.queryBuilder(schema, table).insert(result).toString())
   }
 }
 
@@ -121,6 +123,12 @@ class MysqlKnexConnection extends KnexConnection {
     super.terminal(`mysql -h${this.options.host}${
       this.options.port ? ':' + this.options.port : ''
     } -u${this.options.user} -p${this.options.password}`)
+  }
+
+  // Data Definition Language
+  async exportDDL(schema, table) {
+    const res = await this.client.raw(`show create table ${this.getTarget(schema, table)}`)
+    untitledFile.sql(res[0][0]['Create Table'])
   }
 }
 

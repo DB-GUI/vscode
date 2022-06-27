@@ -3,7 +3,7 @@ dialog {
   color: var(--true-color1);
   background: rgba(var(--color0), .95);
   border-radius: .8em;
-  border: none;
+  border: var(--border1-08);
   outline: none;
 }
 
@@ -23,7 +23,7 @@ dialog > .modal {
 }
 
 dialog > .title {
-  padding: .8em 1.8em .6em;
+  padding: .9em 1.8em .7em;
   font-size: .95em;
   font-weight: bold;
   opacity: .9;

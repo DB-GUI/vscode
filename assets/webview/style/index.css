@@ -22,6 +22,7 @@ body {
 
   --border1-50: 1px solid rgba(var(--color1), .5);
   --border1-18: 1px solid rgba(var(--color1), .18);
+  --border1-08: 1px solid rgba(var(--color1), .08);
   --border-focus: 1px solid var(--vscode-focusBorder);
   --border-radius: .25rem;
   --box-shadow: 0 0 8px 2px rgb(0 0 0 / 18%);

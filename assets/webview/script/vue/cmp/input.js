@@ -4,7 +4,10 @@ export const options = {
   props: ['modelValue'],
   template: `
     <span class="ppz-input">
-      <input class="reset-style" :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" />
+      <input class="reset-style" :value="modelValue"
+        @focus="$emit('focus', $event)"
+        @input="$emit('update:modelValue', $event.target.value)"
+      />
     </span>
   `
 }

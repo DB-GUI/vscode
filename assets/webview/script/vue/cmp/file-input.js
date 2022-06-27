@@ -6,7 +6,7 @@ export const name = 'file-input'
 export const options = {
   template: `
     <span class="file-input">
-      <input v-model="value" @focus="select" @input="onInput">
+      <ppz-input v-model="value" @focus="select">
       <button @click="select">···</button>
     </span>
   `,

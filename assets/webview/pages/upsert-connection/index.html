@@ -11,7 +11,7 @@
       <div class="public form">
         <label>
           <span>name</span>
-          <input v-model="publicForm.name" />
+          <ppz-input v-model="publicForm.name" />
         </label>
       </div>
       <template v-for="form in forms">
@@ -19,7 +19,7 @@
           <label v-for="field in form.fields">
             <span>{{field.required?'*':''}} {{field.name}}</span>
             <file-input v-if="field.type == 'file'" v-model="field.value"></file-input>
-            <input v-else v-model="field.value">
+            <ppz-input v-else v-model="field.value">
           </label>
         </div>
       </template>

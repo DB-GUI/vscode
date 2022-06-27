@@ -26,3 +26,9 @@ exports.proto = function(father, son) {
 exports.clone = function(data) {
   return JSON.parse(JSON.stringify(data))
 }
+
+exports.formatDate = function(date) {
+  return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()
+    } ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}.${
+    date.getMilliseconds()}`
+}

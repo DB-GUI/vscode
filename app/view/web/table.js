@@ -2,6 +2,7 @@ const Webview = require('./common/base')
 const noty = require('../../../lib/vscode-utils/noty')
 const { TableElement } = require('../treeview/connection/tree/base')
 const NewRecordWebview = require('./new-record')
+const formatDate = require('../../utils').formatDate
 
 class TableWebview extends Webview {
   constructor(schemaName, tableName, names, connection) {
@@ -16,6 +17,10 @@ class TableWebview extends Webview {
         async getData(params) {
           const fields = await connection.fieldList(schemaName, tableName)
           const { records, count } = await connection.select(schemaName, tableName, params)
+          for(let record of records)
+            for(let f of fields)
+              if(f.ppzType == 'datetime' && record[f.name])
+                record[f.name] = formatDate(record[f.name])
           return { fields, records, count }
         },
         async update(editing) {

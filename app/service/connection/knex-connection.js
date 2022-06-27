@@ -127,10 +127,19 @@ class MysqlKnexConnection extends KnexConnection {
     return result[0].map(field => ({
       name: field.Field,
       type: field.Type,
+      ppzType: this.ppzType(field.Type), // 便于格式化显示/解析
       notNull: field.Null == 'NO',
       default: field.Default,
       pk: field.Key == 'PRI'
     }))
+  }
+  ppzType(rawType) {
+    if(
+      (['date', 'datetime', 'timestamp'].indexOf(rawType) > -1)
+      || /datetime\(\d*\)/.test(rawType)
+      || /timestamp\(\d*\)/.test(rawType)
+    )
+      return 'datetime'
   }
 
   terminal() {
@@ -179,10 +188,19 @@ class PostgreSQLKnexConnection extends KnexConnection {
     return result.rows.map(field => ({
       name: field.column_name,
       type: field.udt_name,
+      ppzType: this.ppzType(field.udt_name),
       notNull: !Boolean(field.is_nullable),
       default: field.column_default,
       pk: pkNames.indexOf(field.column_name) != -1
     }))
+  }
+  ppzType(rawType) {
+    if(
+      (['date', 'timestamptz', 'timestamp'].indexOf(rawType) > -1)
+      || /timestamp\(\d*\)/.test(rawType)
+      || /timestamptz\(\d*\)/.test(rawType)
+    )
+      return 'datetime'
   }
 
   getCount(count) {

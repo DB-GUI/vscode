@@ -198,6 +198,12 @@ class PostgreSQLKnexConnection extends KnexConnection {
     
     super.terminal(cmd)
   }
+
+  async getDDL(schema, table) {
+    const msg = '暂不支持 pgsql 系数据库导出表结构的操作'
+    noty.error(msg)
+    throw Error(msg)
+  }
 }
 
 exports.Sqlite3KnexConnection =
@@ -230,5 +236,10 @@ class Sqlite3KnexConnection extends KnexConnection {
 
   terminal() {
     super.terminal('sqlite3 ' + this.options.filename)
+  }
+
+  async getDDL(schema, table) {
+    const result = await this.client.raw(`select sql from sqlite_master where type="table" and name="${table}";`)
+    return result[0].sql
   }
 }

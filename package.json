@@ -119,6 +119,12 @@
 				"title": "导出表结构(DDL)",
 				"icon": "$(export)",
 				"category": "PPZ"
+			},
+			{
+				"command": "ppz.export",
+				"title": "导出结构和数据",
+				"icon": "$(export)",
+				"category": "PPZ"
 			}
 		],
 		"menus": {
@@ -158,6 +164,10 @@
 				},
 				{
 					"command": "ppz.exportDDL",
+					"when": "view == connection && viewItem == table"
+				},
+				{
+					"command": "ppz.export",
 					"when": "view == connection && viewItem == table"
 				},
 				{

@@ -76,9 +76,23 @@ class KnexConnection {
   }
 
   // Data Query Language
-  async exportDQL(schema, table, params) {
+  async getDQL(schema, table) {
     const result = await this.queryBuilder(schema, table)
-    untitledFile.sql(this.queryBuilder(schema, table).insert(result).toString())
+    return this.queryBuilder(schema, table).insert(result).toString()
+  }
+  async exportDQL(schema, table) {
+    untitledFile.sql(await this.getDQL(schema, table))
+  }
+  async exportDDL(schema, table) {
+    untitledFile.sql(await this.getDDL(schema, table))
+  }
+  // DDL & DQL
+  async export(schema, table) {
+    untitledFile.sql(
+      await this.getDDL(schema, table),
+      ';\n',
+      await this.getDQL(schema, table)
+    )
   }
 }
 
@@ -126,9 +140,9 @@ class MysqlKnexConnection extends KnexConnection {
   }
 
   // Data Definition Language
-  async exportDDL(schema, table) {
+  async getDDL(schema, table) {
     const res = await this.client.raw(`show create table ${this.getTarget(schema, table)}`)
-    untitledFile.sql(res[0][0]['Create Table'])
+    return res[0][0]['Create Table']
   }
 }
 

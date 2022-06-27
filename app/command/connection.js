@@ -39,6 +39,11 @@ exports.exportDDL = async function(el) {
   checkTableEl(el)
   el.connection.exportDDL(el.schemaName, el.name)
 }
+// 导出结构和数据
+exports.export = async function(el) {
+  checkTableEl(el)
+  el.connection.export(el.schemaName, el.name)
+}
 
 function checkEl(el) {
   if(el instanceof TreeviewElement)

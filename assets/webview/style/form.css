@@ -7,7 +7,7 @@
   margin-top: 3.8em;
 }
 .form-btns button:not(:first-child) {
-  margin-left: 1.2rem;
+  margin-left: 1.2em;
 }
 
 .form > label {
@@ -15,14 +15,14 @@
   align-items: center;
   justify-content: flex-end;
   
-  min-width: 18rem;
-  margin: .5rem 1rem;
+  min-width: 18em;
+  margin: .5em 1em;
 }
 .form > .required span:first-child:before {
   content: '* ';
 }
 
 .form > label > .ppz-input {
-  margin-left: 1rem;
-  width: 10rem;
+  margin-left: 1em;
+  width: 12em;
 }

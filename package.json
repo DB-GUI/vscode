@@ -2,7 +2,7 @@
 	"name": "ppz",
 	"displayName": "ppz",
 	"description": "UI for database management",
-	"version": "0.1.2",
+	"version": "0.2.0",
 	"publisher": "ppz",
 	"icon": "assets/icon.png",
 	"keywords": [
@@ -62,7 +62,7 @@
 			},
 			{
 				"view": "help",
-				"contents": "简介：管理数据库的图形化界面\n当前版本：v0.1.2-beta\n[$(preview)使用帮助](https://github.com/ppz-pro/ppz.vscode/wiki/%E4%BD%BF%E7%94%A8%E5%B8%AE%E5%8A%A9)\n[$(comment)意见反馈](https://github.com/ppz-pro/ppz.vscode/issues/new)\n[$(comment-discussion)微信讨论](command:ppz.wechat)\n[$(bug)发现 bug！](https://github.com/ppz-pro/ppz.vscode/issues)\n[$(trash)清空 PPZ](command:ppz.empty)"
+				"contents": "简介：管理数据库的图形化界面\n当前版本：v0.2.0-beta\n[$(preview)使用帮助](https://github.com/ppz-pro/ppz.vscode/wiki/%E4%BD%BF%E7%94%A8%E5%B8%AE%E5%8A%A9)\n[$(comment)意见反馈](https://github.com/ppz-pro/ppz.vscode/issues/new)\n[$(comment-discussion)微信讨论](command:ppz.wechat)\n[$(bug)发现 bug！](https://github.com/ppz-pro/ppz.vscode/issues)\n[$(trash)清空 PPZ](command:ppz.empty)"
 			}
 		],
 		"commands": [

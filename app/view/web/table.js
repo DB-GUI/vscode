@@ -19,7 +19,7 @@ class TableWebview extends Webview {
           const { records, count } = await connection.select(schemaName, tableName, params)
           for(let record of records)
             for(let f of fields)
-              if(f.ppzType == 'datetime' && record[f.name])
+              if(f.ppzType && (f.ppzType.indexOf('datetime') == 0) && record[f.name])
                 record[f.name] = formatDate(record[f.name])
           return { fields, records, count }
         },

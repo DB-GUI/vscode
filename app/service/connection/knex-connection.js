@@ -27,10 +27,10 @@ class KnexConnection {
   }
   async select(schema, table, { page, fields = ['*'], }) {
     console.debug('sql select', { schema, table })
-    const records = await this.queryBuilder(schema, table)
+    const records = await this._queryBuilder(schema, table)
       .select(...fields)
       .offset((page.index - 1) * page.size).limit(page.size)
-    const count = await this.queryBuilder(schema, table).count()
+    const count = await this._queryBuilder(schema, table).count()
     return {
       records,
       count: this.getCount(count)
@@ -38,10 +38,10 @@ class KnexConnection {
   }
 
   async insert(db, tb, record) {
-    return await this.queryBuilder(db, tb).insert(record)
+    return await this._queryBuilder(db, tb).insert(record)
   }
 
-  queryBuilder(schema, table) {
+  _queryBuilder(schema, table) {
     if(schema)
       table = schema + '.' + table
     return this.client.from(table)
@@ -59,7 +59,7 @@ class KnexConnection {
   async drop(db, tb, where) {
     if(Object.keys(where).length == 0)
       throw Error('deleting all data?')
-    return this.queryBuilder(db, tb).where(where).del()
+    return this._queryBuilder(db, tb).where(where).del()
   }
 
   async close() {
@@ -77,8 +77,8 @@ class KnexConnection {
 
   // Data Query Language
   async getDQL(schema, table) {
-    const result = await this.queryBuilder(schema, table)
-    return this.queryBuilder(schema, table).insert(result).toString()
+    const result = await this._queryBuilder(schema, table)
+    return this._queryBuilder(schema, table).insert(result).toString()
   }
   async exportDQL(schema, table) {
     untitledFile.sql(await this.getDQL(schema, table))
@@ -196,11 +196,15 @@ class PostgreSQLKnexConnection extends KnexConnection {
   }
   ppzType(rawType) {
     if(
-      (['date', 'timestamptz', 'timestamp'].indexOf(rawType) > -1)
+      (['date', 'timestamp'].indexOf(rawType) > -1)
       || /timestamp\(\d*\)/.test(rawType)
-      || /timestamptz\(\d*\)/.test(rawType)
     )
       return 'datetime'
+    else if(
+      'timestamptz' == rawType
+      || /timestamptz\(\d*\)/.test(rawType)
+    )
+      return 'datetime-ts'
   }
 
   getCount(count) {

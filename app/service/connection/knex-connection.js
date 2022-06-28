@@ -18,6 +18,21 @@ class KnexConnection {
     })
   }
   
+  async fieldList(schemaName, tableName) {
+    const fields = await this._fieldList(schemaName, tableName)
+    this.fields = fields // 保存最新的 fields
+    return fields
+  }
+  formatInput(records) {
+    const dateNames = this.fields
+      .filter(f => f.ppzType == 'datetime-ts')
+      .map(f => f.name)
+    for(let record of records)
+      for(let name of dateNames)
+        if((record[name] !== '') && (typeof record[name] == 'string'))
+          record[name] = new Date(record[name])
+  }
+
   getTarget(schema, table) {
     return '`' + schema + '`.`' + table + '`'
   }
@@ -38,6 +53,7 @@ class KnexConnection {
   }
 
   async insert(db, tb, record) {
+    this.formatInput([record])
     return await this._queryBuilder(db, tb).insert(record)
   }
 
@@ -48,6 +64,7 @@ class KnexConnection {
   }
 
   async updateMany(db, tb, changedList) {
+    this.formatInput(changedList.map(item => item.changed))
     const table = db? db + '.' + tb : tb
     return await this.client.transaction(trx =>
       Promise.all(changedList.map(
@@ -122,7 +139,7 @@ class MysqlKnexConnection extends KnexConnection {
     return result[0].map(item => item['Tables_in_' + schema])
   }
   
-  async fieldList(schema, table) {
+  async _fieldList(schema, table) {
     const result = await this.client.raw(`desc \`${schema}\`.\`${table}\``)
     return result[0].map(field => ({
       name: field.Field,
@@ -179,7 +196,7 @@ class PostgreSQLKnexConnection extends KnexConnection {
     const result = await this.client.raw(`SELECT table_name FROM information_schema.tables WHERE table_schema='${schemaName}';`)
     return result.rows.map(db => db.table_name)
   }
-  async fieldList(schemaName, tableName) {
+  async _fieldList(schemaName, tableName) {
     const result = await this.client.raw(`SELECT * FROM information_schema.COLUMNS WHERE table_schema='${schemaName}' and table_name='${tableName}';`)
     const pks = await this.client.raw(`SELECT a.attname
       FROM   pg_index i JOIN pg_attribute a ON a.attrelid = i.indrelid AND a.attnum = ANY(i.indkey)
@@ -245,7 +262,7 @@ class Sqlite3KnexConnection extends KnexConnection {
     }
   }
 
-  async fieldList(schema, table) {
+  async _fieldList(schema, table) {
     return (await this.client.raw(`Pragma table_info(\`${table}\`)`))
       .map(field => ({
         name: field.name,

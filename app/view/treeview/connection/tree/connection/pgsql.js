@@ -60,7 +60,7 @@ class PgsqlSchemaElement extends TreeviewElement {
     super({
       parent: connEl,
       name: schemaName,
-      contextValue: 'parentEl'
+      contextValue: 'pgSchema'
     })
   }
   async _getChildren() {

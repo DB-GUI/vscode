@@ -110,19 +110,19 @@
 			},
 			{
 				"command": "ppz.exportDQL",
-				"title": "导出数据(DQL)",
+				"title": "导出数据 DQL",
 				"icon": "$(export)",
 				"category": "PPZ"
 			},
 			{
 				"command": "ppz.exportDDL",
-				"title": "导出表结构(DDL)",
+				"title": "导出表结构 DDL",
 				"icon": "$(export)",
 				"category": "PPZ"
 			},
 			{
 				"command": "ppz.export",
-				"title": "导出结构和数据",
+				"title": "导出 DDL 和 DQL",
 				"icon": "$(export)",
 				"category": "PPZ"
 			}
@@ -147,33 +147,39 @@
 			],
 			"view/item/context": [
 				{
-					"command": "ppz.deleteTreeItem",
-					"when": "view == connection && viewItem == connection"
-				},
-				{
-					"command": "ppz.terminal",
-					"when": "view == connection && viewItem == connection || viewItem == pgDatabase"
+					"command": "ppz.refreshTreeChildren",
+					"when": "view == connection && viewItem =~ /^connection$|^mysqlSchema$|^pgDatabase$|^pgSchema$|^sqlite3Connection$/",
+					"group": "inline"
 				},
 				{
 					"command": "ppz.editTreeItem",
-					"when": "view == connection && viewItem == connection"
+					"when": "view == connection && viewItem =~ /^connection$|^sqlite3Connection$/",
+					"group": "1_conn@1"
+				},
+				{
+					"command": "ppz.deleteTreeItem",
+					"when": "view == connection && viewItem =~ /^connection$|^sqlite3Connection$/",
+					"group": "1_conn@2"
 				},
 				{
 					"command": "ppz.exportDQL",
-					"when": "view == connection && viewItem == table"
+					"when": "view == connection && viewItem =~ /^mysqlSchema$|^table$|^pgSchema$|^sqlite3Connection$/",
+					"group": "2_export@1"
 				},
 				{
 					"command": "ppz.exportDDL",
-					"when": "view == connection && viewItem == table"
+					"when": "view == connection && viewItem =~ /^mysqlSchema$|^table$|^pgSchema$|^sqlite3Connection$/",
+					"group": "2_export@2"
 				},
 				{
 					"command": "ppz.export",
-					"when": "view == connection && viewItem == table"
+					"when": "view == connection && viewItem =~ /^mysqlSchema$|^table$|^pgSchema$|^sqlite3Connection$/",
+					"group": "2_export@3"
 				},
 				{
-					"command": "ppz.refreshTreeChildren",
-					"when": "view == connection && viewItem == connection || viewItem == pgDatabase || viewItem == parentEl",
-					"group": "inline"
+					"command": "ppz.terminal",
+					"when": "view == connection && viewItem =~ /^connection$|^pgDatabase$|^sqlite3Connection$/",
+					"group": "9_other"
 				}
 			]
 		}

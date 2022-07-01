@@ -5,11 +5,11 @@ const warn = require('../../../../../../lib/vscode-utils/prompt/confirm').warn
 
 module.exports =
 class ConnectionElement extends TreeviewElement {
-  constructor(rootElement, options) {
+  constructor(rootElement, options, contextValue) {
     super({
       parent: rootElement,
       name: options.name,
-      contextValue: 'connection'
+      contextValue: contextValue || 'connection'
     })
     this.options = options
   }

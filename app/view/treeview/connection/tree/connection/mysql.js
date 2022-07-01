@@ -14,7 +14,7 @@ class MysqlDatabaseElement extends TreeviewElement {
     super({
       parent: connectionElement,
       name: dbName,
-      contextValue: 'parentEl'
+      contextValue: 'mysqlSchema'
     })
   }
   async _getChildren() {

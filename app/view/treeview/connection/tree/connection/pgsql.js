@@ -71,3 +71,4 @@ class PgsqlSchemaElement extends TreeviewElement {
     ))
   }
 }
+exports.PgsqlSchemaElement = PgsqlSchemaElement

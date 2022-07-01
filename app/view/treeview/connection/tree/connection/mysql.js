@@ -4,12 +4,12 @@ const ConnectionElement = require('./base')
 class MysqlElement extends ConnectionElement {
   async _getChildren2() {
     const dbList = await this.connection.dbList()
-    return dbList.map(dbName => new MysqlDatabaseElement(this, dbName))
+    return dbList.map(dbName => new MysqlSchemaElement(this, dbName))
   }
 }
 exports.MysqlElement = MysqlElement
 
-class MysqlDatabaseElement extends TreeviewElement {
+class MysqlSchemaElement extends TreeviewElement {
   constructor(connectionElement, dbName) {
     super({
       parent: connectionElement,
@@ -25,3 +25,4 @@ class MysqlDatabaseElement extends TreeviewElement {
     ))
   }
 }
+exports.MysqlSchemaElement = MysqlSchemaElement

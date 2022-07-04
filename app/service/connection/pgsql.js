@@ -1,4 +1,5 @@
 const { KnexConnection, notyConnErr } = require('./base')
+const noty = require('../../../lib/vscode-utils/noty')
 
 module.exports =
 class PostgreSQLKnexConnection extends KnexConnection {

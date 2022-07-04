@@ -33,31 +33,31 @@ class PgsqlDatabaseElement extends TreeviewElement {
     this.isDefault = isDefault
   }
   async _getChildren() {
-    const schemaList = await this.getConn().schemaList()
+    const schemaList = await this.connection.schemaList()
     return schemaList.map(schemaName => new PgsqlSchemaElement(this, schemaName))
   }
-  getConn() {
+  get connection() {
     if(this.isDefault)
       return this.parent.connection
-    if(!this.connection)
-      this.connection = connectionService.connect(Object.assign({}, this.parent.options, {
+    if(!this._connection)
+      this._connection = connectionService.connect(Object.assign({}, this.parent.options, {
         database: this.name
       }))
-    return this.connection
+    return this._connection
   }
 
   close() {
-    if(this.connection)
-      this.connection.close()
+    if(this._connection)
+      this._connection.close()
   }
   
   terminal() {
-    this.getConn().terminal()
+    this.connection.terminal()
   }
 }
 class PgsqlSchemaElement extends TreeviewElement {
   get isSchema() { return true }
-  get connection() { return this.parent.connection || this.parent.parent.connection }
+  get connection() { return this.parent.connection }
   
   constructor(connEl, schemaName) {
     super({
@@ -67,7 +67,7 @@ class PgsqlSchemaElement extends TreeviewElement {
     })
   }
   async _getChildren() {
-    const tbList = await this.parent.getConn().tbList(this.name)
+    const tbList = await this.connection.tbList(this.name)
     return tbList.map(tbName => new TableElement(this, this.name, tbName,
       [this.parent.parent.name, this.parent.name, this.name, tbName],
       this.parent.connection || this.parent.parent.connection

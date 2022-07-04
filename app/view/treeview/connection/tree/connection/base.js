@@ -6,6 +6,11 @@ const warn = require('../../../../../../lib/vscode-utils/prompt/confirm').warn
 module.exports =
 class ConnectionElement extends TreeviewElement {
   get isConnection() { return true }
+  get connection() {
+    if(!this._connection)
+      this._connection = connectionService.connect(this.options)
+    return this._connection
+  }
   constructor(rootElement, options, contextValue) {
     super({
       parent: rootElement,
@@ -21,8 +26,6 @@ class ConnectionElement extends TreeviewElement {
   }
   
   async _getChildren() {
-    if(!this.connection) // 刷新下方节点时，不需重新连接
-      this.connection = connectionService.connect(this.options)
     try {
       return await this._getChildren2()
     } catch(err) {
@@ -32,8 +35,9 @@ class ConnectionElement extends TreeviewElement {
   }
 
   close() {
-    if(this.connection)
-      this.connection.close()
+    if(this._connection) {
+      this._connection.close()
+    }
   }
 
   async startDrop() {
@@ -54,8 +58,6 @@ class ConnectionElement extends TreeviewElement {
   }
 
   terminal() {
-    if(!this.connection) // 打开终端也会开启连接……日后改
-      this.connection = connectionService.connect(this.options)
     this.connection.terminal()
   }
 }

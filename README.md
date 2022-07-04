@@ -10,7 +10,7 @@
 > PPZ 将来会支持 Oracledb、MSSQL  
 > 但目前不考虑支持非关系型数据库，比如 MongoDB，推荐使用 [MongoDB for VS Code](https://github.com/mongodb-js/vscode)（官方出品，质量有保证、功能全面）
 
-![PPZ.vscode](https://files20220620.oss-cn-shanghai.aliyuncs.com/ppz/ppz.vscode/usage/ppz.vscode.gif)
+![PPZ.vscode](https://files20220620.oss-cn-shanghai.aliyuncs.com/ppz/ppz.vscode/usage/ppz.vscode.gif?20220704)
 
 ## why PPZ?
 + 不用额外安装桌面软件

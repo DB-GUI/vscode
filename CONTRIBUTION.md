@@ -15,7 +15,7 @@ npm install
 ## 技术储备
 如果你做过网页开发或 Node.js 程序开发，那么 PPZ.vscode 用到的技术，你可能全都用到过
 
-##### 依赖
+#### 依赖
 PPZ.vscode 尽量使用较少的依赖，因此不需要阅读很多“框架”的文档
 
 可以花两三分钟看一下“[uuid 用来生成唯一字符串](https://github.com/uuidjs/uuid)”、“[Type.js 在运行时检查数据类型](https://github.com/ppz-pro/type.js)” 
@@ -26,10 +26,10 @@ PPZ.vscode 尽量使用较少的依赖，因此不需要阅读很多“框架”
 
 除了以上依赖，还有 [Node MySQL 2](https://github.com/sidorares/node-mysql2)（MySQL 系驱动）、[node-postgres](https://github.com/brianc/node-postgres)（pgsql 系驱动）、[node-sqlite3](https://github.com/TryGhost/node-sqlite3)（Sqlite3 驱动）。但有了 Knex.js，你几乎不需要看他们的文档（我好像就没看过……）
 
-##### 非 web 开发程序员
+#### 非 web 开发程序员
 如果你没参与过网页开发或 Node.js 开发，那么可能要先熟悉一下 js 的基础语法，和 [ES6 新语法](https://es6.ruanyifeng.com/)
 
-##### vscode API
+#### vscode API
 可能很少有朋友做过 vscode 插件，因此对 vscode 插件的生态也应该有一个大概的认识：
 + [vscode 开发极简教程](https://zhuanlan.zhihu.com/p/532031362)
 + [官方教程 “第一个插件”](https://code.visualstudio.com/api/get-started/your-first-extension)

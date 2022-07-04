@@ -1,7 +1,9 @@
 const collection = require('../../model/connection')
 const { clone } = require('../../utils')
 const connectionTreeview = require('../../view/treeview/connection')
-const { MysqlKnexConnection, PostgreSQLKnexConnection, Sqlite3KnexConnection } = require('./knex-connection')
+const MysqlKnexConnection = require('./mysql')
+const PostgreSQLKnexConnection = require('./pgsql')
+const Sqlite3KnexConnection = require('./sqlite3')
 
 const service = module.exports = Object.create(collection)
 

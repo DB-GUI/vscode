@@ -10,6 +10,9 @@ class MysqlElement extends ConnectionElement {
 exports.MysqlElement = MysqlElement
 
 class MysqlSchemaElement extends TreeviewElement {
+  get isSchema() { return true }
+  get connection() { return this.parent.connection }
+
   constructor(connectionElement, dbName) {
     super({
       parent: connectionElement,

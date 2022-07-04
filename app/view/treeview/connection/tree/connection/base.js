@@ -5,6 +5,7 @@ const warn = require('../../../../../../lib/vscode-utils/prompt/confirm').warn
 
 module.exports =
 class ConnectionElement extends TreeviewElement {
+  get isConnection() { return true }
   constructor(rootElement, options, contextValue) {
     super({
       parent: rootElement,

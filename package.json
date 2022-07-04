@@ -110,8 +110,8 @@
 				"category": "PPZ"
 			},
 			{
-				"command": "ppz.exportDQL",
-				"title": "导出数据 DQL",
+				"command": "ppz.exportDML",
+				"title": "导出数据 DML",
 				"icon": "$(export)",
 				"category": "PPZ"
 			},
@@ -123,7 +123,7 @@
 			},
 			{
 				"command": "ppz.export",
-				"title": "导出 DDL 和 DQL",
+				"title": "导出 DDL 和 DML",
 				"icon": "$(export)",
 				"category": "PPZ"
 			}
@@ -163,7 +163,7 @@
 					"group": "1_conn@2"
 				},
 				{
-					"command": "ppz.exportDQL",
+					"command": "ppz.exportDML",
 					"when": "view == connection && viewItem =~ /^mysqlSchema$|^table$|^pgSchema$|^sqlite3Connection$/",
 					"group": "2_export@1"
 				},

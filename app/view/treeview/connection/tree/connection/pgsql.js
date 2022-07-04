@@ -56,6 +56,9 @@ class PgsqlDatabaseElement extends TreeviewElement {
   }
 }
 class PgsqlSchemaElement extends TreeviewElement {
+  get isSchema() { return true }
+  get connection() { return this.parent.connection || this.parent.parent.connection }
+  
   constructor(connEl, schemaName) {
     super({
       parent: connEl,

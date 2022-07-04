@@ -43,6 +43,7 @@ class TreeviewElement {
 exports.TreeviewElement = TreeviewElement
 
 class TableElement extends TreeviewElement {
+  get isTable() { return true }
   constructor(parent, schemaName, tbName, names, connection) {
     super({
       parent,

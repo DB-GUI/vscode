@@ -2,10 +2,6 @@ const vscode = require('vscode')
 const Knex = require('knex')
 const noty = require('../../../lib/vscode-utils/noty')
 const untitledFile = require('../../../lib/vscode-utils/untitled-file')
-const { Sqlite3Element } = require('../../view/treeview/connection/tree/connection/sqlite3')
-const { MysqlSchemaElement } = require('../../view/treeview/connection/tree/connection/mysql')
-const { PgsqlSchemaElement } = require('../../view/treeview/connection/tree/connection/pgsql')
-const { TableElement } = require('../../view/treeview/connection/tree/base')
 
 class KnexConnection {
   constructor(clientName, knexClient, name, connection, useNullAsDefault) {
@@ -97,29 +93,30 @@ class KnexConnection {
   }
 
   // Data Query Language
-  async getDQL2(schema, table) {
-    const result = await this._queryBuilder(schema, table)
-    return this._queryBuilder(schema, table).insert(result).toString()
+  async getDML2(schema, table) {
+    const data = await this._queryBuilder(schema, table)
+    // 下面的 queryBuilder 传入 null 是为了最终结果里不包含 schema 名称
+    return this._queryBuilder(null, table).insert(data).toString() + ';\n'
   }
-  async getDQL(el) {
-    if(isTable(el)) {
+  async getDML(el) {
+    if(el.isTable) {
       console.debug('导出数据', el.schemaName, el.name)
-      return this.getDQL2(el.schemaName, el.name)
+      return this.getDML2(el.schemaName, el.name)
     }
     const schemaName = getSchemaName(el)
     const tbList = await this.tbList(schemaName)
     console.debug('导出数据', el.name, tbList)
     let content = ''
     for(let tb of tbList)
-      content += ';' + await this.getDQL2(schemaName, tb)
+      content += await this.getDML2(schemaName, tb)
     return content
   }
-  async exportDQL(el) {
-    untitledFile.sql(await this.getDQL(el))
+  async exportDML(el) {
+    untitledFile.sql(await this.getDML(el))
   }
 
   async getDDL(el) {
-    if(isTable(el)) {
+    if(el.isTable) {
       console.debug('导出结构', el.schemaName, el.name)
       return this.getDDL2(el.schemaName, el.name)
     }
@@ -128,18 +125,18 @@ class KnexConnection {
     console.debug('导出结构', el.name, tbList)
     let content = ''
     for(let tb of tbList)
-      content += ';' + await this.getDDL2(schemaName, tb)
+      content += await this.getDDL2(schemaName, tb)
     return content
   }
   async exportDDL(el) {
     untitledFile.sql(await this.getDDL(el))
   }
-  // DDL & DQL
+  // DDL & DML
   async export(el) {
     untitledFile.sql(
       await this.getDDL(el),
-      ';\n',
-      await this.getDQL(el)
+      '\n',
+      await this.getDML(el)
     )
   }
 }
@@ -199,7 +196,7 @@ class MysqlKnexConnection extends KnexConnection {
   // Data Definition Language
   async getDDL2(schema, table) {
     const res = await this.client.raw(`show create table ${this.getTarget(schema, table)}`)
-    return res[0][0]['Create Table']
+    return res[0][0]['Create Table'] + ';\n'
   }
 }
 
@@ -310,18 +307,15 @@ class Sqlite3KnexConnection extends KnexConnection {
 
   async getDDL2(schema, table) {
     const result = await this.client.raw(`select sql from sqlite_master where type="table" and name="${table}";`)
-    return result[0].sql
+    return result[0].sql + ';\n'
   }
 }
 
-function isTable(el) {
-  return el instanceof TableElement
-}
 function getSchemaName(el) {
-  if(el instanceof MysqlSchemaElement || el instanceof PgsqlSchemaElement)
-    return el.name
-  else if(el instanceof Sqlite3Element)
+  if(el.isSqlite3Element)
     return null
+  else if(el.isSchema)
+    return el.name
   
   const msg = '导出数据失败，意料之外的元素类型'
   noty.fatal(msg)

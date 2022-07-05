@@ -1,0 +1,31 @@
+#vue-app {
+  padding: 1em;
+}
+textarea {
+  box-sizing: border-box;
+  width: 100%;
+  padding: .5em 1.1em;
+  line-height: 1.5em;
+  height: 8em;
+  color: var(--true-color1);
+  background: transparent;
+  border: 1px solid rgba(var(--color1), .2);
+  border-radius: var(--border-radius);
+  outline: none !important;
+}
+textarea:hover {
+  border: 1px solid rgba(var(--color1), .38);
+}
+textarea:focus {
+  border: var(--border-focus);
+}
+
+.options {
+  margin: 1em 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.table-wrapper {
+  overflow: auto;
+}

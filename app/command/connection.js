@@ -1,6 +1,7 @@
 const { tree } = require('../view/treeview/connection')
 const { TreeviewElement } = require('../view/treeview/connection/tree/base')
 const UpsertConnectionWebview = require('../view/web/upsert-connection')
+const TerminalWebview = require('../view/web/ppz-terminal')
 const openTableWebview = require('../view/web/table')
 const noty = require('../../lib/vscode-utils/noty')
 
@@ -23,6 +24,10 @@ exports.editTreeItem = function(el) {
 exports.terminal = function(el) {
   checkEl(el)
   el.terminal()
+}
+exports.ppzTerminal = function(el) {
+  checkEl(el)
+  new TerminalWebview(el.connection.clone())
 }
 // 点击“删除按钮”，此时还未删除
 exports.deleteTreeItem = async function(el) {

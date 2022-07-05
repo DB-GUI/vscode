@@ -10,16 +10,17 @@ const service = module.exports = Object.create(collection)
 service.connect = function(connection) {
   console.debug('connecting to', connection)
   connection = clone(connection)
-  switch(connection.client) {
-    case 'mysql':
-      return new MysqlKnexConnection(connection)
-    case 'postgresql':
-      return new PostgreSQLKnexConnection(connection)
-    case 'sqlite3':
-      return new Sqlite3KnexConnection(connection)
-    default:
-      throw Error('意外的连接类型 ' + connection.client)
-  }
+  const Class = {
+    mysql: MysqlKnexConnection,
+    postgresql: PostgreSQLKnexConnection,
+    sqlite3: Sqlite3KnexConnection
+  }[connection.client]
+  if(!Class)
+    throw Error('意外的连接类型 ' + connection.client)
+  const result = new Class(connection)
+  // 危险：connection 对象会不会变？新 connection 对象没有 clone 方法；方式太丑
+  result.clone = () => new Class(connection)
+  return result
 }
 
 service.upsert = async function({ record, connect }) {

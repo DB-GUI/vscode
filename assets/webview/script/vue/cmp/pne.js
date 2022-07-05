@@ -61,7 +61,7 @@ export const style = `
   .pne tr > *:first-child {
     padding-left: 1em;
   }
-  .pne th, td {
+  .pne th, .pne td {
     padding: 0 .5em;
     max-width: 16em;
     height: 2em;

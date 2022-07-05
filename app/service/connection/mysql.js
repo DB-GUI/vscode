@@ -4,6 +4,7 @@ module.exports =
 class MysqlKnexConnection extends KnexConnection {
   constructor({ name, host, port, user, password, database }) {
     super('mysql', 'mysql2', name, {
+      multipleStatements: true,
       host, port, user, password, database
     })
   }

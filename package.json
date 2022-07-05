@@ -111,7 +111,7 @@
 			},
 			{
 				"command": "ppz.ppzTerminal",
-				"title": "PPZ 终端",
+				"title": "打开终端",
 				"icon": "$(terminal)",
 				"category": "PPZ"
 			},

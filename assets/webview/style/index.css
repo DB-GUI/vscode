@@ -50,6 +50,25 @@ button[disabled] {
   cursor: default;
 }
 
+table.ppz {
+  border: 1px solid rgba(var(--color1), .06);
+  border-collapse: collapse;
+}
+table.ppz thead tr {
+  background: rgba(var(--color1), .1);
+}
+table.ppz tr:nth-child(2n) {
+  background: rgba(var(--color1), .06);
+}
+table.ppz th, table.ppz td {
+  padding: .3em .6em;
+  line-height: 1.5em;
+  text-align: left;
+}
+table.ppz tbody th:hover, table.ppz tbody td:hover {
+  background-color: rgba(var(--color1), .1);
+}
+
 .flex-container {
   width: 100%;
   height: 100vh;

@@ -1,4 +1,5 @@
 const Webview = require('./common/base')
+const Sevlet = require('../../../lib/vscode-utils/request/server')
 const noty = require('../../../lib/vscode-utils/noty')
 
 module.exports = 
@@ -7,10 +8,25 @@ class TerminalWebview extends Webview {
     console.debug('TerminalWebview constructing')
     super({
       filename: 'terminal',
-      title: connection.name + ' Terminal',
+      title: connection.name,
       webviewServerHandlers: {
         exec: async (sql) => {
-          return connection.client.raw(sql)
+          try {
+            const now = new Date()
+            const rawResponse = await connection.client.raw(sql)
+            return {
+              time: new Date() - now,
+              clientType: connection.clientType,
+              rawResponse,
+            }
+          } catch(error) {
+            return {
+              clientType: connection.clientType,
+              error: true,
+              rawError: error,
+              errString: error.toString()
+            }
+          }
         }
       }
     })

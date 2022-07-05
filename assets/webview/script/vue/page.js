@@ -41,6 +41,11 @@ function VuePage(getVueOptions, ...cmps) {
         styles.push(cmp.style)
       }
       Style(styles)
+      app.directive('focus', {
+        mounted(el) {
+          el.focus()
+        }
+      })
       app.mount('#vue-app')
     }
   }

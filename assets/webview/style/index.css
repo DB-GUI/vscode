@@ -52,6 +52,7 @@ button[disabled] {
 
 table.ppz {
   border: 1px solid rgba(var(--color1), .06);
+  border-top: none;
   border-collapse: collapse;
 }
 table.ppz thead tr {
@@ -64,9 +65,18 @@ table.ppz th, table.ppz td {
   padding: .3em .6em;
   line-height: 1.5em;
   text-align: left;
+  max-width: 10em;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 table.ppz tbody th:hover, table.ppz tbody td:hover {
   background-color: rgba(var(--color1), .1);
+}
+table.ppz tbody th:focus, table.ppz tbody td:focus {
+  background-color: rgba(var(--color1), .1);
+  white-space: initial;
 }
 
 .flex-container {

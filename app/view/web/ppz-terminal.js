@@ -1,6 +1,4 @@
 const Webview = require('./common/base')
-const Sevlet = require('../../../lib/vscode-utils/request/server')
-const noty = require('../../../lib/vscode-utils/noty')
 
 module.exports = 
 class TerminalWebview extends Webview {

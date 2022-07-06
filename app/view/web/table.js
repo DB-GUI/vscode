@@ -3,6 +3,7 @@ const noty = require('../../../lib/vscode-utils/noty')
 const { TableElement } = require('../treeview/connection/tree/base')
 const NewRecordWebview = require('./new-record')
 const formatDate = require('../../utils').formatDate
+const TerminalWebview = require('./ppz-terminal')
 
 class TableWebview extends Webview {
   constructor(schemaName, tableName, names, connection) {
@@ -47,7 +48,7 @@ class TableWebview extends Webview {
           new NewRecordWebview(schemaName, tableName, connection, data)
         },
         openTerminal() {
-          connection.terminal()
+          new TerminalWebview(connection.clone())
         }
       }
     })

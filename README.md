@@ -5,7 +5,15 @@
 [github 仓库](https://github.com/ppz-pro/ppz.vscode) | [微软商店](https://marketplace.visualstudio.com/items?itemName=ppz.ppz) | [国内仓库](https://gitee.com/ppz-pro/ppz.vscode)
 
 [**PPZ**](https://marketplace.visualstudio.com/items?itemName=ppz.ppz) 是一个 vscode 插件，提供操作数据库的图形界面，详情请参考[使用帮助](https://gitee.com/ppz-pro/ppz.vscode/wikis/%E4%BD%BF%E7%94%A8%E5%B8%AE%E5%8A%A9)  
-目前支持 MySQL、[StoneDB(国产)](https://www.stoneatom.com/StoneDB)、MariaDB、SQLite3(SQLite3 仅支持 windows)、PostgreSQL、CockroachDB  
+
++ ✅支持多种数据库（目前：MySQL、[StoneDB(国产)](https://www.stoneatom.com/StoneDB)、MariaDB、SQLite3(SQLite3 仅支持 windows)、PostgreSQL、CockroachDB）
++ ✅连接管理
++ ✅数据管理
++ ✅数据或表结构导出
++ ✅模拟终端（运行 sql 语句）
++ 表管理
++ 模式管理
++ 全功能的数据搜索
 
 > PPZ 将来会支持 Oracledb、MSSQL  
 > 但目前不考虑支持非关系型数据库，比如 MongoDB，推荐使用 [MongoDB for VS Code](https://github.com/mongodb-js/vscode)（官方出品，质量有保证、功能全面）
@@ -22,17 +30,11 @@
 ## PPZ 需要你！
 目前是一个人在维护、测试、升级  
 由于我还有全职工作，不能占用工作时间，所以只能在公司工作完成之余，继续完善 PPZ  
-所以时间上是很不够的  
-
-所以，PPZ 需要你！  
-如果你修复了一个 bug，PPZ 会感谢你！  
-如果你发现一个 bug，PPZ 会感谢你！  
-如果你想到实用的功能，PPZ 会感谢你！  
-如果你觉得哪个功能不合理，提出批评，PPZ 会感谢你！  
-如果你把 PPZ 推荐给更多朋友，PPZ 会感谢你！  
-如果你给 PPZ 一个 star，PPZ 会感谢你！  
-
-> 以上，均可以[在 issue 页留言](https://github.com/ppz-pro/ppz.vscode/issues)（或提交 PR），由于项目还处于“摸着石头过河”阶段，因此 issue 没有格式要求
+所以时间上是很不够的，欢迎朋友们一起来维护 PPZ   
++ 参与功能测试
++ 提交 BUG、批评、建议
++ 修复一个 BUG
++ 提交新功能
 
 感谢以下朋友：
 + 目前还没有朋友可感谢……
@@ -43,7 +45,7 @@
 
 ##### 微信群
 <div align="center">
-<img src="https://files20220620.oss-cn-shanghai.aliyuncs.com/ppz.vscode.jpg" alt="PPZ.vscode wechat" width=268 />
+<img src="https://files20220620.oss-cn-shanghai.aliyuncs.com/ppz.vscode.jpg?20220704" alt="PPZ.vscode wechat" width=268 />
 </div>
 
 ## 链接

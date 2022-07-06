@@ -1,7 +1,7 @@
 export default {
   rows(raw) {
     if(raw instanceof Array)
-      raw = raw[raw.length - 1]
+      return raw.map(this.rows)
     return raw.command == 'SELECT'
       ? {
         fields: raw.fields.map(f => f.name),

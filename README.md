@@ -31,17 +31,18 @@
 目前是一个人在维护、测试、升级  
 由于我还有全职工作，不能占用工作时间，所以只能在公司工作完成之余，继续完善 PPZ  
 所以时间上是很不够的，欢迎朋友们一起来维护 PPZ   
-+ 参与功能测试
++ 参与功能测试([如何参与？](./FCT.md))
 + 提交 BUG、批评、建议
 + 修复一个 BUG
-+ 提交新功能
++ 提交新功能(请查看[开发手册](./CONTRIBUTION.md))
 
 感谢以下朋友：
-+ 目前还没有朋友可感谢……
-+ 快来让 PPZ 谢谢你！
-
-##### Contribution
-请查看[开发手册](./CONTRIBUTION.md)
+<div align="center">
+  <a href="https://github.com/yyt6801">
+    <img src="https://avatars.githubusercontent.com/u/18433720?v=4" style="width: 2em">
+    yyt6801
+  </a>
+</div>
 
 ##### 微信群
 <div align="center">

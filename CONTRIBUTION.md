@@ -32,6 +32,5 @@ PPZ.vscode 尽量使用较少的依赖，因此不需要阅读很多“框架”
 #### vscode API
 可能很少有朋友做过 vscode 插件，因此对 vscode 插件的生态也应该有一个大概的认识：
 + [vscode 开发极简教程](https://zhuanlan.zhihu.com/p/532031362)
-+ [官方教程 “第一个插件”](https://code.visualstudio.com/api/get-started/your-first-extension)
 + [官方全面细致的教程](https://code.visualstudio.com/api/extension-guides/overview)
 + [vscode api](https://code.visualstudio.com/api/references/vscode-api)

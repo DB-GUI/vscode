@@ -1,32 +1,56 @@
 import VuePage from '../../script/vue/page.js'
-import FormOptions from './form-options.js'
+
+const F = (key, type) => ({ key, type })
+const A = (name, label, urlSupport, keys) => ({ name, label, keys, urlSupport })
 
 VuePage(function(page) {
   return {
     initData() {
-      return FormOptions(PPZ.initData.editing)
+      return {
+        record: PPZ.initData.record || {
+          name: '未命名连接',
+          client: 'mysql',
+          useUrl: 0,
+          url: '',
+        },
+        fields: [
+          F('host'),
+          F('port'),
+          F('user'),
+          F('password'),
+          F('database'),
+          F('filename', 'file')
+        ],
+        adapters: [
+          A('mysql', 'MySQL', true,
+            ['host', 'port', 'user', 'password', 'database']),
+          A('postgresql', 'PostgreSQL', true,
+            ['host', 'port', 'user', 'password', 'database']),
+          A('sqlite3', 'Sqlite3', false, ['filename'])
+        ]
+      }
+    },
+    computed: {
+      adapter() {
+        return this.adapters.find(a => a.name == this.record.client)
+      }
     },
     methods: {
-      select(key) {
-        this.current = key
-      },
       async save(connect) {
-        await page.api.save({
-          connect,
-          record: this.getFormData()
-        })
-      },
-      getFormData() {
-        const form = this.forms.find(form => form.key == this.current)
-        const result = {
-          client: form.key,
-          name: this.publicForm.name
+        const record = debugClone(this.record)
+        if(record.useUrl)
+          for(let f of this.fields)
+            delete record[f.key]
+        else {
+          delete record.useUrl
+          delete record.url
+          for(let f of this.fields)
+            if(this.adapter.keys.indexOf(f.key) === -1)
+              delete record[f.key]
         }
-        if(PPZ.initData.editing)
-          result.id = PPZ.initData.editing.id
-        for(const field of form.fields)
-          result[field.name] = field.value
-        return result
+        await page.api.save({
+          connect, record
+        })
       }
     }
   }

@@ -2,48 +2,56 @@
   <div class="form-container">
     <div class="client-selector">
       <button
-        v-for="form in forms"
-        :class="{ selected: current == form.key }"
-        @click="select(form.key)"
-      >{{form.label}}</button>
+        v-for="a in adapters"
+        :class="{ selected: record.client == a.name }"
+        @click="record.client = a.name"
+      >{{a.label}}</button>
     </div>
     <div class="forms">
       <div class="public form">
         <label>
           <span>name</span>
-          <ppz-input v-model="publicForm.name" />
+          <ppz-input v-model="record.name" />
         </label>
-        <br>
-        <label class="conn-type">
-          <span>连接方式</span>
-          <radio-group v-model="useUrl" :list="[{ label: '字段', value: 0 }, { label: 'URL', value: 1 }]"></radio-group>
-          <span>
-            <ppz-icon iid="help"></ppz-icon>
-            如果下面没有你需要的字段，可以尝试
-            <a @click="$refs.useURL.showModal()">使用 URL 连接方式</a>
-            <dialog class="useURL" ref="useURL">
-              <div class="close" @click="$refs.useURL.close()">x</div>
-              <ul>
-                <li>
-                  <a href="https://github.com/mysqljs/mysql#connection-options">MySQL URL</a>
-                </li>
-                <li>
-                  <a href="https://node-postgres.com/features/connecting#connection-uri">PostgreSQL URL</a>
-                </li>
-              </ul>
-            </dialog>
-          </span>
-        </label>
-      </div>
-      <template v-for="form in forms">
-        <div class="private form" v-show="form.key == current">
-          <label v-for="field in form.fields">
-            <span>{{field.required?'*':''}} {{field.name}}</span>
-            <file-input v-if="field.type == 'file'" v-model="field.value"></file-input>
-            <ppz-input v-else v-model="field.value">
+        <template v-if="adapter.urlSupport">
+          <br>
+          <label class="conn-type">
+            <span>连接方式</span>
+            <radio-group v-model="record.useUrl" :list="[{ label: '字段', value: 0 }, { label: 'URL', value: 1 }]"></radio-group>
+            <span>
+              <ppz-icon iid="help"></ppz-icon>
+              如果下面没有你需要的字段，可以尝试
+              <a @click="$refs.useUrl.showModal()">使用 URL 连接方式</a>
+              <dialog class="useUrl" ref="useUrl">
+                <div class="close" @click="$refs.useUrl.close()">x</div>
+                <ul>
+                  <li>
+                    <a href="https://github.com/mysqljs/mysql#connection-options">MySQL URL</a>
+                  </li>
+                  <li>
+                    <a href="https://node-postgres.com/features/connecting#connection-uri">PostgreSQL URL</a>
+                  </li>
+                </ul>
+              </dialog>
+            </span>
           </label>
-        </div>
-      </template>
+        </template>
+      </div>
+      <div class="private form">
+        <template v-if="record.useUrl && adapter.urlSupport">
+          <label class="long-txt">
+            <span>URL</span>
+            <ppz-input v-model="record.url"></ppz-input>
+          </label>
+        </template>
+        <template v-else v-for="f in fields">
+          <label v-if="adapter.keys.indexOf(f.key) > -1" :class="{ 'long-txt': f.type=='file' }">
+            <span>{{f.key}}</span>
+            <file-input v-if="f.type == 'file'" v-model="record[f.key]"></file-input>
+            <ppz-input v-else v-model="record[f.key]">
+          </label>
+        </template>
+      </div>
     </div>
   </div>
   <div class="form-btns">

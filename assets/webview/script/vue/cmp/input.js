@@ -1,10 +1,10 @@
 export const name = 'ppz-input'
 
 export const options = {
-  props: ['modelValue'],
+  props: ['modelValue', 'textarea'],
   template: `
     <span class="ppz-input">
-      <input class="reset-style" :value="modelValue"
+      <component :is="textarea?'textarea':'input'" class="reset-style" :value="modelValue"
         @focus="$emit('focus', $event)"
         @input="$emit('update:modelValue', $event.target.value)"
       />
@@ -29,7 +29,7 @@ export const style = `
     background: currentColor;
     opacity: .05;
   }
-  .ppz-input input {
+  .ppz-input input, .ppz-input textarea {
     border: 1px solid transparent;
     color: inherit;
     height: 2em;
@@ -37,7 +37,13 @@ export const style = `
     padding: 0 .5em;
     outline: none;
   }
-  .ppz-input input:focus {
+  .ppz-input textarea {
+    padding: .5em;
+    line-height: 1.5em;
+    height: 4em;
+    display: block;
+  }
+  .ppz-input input:focus, .ppz-input textarea:focus {
     border: var(--border-focus);
   }
 `

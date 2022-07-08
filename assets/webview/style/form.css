@@ -14,17 +14,26 @@
 .form > label {
   display: inline-flex;
   align-items: center;
-  justify-content: flex-end;
   
   line-height: 2em;
   min-width: 22em;
   margin: .8em 1.5em;
+}
+.form > label > span:first-child {
+  display: block;
+  min-width: 5em;
+  text-align: right;
 }
 .form > .required span:first-child:before {
   content: '* ';
 }
 
 .form > label > .ppz-input, .form > label > .ppz-radio-group {
+  display: block;
+  flex: 1;
   margin-left: 1em;
-  width: 16em;
+}
+
+.form > label.long-txt {
+  width: 36em;
 }

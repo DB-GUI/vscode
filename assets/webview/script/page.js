@@ -56,3 +56,5 @@ function putComputedColor() {
   config.prefix = ''
   writeStyle(colors)
 }
+
+window.debugClone = target => JSON.parse(JSON.stringify(target))

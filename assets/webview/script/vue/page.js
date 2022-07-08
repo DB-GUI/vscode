@@ -8,6 +8,7 @@ import * as IconBtn from './cmp/icon-btn.js'
 import * as Checkbox from './cmp/checkbox.js'
 import * as PNE from './cmp/pne.js'
 import * as HR from './cmp/hr.js'
+import * as RadioGroup from './cmp/radio-group.js'
 import Style from './style.js'
 
 export default
@@ -29,7 +30,8 @@ function VuePage(getVueOptions, ...cmps) {
       
       const app = createApp(options)
       cmps.push(
-        Icon, IconBtn, FileInput, Input, Pagination, Checkbox, PNE, HR
+        Icon, IconBtn, FileInput, Input, Pagination,
+        RadioGroup, Checkbox, PNE, HR
       )
       const styles = []
       for(const cmp of cmps) {

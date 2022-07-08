@@ -1,6 +1,7 @@
 /* .form */
 .form {
-  margin: 0 3.8em;
+  max-width: 666px;
+  margin: 0 auto;
 }
 
 .form-btns {
@@ -15,14 +16,15 @@
   align-items: center;
   justify-content: flex-end;
   
-  min-width: 18em;
-  margin: .5em 1em;
+  line-height: 2em;
+  min-width: 22em;
+  margin: .8em 1.5em;
 }
 .form > .required span:first-child:before {
   content: '* ';
 }
 
-.form > label > .ppz-input {
+.form > label > .ppz-input, .form > label > .ppz-radio-group {
   margin-left: 1em;
-  width: 12em;
+  width: 16em;
 }

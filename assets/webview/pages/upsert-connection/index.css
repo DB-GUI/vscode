@@ -10,7 +10,22 @@
   opacity: .66;
 }
 .public.form {
-  padding-bottom: .56em;
+  padding-bottom: 1.16em;
   border-bottom: var(--border1-18);
-  margin-bottom: .56em;
+  margin-bottom: 1.36em;
+}
+.conn-type {
+  position: relative;
+}
+.conn-type .ppz-radio-group + span {
+  position: absolute;
+  top: 5%;
+  left: 80%;
+  right: -100%;
+  font-size: .9em;
+  opacity: .9;
+}
+
+.useURL ul {
+  padding: .2em 3em;
 }

@@ -13,6 +13,27 @@
           <span>name</span>
           <ppz-input v-model="publicForm.name" />
         </label>
+        <br>
+        <label class="conn-type">
+          <span>连接方式</span>
+          <radio-group v-model="useUrl" :list="[{ label: '字段', value: 0 }, { label: 'URL', value: 1 }]"></radio-group>
+          <span>
+            <ppz-icon iid="help"></ppz-icon>
+            如果下面没有你需要的字段，可以尝试
+            <a @click="$refs.useURL.showModal()">使用 URL 连接方式</a>
+            <dialog class="useURL" ref="useURL">
+              <div class="close" @click="$refs.useURL.close()">x</div>
+              <ul>
+                <li>
+                  <a href="https://github.com/mysqljs/mysql#connection-options">MySQL URL</a>
+                </li>
+                <li>
+                  <a href="https://node-postgres.com/features/connecting#connection-uri">PostgreSQL URL</a>
+                </li>
+              </ul>
+            </dialog>
+          </span>
+        </label>
       </div>
       <template v-for="form in forms">
         <div class="private form" v-show="form.key == current">

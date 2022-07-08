@@ -1,5 +1,6 @@
 export default function FormOptions(editing) {
   return {
+    useUrl: 0,
     current: editing? editing.client : 'mysql',
     publicForm: {
       name: editing ? editing.name : '未命名连接',

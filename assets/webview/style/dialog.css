@@ -34,7 +34,7 @@ dialog > .modal {
   right: 0;
   top: 0;
   bottom: 0;
-  background: rgba(var(--color0), .3);
+  background: rgba(var(--color0), .5);
   animation: fadeIn .3s ease;
 }
 

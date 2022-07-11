@@ -72,6 +72,14 @@
 当前支持 MySQL、PostgreSQL、Sqlite3，对于不同的数据库，在底层有不同的逻辑，上层有不同的表现  
 同一个功能在 MySQL 上没问题，可能在其他数据库就有问题
 
+##### 颜色主题
+vscode 有丰富的颜色主题供开发者选择，提升用户体验  
+同时对插件开发者来说，也带来了挑战：
++ 页面上某些元素可能在特定的颜色模式下，很模糊或不明显或看不清
++ 对不同颜色的适配也可能出现 bug
+
+多换几个颜色主题试试
+
 ## 提交 BUG
 如果你发现了问题，可以在 [github](https://github.com/ppz-pro/ppz.vscode/issues) 或 [gitee](https://gitee.com/ppz-pro/ppz.vscode/issues) 的 issue 页面提交 BUG  
 感谢！

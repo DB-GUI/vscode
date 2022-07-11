@@ -2,11 +2,17 @@ const { KnexConnection, notyConnErr } = require('./base')
 
 module.exports =
 class MysqlKnexConnection extends KnexConnection {
-  constructor({ name, host, port, user, password, database }) {
-    super('mysql', 'mysql2', name, {
-      multipleStatements: true,
-      host, port, user, password, database
-    })
+  constructor({
+    useUrl, url,
+    name, host, port, user, password, database
+  }) {
+    super('mysql', 'mysql2', name, 
+      useUrl && url
+      || {
+        multipleStatements: true,
+        host, port, user, password, database
+      }
+    )
   }
   async dbList() {
     try {

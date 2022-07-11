@@ -3,10 +3,17 @@ const noty = require('../../../lib/vscode-utils/noty')
 
 module.exports =
 class PostgreSQLKnexConnection extends KnexConnection {
-  constructor({ name, host, port, user, password, database }) {
-    super('postgresql', 'pg', name, {
-      host, port, user, password, database
-    })
+  constructor({
+    useUrl, url,
+    name, host, port, user, password, database
+  }) {
+    super('postgresql', 'pg', name,
+      useUrl ? {
+        connectionString: url
+      } : {
+        host, port, user, password, database
+      }
+    )
   }
   async dbList() {
     try {

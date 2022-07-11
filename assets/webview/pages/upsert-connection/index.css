@@ -29,3 +29,12 @@
 .useUrl ul {
   padding: .2em 3em;
 }
+
+.tttips {
+  position: fixed;
+  right: 1em;
+  bottom: .5em;
+  opacity: .6;
+  font-size: .8em;
+  line-height: 1.5;
+}

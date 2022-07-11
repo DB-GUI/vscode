@@ -15,7 +15,7 @@
         </label>
         <template v-if="adapter.urlSupport">
           <br>
-          <label class="conn-type">
+          <div class="label conn-type">
             <span>连接方式</span>
             <radio-group v-model="record.useUrl" :list="[{ label: '字段', value: 0 }, { label: 'URL', value: 1 }]"></radio-group>
             <span>
@@ -34,7 +34,7 @@
                 </ul>
               </dialog>
             </span>
-          </label>
+          </div>
         </template>
       </div>
       <div class="private form">
@@ -60,4 +60,7 @@
   </div>
 </div>
 
-<div style="position: fixed; right: 1em; bottom: .6em; opacity: .6; font-size: .8em;">*目前 SQLite3 仅支持 windows</div>
+<div class="tttips">
+  * 目前 SQLite3 仅支持 windows<br>
+  * StoneDB、MariaDB 等 MySQL 系数据库请使用 MySQL 驱动
+</div>

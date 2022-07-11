@@ -11,6 +11,7 @@
   margin-left: 1.2em;
 }
 
+.form > .label,
 .form > label {
   display: inline-flex;
   align-items: center;
@@ -19,7 +20,8 @@
   min-width: 22em;
   margin: .8em 1.5em;
 }
-.form > label > span:first-child {
+.form > label > span:first-child,
+.form > .label > span:first-child {
   display: block;
   min-width: 5em;
   text-align: right;
@@ -28,12 +30,16 @@
   content: '* ';
 }
 
-.form > label > .ppz-input, .form > label > .ppz-radio-group {
+.form > label > .ppz-input,
+.form > label > .ppz-radio-group,
+.form > .label > .ppz-input,
+.form > .label > .ppz-radio-group {
   display: block;
   flex: 1;
   margin-left: 1em;
 }
 
+.form > .label.long-txt
 .form > label.long-txt {
   width: 36em;
 }

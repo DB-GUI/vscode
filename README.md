@@ -39,7 +39,7 @@
 感谢以下朋友：
 <div align="center">
   <a href="https://github.com/yyt6801">
-    <img src="https://avatars.githubusercontent.com/u/18433720?v=4" style="width: 2em">
+    <img src="https://avatars.githubusercontent.com/u/18433720?v=4" width=28 style="width: 2em">
     yyt6801
   </a>
 </div>

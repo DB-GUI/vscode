@@ -1,3 +1,14 @@
+# 0.2.3-beta(2022-07-12)
+### 新增功能
++ 通过 url 添加连接
+
+### 修复 bug
++ upsert 连接时的字段限制
++ [issue#10](https://github.com/ppz-pro/ppz.vscode/issues/10)
+
+### 优化
++ 优化了一些样式
+
 # 0.2.2-beta(2022-07-06)
 ### 新增功能
 + 模拟 sql 终端

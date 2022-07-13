@@ -4,13 +4,16 @@ const noty = require('../../../lib/vscode-utils/noty')
 module.exports =
 class PostgreSQLKnexConnection extends KnexConnection {
   constructor({
+    isCockroach,
     useUrl, url,
     name, host, port, user, password, database
   }) {
     super('postgresql', 'pg', name,
       useUrl ? {
+        isCockroach,
         connectionString: url
       } : {
+        isCockroach,
         host, port, user, password, database
       }
     )

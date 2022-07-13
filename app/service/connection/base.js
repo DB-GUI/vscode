@@ -10,7 +10,7 @@ class KnexConnection {
     this.name = name
     this.options = connection
     this.client = Knex({
-      client: knexClient,
+      client: connection.isCockroach ? 'cockroachdb': knexClient,
       connection,
       useNullAsDefault,
       acquireConnectionTimeout: 10000,

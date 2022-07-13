@@ -26,6 +26,8 @@ VuePage(function(page) {
             ['host', 'port', 'user', 'password', 'database']),
           A('postgresql', 'PostgreSQL', true,
             ['host', 'port', 'user', 'password', 'database']),
+          A('cockroachdb', 'CockroachDB', true,
+            ['host', 'port', 'user', 'password', 'database']),
           A('sqlite3', 'Sqlite3', false, ['filename'])
         ]
       }
@@ -47,6 +49,10 @@ VuePage(function(page) {
           for(let f of this.fields)
             if(this.adapter.keys.indexOf(f.key) === -1)
               delete record[f.key]
+        }
+        if(record.client == 'cockroachdb') {
+          record.client = 'postgresql'
+          record.isCockroach = true
         }
         await page.api.save({
           connect, record

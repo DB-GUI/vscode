@@ -17,7 +17,10 @@ VuePage(function(page) {
     },
     methods: {
       async putData(isRefresh) {
-        const { fields, records, count } = await page.api.getData(this.selectParams)
+        const { fields, records, count } = await page.api.getData({
+          params: this.selectParams,
+          sort: this.pneOptions && this.pneOptions.sort
+        })
         this.selectParams.page.count = count
         this.setFields(fields)
         this.setRecords(records)
@@ -28,13 +31,18 @@ VuePage(function(page) {
         const oldMap = {}
         for(const f of this.fields)
           oldMap[f.name] = f
-        for(const f of fields)
-          f.show = oldMap[f.name] === undefined // 原来没有的要显示
-                || oldMap[f.name].show // 原来显示的要显示
+        for(const f of fields) {
+          const old = oldMap[f.name]
+          if(old)
+            f.show = old.show
+          else
+            f.show = true
+        }
         this.fields = fields
       },
       setRecords(records) {
         this.pneOptions = {
+          sort: this.pneOptions && this.pneOptions.sort || [],
           focus: {},
           editing: {}
         }

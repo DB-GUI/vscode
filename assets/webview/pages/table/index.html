@@ -4,6 +4,7 @@
     <div class="operations">
       <div class="btns">
         <icon-btn iid="light" @click="refresh" title="刷新"></icon-btn>
+        <icon-btn iid="search" @click="$refs.fieldSelector.showModal()" title="搜索"></icon-btn>
         <icon-btn iid="filter" @click="$refs.fieldSelector.showModal()" title="字段选择"></icon-btn>
         <dialog class="middle" ref="fieldSelector">
           <div class="modal"></div>
@@ -38,6 +39,9 @@
     </div>
   </header>
   <div class="table-wrapper">
-    <ppz-pne :fields="fields" :records="records" :options="pneOptions" :editable="hasPK"></ppz-pne>
+    <ppz-pne :fields="fields" :records="records" :options="pneOptions"
+      :editable="hasPK"
+      @sort="putData"
+      ></ppz-pne>
   </div>
 </div>

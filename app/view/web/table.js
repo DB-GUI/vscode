@@ -15,7 +15,8 @@ class TableWebview extends Webview {
         names
       },
       webviewServerHandlers: {
-        async getData(params) {
+        async getData({ params, sort }) {
+          params.sort = sort || []
           const fields = await connection.fieldList(schemaName, tableName)
           const { records, count } = await connection.select(schemaName, tableName, params)
           for(let record of records)

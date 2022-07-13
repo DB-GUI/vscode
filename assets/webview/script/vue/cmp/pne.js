@@ -91,4 +91,7 @@ export const style = `
   .pne th.highlight, .pne td.highlight {
     background: rgba(var(--color1), .1);
   }
+  .pne td:focus {
+    white-space: initial;
+  }
 `

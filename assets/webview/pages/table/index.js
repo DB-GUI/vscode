@@ -19,6 +19,7 @@ VuePage(function(page) {
       async putData(isRefresh) {
         const { fields, records, count } = await page.api.getData({
           params: this.selectParams,
+          // 头回加载数据时，没有 pneOptions
           sort: this.pneOptions && this.pneOptions.sort
         })
         this.selectParams.page.count = count

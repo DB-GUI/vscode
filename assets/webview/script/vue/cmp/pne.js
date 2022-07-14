@@ -13,8 +13,8 @@ export const options = {
               <div>
                 <span>{{f.name}}</span>
                 <span class="sort-icons">
-                  <ppz-icon iid="arrow-up-filling" :style="{ opacity: sortMap[f.name] && sortMap[f.name] == 'asc' }" />
-                  <ppz-icon iid="arrow-down-filling" :style="{ opacity: sortMap[f.name] && sortMap[f.name] == 'desc' }" />
+                  <ppz-icon iid="arrow-up-filling" :class="{ selected: sortMap[f.name] && sortMap[f.name] == 'desc' }" />
+                  <ppz-icon iid="arrow-down-filling" :class="{ selected: sortMap[f.name] && sortMap[f.name] == 'asc' }" />
                 </span>
               </div>
             </th>
@@ -109,6 +109,9 @@ export const style = `
     height: .73em;
     display: block;
     opacity: .5;
+  }
+  .pne .sort-icons svg.selected {
+    opacity: 1;
   }
   .pne .sort-icons svg:first-child {
     transform: translate(0, .16em);

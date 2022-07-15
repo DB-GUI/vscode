@@ -10,6 +10,10 @@ VuePage(function(page) {
         selectParams: {
           page: { count: 0, size: 16, index: 1 }
         },
+        sql: {
+          clause: '',
+          noPagination: true
+        },
         fields: [],
         records: [],
         pneOptions: null
@@ -27,6 +31,17 @@ VuePage(function(page) {
         this.setRecords(records)
         if(isRefresh === true)
           page.noty.info('数据已刷新')
+      },
+      async checkSQL() {
+        const params = debugClone(this.selectParams)
+        if(this.sql.noPagination)
+          delete params.page
+        const { sql } = await page.api.checkSQL({
+          params,
+          sort: this.pneOptions && this.pneOptions.sort
+        })
+        this.sql.clause = sql
+        this.$refs.sqlViewer.showModal()
       },
       setFields(fields) {
         const oldMap = {}

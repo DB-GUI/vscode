@@ -6,7 +6,7 @@
         <icon-btn iid="light" @click="refresh" title="刷新"></icon-btn>
         <icon-btn iid="search" @click="$refs.fieldSelector.showModal()" title="搜索"></icon-btn>
         <icon-btn iid="filter" @click="$refs.fieldSelector.showModal()" title="字段选择"></icon-btn>
-        <dialog class="middle" ref="fieldSelector">
+        <dialog ref="fieldSelector">
           <div class="modal"></div>
           <div class="title">字段选择</div>
           <div class="body">
@@ -28,6 +28,18 @@
           :disabled="!hasPK || !isEditing"></icon-btn>
         <icon-btn iid="delete" @click="drop" title="删除"
           :disabled="!hasPK || pneOptions.focus.y === undefined"></icon-btn>
+        <icon-btn iid="sql" @click="checkSQL" title="查看当前 sql"></icon-btn>
+        <dialog ref="sqlViewer" class="sql">
+          <div class="modal"></div>
+          <div class="title">查看 SQL</div>
+          <div class="body">{{sql.clause}}</div>
+          <div class="btns">
+            <button @click="">在新文件中打开</button>
+            <button @click="">复制到剪切板</button>
+            <button @click="">在终端中打开</button>
+            <button @click="$refs.sqlViewer.close()">关闭</button>
+          </div>
+        </dialog>
         <icon-btn iid="terminal" @click="terminal" title="打开终端"></icon-btn>
       </div>
       <ppz-pagination :count="selectParams.page.count"

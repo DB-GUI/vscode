@@ -40,20 +40,16 @@ class KnexConnection {
   getCount(count) {
     return count[0]['count(*)']
   }
-  async select(schema, table, { page, sort, fields = ['*'], }) {
-    console.debug('sql select', { schema, table })
-    const records = await this._queryBuilder(schema, table)
-      .select(...fields)
-      .offset((page.index - 1) * page.size).limit(page.size)
-      .orderBy(sort
-        .filter(item => item.sort != 'no')
-        .map(item => ({ column: item.name, order: item.sort }))
-      )
+  async select(schema, table, params) {
+    const records = await this._queryBuilder2(schema, table, params)
     const count = await this._queryBuilder(schema, table).count()
     return {
       records,
       count: this.getCount(count)
     }
+  }
+  selectSQL(schema, table, params) {
+    return this._queryBuilder2(schema, table, params).toString() + ';'
   }
 
   async insert(db, tb, record) {
@@ -65,6 +61,20 @@ class KnexConnection {
     if(schema)
       table = schema + '.' + table
     return this.client.from(table)
+  }
+
+  _queryBuilder2(schema, table, { fields, page, sort, search }) {
+    let query = this._queryBuilder(schema, table)
+    if(fields)
+      query = query.select(...fields)
+    if(page)
+      query = query.offset((page.index - 1) * page.size).limit(page.size)
+    if(sort)
+      query = query.orderBy(sort
+        .filter(item => item.sort != 'no')
+        .map(item => ({ column: item.name, order: item.sort }))
+      )
+    return query
   }
 
   async updateMany(db, tb, changedList) {

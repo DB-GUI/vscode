@@ -21,10 +21,9 @@
 ![PPZ.vscode](https://files20220620.oss-cn-shanghai.aliyuncs.com/ppz/ppz.vscode/usage/ppz.vscode.gif?20220704)
 
 ## why PPZ?
++ 干净：不产生垃圾文件、卸载无残留
 + 不用额外安装桌面软件
 + 超轻量级
-+ 对开发者（或者说，我）来说很实用（增删改查）
-+ 安装、删除都很简单且快，删除后不留一丝痕迹
 + 坚持低熵
 
 ## PPZ 需要你！
@@ -35,6 +34,7 @@
 + 提交 BUG、批评、建议
 + 修复一个 BUG
 + 提交新功能(请查看[开发手册](./CONTRIBUTION.md))
++ 给皮皮仔[画个图标](./assets/icon.png)
 
 感谢以下朋友：
 <div align="center">

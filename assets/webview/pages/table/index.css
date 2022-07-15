@@ -22,6 +22,11 @@ header .operations {
   margin-bottom: .68em;
 }
 
+dialog.sql .body {
+  padding: 1em 2em;
+  line-height: 1.5;
+}
+
 .table-wrapper {
   flex: 1;
   overflow: auto;

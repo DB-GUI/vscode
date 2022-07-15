@@ -5,6 +5,7 @@ dialog {
   border-radius: .8em;
   border: var(--border1-08);
   outline: none;
+  max-width: 38em;
 }
 
 dialog > .close {
@@ -20,11 +21,7 @@ dialog > .close:hover {
   opacity: .9;
 }
 dialog > .close:active {
-  opacity: .1;
-}
-
-dialog.middle {
-  max-width: 38em;
+  opacity: 1;
 }
 
 dialog > .modal {

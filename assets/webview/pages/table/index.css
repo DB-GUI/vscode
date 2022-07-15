@@ -14,17 +14,27 @@ header .operations {
   color: var(--vscode-button-foreground);
 }
 
+dialog .body {
+  min-height: 13em;
+}
+
 .operations dialog.field .body {
   padding: 1.5em .6em .6em 2em;
 }
 .operations dialog .ppz-checkbox {
-  margin-right: 1.2em;
-  margin-bottom: .68em;
+  margin-right: 2em;
+  margin-bottom: 1em;
 }
 
 dialog.sql .body {
   padding: 1em 2em;
-  line-height: 1.5;
+  line-height: 2;
+  display: flex;
+  flex-direction: column;
+}
+dialog.sql .body p {
+  margin: 0;
+  flex: 1;
 }
 
 .table-wrapper {

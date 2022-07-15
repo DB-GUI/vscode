@@ -53,6 +53,10 @@ VuePage(function(page) {
           page.noty.fatal('发生意外')
         }
       },
+      search() {
+        this.putData()
+        this.$refs.searchDialog.close()
+      },
       openFileWithSQL() {
         page.api.openFile({
           content: this.sql.clause,

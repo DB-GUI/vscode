@@ -4,7 +4,17 @@
     <div class="operations">
       <div class="btns">
         <icon-btn iid="light" @click="refresh" title="刷新"></icon-btn>
-        <icon-btn iid="search" @click="$refs.fieldSelector.showModal()" title="搜索"></icon-btn>
+        <icon-btn iid="search" @click="$refs.searchDialog.showModal()" title="搜索"></icon-btn>
+        <dialog class="search" ref="searchDialog">
+          <div class="modal"></div>
+          <div class="title">搜索数据</div>
+          <div class="body">
+          </div>
+          <div class="btns">
+            <button @click="search">搜索</button>
+            <button @click="$refs.searchDialog.close()">关闭</button>
+          </div>
+        </dialog>
         <icon-btn iid="filter" @click="$refs.fieldSelector.showModal()" title="字段选择"></icon-btn>
         <dialog class="field" ref="fieldSelector">
           <div class="modal"></div>

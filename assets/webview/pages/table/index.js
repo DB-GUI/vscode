@@ -1,5 +1,6 @@
 import VuePage from '../../script/vue/page.js'
 import * as Nav from './nav.js'
+import * as SearchItem from './search-item.js'
 
 VuePage(function(page) {
   const tableName = PPZ.initData.names[PPZ.initData.names.length - 1]
@@ -8,6 +9,7 @@ VuePage(function(page) {
     initData() {
       return {
         selectParams: {
+          search: [],
           page: { count: 0, size: 16, index: 1 }
         },
         sql: {
@@ -31,6 +33,9 @@ VuePage(function(page) {
         this.setRecords(records)
         if(isRefresh === true)
           page.noty.info('数据已刷新')
+      },
+      addSearch() {
+        this.selectParams.search.push(SearchItem.newItemData())
       },
       async checkSQL() {
         const params = debugClone(this.selectParams)
@@ -206,4 +211,4 @@ VuePage(function(page) {
         this.putData()
     }
   }
-}, Nav)
+}, Nav, SearchItem)

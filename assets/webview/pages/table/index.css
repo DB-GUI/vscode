@@ -14,10 +14,18 @@ header .operations {
   color: var(--vscode-button-foreground);
 }
 
+header .operations .btns > .icon-btn {
+  margin: 0 .08em;
+}
+
 dialog .body {
   min-height: 13em;
 }
 
+dialog.search .body > .icon-btn {
+  margin: 0 auto;
+  display: block;
+}
 .operations dialog.field .body {
   padding: 1.5em .6em .6em 2em;
 }

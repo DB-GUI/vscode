@@ -14,7 +14,7 @@ header .operations {
   color: var(--vscode-button-foreground);
 }
 
-.operations dialog .body {
+.operations dialog.field .body {
   padding: 1.5em .6em .6em 2em;
 }
 .operations dialog .ppz-checkbox {

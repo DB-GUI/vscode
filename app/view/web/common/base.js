@@ -1,6 +1,7 @@
 const Path = require('path')
 const fs = require('fs')
 const vscode = require('vscode')
+const untitledFile = require('../../../../lib/vscode-utils/untitled-file')
 const noty = require('../../../../lib/vscode-utils/noty')
 const prompt = require('../../../../lib/vscode-utils/prompt/webview/server')
 const WebviewServer = require('../../../../lib/vscode-utils/request/server')
@@ -8,12 +9,14 @@ const selectFile = require('../../../../lib/vscode-utils/file-selector/server')
 
 module.exports = class Webview {
   constructor({
+    connection,
     filename,
     category = 'ppz',
     title = 'ppz',
     initData,
     webviewServerHandlers
   }) {
+    this.connection = connection
     console.debug('webview constructing', filename)
     // html 文件路径
     const path = this.localPath('webview/pages/' + filename + '/index.html')
@@ -56,6 +59,13 @@ module.exports = class Webview {
       },
       prompt,
       selectFile,
+      openFile({ content, language }) {
+        untitledFile(content, language)
+      },
+      openTerminal: sql => {
+        const Class = require('../ppz-terminal')
+        new Class(this.connection.clone(), sql)
+      },
       dispose: () => { // 销毁 webview
         this.dispose()
       },

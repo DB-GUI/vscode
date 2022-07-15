@@ -32,11 +32,18 @@
         <dialog ref="sqlViewer" class="sql">
           <div class="modal"></div>
           <div class="title">查看 SQL</div>
-          <div class="body">{{sql.clause}}</div>
+          <div class="body">
+            <p>{{sql.clause}}</p>
+            <radio-group
+              v-model="sql.noPagination"
+              @update:model-value="checkSQL"
+              :list="[{ label: '带分页', value: false }, { label: '不带', value: true }]"
+              ></radio-group>
+          </div>
           <div class="btns">
-            <button @click="">在新文件中打开</button>
-            <button @click="">复制到剪切板</button>
-            <button @click="">在终端中打开</button>
+            <button @click="openFileWithSQL">在新文件中打开</button>
+            <button @click="writeClipboard">复制到剪切板</button>
+            <button @click="openTerminalWithSQL">在终端中打开</button>
             <button @click="$refs.sqlViewer.close()">关闭</button>
           </div>
         </dialog>

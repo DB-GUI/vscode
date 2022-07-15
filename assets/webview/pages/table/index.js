@@ -41,7 +41,26 @@ VuePage(function(page) {
           sort: this.pneOptions && this.pneOptions.sort
         })
         this.sql.clause = sql
-        this.$refs.sqlViewer.showModal()
+        try {
+          this.$refs.sqlViewer.showModal()
+        } catch(e) {}
+      },
+      async writeClipboard() {
+        try {
+          await navigator.clipboard.writeText(this.sql.clause)
+          page.noty.info('已复制到剪切板')
+        } catch {
+          page.noty.fatal('发生意外')
+        }
+      },
+      openFileWithSQL() {
+        page.api.openFile({
+          content: this.sql.clause,
+          language: 'sql'
+        })
+      },
+      openTerminalWithSQL() {
+        page.api.openTerminal(this.sql.clause)
       },
       setFields(fields) {
         const oldMap = {}

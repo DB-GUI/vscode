@@ -11,6 +11,7 @@ class TableWebview extends Webview {
     super({
       filename: 'table',
       title: tableName,
+      connection,
       initData: {
         names
       },
@@ -53,9 +54,6 @@ class TableWebview extends Webview {
         },
         newRecord(data) {
           new NewRecordWebview(schemaName, tableName, connection, data)
-        },
-        openTerminal() {
-          new TerminalWebview(connection.clone())
         }
       }
     })

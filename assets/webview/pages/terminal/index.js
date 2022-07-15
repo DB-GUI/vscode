@@ -5,7 +5,7 @@ VuePage(function(page) {
   return {
     initData() {
       return {
-        sql: '',
+        sql: PPZ.initData && PPZ.initData.initSQL || '',
         result: null
       }
     },

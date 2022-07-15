@@ -2,11 +2,12 @@ const Webview = require('./common/base')
 
 module.exports = 
 class TerminalWebview extends Webview {
-  constructor(connection) {
+  constructor(connection, initSQL) {
     console.debug('TerminalWebview constructing')
     super({
       filename: 'terminal',
       title: connection.name,
+      initData: { initSQL },
       webviewServerHandlers: {
         exec: async (sql) => {
           try {

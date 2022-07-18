@@ -88,6 +88,11 @@ table.ppz tbody th:focus, table.ppz tbody td:focus {
   flex-direction: column;
 }
 
+.filler {
+  width: 1em;
+  height: 1em;
+}
+
 /** iconfont **/
 .icon {
   width: 1em;

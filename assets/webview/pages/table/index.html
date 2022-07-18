@@ -10,11 +10,12 @@
           <div class="title">搜索数据</div>
           <div class="body">
             <search-item
-              v-for="item in selectParams.search"
+              v-for="(item, index) in selectParams.search"
               :fields="fields"
               v-model:field="item.field"
               v-model:operator="item.operator"
               v-model:value="item.value"
+              @destroy="selectParams.search.splice(index, 1)"
               ></search-item>
             <icon-btn iid="add" class="round primary" @click="addSearch"></icon-btn>
           </div>

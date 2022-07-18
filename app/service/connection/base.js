@@ -74,6 +74,12 @@ class KnexConnection {
         .filter(item => item.sort != 'no')
         .map(item => ({ column: item.name, order: item.sort }))
       )
+    if(search)
+      for(let { field, operator, value } of search) {
+        if(['=', '!=', '>', '>=', '<', '<=', 'like'].indexOf(operator) > -1)
+          query = query.where(field, operator, value)
+        
+      }
     return query
   }
 

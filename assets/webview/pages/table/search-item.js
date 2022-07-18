@@ -1,17 +1,9 @@
 export const name = 'search-item'
 
 const operators = [
-  '=',
-  '!=',
-  '>',
-  '>=',
-  '<',
-  '<=',
-  'like',
-  'in',
-  'not in',
-  'null',
-  ['not null', 'notNull']
+  '=', '!=', '>', '>=', '<', '<=', 'like',
+  'in', 'not in',
+  'null', 'not null'
 ]
 
 export const options = {
@@ -28,7 +20,6 @@ export const options = {
       </select>
       <select class="operator" v-model="operator" @change="emitOperator($event.target.value)">
         <template v-for="op in operators">
-          <option v-if="op instanceof Array" :value="op[1]">{{op[0]}}</option>
           <option v-else>{{op}}</option>
         </template>
       </select>
@@ -50,6 +41,7 @@ export const options = {
           @click="value.push(null); emitValue(value)"
         />
       </div>
+      <div class="filler" v-else />
       <icon-btn iid="error" class="round" @click="$emit('destroy')"></icon-btn>
     </div>
   `,

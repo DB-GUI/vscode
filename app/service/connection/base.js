@@ -81,7 +81,12 @@ class KnexConnection {
           'in', 'not in'
         ].indexOf(operator) > -1)
           query = query.where(field, operator, value)
-        
+        else if('null' === operator)
+          query = query.whereNull(field)
+        else if('not null' === operator)
+          query = query.whereNotNull(field)
+        else
+          noty.fatal('预料之外的操作符：' + operator)
       }
     return query
   }

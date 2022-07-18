@@ -25,8 +25,12 @@ dialog .body {
 dialog.search {
   width: 38em;
 }
-dialog.search .body > * {
-  margin-top: .8em;
+dialog.search .body {
+  padding: 1.8em;
+  min-height: 15em;
+}
+dialog.search .body > .search-item {
+  margin-bottom: 1.2em;
 }
 dialog.search .body > .icon-btn {
   margin-left: auto;

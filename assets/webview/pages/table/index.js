@@ -62,6 +62,9 @@ VuePage(function(page) {
         this.putData()
         this.$refs.searchDialog.close()
       },
+      emptySearch() {
+        this.selectParams.search = []
+      },
       openFileWithSQL() {
         page.api.openFile({
           content: this.sql.clause,

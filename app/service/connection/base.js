@@ -76,7 +76,10 @@ class KnexConnection {
       )
     if(search)
       for(let { field, operator, value } of search) {
-        if(['=', '!=', '>', '>=', '<', '<=', 'like'].indexOf(operator) > -1)
+        if([
+          '=', '!=', '>', '>=', '<', '<=', 'like',
+          'in', 'not in'
+        ].indexOf(operator) > -1)
           query = query.where(field, operator, value)
         
       }

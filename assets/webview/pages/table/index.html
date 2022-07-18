@@ -17,10 +17,11 @@
               v-model:value="item.value"
               @destroy="selectParams.search.splice(index, 1)"
               ></search-item>
-            <icon-btn iid="add" class="round primary" @click="addSearch"></icon-btn>
+            <icon-btn iid="add" class="round" @click="addSearch"></icon-btn>
           </div>
           <div class="btns">
             <button @click="search">搜索</button>
+            <button @click="emptySearch">清空</button>
             <button @click="$refs.searchDialog.close()">关闭</button>
           </div>
         </dialog>

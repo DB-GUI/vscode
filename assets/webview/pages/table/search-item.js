@@ -9,7 +9,7 @@ const operators = [
   '<=',
   'like',
   'in',
-  ['not in', 'notIn'],
+  'not in',
   'null',
   ['not null', 'notNull']
 ]
@@ -33,23 +33,42 @@ export const options = {
         </template>
       </select>
 
-      <input v-if="isPlain(operator)" ref="input" v-model="value" @input="emitValue($event.target.value)" />
-
-      <icon-btn iid="delete" class="round destroy" @click="$emit('destroy')"></icon-btn>
+      <input
+        v-if="['=', '!=', '>', '>=', '<', '<=', 'like'].indexOf(operator) > -1"
+        ref="input" v-model="value" @input="emitValue($event.target.value)"
+      />
+      <div class="input-array" v-else-if="['in', 'not in'].indexOf(operator) > -1">
+        <div class="input-array-item" v-for="(vv, index) in value">
+          <input :value="vv"
+            @input="value[index] = $event.target.value; emitValue(value)"
+          />
+          <icon-btn iid="error" class="round"
+            @click="value.splice(index, 1); emitValue(value)"
+          />
+        </div>
+        <icon-btn iid="add" class="round add-array-item"
+          @click="value.push(null); emitValue(value)"
+        />
+      </div>
+      <icon-btn iid="error" class="round" @click="$emit('destroy')"></icon-btn>
     </div>
   `,
   watch: {
-    operator(nv) {
-      if(nv == 'like' && !this.value) {
-        this.emitValue('%%')
-        this.$refs.input.focus()
-      }
+    operator(nv, ov) {
+      const isArray = item => ['in', 'not in'].indexOf(item) > -1
+      this.$nextTick().then(() => {
+        if(nv == 'like' && (!this.value || this.value instanceof Array)) {
+          this.emitValue('%%')
+          this.$refs.input.focus()
+        } else if(isArray(nv) && !isArray(ov)) {
+          this.emitValue([null])
+        } else if(!isArray(nv) && isArray(ov)) {
+          this.emitValue(null)
+        }
+      })
     }
   },
   methods: {
-    isPlain(op) {
-      return ['=', '!=', '>', '>=', '<', '<=', 'like'].indexOf(op) > -1
-    },
     emitField(f) {
       this.$emit('update:field', f)
     },
@@ -69,51 +88,67 @@ export const options = {
 }
 
 export const style = `
-  .search-item {
-    display: flex;
-  }
-  .search-item > *:not(:last-child) {
-    margin-right: 1em;
-  }
   .search-item select, .search-item input {
     height: 2em;
+    color: inherit;
+    text-align: center;
+    border: 1px solid rgba(var(--color1), .3);
+    border-radius: 1em;
+
     background-color: transparent;
     appearance: none;
     outline: none;
-    border: 1px solid rgba(var(--color1), .3);
-    color: rgba(var(--color1), 1);
-    border-radius: 1em;
   }
   .search-item select:focus, .search-item input:focus {
     border: var(--border-focus);
   }
   .search-item select option {
     color: initial;
-    text-align: center;
+  }
+  .search-item button.icon-btn {
+    opacity: .5;
+    background: transparent;
+    transition: all .1s ease;
+  }
+  .search-item button.icon-btn:hover {
+    opacity: 1;
+    background: rgba(var(--color1), .1);
+  }
+  
+  /* 上面是通用元素样式，下面是具体元素样式 */
+
+  .search-item {
+    display: flex;
   }
   .search-item > .field {
+    margin-right: 1em;
     width: 12.31em;
   }
   .search-item > .operator {
+    margin-right: 1em;
     width: 3.8em;
   }
   .search-item > .operator + *:not(button) {
     width: 12em;
     flex: 1;
   }
-  .search-item button.destroy {
-    opacity: .5;
-    background: transparent;
-    transition: all .1s ease;
-    margin-left: -.5em;
-  }
-  .search-item button.destroy:hover {
-    opacity: 1;
-    background: rgba(var(--color1), .1);
-  }
 
   .search-item > input {
-    padding: 0 .8em;
+    margin-right: .5em;
+  }
+
+  .search-item .input-array-item {
+    display: flex;
+    margin-bottom: .8em;
+  }
+  .search-item .input-array-item input {
+    margin-right: .5em;
+    width: 2em;
+    flex: 1;
+  }
+  .search-item .add-array-item {
+    margin: 0 auto;
+    display: block;
   }
 `
 

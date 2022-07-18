@@ -11,9 +11,9 @@
 + ✅数据管理
 + ✅数据或表结构导出
 + ✅模拟终端（运行 sql 语句）
++ ✅全功能的数据搜索
 + 表管理
 + 模式管理
-+ 全功能的数据搜索
 
 > PPZ 将来会支持 Oracledb、MSSQL  
 > 但目前不考虑支持非关系型数据库，比如 MongoDB，推荐使用 [MongoDB for VS Code](https://github.com/mongodb-js/vscode)（官方出品，质量有保证、功能全面）

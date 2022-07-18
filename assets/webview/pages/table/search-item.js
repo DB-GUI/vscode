@@ -38,7 +38,7 @@ export const options = {
           />
         </div>
         <icon-btn iid="add" class="round add-array-item"
-          @click="value.push(null); emitValue(value)"
+          @click="value.push(''); emitValue(value)"
         />
       </div>
       <div class="filler" v-else />
@@ -53,9 +53,9 @@ export const options = {
           this.emitValue('%%')
           this.$refs.input.focus()
         } else if(isArray(nv) && !isArray(ov)) {
-          this.emitValue([null])
+          this.emitValue([''])
         } else if(!isArray(nv) && isArray(ov)) {
-          this.emitValue(null)
+          this.emitValue('')
         }
       })
     }
@@ -149,6 +149,6 @@ function newItemData() {
   return {
     field: null,
     operator: null,
-    value: null
+    value: ''
   }
 }

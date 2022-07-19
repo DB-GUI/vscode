@@ -15,7 +15,11 @@ header .operations {
 }
 
 header .operations .btns > .icon-btn {
-  margin: 0 .08em;
+  padding: 0 .58em;
+  background-color: transparent;
+}
+header .operations .btns > .icon-btn:not([disabled]):hover {
+  background-color: var(--vscode-button-hoverBackground);
 }
 
 dialog .body {
@@ -54,6 +58,13 @@ dialog.sql .body {
 dialog.sql .body p {
   margin: 0;
   flex: 1;
+}
+
+.operations .ppz-pagination .icon-btn {
+  background-color: transparent;
+}
+.operations .ppz-pagination .icon-btn:not([disabled]):hover {
+  background-color: var(--vscode-button-hoverBackground);
 }
 
 .table-wrapper {

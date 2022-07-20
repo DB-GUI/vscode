@@ -6,7 +6,8 @@ module.exports = function getConEl(root, options) {
   const Klass = {
     mysql: MysqlElement,
     sqlite3: Sqlite3Element,
-    postgresql: PgsqlElement
+    postgresql: PgsqlElement,
+    cockroachdb: PgsqlElement,
   }[options.client]
   if(!Klass)
     throw Error('未知的连接类型')

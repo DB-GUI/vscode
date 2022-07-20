@@ -80,11 +80,13 @@ export const options = {
   computed: {
     data() {
       if(!this.result || !this.result.rawResponse) return
+      // PPZ_ADAPTER
       return {
         mysql2: Mysql,
         pg: Pgsql,
+        cockroachdb: Pgsql,
         sqlite3: Sqlite3
-      }[this.result.clientType].rows(this.result.rawResponse)
+      }[this.result.driveName].rows(this.result.rawResponse)
     }
   }
 }

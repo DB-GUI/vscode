@@ -2,8 +2,10 @@ const { KnexConnection, notyConnErr } = require('./base')
 
 module.exports =
 class Sqlite3KnexConnection extends KnexConnection {
+  get clientName() { return 'sqlite3' }
+  get driveName() { return 'sqlite3' }
   constructor({ name, filename }) {
-    super('sqlite3', 'sqlite3', name, { filename }, true)
+    super(name, { filename }, true)
   }
   
   async tbList() {

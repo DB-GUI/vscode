@@ -15,12 +15,12 @@ class TerminalWebview extends Webview {
             const rawResponse = await connection.client.raw(sql)
             return {
               time: new Date() - now,
-              clientType: connection.clientType,
+              driveName: connection.driveName,
               rawResponse,
             }
           } catch(error) {
             return {
-              clientType: connection.clientType,
+              driveName: connection.driveName,
               error: true,
               rawError: error,
               errString: error.toString()

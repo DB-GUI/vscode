@@ -4,6 +4,7 @@ const connectionTreeview = require('../../view/treeview/connection')
 const MysqlKnexConnection = require('./mysql')
 const PostgreSQLKnexConnection = require('./pgsql')
 const Sqlite3KnexConnection = require('./sqlite3')
+const CockroachDB = require('./cock')
 
 const service = module.exports = Object.create(collection)
 
@@ -13,7 +14,8 @@ service.connect = function(connection) {
   const Class = {
     mysql: MysqlKnexConnection,
     postgresql: PostgreSQLKnexConnection,
-    sqlite3: Sqlite3KnexConnection
+    sqlite3: Sqlite3KnexConnection,
+    cockroachdb: CockroachDB,
   }[connection.client]
   if(!Class)
     throw Error('意外的连接类型 ' + connection.client)

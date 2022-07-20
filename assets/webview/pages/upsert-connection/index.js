@@ -50,10 +50,6 @@ VuePage(function(page) {
             if(this.adapter.keys.indexOf(f.key) === -1)
               delete record[f.key]
         }
-        if(record.client == 'cockroachdb') {
-          record.client = 'postgresql'
-          record.isCockroach = true
-        }
         await page.api.save({
           connect, record
         })

@@ -2,11 +2,13 @@ const { KnexConnection, notyConnErr } = require('./base')
 
 module.exports =
 class MysqlKnexConnection extends KnexConnection {
+  get clientName() { return 'mysql' }
+  get driveName() { return 'mysql2' }
   constructor({
     useUrl, url,
     name, host, port, user, password, database
   }) {
-    super('mysql', 'mysql2', name, 
+    super(name, 
       useUrl && url
       || {
         multipleStatements: true,

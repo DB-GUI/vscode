@@ -4,13 +4,13 @@ const noty = require('../../../lib/vscode-utils/noty')
 const untitledFile = require('../../../lib/vscode-utils/untitled-file')
 
 class KnexConnection {
-  constructor(clientName, knexClient, name, connection, useNullAsDefault) {
-    this.clientName = clientName
-    this.clientType = knexClient
+  get clientName() { throw Error('未定义 clientName') }
+  get driveName() { throw Error('未定义 driveName') }
+  constructor(name, connection, useNullAsDefault) {
     this.name = name
     this.options = connection
     this.client = Knex({
-      client: connection.isCockroach ? 'cockroachdb': knexClient,
+      client: this.driveName,
       connection,
       useNullAsDefault,
       acquireConnectionTimeout: 10000,

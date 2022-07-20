@@ -1,18 +1,16 @@
 <div id="vue-app" class="flex-container">
   <div class="form-container">
-    <div class="client-selector">
-      <button
-        v-for="a in adapters"
-        :class="{ selected: record.client == a.name }"
-        @click="record.client = a.name"
-      >{{a.label}}</button>
-    </div>
     <div class="forms">
       <div class="public form">
         <label>
           <span>name</span>
           <ppz-input v-model="record.name" />
         </label>
+        <div class="label">
+          <span>连接类型</span>
+          <radio-group v-model="record.client"
+            :list="adapters.map(item => ({ label: item.label, value: item.name }))"></radio-group>
+        </div>
         <template v-if="adapter.urlSupport">
           <br>
           <div class="label conn-type">

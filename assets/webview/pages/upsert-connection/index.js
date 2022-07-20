@@ -26,9 +26,9 @@ VuePage(function(page) {
             ['host', 'port', 'user', 'password', 'database']),
           A('postgresql', 'PostgreSQL', true,
             ['host', 'port', 'user', 'password', 'database']),
+          A('sqlite3', 'Sqlite3', false, ['filename']),
           A('cockroachdb', 'CockroachDB', true,
-            ['host', 'port', 'user', 'password', 'database']),
-          A('sqlite3', 'Sqlite3', false, ['filename'])
+            ['host', 'port', 'user', 'password', 'database'])
         ]
       }
     },

@@ -2,13 +2,6 @@
   width: 100%;
 }
 
-.client-selector {
-  text-align: center;
-  margin-bottom: 2.6em;
-}
-.client-selector > button:not(.selected) {
-  opacity: .66;
-}
 .public.form {
   padding-bottom: 1.16em;
   border-bottom: var(--border1-18);

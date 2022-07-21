@@ -21,8 +21,11 @@ VuePage(function(page) {
           F('database'),
           F('filename', 'file')
         ],
+        // PPZ_ADAPTER
         adapters: [
           A('mysql', 'MySQL', true,
+            ['host', 'port', 'user', 'password', 'database']),
+          A('mssql', 'SQL Server', true,
             ['host', 'port', 'user', 'password', 'database']),
           A('postgresql', 'PostgreSQL', true,
             ['host', 'port', 'user', 'password', 'database']),

@@ -9,6 +9,7 @@ class KnexConnection {
   constructor(name, connection, useNullAsDefault) {
     this.name = name
     this.options = connection
+    console.debug('constructing connection', connection)
     this.client = Knex({
       client: this.driveName,
       connection,

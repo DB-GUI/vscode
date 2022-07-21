@@ -14,6 +14,8 @@ class ConnectionCollection extends ArrayCollection {
       url.searchParams.set('multipleStatements', true)
       record.url = url.href
     }
+    if(record.port)
+      record.port = parseInt(record.port) || record.port
     return super.upsert(record)
   }
 

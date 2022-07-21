@@ -5,17 +5,20 @@ const MysqlKnexConnection = require('./mysql')
 const PostgreSQLKnexConnection = require('./pgsql')
 const Sqlite3KnexConnection = require('./sqlite3')
 const CockroachDB = require('./cock')
+const MSSQLKnexConnection = require('./mssql')
 
 const service = module.exports = Object.create(collection)
 
 service.connect = function(connection) {
   console.debug('connecting to', connection)
   connection = clone(connection)
+  // PPZ_ADAPTER
   const Class = {
     mysql: MysqlKnexConnection,
     postgresql: PostgreSQLKnexConnection,
     sqlite3: Sqlite3KnexConnection,
     cockroachdb: CockroachDB,
+    mssql: MSSQLKnexConnection,
   }[connection.client]
   if(!Class)
     throw Error('意外的连接类型 ' + connection.client)

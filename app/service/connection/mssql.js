@@ -1,4 +1,4 @@
-const { KnexConnection, notyConnErr, TableInfo } = require('./base')
+const { KnexConnection, notyConnErr, TableInfo, ColumnInfo } = require('./base')
 const noty = require('../../../lib/vscode-utils/noty')
 
 class MssqlTableInfo extends TableInfo {
@@ -52,13 +52,27 @@ class MSSQLKnexConnection extends KnexConnection {
     return result.map(tb => new MssqlTableInfo(tb.name, tb.object_id))
   }
   async _fieldList(schemaName, tableName) {
-    throw Error('not implemented')
+    const oid = `object_id('${schemaName}.${tableName}')`
+    const result = await this.client.raw(`
+      select col.*, t.name as _type_name from sys.columns as col
+      left join sys.types as t
+        on col.user_type_id = t.user_type_id
+      where object_id = ${oid};`)
+    const pk = (await this.client.raw(`
+      select * from sys.objects where type = 'PK' and parent_object_id = ${oid};
+    `))[0]
+    return result.map(c => new ColumnInfo(
+      c.name, c._type_name, !c.is_nullable,
+      'ppz-bbbbbbbbbug', // TODO
+      pk && pk.object_id === c.column_id,
+      null
+    ))
   }
   ppzType(rawType) {
   }
 
   getCount(count) {
-    throw Error('not implemented')
+    return count[0]['']
   }
 
   terminal() {

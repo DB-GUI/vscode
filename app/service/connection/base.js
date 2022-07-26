@@ -187,9 +187,21 @@ class TableInfo {
   }
 }
 
+class ColumnInfo {
+  constructor(name, type, notNull, defaultTo, pk, ppzType) {
+    this.name = name
+    this.type = type
+    this.notNull = notNull
+    this.defaultTo = defaultTo
+    this.pk = pk
+    this.ppzType = ppzType
+  }
+}
+
 module.exports = {
   KnexConnection,
   TableInfo,
+  ColumnInfo,
   notyConnErr: err => {
     noty.error('连接失败，请检查连接信息或服务器 ' + err)
   }

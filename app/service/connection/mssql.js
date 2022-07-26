@@ -54,17 +54,28 @@ class MSSQLKnexConnection extends KnexConnection {
   async _fieldList(schemaName, tableName) {
     const oid = `object_id('${schemaName}.${tableName}')`
     const result = await this.client.raw(`
-      select col.*, t.name as _type_name from sys.columns as col
+      select
+        col.*,
+        t.name as _type_name
+      from sys.columns as col
       left join sys.types as t
         on col.user_type_id = t.user_type_id
-      where object_id = ${oid};`)
-    const pk = (await this.client.raw(`
-      select * from sys.objects where type = 'PK' and parent_object_id = ${oid};
-    `))[0]
+      where col.object_id = ${oid};`)
+    const pks = (await this.client.raw(`
+      select
+        col.*
+      from sys.index_columns col
+      left join sys.indexes ind
+        on col.index_id = ind.index_id
+        and col.object_id = ind.object_id
+      where
+        ind.is_primary_key = 1
+        and col.object_id = ${oid};
+    `)).map(item => item.column_id)
     return result.map(c => new ColumnInfo(
       c.name, c._type_name, !c.is_nullable,
       'ppz-bbbbbbbbbug', // TODO
-      pk && pk.object_id === c.column_id,
+      pks.indexOf(c.column_id) > -1,
       null
     ))
   }

@@ -1,5 +1,12 @@
-const { KnexConnection, notyConnErr } = require('./base')
+const { KnexConnection, notyConnErr, TableInfo } = require('./base')
 const noty = require('../../../lib/vscode-utils/noty')
+
+class MssqlTableInfo extends TableInfo {
+  constructor(name, id) {
+    super(name)
+    this.id = id
+  }
+}
 
 module.exports =
 class MSSQLKnexConnection extends KnexConnection {
@@ -42,7 +49,7 @@ class MSSQLKnexConnection extends KnexConnection {
   }
   async tbList(schemaName) {
     const result = await this.client.raw(`select * from sys.tables where schema_name(schema_id) = '${schemaName}'`)
-    return result.map(db => db.name)
+    return result.map(tb => new MssqlTableInfo(tb.name, tb.object_id))
   }
   async _fieldList(schemaName, tableName) {
     throw Error('not implemented')

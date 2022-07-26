@@ -1,4 +1,4 @@
-const { KnexConnection, notyConnErr } = require('./base')
+const { KnexConnection, TableInfo, notyConnErr } = require('./base')
 
 module.exports =
 class MysqlKnexConnection extends KnexConnection {
@@ -28,7 +28,7 @@ class MysqlKnexConnection extends KnexConnection {
   async tbList(schema) {
     await this.client.raw('use `' + schema + '`')
     const result = await this.client.raw('show tables;')
-    return result[0].map(item => item['Tables_in_' + schema])
+    return result[0].map(item => new TableInfo(item['Tables_in_' + schema]))
   }
   
   async _fieldList(schema, table) {

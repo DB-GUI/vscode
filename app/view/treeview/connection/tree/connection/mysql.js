@@ -22,8 +22,8 @@ class MysqlSchemaElement extends TreeviewElement {
   }
   async _getChildren() {
     const tbList = await this.parent.connection.tbList(this.name)
-    return tbList.map(name => new TableElement(this, this.name, name,
-      [this.parent.name, this.name, name],
+    return tbList.map(tb => new TableElement(this, this.name, tb.name,
+      [this.parent.name, this.name, tb.name],
       this.parent.connection
     ))
   }

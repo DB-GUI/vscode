@@ -1,4 +1,4 @@
-const { KnexConnection, notyConnErr } = require('./base')
+const { KnexConnection, TableInfo, notyConnErr } = require('./base')
 
 module.exports =
 class Sqlite3KnexConnection extends KnexConnection {
@@ -12,7 +12,7 @@ class Sqlite3KnexConnection extends KnexConnection {
     try {
       return (await this.client.raw('Pragma table_list'))
         .filter(tb => tb.type == 'table' && tb.schema == 'main' && tb.name.indexOf('sqlite_') != 0)
-        .map(tb => tb.name)
+        .map(tb => new TableInfo(tb.name))
     } catch(err) {
       notyConnErr(err)
       return []

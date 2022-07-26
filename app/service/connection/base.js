@@ -137,7 +137,7 @@ class KnexConnection {
     console.debug('导出数据', el.name, tbList)
     let content = ''
     for(let tb of tbList)
-      content += await this.getDML2(schemaName, tb)
+      content += await this.getDML2(schemaName, tb.name)
     return content
   }
   async exportDML(el) {
@@ -154,7 +154,7 @@ class KnexConnection {
     console.debug('导出结构', el.name, tbList)
     let content = ''
     for(let tb of tbList)
-      content += await this.getDDL2(schemaName, tb)
+      content += await this.getDDL2(schemaName, tb.name)
     return content
   }
   async exportDDL(el) {
@@ -181,8 +181,15 @@ function getSchemaName(el) {
   throw Error(msg)
 }
 
+class TableInfo {
+  constructor(name) {
+    this.name = name
+  }
+}
+
 module.exports = {
   KnexConnection,
+  TableInfo,
   notyConnErr: err => {
     noty.error('连接失败，请检查连接信息或服务器 ' + err)
   }

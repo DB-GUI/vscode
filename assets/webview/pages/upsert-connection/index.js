@@ -25,7 +25,7 @@ VuePage(function(page) {
         adapters: [
           A('mysql', 'MySQL', true,
             ['host', 'port', 'user', 'password', 'database']),
-          A('mssql', 'SQL Server', true,
+          A('mssql', 'SQL Server', false,
             ['host', 'port', 'user', 'password', 'database']),
           A('postgresql', 'PostgreSQL', true,
             ['host', 'port', 'user', 'password', 'database']),

@@ -1,4 +1,4 @@
-const { KnexConnection, notyConnErr } = require('./base')
+const { KnexConnection, TableInfo, notyConnErr } = require('./base')
 const noty = require('../../../lib/vscode-utils/noty')
 
 module.exports =
@@ -33,7 +33,7 @@ class PostgreSQLKnexConnection extends KnexConnection {
   }
   async tbList(schemaName) {
     const result = await this.client.raw(`SELECT table_name FROM information_schema.tables WHERE table_schema='${schemaName}';`)
-    return result.rows.map(db => db.table_name)
+    return result.rows.map(db => new TableInfo(db.table_name))
   }
   async _fieldList(schemaName, tableName) {
     const result = await this.client.raw(`SELECT * FROM information_schema.COLUMNS WHERE table_schema='${schemaName}' and table_name='${tableName}';`)

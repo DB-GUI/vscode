@@ -1,6 +1,7 @@
 import Mysql from './mysql.js'
 import Pgsql from './pgsql.js'
 import Sqlite3 from './sqlite3.js'
+import Mssql from './mssql.js'
 
 export const name = 'result-view'
 
@@ -85,6 +86,7 @@ export const options = {
         mysql2: Mysql,
         pg: Pgsql,
         cockroachdb: Pgsql,
+        mssql: Mssql,
         sqlite3: Sqlite3
       }[this.result.driveName].rows(this.result.rawResponse)
     }

@@ -91,6 +91,8 @@ class MSSQLKnexConnection extends KnexConnection {
   }
 
   async getDDL2(schema, table) {
-    throw Error('not implemented')
+    const msg = '暂不支持 mssql 系数据库导出表结构的操作'
+    noty.error(msg)
+    throw Error(msg)
   }
 }

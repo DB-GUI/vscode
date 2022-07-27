@@ -1,6 +1,7 @@
 import Mysql from './mysql.js'
 import Pgsql from './pgsql.js'
 import Sqlite3 from './sqlite3.js'
+import Mssql from './mssql.js'
 
 export const name = 'result-view'
 
@@ -80,11 +81,14 @@ export const options = {
   computed: {
     data() {
       if(!this.result || !this.result.rawResponse) return
+      // PPZ_ADAPTER
       return {
         mysql2: Mysql,
         pg: Pgsql,
+        cockroachdb: Pgsql,
+        mssql: Mssql,
         sqlite3: Sqlite3
-      }[this.result.clientType].rows(this.result.rawResponse)
+      }[this.result.driveName].rows(this.result.rawResponse)
     }
   }
 }

@@ -21,14 +21,17 @@ VuePage(function(page) {
           F('database'),
           F('filename', 'file')
         ],
+        // PPZ_ADAPTER
         adapters: [
           A('mysql', 'MySQL', true,
             ['host', 'port', 'user', 'password', 'database']),
+          A('mssql', 'SQL Server', false,
+            ['host', 'port', 'user', 'password', 'database']),
           A('postgresql', 'PostgreSQL', true,
             ['host', 'port', 'user', 'password', 'database']),
+          A('sqlite3', 'Sqlite3', false, ['filename']),
           A('cockroachdb', 'CockroachDB', true,
-            ['host', 'port', 'user', 'password', 'database']),
-          A('sqlite3', 'Sqlite3', false, ['filename'])
+            ['host', 'port', 'user', 'password', 'database'])
         ]
       }
     },
@@ -49,10 +52,6 @@ VuePage(function(page) {
           for(let f of this.fields)
             if(this.adapter.keys.indexOf(f.key) === -1)
               delete record[f.key]
-        }
-        if(record.client == 'cockroachdb') {
-          record.client = 'postgresql'
-          record.isCockroach = true
         }
         await page.api.save({
           connect, record

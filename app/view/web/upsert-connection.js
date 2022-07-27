@@ -11,12 +11,6 @@ module.exports = class UpsertConnectionWebview extends Webview {
   }
 
   async upsert(data) {
-    let { useUrl, url, client } = data.record
-    if(client == 'mysql' && useUrl && url) {
-      url = new URL(url)
-      url.searchParams.set('multipleStatements', true)
-      data.record.url = url.href
-    }
     console.debug('upserting connection', data.record)
     await service.upsert(data)
   }

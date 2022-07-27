@@ -2,7 +2,7 @@
 	"name": "ppz",
 	"displayName": "ppz",
 	"description": "UI for database management",
-	"version": "0.2.4",
+	"version": "0.3.0",
 	"publisher": "ppz",
 	"icon": "assets/icon.png",
 	"keywords": [
@@ -63,7 +63,7 @@
 			},
 			{
 				"view": "help",
-				"contents": "简介：管理数据库的图形化界面\n当前版本：v0.2.4-beta\n[$(preview)使用帮助](https://github.com/ppz-pro/ppz.vscode/wiki/%E4%BD%BF%E7%94%A8%E5%B8%AE%E5%8A%A9)\n[$(comment-discussion)微信讨论](command:ppz.wechat)\n[$(comment)意见反馈](https://github.com/ppz-pro/ppz.vscode/issues/new)\n[$(bug)发现 bug！](https://github.com/ppz-pro/ppz.vscode/issues)\n[$(trash)清空 PPZ](command:ppz.empty)"
+				"contents": "简介：管理数据库的图形化界面\n当前版本：v0.3.0-beta\n[$(preview)使用帮助](https://github.com/ppz-pro/ppz.vscode/wiki/%E4%BD%BF%E7%94%A8%E5%B8%AE%E5%8A%A9)\n[$(comment-discussion)微信讨论](command:ppz.wechat)\n[$(comment)意见反馈](https://github.com/ppz-pro/ppz.vscode/issues/new)\n[$(bug)发现 bug！](https://github.com/ppz-pro/ppz.vscode/issues)\n[$(trash)清空 PPZ](command:ppz.empty)"
 			}
 		],
 		"commands": [
@@ -111,7 +111,7 @@
 			},
 			{
 				"command": "ppz.ppzTerminal",
-				"title": "打开终端",
+				"title": "SQL 终端",
 				"icon": "$(terminal)",
 				"category": "PPZ"
 			},
@@ -155,7 +155,7 @@
 			"view/item/context": [
 				{
 					"command": "ppz.refreshTreeChildren",
-					"when": "view == connection && viewItem =~ /^connection$|^mysqlSchema$|^pgDatabase$|^pgSchema$|^sqlite3Connection$/",
+					"when": "view == connection && viewItem =~ /^connection$|^mysqlSchema$|^pgDatabase$|^pgSchema$|^sqlite3Connection$|^msDatabase$|^msSchema$/",
 					"group": "inline"
 				},
 				{
@@ -170,28 +170,23 @@
 				},
 				{
 					"command": "ppz.exportDML",
-					"when": "view == connection && viewItem =~ /^mysqlSchema$|^table$|^pgSchema$|^sqlite3Connection$/",
+					"when": "view == connection && viewItem =~ /^mysqlSchema$|^table$|^pgSchema$|^sqlite3Connection$|^msSchema$/",
 					"group": "2_export@1"
 				},
 				{
 					"command": "ppz.exportDDL",
-					"when": "view == connection && viewItem =~ /^mysqlSchema$|^table$|^pgSchema$|^sqlite3Connection$/",
+					"when": "view == connection && viewItem =~ /^mysqlSchema$|^table$|^pgSchema$|^sqlite3Connection$|^msSchema$/",
 					"group": "2_export@2"
 				},
 				{
 					"command": "ppz.export",
-					"when": "view == connection && viewItem =~ /^mysqlSchema$|^table$|^pgSchema$|^sqlite3Connection$/",
+					"when": "view == connection && viewItem =~ /^mysqlSchema$|^table$|^pgSchema$|^sqlite3Connection$|^msSchema$/",
 					"group": "2_export@3"
 				},
 				{
-					"command": "ppz.terminal",
-					"when": "view == connection && viewItem =~ /^connection$|^pgDatabase$|^sqlite3Connection$/",
-					"group": "9_other@1"
-				},
-				{
 					"command": "ppz.ppzTerminal",
-					"when": "view == connection && viewItem =~ /^connection$|^pgDatabase$|^sqlite3Connection$/",
-					"group": "9_other@2"
+					"when": "view == connection && viewItem =~ /^connection$|^pgDatabase$|^sqlite3Connection$|^msDatabase$/",
+					"group": "9_other@1"
 				}
 			]
 		}
@@ -206,6 +201,7 @@
 		"mysql2": "^2.3.3",
 		"pg": "^8.7.3",
 		"sqlite3": "^5.0.5",
+		"tedious": "^15.0.0",
 		"uuid": "^8.3.2"
 	}
 }

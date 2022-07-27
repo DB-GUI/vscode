@@ -6,7 +6,7 @@
 
 [**PPZ**](https://marketplace.visualstudio.com/items?itemName=ppz.ppz) 是一个 vscode 插件，提供操作数据库的图形界面，详情请参考[使用帮助](https://gitee.com/ppz-pro/ppz.vscode/wikis/%E4%BD%BF%E7%94%A8%E5%B8%AE%E5%8A%A9)  
 
-+ ✅支持多种数据库（目前：MySQL、[StoneDB(国产)](https://www.stoneatom.com/StoneDB)、MariaDB、SQLite3(SQLite3 仅支持 windows)、PostgreSQL、CockroachDB）
++ ✅支持多种数据库（目前：MySQL、MSSQL(SQL Server)、SQLite3(SQLite3 仅支持 windows)、PostgreSQL、CockroachDB、[StoneDB(国产)](https://www.stoneatom.com/StoneDB)、MariaDB 等）
 + ✅连接管理
 + ✅数据管理
 + ✅数据或表结构导出
@@ -17,8 +17,8 @@
 
 [皮皮仔的计划](https://github.com/ppz-pro/ppz.vscode/wiki/todo)
 
-> PPZ 将来会支持 Oracledb、MSSQL  
-> 但目前不考虑支持非关系型数据库，比如 MongoDB，推荐使用 [MongoDB for VS Code](https://github.com/mongodb-js/vscode)（官方出品，质量有保证、功能全面）
+> PPZ 将于下个小版本支持 Oracledb！  
+> 目前暂不考虑支持非关系型数据库，比如 MongoDB，推荐使用 [MongoDB for VS Code](https://github.com/mongodb-js/vscode)（官方出品，质量有保证、功能全面）
 
 ![PPZ.vscode](https://files20220620.oss-cn-shanghai.aliyuncs.com/ppz/ppz.vscode/usage/ppz.vscode.gif?20220704)
 

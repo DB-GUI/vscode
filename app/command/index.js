@@ -3,7 +3,7 @@ const connection = require('./connection')
 const other = require('./other')
 
 function registerCommand(name, handler) {
-  console.debug('注册 command', name)
+  // console.debug('注册 command', name)
   Context.subscriptions.push(
     vscode.commands.registerCommand('ppz.' + name, function() {
       console.debug('执行 command', name)

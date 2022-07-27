@@ -4,13 +4,14 @@ const noty = require('../../../lib/vscode-utils/noty')
 const untitledFile = require('../../../lib/vscode-utils/untitled-file')
 
 class KnexConnection {
-  constructor(clientName, knexClient, name, connection, useNullAsDefault) {
-    this.clientName = clientName
-    this.clientType = knexClient
+  get clientName() { throw Error('未定义 clientName') }
+  get driveName() { throw Error('未定义 driveName') }
+  constructor(name, connection, useNullAsDefault) {
     this.name = name
     this.options = connection
+    console.debug('constructing connection', connection)
     this.client = Knex({
-      client: connection.isCockroach ? 'cockroachdb': knexClient,
+      client: this.driveName,
       connection,
       useNullAsDefault,
       acquireConnectionTimeout: 10000,
@@ -136,7 +137,7 @@ class KnexConnection {
     console.debug('导出数据', el.name, tbList)
     let content = ''
     for(let tb of tbList)
-      content += await this.getDML2(schemaName, tb)
+      content += await this.getDML2(schemaName, tb.name)
     return content
   }
   async exportDML(el) {
@@ -153,7 +154,7 @@ class KnexConnection {
     console.debug('导出结构', el.name, tbList)
     let content = ''
     for(let tb of tbList)
-      content += await this.getDDL2(schemaName, tb)
+      content += await this.getDDL2(schemaName, tb.name)
     return content
   }
   async exportDDL(el) {
@@ -180,8 +181,27 @@ function getSchemaName(el) {
   throw Error(msg)
 }
 
+class TableInfo {
+  constructor(name) {
+    this.name = name
+  }
+}
+
+class ColumnInfo {
+  constructor(name, type, notNull, defaultTo, pk, ppzType) {
+    this.name = name
+    this.type = type
+    this.notNull = notNull
+    this.defaultTo = defaultTo
+    this.pk = pk
+    this.ppzType = ppzType
+  }
+}
+
 module.exports = {
   KnexConnection,
+  TableInfo,
+  ColumnInfo,
   notyConnErr: err => {
     noty.error('连接失败，请检查连接信息或服务器 ' + err)
   }

@@ -111,7 +111,7 @@
 			},
 			{
 				"command": "ppz.ppzTerminal",
-				"title": "打开终端",
+				"title": "SQL 终端",
 				"icon": "$(terminal)",
 				"category": "PPZ"
 			},
@@ -155,7 +155,7 @@
 			"view/item/context": [
 				{
 					"command": "ppz.refreshTreeChildren",
-					"when": "view == connection && viewItem =~ /^connection$|^mysqlSchema$|^pgDatabase$|^pgSchema$|^sqlite3Connection$/",
+					"when": "view == connection && viewItem =~ /^connection$|^mysqlSchema$|^pgDatabase$|^pgSchema$|^sqlite3Connection$|^msDatabase$|^msSchema$/",
 					"group": "inline"
 				},
 				{
@@ -170,28 +170,23 @@
 				},
 				{
 					"command": "ppz.exportDML",
-					"when": "view == connection && viewItem =~ /^mysqlSchema$|^table$|^pgSchema$|^sqlite3Connection$/",
+					"when": "view == connection && viewItem =~ /^mysqlSchema$|^table$|^pgSchema$|^sqlite3Connection$|^msSchema$/",
 					"group": "2_export@1"
 				},
 				{
 					"command": "ppz.exportDDL",
-					"when": "view == connection && viewItem =~ /^mysqlSchema$|^table$|^pgSchema$|^sqlite3Connection$/",
+					"when": "view == connection && viewItem =~ /^mysqlSchema$|^table$|^pgSchema$|^sqlite3Connection$|^msSchema$/",
 					"group": "2_export@2"
 				},
 				{
 					"command": "ppz.export",
-					"when": "view == connection && viewItem =~ /^mysqlSchema$|^table$|^pgSchema$|^sqlite3Connection$/",
+					"when": "view == connection && viewItem =~ /^mysqlSchema$|^table$|^pgSchema$|^sqlite3Connection$|^msSchema$/",
 					"group": "2_export@3"
 				},
 				{
-					"command": "ppz.terminal",
-					"when": "view == connection && viewItem =~ /^connection$|^pgDatabase$|^sqlite3Connection$/",
-					"group": "9_other@1"
-				},
-				{
 					"command": "ppz.ppzTerminal",
-					"when": "view == connection && viewItem =~ /^connection$|^pgDatabase$|^sqlite3Connection$/",
-					"group": "9_other@2"
+					"when": "view == connection && viewItem =~ /^connection$|^pgDatabase$|^sqlite3Connection$|^msDatabase$/",
+					"group": "9_other@1"
 				}
 			]
 		}

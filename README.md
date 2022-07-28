@@ -1,17 +1,19 @@
 # PPZ.vscode
-[![license](https://img.shields.io/github/license/ppz-pro/ppz.vscode)](https://github.com/ppz-pro/ppz.vscode/blob/main/LICENSE)
 [![release](https://img.shields.io/github/release/ppz-pro/ppz.vscode)](https://github.com/ppz-pro/ppz.vscode/releases)
+[![installs](https://img.shields.io/visual-studio-marketplace/i/ppz.ppz)](https://marketplace.visualstudio.com/items?itemName=ppz.ppz)
+[![license](https://img.shields.io/github/license/ppz-pro/ppz.vscode)](https://github.com/ppz-pro/ppz.vscode/blob/main/LICENSE)
 
 [github 仓库](https://github.com/ppz-pro/ppz.vscode) | [微软商店](https://marketplace.visualstudio.com/items?itemName=ppz.ppz) | [国内仓库](https://gitee.com/ppz-pro/ppz.vscode)
 
 [**PPZ**](https://marketplace.visualstudio.com/items?itemName=ppz.ppz) 是一个 vscode 插件，提供操作数据库的图形界面，详情请参考[使用帮助](https://gitee.com/ppz-pro/ppz.vscode/wikis/%E4%BD%BF%E7%94%A8%E5%B8%AE%E5%8A%A9)  
 
-+ ✅支持多种数据库（目前：MySQL、MSSQL(SQL Server)、SQLite3(SQLite3 仅支持 windows)、PostgreSQL、CockroachDB、[StoneDB(国产)](https://www.stoneatom.com/StoneDB)、MariaDB 等）
-+ ✅连接管理
-+ ✅数据管理
-+ ✅数据或表结构导出
-+ ✅模拟终端（运行 sql 语句）
-+ ✅全功能的数据搜索
++ ✅ **界面干净**
++ ✅ 支持多种数据库（目前：MySQL、MSSQL(SQL Server)、SQLite3(SQLite3 仅支持 windows)、PostgreSQL、CockroachDB、[StoneDB(国产)](https://www.stoneatom.com/StoneDB)、MariaDB 等）
++ ✅ 连接管理
++ ✅ 数据管理
++ ✅ 数据或表结构导出
++ ✅ 模拟终端（运行 sql 语句）
++ ✅ 全功能的数据搜索
 + 表管理
 + 模式管理
 

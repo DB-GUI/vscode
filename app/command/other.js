@@ -1,4 +1,5 @@
 const Wechat = require('../view/web/wechat')
+const Feifei = require('../view/web/feifei')
 const noty = require('../../lib/vscode-utils/noty')
 const warn = require('../../lib/vscode-utils/prompt/confirm').warn
 const cp = require('child_process')
@@ -21,4 +22,8 @@ exports.github = async function() {
 
 exports.wechat = async function() {
   new Wechat()
+}
+
+exports.love = async function() {
+  new Feifei()
 }

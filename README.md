@@ -17,7 +17,7 @@
 + 表管理
 + 模式管理
 
-[一些截图](https://gitee.com/ppz-pro/ppz.vscode/wikis/Features) | [皮皮仔的计划](https://github.com/ppz-pro/ppz.vscode/wiki/todo)
+[一些截图](https://gitee.com/ppz-pro/ppz.vscode/wikis/Features) | [皮皮仔的计划](https://github.com/ppz-pro/ppz.vscode/wiki/todo) | [开发者在找一份工作](https://github.com/ppz-pro/ppz.vscode/wiki/sth2eat)
 
 > PPZ 将于下个小版本支持 Oracledb！  
 > 目前暂不考虑支持非关系型数据库，比如 MongoDB，推荐使用 [MongoDB for VS Code](https://github.com/mongodb-js/vscode)（官方出品，质量有保证、功能全面）

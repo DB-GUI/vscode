@@ -6,10 +6,11 @@ class PostgreSQLKnexConnection extends KnexConnection {
   get clientName() { return 'postgresql' }
   get driveName() { return 'pg' }
   constructor({
+    id, name,
     useUrl, url,
-    name, host, port, user, password, database
+    host, port, user, password, database
   }) {
-    super(name,
+    super(id, name,
       useUrl && {
         connectionString: url
       }

@@ -6,7 +6,8 @@ const untitledFile = require('../../../lib/vscode-utils/untitled-file')
 class KnexConnection {
   get clientName() { throw Error('未定义 clientName') }
   get driveName() { throw Error('未定义 driveName') }
-  constructor(name, connection, useNullAsDefault) {
+  constructor(id, name, connection, useNullAsDefault) {
+    this.id = id
     this.name = name
     this.options = connection
     console.debug('constructing connection', connection)

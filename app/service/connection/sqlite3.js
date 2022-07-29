@@ -4,8 +4,8 @@ module.exports =
 class Sqlite3KnexConnection extends KnexConnection {
   get clientName() { return 'sqlite3' }
   get driveName() { return 'sqlite3' }
-  constructor({ name, filename }) {
-    super(name, { filename }, true)
+  constructor({ id, name, filename }) {
+    super(id, name, { filename }, true)
   }
   
   async tbList() {

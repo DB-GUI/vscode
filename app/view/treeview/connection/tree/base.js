@@ -23,6 +23,8 @@ class TreeviewElement {
     return result
   }
 
+  // 对外的“获取子节点”函数，功能仅在于“懒加载”
+  // 具体的“获取子节点”功能在 _getChildren 里实现
   async getChildren() {
     if(!this._children) {
       console.debug('getChildren', this.name)

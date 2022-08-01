@@ -13,9 +13,10 @@ class MSSQLKnexConnection extends KnexConnection {
   get clientName() { return 'mssql' }
   get driveName() { return 'mssql' }
   constructor({
-    name, host, port, user, password, database
+    id, name,
+    host, port, user, password, database
   }) {
-    super(name, {
+    super(id, name, {
       server: host,
       options: {
         database,

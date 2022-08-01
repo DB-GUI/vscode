@@ -5,10 +5,11 @@ class MysqlKnexConnection extends KnexConnection {
   get clientName() { return 'mysql' }
   get driveName() { return 'mysql2' }
   constructor({
+    id, name,
     useUrl, url,
-    name, host, port, user, password, database
+    host, port, user, password, database
   }) {
-    super(name, 
+    super(id, name, 
       useUrl && url
       || {
         multipleStatements: true,

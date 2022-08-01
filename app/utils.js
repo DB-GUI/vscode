@@ -27,8 +27,25 @@ exports.clone = function(data) {
   return JSON.parse(JSON.stringify(data))
 }
 
+const format = target => {
+  if(isNaN(target))
+    target = 0
+  return target < 10
+    ? '0' + target
+    : target
+}
 exports.formatDate = function(date) {
-  return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()
-    } ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}.${
-    date.getMilliseconds()}`
+  const year = date.getFullYear() || '0000'
+  const month = date.getMonth() + 1
+  const day = date.getDate()
+  const hours = date.getHours()
+  const minutes = date.getMinutes()
+  const seconds = date.getSeconds()
+  let ms = date.getMilliseconds()
+  if(isNaN(ms))
+    ms = 0
+  ms = (ms + '').padStart(3, '0')
+  return `${format(year)}-${format(month)}-${format(day)
+    } ${format(hours)}:${format(minutes)}:${format(seconds)
+    }.${ms}`
 }

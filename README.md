@@ -20,9 +20,6 @@
 
 [一些截图](https://gitee.com/ppz-pro/ppz.vscode/wikis/Features) | [皮皮仔的计划](https://github.com/ppz-pro/ppz.vscode/wiki/todo)
 
-[开发者正在找一份工作，目前已提离职](https://dagaiguanyu.github.io/Resume/dist/)
-
-> PPZ 将于下个小版本支持 Oracledb！  
 > 目前暂不考虑支持非关系型数据库，比如 MongoDB，推荐使用 [MongoDB for VS Code](https://github.com/mongodb-js/vscode)（官方出品，质量有保证、功能全面）
 
 ![PPZ.vscode](https://files20220620.oss-cn-shanghai.aliyuncs.com/ppz/ppz.vscode/usage/ppz.vscode.gif?20220704)
@@ -34,12 +31,8 @@
 + 坚持低熵
 
 ## PPZ 需要你！
-目前是一个人在维护、测试、升级  
-由于我还有全职工作，不能占用工作时间，所以只能在公司工作完成之余，继续完善 PPZ  
-所以时间上是很不够的，欢迎朋友们一起来维护 PPZ   
 + 参与功能测试([如何参与？](./FCT.md))
-+ 提交 BUG、批评、建议
-+ 修复一个 BUG
++ [提交 BUG、批评、建议](https://github.com/ppz-pro/ppz.vscode/issues)
 + 提交新功能(请查看[开发手册](./CONTRIBUTION.md))
 + 给皮皮仔[画个图标](./assets/icon.png)
 
@@ -49,9 +42,4 @@
     <img src="https://avatars.githubusercontent.com/u/18433720?v=4" width=28 style="width: 2em">
     yyt6801
   </a>
-</div>
-
-##### 微信群
-<div align="center">
-<img src="https://files20220620.oss-cn-shanghai.aliyuncs.com/ppz.vscode.jpg?20220704" alt="PPZ.vscode wechat" width=268 />
 </div>

@@ -1,5 +1,5 @@
 const collection = require('../../model/connection')
-const { clone } = require('../../utils')
+const clone = require('@ppzp/stupid/clone')
 const connectionTreeview = require('../../view/treeview/connection')
 const MysqlKnexConnection = require('./mysql')
 const PostgreSQLKnexConnection = require('./pgsql')

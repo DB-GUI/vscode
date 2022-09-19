@@ -1,6 +1,6 @@
-const ArrayCollection = require('./collection/array')
+const Collection = require('@ppzp/bd/collection')
 
-class ConnectionCollection extends ArrayCollection {
+class ConnectionCollection extends Collection {
   constructor() {
     super('connection')
   }
@@ -17,9 +17,6 @@ class ConnectionCollection extends ArrayCollection {
     if(record.port)
       record.port = parseInt(record.port) || record.port
     return super.upsert(record)
-  }
-
-  validateOne(record) {
   }
 }
 

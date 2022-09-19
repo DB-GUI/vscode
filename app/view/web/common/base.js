@@ -6,6 +6,7 @@ const noty = require('../../../../lib/vscode-utils/noty')
 const prompt = require('../../../../lib/vscode-utils/prompt/webview/server')
 const WebviewServer = require('../../../../lib/vscode-utils/request/server')
 const selectFile = require('../../../../lib/vscode-utils/file-selector/server')
+const { get: getContext } = require('@ppzp/context')
 
 module.exports = class Webview {
   constructor({
@@ -42,7 +43,7 @@ module.exports = class Webview {
       title,
       vscode.ViewColumn.One,
       {
-        localResourceRoots: [vscode.Uri.file(Context.extensionPath)],
+        localResourceRoots: [vscode.Uri.file(getContext().extensionPath)],
         enableScripts: true
       }
     )
@@ -51,7 +52,7 @@ module.exports = class Webview {
       dark: this.uri('logo-white.svg')
     }
     // 处理来自网页的请求
-    new WebviewServer(this.panel.webview, Context.subscriptions, Object.assign({
+    new WebviewServer(this.panel.webview, getContext().subscriptions, Object.assign({
       noty: ({ type, msg, btns }) => {
         const result = noty[type](msg, btns)
         if(btns.length)
@@ -84,7 +85,7 @@ module.exports = class Webview {
   }
   webviewUri(path) {
     return this.panel.webview.asWebviewUri(vscode.Uri.file(
-      Path.join(Context.extensionPath, 'assets/webview', path)
+      Path.join(getContext().extensionPath, 'assets/webview', path)
     ))
   }
 

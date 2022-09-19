@@ -196,6 +196,9 @@
 		"@types/vscode": "^1.47.3"
 	},
 	"dependencies": {
+		"@ppzp/bd": "file:../bd.vscode/ppzp-bd-0.1.1.tgz",
+		"@ppzp/context": "^0.0.0",
+		"@ppzp/stupid": "^0.0.0",
 		"@ppzp/type": "^0.0.4",
 		"knex": "^2.1.0",
 		"mysql2": "^2.3.3",

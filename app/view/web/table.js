@@ -4,6 +4,7 @@ const { TableElement } = require('../treeview/connection/tree/base')
 const NewRecordWebview = require('./new-record')
 const formatDate = require('../../utils').formatDate
 const TerminalWebview = require('./ppz-terminal')
+const { get: getContext } = require('@ppzp/context')
 
 class TableWebview extends Webview {
   constructor(schemaName, tableName, names, connection) {
@@ -77,5 +78,5 @@ module.exports = function openTableWebview(tableEl) {
   map.set(tableEl, view)
   view.panel.onDidDispose(() => {
     map.delete(tableEl)
-  }, null, Context.subscriptions)
+  }, null, getContext().subscriptions)
 }

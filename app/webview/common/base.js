@@ -90,7 +90,7 @@ module.exports = class Webview {
   }
 
   localPath(path) {
-    return Path.join(__dirname, '../../../../assets', path)
+    return Path.join(__dirname, '../../../assets', path)
   }
 
   uri(path) {

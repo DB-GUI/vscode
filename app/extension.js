@@ -1,6 +1,6 @@
 const { set: setContext } = require('@ppzp/context')
+const initState = require('./model/migration')
 const initCommand = require('./command')
-const initState = require('./service/migration')
 const initTreeview = require('./treeview')
 
 exports.activate = async function(context) {

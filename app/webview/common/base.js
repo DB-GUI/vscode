@@ -1,11 +1,11 @@
 const Path = require('path')
 const fs = require('fs')
 const vscode = require('vscode')
-const untitledFile = require('../../../../lib/vscode-utils/untitled-file')
-const noty = require('../../../../lib/vscode-utils/noty')
-const prompt = require('../../../../lib/vscode-utils/prompt/webview/server')
-const WebviewServer = require('../../../../lib/vscode-utils/request/server')
-const selectFile = require('../../../../lib/vscode-utils/file-selector/server')
+const untitledFile = require('../../../lib/vscode-utils/untitled-file')
+const noty = require('../../../lib/vscode-utils/noty')
+const prompt = require('../../../lib/vscode-utils/prompt/webview/server')
+const WebviewServer = require('../../../lib/vscode-utils/request/server')
+const selectFile = require('../../../lib/vscode-utils/file-selector/server')
 const { get: getContext } = require('@ppzp/context')
 
 module.exports = class Webview {

@@ -1,5 +1,5 @@
 const Webview = require('./common/form')
-const service = require('../../service/connection')
+const service = require('../service/connection')
 
 module.exports = class UpsertConnectionWebview extends Webview {
   constructor(record) {

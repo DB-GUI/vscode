@@ -1,5 +1,5 @@
 const Webview = require('./common/base')
-const noty = require('../../../lib/vscode-utils/noty')
+const noty = require('../../lib/vscode-utils/noty')
 
 module.exports = 
 class TableWebview extends Webview {

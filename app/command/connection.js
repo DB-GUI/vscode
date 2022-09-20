@@ -1,8 +1,8 @@
 const { tree } = require('../treeview/connection')
 const { TreeviewElement } = require('../treeview/connection/tree/base')
-const UpsertConnectionWebview = require('../view/web/upsert-connection')
-const TerminalWebview = require('../view/web/ppz-terminal')
-const openTableWebview = require('../view/web/table')
+const UpsertConnectionWebview = require('../webview/upsert-connection')
+const TerminalWebview = require('../webview/ppz-terminal')
+const openTableWebview = require('../webview/table')
 const noty = require('../../lib/vscode-utils/noty')
 
 exports.openTable = openTableWebview

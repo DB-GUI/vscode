@@ -20,12 +20,15 @@ class ConnectionTreeview {
     }
   }
 
-  addConnection() {
-
+  addConnection(options, connect) {
+    this.root.addChild(options, connect)
+  }
+  updateConnection(options, connect) {
+    this.root.updateChild(options, connect)
   }
 
   reload(el = this.root) {
-    
+    el.refresh()
   }
 }
 

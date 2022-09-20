@@ -31,11 +31,9 @@ service.connect = function(connection) {
 service.upsert = async function({ record, connect }) {
   const rawId = record._id
   const id = await collection.upsert(record)
-  // 插入连接，是新用户接触的第一个功能
-  // 即使动态修改 treeview 节点很麻烦，也应尽量做好
-  // 但其他 upsert，就要量力而行了（用户可以点击相应的刷新按钮来更新）
+  const options = collection.findById(id)
   if(rawId)
-    connectionTreeview.tree.updateChild(collection.findById(id), connect)
+    connectionTreeview.updateConnection(options, connect)
   else
-    connectionTreeview.tree.addChild(record, connect)
+    connectionTreeview.addConnection(options, connect)
 }

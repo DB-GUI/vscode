@@ -1,7 +1,7 @@
 const { set: setContext } = require('@ppzp/context')
 const initCommand = require('./command')
 const initState = require('./service/migration')
-const initTreeview = require('./view/treeview')
+const initTreeview = require('./treeview')
 
 exports.activate = async function(context) {
   setContext(context)

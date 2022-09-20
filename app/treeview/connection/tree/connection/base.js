@@ -1,7 +1,7 @@
 const { TreeviewElement } = require('../base')
-const connectionService = require('../../../../../service/connection')
-const noty = require('../../../../../../lib/vscode-utils/noty')
-const warn = require('../../../../../../lib/vscode-utils/prompt/confirm').warn
+const connectionService = require('../../../../service/connection')
+const noty = require('../../../../../lib/vscode-utils/noty')
+const warn = require('../../../../../lib/vscode-utils/prompt/confirm').warn
 
 module.exports =
 class ConnectionElement extends TreeviewElement {

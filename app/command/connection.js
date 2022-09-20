@@ -1,5 +1,5 @@
-const { tree } = require('../view/treeview/connection')
-const { TreeviewElement } = require('../view/treeview/connection/tree/base')
+const { tree } = require('../treeview/connection')
+const { TreeviewElement } = require('../treeview/connection/tree/base')
 const UpsertConnectionWebview = require('../view/web/upsert-connection')
 const TerminalWebview = require('../view/web/ppz-terminal')
 const openTableWebview = require('../view/web/table')

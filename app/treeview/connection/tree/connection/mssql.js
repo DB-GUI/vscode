@@ -1,6 +1,6 @@
 const { TreeviewElement, TableElement } = require('../base')
 const ConnectionElement = require('./base')
-const connectionService = require('../../../../../service/connection')
+const connectionService = require('../../../../service/connection')
 
 class MssqlElement extends ConnectionElement {
   async _getChildren2() {

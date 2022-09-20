@@ -39,7 +39,7 @@ class TreeviewElement {
   }
   
   getIconPath(path) {
-    return Path.join(__filename, '../../../../../../assets/icon/', path)
+    return Path.join(__filename, '../../../../../assets/icon/', path)
   }
 }
 exports.TreeviewElement = TreeviewElement

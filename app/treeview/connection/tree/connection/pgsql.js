@@ -1,5 +1,5 @@
 const { TreeviewElement, TableElement } = require('../base')
-const connectionService = require('../../../../../service/connection')
+const connectionService = require('../../../../service/connection')
 const ConnectionElement = require('./base')
 
 class PgsqlElement extends ConnectionElement {

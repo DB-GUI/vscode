@@ -1,6 +1,6 @@
 const collection = require('../../model/connection')
 const clone = require('@ppzp/stupid/clone')
-const connectionTreeview = require('../../view/treeview/connection')
+const connectionTreeview = require('../../treeview/connection')
 const MysqlKnexConnection = require('./mysql')
 const PostgreSQLKnexConnection = require('./pgsql')
 const Sqlite3KnexConnection = require('./sqlite3')

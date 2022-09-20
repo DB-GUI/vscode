@@ -1,5 +1,5 @@
 const vscode = require('vscode')
-const connectionService = require('../../../../service/connection')
+const connectionService = require('../../../service/connection')
 const { TreeviewElement } = require('./base')
 const getConEl = require('./connection/index')
 

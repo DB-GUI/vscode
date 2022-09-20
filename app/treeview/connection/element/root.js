@@ -1,7 +1,10 @@
 const vscode = require('vscode')
 const connectionService = require('../../../service/connection')
 const { TreeviewElement } = require('./base')
-const getConEl = require('./connection/index')
+const { MysqlElement } = require('./adapter/mysql')
+const { Sqlite3Element } = require('./adapter/sqlite3')
+const { PgsqlElement } = require('./adapter/pgsql')
+const { MssqlElement } = require('./adapter/mssql')
 
 module.exports =
 class RootElement extends TreeviewElement {
@@ -13,7 +16,19 @@ class RootElement extends TreeviewElement {
   }
   _getChildren() {
     return connectionService.getAll().map(
-      options => getConEl(this, options)
+      options => {
+        // PPZ_ADAPTER
+        const Klass = {
+          mysql: MysqlElement,
+          sqlite3: Sqlite3Element,
+          postgresql: PgsqlElement,
+          cockroachdb: PgsqlElement,
+          mssql: MssqlElement,
+        }[options.client]
+        if(!Klass)
+          throw Error('未知的连接类型')
+        return new Klass(this, options)
+      }
     )
   }
   refresh() {

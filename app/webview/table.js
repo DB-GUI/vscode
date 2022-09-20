@@ -1,9 +1,8 @@
 const Webview = require('./common/base')
 const noty = require('../../lib/vscode-utils/noty')
-const { TableElement } = require('../treeview/connection/tree/base')
+const { TableElement } = require('../treeview/connection/element/base')
 const NewRecordWebview = require('./new-record')
 const formatDate = require('@ppzp/stupid/format-date')
-const TerminalWebview = require('./ppz-terminal')
 const { get: getContext } = require('@ppzp/context')
 
 class TableWebview extends Webview {

@@ -1,5 +1,5 @@
-const { tree } = require('../treeview/connection')
-const { TreeviewElement } = require('../treeview/connection/tree/base')
+const connectionTreeview = require('../treeview/connection')
+const { TreeviewElement } = require('../treeview/connection/element/base')
 const UpsertConnectionWebview = require('../webview/upsert-connection')
 const TerminalWebview = require('../webview/ppz-terminal')
 const openTableWebview = require('../webview/table')
@@ -12,9 +12,8 @@ exports.addConnection = function() {
   new UpsertConnectionWebview()
 }
 
-exports.refreshTreeChildren = function(el = tree) {
-  checkEl(el)
-  el.refresh()
+exports.refreshTreeChildren = function(el) {
+  connectionTreeview.reload(el)
 }
 // 点击“编辑按钮”，开始填“连接信息”，此时还未编辑完成
 exports.editTreeItem = function(el) {

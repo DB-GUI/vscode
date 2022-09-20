@@ -1,19 +1,33 @@
 const vscode = require('vscode')
-const Tree = require('./tree/root')
+const Tree = require('./element/root')
 
-const updateEvent = new vscode.EventEmitter()
-const tree = new Tree(updateEvent)
-exports.tree = tree
+class ConnectionTreeview {
+  init() {
+    const updateEvent = new vscode.EventEmitter()
+    const root = this.root = new Tree(updateEvent)
 
-exports.options = {
-  showCollapseAll: true,
-  treeDataProvider: {
-    onDidChangeTreeData: updateEvent.event,
-    getChildren(el = tree) {
-      return el.getChildren()
-    },
-    getTreeItem(el) {
-      return el.getTreeItem()
+    return {
+      showCollapseAll: true,
+      treeDataProvider: {
+        onDidChangeTreeData: updateEvent.event,
+        getChildren(el = root) {
+          return el.getChildren()
+        },
+        getTreeItem(el) {
+          return el.getTreeItem()
+        }
+      }
     }
   }
+
+  addConnection() {
+
+  }
+
+  reload(el = this.root) {
+    
+  }
 }
+
+
+module.exports = new ConnectionTreeview()

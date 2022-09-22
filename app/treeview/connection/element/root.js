@@ -16,19 +16,7 @@ class RootElement extends TreeviewElement {
   }
   _getChildren() {
     return connectionService.getAll().map(
-      options => {
-        // PPZ_ADAPTER
-        const Klass = {
-          mysql: MysqlElement,
-          sqlite3: Sqlite3Element,
-          postgresql: PgsqlElement,
-          cockroachdb: PgsqlElement,
-          mssql: MssqlElement,
-        }[options.client]
-        if(!Klass)
-          throw Error('未知的连接类型')
-        return new Klass(this, options)
-      }
+      options => getConEl(this, options)
     )
   }
   refresh() {
@@ -48,7 +36,7 @@ class RootElement extends TreeviewElement {
   }
   updateChild(options, connect) {
     // 更新入口在 treeview，此时 treeview 一定展开过，this._children 一定存在
-    const index = this._children.findIndex(conn => conn.options.id == options.id)
+    const index = this._children.findIndex(conn => conn.options._id === options._id)
     this._children[index].close()
     const newChild = getConEl(this, options)
     newChild.collapse = vscode.TreeItemCollapsibleState[connect?'Expanded':'Collapsed']
@@ -60,4 +48,18 @@ class RootElement extends TreeviewElement {
     this._children.splice(index, 1)
     this.updateEvent.fire()
   }
+}
+
+function getConEl(that, options) {
+  // PPZ_ADAPTER
+  const Klass = {
+    mysql: MysqlElement,
+    sqlite3: Sqlite3Element,
+    postgresql: PgsqlElement,
+    cockroachdb: PgsqlElement,
+    mssql: MssqlElement,
+  }[options.client]
+  if(!Klass)
+    throw Error('未知的连接类型')
+  return new Klass(that, options)
 }

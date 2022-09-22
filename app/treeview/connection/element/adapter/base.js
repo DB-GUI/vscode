@@ -45,7 +45,7 @@ class ConnectionElement extends TreeviewElement {
       return
     // 数据删除
     try {
-      connectionService.deleteById(this.options.id)
+      connectionService.deleteById(this.options._id)
       console.debug('已删除连接', this.name)
     } catch(err) {
       noty.error('删除失败 ' + err)

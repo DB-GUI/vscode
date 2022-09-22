@@ -1,6 +1,8 @@
-const Path = require('path')
-const vscode = require('vscode')
+import Path from 'path'
+import vscode from 'vscode'
+import { get as getContext } from '@ppzp/context'
 
+export
 class TreeviewElement {
   constructor({
     parent,
@@ -39,11 +41,11 @@ class TreeviewElement {
   }
   
   getIconPath(path) {
-    return Path.join(__filename, '../../../../../assets/icon/', path)
+    return Path.join(getContext().extensionPath, 'assets/icon/', path)
   }
 }
-exports.TreeviewElement = TreeviewElement
 
+export
 class TableElement extends TreeviewElement {
   get isTable() { return true }
   constructor(parent, schemaName, tbName, names, connection) {
@@ -69,4 +71,3 @@ class TableElement extends TreeviewElement {
     return result
   }
 }
-exports.TableElement = TableElement

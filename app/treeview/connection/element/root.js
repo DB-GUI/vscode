@@ -1,12 +1,12 @@
-const vscode = require('vscode')
-const connectionService = require('../../../service/connection')
-const { TreeviewElement } = require('./base')
-const { MysqlElement } = require('./adapter/mysql')
-const { Sqlite3Element } = require('./adapter/sqlite3')
-const { PgsqlElement } = require('./adapter/pgsql')
-const { MssqlElement } = require('./adapter/mssql')
+import vscode from 'vscode'
+import connectionService from '../../../service/connection'
+import { TreeviewElement } from './base'
+import { MysqlElement } from './adapter/mysql'
+import { Sqlite3Element } from './adapter/sqlite3'
+import { PgsqlElement } from './adapter/pgsql'
+import { MssqlElement } from './adapter/mssql'
 
-module.exports =
+export default
 class RootElement extends TreeviewElement {
   constructor(updateEvent) {
     super({

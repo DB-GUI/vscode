@@ -1,6 +1,6 @@
-const Webview = require('./common/base')
+import Webview from './common/base'
 
-module.exports = 
+export default
 class TableWebview extends Webview {
   constructor() {
     super({

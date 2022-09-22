@@ -1,13 +1,14 @@
-const collection = require('../../model/connection')
-const clone = require('@ppzp/stupid/clone')
-const connectionTreeview = require('../../treeview/connection')
-const MysqlKnexConnection = require('./mysql')
-const PostgreSQLKnexConnection = require('./pgsql')
-const Sqlite3KnexConnection = require('./sqlite3')
-const CockroachDB = require('./cock')
-const MSSQLKnexConnection = require('./mssql')
+import clone from '@ppzp/stupid/clone'
 
-const service = module.exports = Object.create(collection)
+import collection from '../../model/connection.js'
+import connectionTreeview from '../../treeview/connection/index.js'
+import MysqlKnexConnection from './mysql'
+import PostgreSQLKnexConnection from './pgsql'
+import Sqlite3KnexConnection from './sqlite3'
+import CockroachDB from './cock'
+import MSSQLKnexConnection from './mssql'
+
+const service = Object.create(collection)
 
 service.connect = function(connection) {
   console.debug('connecting to', connection)
@@ -37,3 +38,5 @@ service.upsert = async function({ record, connect }) {
   else
     connectionTreeview.addConnection(options, connect)
 }
+
+export default service

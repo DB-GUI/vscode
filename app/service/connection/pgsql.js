@@ -1,7 +1,7 @@
-const { KnexConnection, TableInfo, notyConnErr } = require('./base')
-const noty = require('../../../lib/vscode-utils/noty')
+import { KnexConnection, TableInfo, notyConnErr } from './base'
+import noty from '../../../lib/vscode-utils/noty'
 
-module.exports =
+export default
 class PostgreSQLKnexConnection extends KnexConnection {
   get clientName() { return 'postgresql' }
   get driveName() { return 'pg' }

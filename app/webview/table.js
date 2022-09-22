@@ -1,9 +1,10 @@
-const Webview = require('./common/base')
-const noty = require('../../lib/vscode-utils/noty')
-const { TableElement } = require('../treeview/connection/element/base')
-const NewRecordWebview = require('./new-record')
-const formatDate = require('@ppzp/stupid/format-date')
-const { get: getContext } = require('@ppzp/context')
+import Webview from './common/base'
+import noty from '../../lib/vscode-utils/noty'
+import { TableElement } from '../treeview/connection/element/base'
+import NewRecordWebview from './new-record'
+import formatDate from '@ppzp/stupid/format-date'
+import { get as getContext } from '@ppzp/context'
+import makeOpenTerminal from './common/open-terminal'
 
 class TableWebview extends Webview {
   constructor(schemaName, tableName, names, connection) {
@@ -16,6 +17,7 @@ class TableWebview extends Webview {
         names
       },
       webviewServerHandlers: {
+        ...makeOpenTerminal(connection.clone()),
         async getData({ params, sort }) {
           params.sort = sort
           const fields = await connection.fieldList(schemaName, tableName)
@@ -62,7 +64,8 @@ class TableWebview extends Webview {
 
 const map = new Map()
 
-module.exports = function openTableWebview(tableEl) {
+export default
+function openTableWebview(tableEl) {
   if(!(tableEl instanceof TableElement))
     throw Error('cant create a TableWebview from a non-TableElement')
   

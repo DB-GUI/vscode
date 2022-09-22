@@ -1,7 +1,8 @@
-const Webview = require('./common/form')
-const service = require('../service/connection')
+import Webview from './common/form-base'
+import service from '../service/connection'
 
-module.exports = class UpsertConnectionWebview extends Webview {
+export default
+class UpsertConnectionWebview extends Webview {
   constructor(record) {
     super({
       filename: 'upsert-connection',

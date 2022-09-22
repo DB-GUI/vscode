@@ -1,14 +1,15 @@
-const { TreeviewElement, TableElement } = require('../base')
-const ConnectionElement = require('./base')
+import { TreeviewElement, TableElement } from '../base'
+import ConnectionElement from './base'
 
+export
 class MysqlElement extends ConnectionElement {
   async _getChildren2() {
     const dbList = await this.connection.dbList()
     return dbList.map(dbName => new MysqlSchemaElement(this, dbName))
   }
 }
-exports.MysqlElement = MysqlElement
 
+export
 class MysqlSchemaElement extends TreeviewElement {
   get isSchema() { return true }
   get connection() { return this.parent.connection }
@@ -28,4 +29,3 @@ class MysqlSchemaElement extends TreeviewElement {
     ))
   }
 }
-exports.MysqlSchemaElement = MysqlSchemaElement

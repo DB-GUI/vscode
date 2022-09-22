@@ -1,15 +1,16 @@
-const { TreeviewElement, TableElement } = require('../base')
-const ConnectionElement = require('./base')
-const connectionService = require('../../../../service/connection')
+import { TreeviewElement, TableElement } from '../base'
+import ConnectionElement from './base'
+import connectionService from '../../../../service/connection'
 
+export
 class MssqlElement extends ConnectionElement {
   async _getChildren2() {
     const dbList = await this.connection.dbList()
     return dbList.map(name => new MssqlDatabaseElement(this, name))
   }
 }
-exports.MssqlElement = MssqlElement
 
+export
 class MssqlDatabaseElement extends TreeviewElement {
   get isSchema() { return false }
   get connection() {
@@ -32,8 +33,8 @@ class MssqlDatabaseElement extends TreeviewElement {
     return schemaList.map(options => new MssqlSchemaElement(this, options))
   }
 }
-exports.MssqlDatabaseElement = MssqlDatabaseElement
 
+export
 class MssqlSchemaElement extends TreeviewElement {
   get isSchema() { return true }
   get connection() { return this.parent.connection }
@@ -53,4 +54,3 @@ class MssqlSchemaElement extends TreeviewElement {
     ))
   }
 }
-exports.MssqlSchemaElement = MssqlSchemaElement

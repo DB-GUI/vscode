@@ -1,6 +1,7 @@
-const { TableElement } = require('../base')
-const ConnectionElement = require('./base')
+import { TableElement } from '../base'
+import ConnectionElement from './base'
 
+export
 class Sqlite3Element extends ConnectionElement {
   get isSchema() { return true }
   get isSqlite3Element() { return true }
@@ -13,4 +14,3 @@ class Sqlite3Element extends ConnectionElement {
     return tbList.map(tb => new TableElement(this, null, tb.name, [this.name, tb.name], this.connection))
   }
 }
-exports.Sqlite3Element = Sqlite3Element

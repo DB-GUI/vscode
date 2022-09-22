@@ -1,14 +1,16 @@
-const Path = require('path')
-const fs = require('fs')
-const vscode = require('vscode')
-const untitledFile = require('../../../lib/vscode-utils/untitled-file')
-const noty = require('../../../lib/vscode-utils/noty')
-const prompt = require('../../../lib/vscode-utils/prompt/webview/server')
-const WebviewServer = require('../../../lib/vscode-utils/request/server')
-const selectFile = require('../../../lib/vscode-utils/file-selector/server')
-const { get: getContext } = require('@ppzp/context')
+import Path from 'path'
+import fs from 'fs'
+import vscode from 'vscode'
+import { get as getContext } from '@ppzp/context'
 
-module.exports = class Webview {
+import untitledFile from '../../../lib/vscode-utils/untitled-file'
+import noty from '../../../lib/vscode-utils/noty'
+import prompt from '../../../lib/vscode-utils/prompt/webview/server'
+import WebviewServer from '../../../lib/vscode-utils/request/server'
+import selectFile from '../../../lib/vscode-utils/file-selector/server'
+
+export default
+class Webview {
   constructor({
     connection,
     filename,
@@ -52,7 +54,7 @@ module.exports = class Webview {
       dark: this.uri('logo-white.svg')
     }
     // 处理来自网页的请求
-    new WebviewServer(this.panel.webview, getContext().subscriptions, Object.assign({
+    new WebviewServer(this.panel.webview, getContext().subscriptions, {
       noty: ({ type, msg, btns }) => {
         const result = noty[type](msg, btns)
         if(btns.length)
@@ -63,10 +65,6 @@ module.exports = class Webview {
       openFile({ content, language }) {
         untitledFile(content, language)
       },
-      openTerminal: sql => {
-        const Class = require('../ppz-terminal')
-        new Class(this.connection.clone(), sql)
-      },
       dispose: () => { // 销毁 webview
         this.dispose()
       },
@@ -74,8 +72,9 @@ module.exports = class Webview {
         this.state = state
         console.debug('state saved')
       },
-      getState: () => this.state
-    }, webviewServerHandlers))
+      getState: () => this.state,
+      ...webviewServerHandlers
+    })
 
     console.debug('webview constructed')
   }
@@ -90,7 +89,7 @@ module.exports = class Webview {
   }
 
   localPath(path) {
-    return Path.join(__dirname, '../../../assets', path)
+    return Path.join(getContext().extensionPath, 'assets', path)
   }
 
   uri(path) {

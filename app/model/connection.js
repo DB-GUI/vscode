@@ -1,4 +1,4 @@
-const Collection = require('@ppzp/bd/collection')
+import Collection from '@ppzp/bd/collection'
 
 class ConnectionCollection extends Collection {
   constructor() {
@@ -20,4 +20,4 @@ class ConnectionCollection extends Collection {
   }
 }
 
-module.exports = new ConnectionCollection()
+export default new ConnectionCollection()

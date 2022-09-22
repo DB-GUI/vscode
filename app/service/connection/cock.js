@@ -1,6 +1,6 @@
-const Base = require('./pgsql')
+import Base from './pgsql'
 
-module.exports =
+export default
 class CockroachDBKnexConnection extends Base {
   get driveName() { return 'cockroachdb' }
 }

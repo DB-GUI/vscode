@@ -1,7 +1,7 @@
-const vscode = require('vscode')
-const connection = require('./connection')
-const other = require('./other')
-const { get: getContext } = require('@ppzp/context')
+import vscode from 'vscode'
+import * as connection from './connection'
+import * as other from './other'
+import { get as getContext } from '@ppzp/context'
 
 function registerCommand(name, handler) {
   // console.debug('注册 command', name)
@@ -13,7 +13,7 @@ function registerCommand(name, handler) {
   )
 }
 
-module.exports = function() {
+export default function() {
   ;[
     connection,
     other

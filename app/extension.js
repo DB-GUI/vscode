@@ -1,9 +1,10 @@
-const { set: setContext } = require('@ppzp/context')
-const initState = require('./model/migration')
-const initCommand = require('./command')
-const initTreeview = require('./treeview')
+import { set as setContext } from '@ppzp/context'
+import initState from './model/migration/index.js'
+import initCommand from './command/index.js'
+import initTreeview from './treeview/index.js'
 
-exports.activate = async function(context) {
+export
+async function activate(context) {
   setContext(context)
   
   try {

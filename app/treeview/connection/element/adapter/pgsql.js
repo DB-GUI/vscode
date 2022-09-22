@@ -1,7 +1,8 @@
-const { TreeviewElement, TableElement } = require('../base')
-const connectionService = require('../../../../service/connection')
-const ConnectionElement = require('./base')
+import { TreeviewElement, TableElement } from '../base'
+import connectionService from '../../../../service/connection'
+import ConnectionElement from './base'
 
+export
 class PgsqlElement extends ConnectionElement {
   async _getChildren2() {
     const dbList = await this.connection.dbList()
@@ -21,7 +22,6 @@ class PgsqlElement extends ConnectionElement {
     super.refresh()
   }
 }
-exports.PgsqlElement = PgsqlElement
 
 class PgsqlDatabaseElement extends TreeviewElement {
   constructor(connEl, dbName, isDefault) {
@@ -55,6 +55,8 @@ class PgsqlDatabaseElement extends TreeviewElement {
     this.connection.terminal()
   }
 }
+
+export
 class PgsqlSchemaElement extends TreeviewElement {
   get isSchema() { return true }
   get connection() { return this.parent.connection }
@@ -74,4 +76,3 @@ class PgsqlSchemaElement extends TreeviewElement {
     ))
   }
 }
-exports.PgsqlSchemaElement = PgsqlSchemaElement

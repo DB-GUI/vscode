@@ -1,9 +1,9 @@
-const { TreeviewElement } = require('../base')
-const connectionService = require('../../../../service/connection')
-const noty = require('../../../../../lib/vscode-utils/noty')
-const warn = require('../../../../../lib/vscode-utils/prompt/confirm').warn
+import { TreeviewElement } from '../base'
+import connectionService from '../../../../service/connection'
+import noty from '../../../../../lib/vscode-utils/noty'
+import { warn } from '../../../../../lib/vscode-utils/prompt/confirm'
 
-module.exports =
+export default
 class ConnectionElement extends TreeviewElement {
   get isConnection() { return true }
   get connection() {
@@ -45,7 +45,7 @@ class ConnectionElement extends TreeviewElement {
       return
     // 数据删除
     try {
-      connectionService.drop(this.options.id)
+      connectionService.deleteById(this.options.id)
       console.debug('已删除连接', this.name)
     } catch(err) {
       noty.error('删除失败 ' + err)

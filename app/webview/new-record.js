@@ -1,7 +1,7 @@
-const Webview = require('./common/base')
-const noty = require('../../lib/vscode-utils/noty')
+import Webview from './common/base'
+import noty from '../../lib/vscode-utils/noty'
 
-module.exports = 
+export default
 class TableWebview extends Webview {
   constructor(database, table, connection, data) {
     console.debug('NewRecordWebview constructing', { database, table })

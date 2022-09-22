@@ -1,6 +1,6 @@
-const Webview = require('./common/base')
+import Webview from './common/base'
 
-module.exports = 
+export default
 class TerminalWebview extends Webview {
   constructor(connection, initSQL) {
     console.debug('TerminalWebview constructing')

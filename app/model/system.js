@@ -1,3 +1,3 @@
-const Collection = require('@ppzp/bd')
+import Collection from '@ppzp/bd'
 
-module.exports = new Collection('system')
+export default new Collection('system')

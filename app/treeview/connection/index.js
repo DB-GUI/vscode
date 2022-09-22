@@ -1,5 +1,5 @@
-const vscode = require('vscode')
-const Tree = require('./element/root')
+import vscode from 'vscode'
+import Tree from './element/root'
 
 class ConnectionTreeview {
   init() {
@@ -32,5 +32,4 @@ class ConnectionTreeview {
   }
 }
 
-
-module.exports = new ConnectionTreeview()
+export default new ConnectionTreeview()

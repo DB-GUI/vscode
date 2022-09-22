@@ -1,9 +1,10 @@
-const { get } = require('@ppzp/context')
+import { get } from '@ppzp/context'
 
-const v0_0 = require('./0-0-0')
-const v0_4 = require('./0-4-0')
+import v0_0 from './0-0-0'
+import v0_4 from './0-4-0'
 
-module.exports = async function() {
+export default
+async function() {
   const state = get().globalState
   await v0_0(state)
   await v0_4(state)

@@ -1,6 +1,7 @@
-const vscode = require('vscode')
-const connection = require('./connection')
+import vscode from 'vscode'
+import connection from './connection'
 
-module.exports = function() {
+export default
+function initTreeview() {
   vscode.window.createTreeView('connection', connection.init())
 }

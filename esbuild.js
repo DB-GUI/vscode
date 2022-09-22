@@ -4,6 +4,7 @@ const options = {
   sourcemap: true,
   external: [
     'vscode',
+    'sqlite3',
     'oracledb', 'mysql', 'better-sqlite3', 'pg-query-stream',
     'pg-native', 'mock-aws-s3', 'aws-sdk', 'nock'
   ],

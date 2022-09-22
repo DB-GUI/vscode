@@ -5,6 +5,7 @@ import initTreeview from './treeview/index.js'
 
 export
 async function activate(context) {
+  console.log('[ppz extension path]', context.extensionPath)
   setContext(context)
   
   try {

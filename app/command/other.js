@@ -1,7 +1,6 @@
 import cp from 'child_process'
 import { get as getContext } from '@ppzp/context'
 
-import Wechat from '../webview/wechat.js'
 import Feifei from '../webview/feifei.js'
 import noty from '../../lib/vscode-utils/noty/index.js'
 import { warn } from '../../lib/vscode-utils/prompt/confirm'
@@ -22,11 +21,6 @@ async function empty() {
 export
 function github() {
   cp.exec('start https://github.com/ppz-pro/ppz.vscode')
-}
-
-export
-function wechat() {
-  new Wechat()
 }
 
 export

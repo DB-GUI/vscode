@@ -67,7 +67,7 @@
 			},
 			{
 				"view": "help",
-				"contents": "简介：管理数据库的图形化界面\n当前版本：v0.5.0-beta\n[$(preview)使用帮助](https://gitee.com/ppz-pro/ppz.vscode/wikis/pages)\n[$(comment)意见反馈](https://gitee.com/ppz-pro/ppz.vscode/issues)\n[$(bug)发现 bug！](https://gitee.com/ppz-pro/ppz.vscode/issues)\n[🐈可爱猫咪](command:ppz.love)\n[$(trash)清空 PPZ](command:ppz.empty)"
+				"contents": "简介：管理数据库的图形化界面\n当前版本：v0.5.0-alpha\n[$(preview)使用帮助](https://gitee.com/ppz-pro/ppz.vscode/wikis/pages)\n[$(comment)意见反馈](https://gitee.com/ppz-pro/ppz.vscode/issues)\n[$(bug)发现 bug！](https://gitee.com/ppz-pro/ppz.vscode/issues)\n[🐈可爱猫咪](command:ppz.love)\n[$(trash)清空 PPZ](command:ppz.empty)"
 			}
 		],
 		"commands": [
@@ -201,7 +201,7 @@
 		"esbuild": "^0.15.8"
 	},
 	"dependencies": {
-		"@ppzp/bd": "file:../bd.vscode/ppzp-bd-0.1.1.tgz",
+		"@ppzp/bd": "^0.1.1",
 		"@ppzp/context": "^0.0.0",
 		"@ppzp/stupid": "^0.1.1",
 		"@ppzp/type": "^0.0.4",

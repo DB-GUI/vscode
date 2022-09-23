@@ -1,7 +1,4 @@
 body {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
   --padding-h: .88em;
 }
 
@@ -68,6 +65,6 @@ dialog.sql .body p {
 }
 
 .table-wrapper {
-  flex: 1;
+  height: calc(100vh - 3.76rem);
   overflow: auto;
 }

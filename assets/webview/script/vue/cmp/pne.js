@@ -92,7 +92,7 @@ export const style = `
   .pne thead {
     position: sticky;
     top: 0;
-    background: rgba(var(--color1), .1);
+    background: rgba(var(--color0), .68);
   }
   .pne th div {
     display: flex;

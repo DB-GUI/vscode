@@ -1,7 +1,6 @@
 const Path = require('path')
 const FS = require('node:fs/promises')
 const esbuild = require('esbuild')
-const childProcess = require('child_process')
 const packageJson = require('../package.json')
 
 ;(async function package() {
@@ -13,25 +12,24 @@ const packageJson = require('../package.json')
   // 删除旧目录
   const dir = p('../dist')
   try {
-    await FS.access(dir, FS.constants.R_OK)
     await FS.rm(dir, {
       recursive: true,
       force: true
     })
     console.log('删除老文件')
   } catch(err) {
-    console.log('未检测到老文件')
+    console.log('未检测到老文件或没有权限')
   }
   await FS.mkdir(dir)
 
   // webview
-  cp('assets')
+  await cp('assets')
   // lib
-  cp('lib')
+  await cp('lib')
   // doc
-  cp('CHANGELOG.md')
-  cp('LICENSE')
-  cp('README.md')
+  await cp('CHANGELOG.md')
+  await cp('LICENSE')
+  await cp('README.md')
 
   // package.json
   delete packageJson.devDependencies
@@ -92,7 +90,10 @@ const packageJson = require('../package.json')
 function p(target) { // 获取绝对路径
   return Path.join(__dirname, target)
 }
-function cp(from, to = '../dist') { // 复制
+async function cp(from) { // 复制
+  const to = '../dist/' + from
   from = '../' + from
-  childProcess.execSync(`cp -r ${p(from)} ${p(to)}`)
+  await FS.cp(p(from), p(to), {
+    recursive: true
+  })
 }

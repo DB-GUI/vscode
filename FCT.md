@@ -4,6 +4,8 @@
 
 [使用 Docker 搭建测试数据库](https://zhuanlan.zhihu.com/p/546463994)
 
+> 目前 ppz 不支持创建数据库、表的功能，可以使用 [Dbeaver](https://dbeaver.io/) 或 ppz 内置的模拟终端，来创建
+
 ### 连接
 + 连接管理
 

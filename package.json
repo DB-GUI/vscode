@@ -6,8 +6,8 @@
 	"publisher": "ppz",
 	"icon": "assets/icon.png",
 	"scripts": {
-		"dist": "node ./esbuild.js pro",
-		"dev": "node ./esbuild.js dev"
+		"dist": "node ./build/index.js pro && cd dist && vsce package",
+		"dev": "node ./build/index.js dev"
 	},
 	"keywords": [
 		"database",

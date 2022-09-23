@@ -1,7 +1,0 @@
-.vscode
-app
-node_modules
-.gitignore
-esbuild.js
-extension.js.map
-*.vsix

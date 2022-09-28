@@ -37,40 +37,11 @@ const packageJson = require('../package.json')
   // package.json
   delete packageJson.devDependencies
   delete packageJson.dependencies
-  packageJson.dependencies = {
-		"sqlite3": "^5.1.1",
-  }
   await FS.writeFile(p('../dist/package.json'), JSON.stringify(packageJson))
   console.log('write package.json')
 
-  // fake sqlite3
-  if(buildType === 'pro') {
-    await FS.mkdir(p('../dist/node_modules/sqlite3'), {
-      recursive: true
-    })
-    await FS.writeFile(p('../dist/node_modules/sqlite3/package.json'), `
-      {
-        "name": "sqlite3",
-        "description": "Asynchronous, non-blocking SQLite3 bindings",
-        "version": "5.1.1",
-        "homepage": "https://github.com/TryGhost/node-sqlite3",
-        "author": {
-          "name": "Mapbox",
-          "url": "https://mapbox.com/"
-        },
-        "files": [
-          "index.js"
-        ],
-        "main": "./index.js"
-      }
-    `)
-    await FS.writeFile(p('../dist/node_modules/sqlite3/index.js'), '"ppz"')
-    console.log('fake sqlite3')
-  }
-
   // .ignore
   await FS.writeFile(p('../dist/.vscodeignore'), `
-    node_modules
     *.vsix
     *.js.map
   `)

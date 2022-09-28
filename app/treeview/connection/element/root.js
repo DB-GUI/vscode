@@ -1,5 +1,6 @@
 import vscode from 'vscode'
 import connectionService from '../../../service/connection'
+import { checkInstall } from '../../../service/install-sqlite3'
 import { TreeviewElement } from './base'
 import { MysqlElement } from './adapter/mysql'
 import { Sqlite3Element } from './adapter/sqlite3'
@@ -14,6 +15,14 @@ class RootElement extends TreeviewElement {
       name: 'root'
     })
   }
+
+  async getChildren() {
+    const list = await super.getChildren()
+    if(list.some(item => item.options.client === 'sqlite3'))
+      checkInstall()
+    return list
+  }
+
   _getChildren() {
     return connectionService.getAll().map(
       options => getConEl(this, options)

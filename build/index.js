@@ -8,6 +8,7 @@ const packageJson = require('../package.json')
   const buildType = process.argv[2]
   if(buildType != 'dev' && buildType != 'pro')
     throw Error('error build type: ' + buildType)
+  console.log('build type:', buildType)
 
   // 删除旧目录
   const dir = p('../dist')
@@ -18,9 +19,10 @@ const packageJson = require('../package.json')
     })
     console.log('删除老文件')
   } catch(err) {
-    console.log('未检测到老文件或没有权限')
+    console.log('未检测到老文件或...', err)
   }
   await FS.mkdir(dir)
+  console.log('创建目录', dir)
 
   // webview
   await cp('assets')
@@ -30,6 +32,7 @@ const packageJson = require('../package.json')
   await cp('CHANGELOG.md')
   await cp('LICENSE')
   await cp('README.md')
+  console.log('copy assets, changelog, license, readme')
 
   // package.json
   delete packageJson.devDependencies
@@ -38,28 +41,32 @@ const packageJson = require('../package.json')
 		"sqlite3": "^5.1.1",
   }
   await FS.writeFile(p('../dist/package.json'), JSON.stringify(packageJson))
+  console.log('write package.json')
 
   // fake sqlite3
-  await FS.mkdir(p('../dist/node_modules/sqlite3'), {
-    recursive: true
-  })
-  await FS.writeFile(p('../dist/node_modules/sqlite3/package.json'), `
-    {
-      "name": "sqlite3",
-      "description": "Asynchronous, non-blocking SQLite3 bindings",
-      "version": "5.1.1",
-      "homepage": "https://github.com/TryGhost/node-sqlite3",
-      "author": {
-        "name": "Mapbox",
-        "url": "https://mapbox.com/"
-      },
-      "files": [
-        "index.js"
-      ],
-      "main": "./index.js"
-    }
-  `)
-  await FS.writeFile(p('../dist/node_modules/sqlite3/index.js'), '"ppz"')
+  if(buildType === 'pro') {
+    await FS.mkdir(p('../dist/node_modules/sqlite3'), {
+      recursive: true
+    })
+    await FS.writeFile(p('../dist/node_modules/sqlite3/package.json'), `
+      {
+        "name": "sqlite3",
+        "description": "Asynchronous, non-blocking SQLite3 bindings",
+        "version": "5.1.1",
+        "homepage": "https://github.com/TryGhost/node-sqlite3",
+        "author": {
+          "name": "Mapbox",
+          "url": "https://mapbox.com/"
+        },
+        "files": [
+          "index.js"
+        ],
+        "main": "./index.js"
+      }
+    `)
+    await FS.writeFile(p('../dist/node_modules/sqlite3/index.js'), '"ppz"')
+    console.log('fake sqlite3')
+  }
 
   // .ignore
   await FS.writeFile(p('../dist/.vscodeignore'), `
@@ -67,6 +74,7 @@ const packageJson = require('../package.json')
     *.vsix
     *.js.map
   `)
+  console.log('write .vscodeignore')
 
   // 打包 extension.js
   await esbuild.build({
@@ -84,6 +92,7 @@ const packageJson = require('../package.json')
     platform: 'node',
     outfile: p('../dist/extension.js'),
   })
+  console.log('打包成功，非 app 目录的文件发生改动时，要重启此命令！！！')
 })()
 
 // 工具

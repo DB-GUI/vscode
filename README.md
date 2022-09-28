@@ -27,7 +27,7 @@
 ## why PPZ?
 + 干净：不产生垃圾文件、卸载无残留
 + 不用额外安装桌面软件
-+ 超轻量级
++ 超轻量级（[安装包](https://github.com/ppz-pro/ppz.vscode/releases)在 1MB 以内）
 + 坚持低熵
 
 ## PPZ 需要你！

@@ -1,3 +1,15 @@
+# 0.5.0-beta(2022-09-28)
+### 新增功能
++ Sqlite3 的全平台支持！🎉
+
+### 修复 bug
++ [issue#43](https://github.com/ppz-pro/ppz.vscode/issues/34)
+
+### 优化
++ 底层小型重构，解决循环依赖问题
++ 引入 esbuild 打包，缩小安装包体积
++ table 页，计算 pageSize 值（之前是固定值）
+
 # 0.3.0-alpha(2022-07-27)
 ### 新增功能
 + MSSQL 支持！🎉

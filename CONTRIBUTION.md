@@ -7,7 +7,6 @@ git clone git@github.com:ppz-pro/ppz.vscode.git
 ```
 3. 安装依赖
 > 由于“网络原因”，安装依赖可能会比较慢  
-> 安装 sqlite3 的驱动时，很容易失败（就算换了国内的源也不行），可以多试几次，或连手机热点安装
 
 ``` bash
 cd ppz.vscode

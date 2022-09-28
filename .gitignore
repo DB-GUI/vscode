@@ -1,7 +1,3 @@
-.test
-.test.html
 node_modules
-.vscode-test/
 *.vsix
-
-vue.test.html
+/dist

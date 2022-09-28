@@ -24,8 +24,11 @@ export const options = {
   template: `
     <div class="ppz-pagination">
       <icon-btn @click="refresh" iid="refresh" />
-      <ppz-input v-model.trim="inputingSize" />
-      <span class="txt">条记录 / 页 共 </span><span>{{count}}</span><span class="txt"> 条 </span>
+      <span class="txt">每页</span>
+      <ppz-input class="page-size" v-model.trim="inputingSize" />
+      <span class="txt">条记录，共 </span>
+      <span>{{count}}</span>
+      <span class="txt"> 条、</span>
       <span>{{pageCount}}</span><span class="txt"> 页</span>
       <icon-btn class="big" :disabled="index <= 1" @click="incr(-2)" iid="arrow-left2" />
       <icon-btn class="big" :disabled="index <= 1" @click="incr(-1)" iid="arrow-left" />
@@ -108,5 +111,11 @@ export const style = `
     width: 2.2em;
     padding: 0 0.16em;
     text-align: center;
+    height: 1.3em;
+    background: rgba(var(--color1), .1);
+    border-radius: 4px;
+  }
+  .ppz-pagination .page-size {
+    margin: 0 .3em;
   }
 `

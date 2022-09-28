@@ -1,29 +1,29 @@
-const Wechat = require('../view/web/wechat')
-const Feifei = require('../view/web/feifei')
-const noty = require('../../lib/vscode-utils/noty')
-const warn = require('../../lib/vscode-utils/prompt/confirm').warn
-const cp = require('child_process')
+import cp from 'child_process'
+import { get as getContext } from '@ppzp/context'
 
-exports.empty = async function() {
+import Feifei from '../webview/feifei.js'
+import noty from '../../lib/vscode-utils/noty/index.js'
+import { warn } from '../../lib/vscode-utils/prompt/confirm'
+
+export
+async function empty() {
   if(await warn('确认清除所有数据吗？', '此操作将清除全部 ppz 数据', '确认清除'))
     return
-  const keys = Context.globalState.keys()
+  const keys = getContext().globalState.keys()
   await Promise.all(
     keys.map(key =>
-      Context.globalState.update(key, undefined)
+      getContext().globalState.update(key, undefined)
     )
   )
   noty.info('数据已清空，请重启 vscode')
 }
 
-exports.github = async function() {
+export
+function github() {
   cp.exec('start https://github.com/ppz-pro/ppz.vscode')
 }
 
-exports.wechat = async function() {
-  new Wechat()
-}
-
-exports.love = async function() {
+export
+function love() {
   new Feifei()
 }

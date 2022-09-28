@@ -1,6 +1,6 @@
-const ArrayCollection = require('./collection/array')
+import Collection from '@ppzp/bd/collection'
 
-class ConnectionCollection extends ArrayCollection {
+class ConnectionCollection extends Collection {
   constructor() {
     super('connection')
   }
@@ -18,9 +18,6 @@ class ConnectionCollection extends ArrayCollection {
       record.port = parseInt(record.port) || record.port
     return super.upsert(record)
   }
-
-  validateOne(record) {
-  }
 }
 
-module.exports = new ConnectionCollection()
+export default new ConnectionCollection()

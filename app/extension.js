@@ -1,17 +1,32 @@
-const init = require('./service/init')
+import { set as setContext } from '@ppzp/context'
+import initState from './model/migration/index.js'
+import initCommand from './command/index.js'
+import initTreeview from './treeview/index.js'
 
-exports.activate = async function(context) {
-  console.debug('activating')
-  globalThis.Context = context
+export
+async function activate(context) {
+  console.log('[ppz extension path]', context.extensionPath)
+  setContext(context)
+  
   try {
-    await init()
-    console.debug('activated')
+    // 数据迁移
+    await initState()
+    // 注册命令
+    initCommand()
+    // 左侧的 treeview
+    initTreeview()
   } catch(e) {
     console.error('error on activating')
     console.error(e)
   }
-}
 
-exports.deactivate = function() {
-  console.debug('deactivated')
+  // 未捕获的异常们
+  process.on('uncaughtException', error => {
+    console.error('uncaughtException')
+    console.error(error)
+  })
+  process.on('unhandledRejection', error => {
+    console.error('unhandledRejection')
+    console.error(error)
+  })
 }

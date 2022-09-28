@@ -5,7 +5,7 @@ export const name = 'file-input'
 export const options = {
   props: ['modelValue'],
   template: `
-    <ppz-input v-model="modelValue" @focus="select" />
+    <ppz-input v-model="modelValue" @click="select" />
   `,
   methods: {
     async select() {

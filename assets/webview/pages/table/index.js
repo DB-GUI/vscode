@@ -2,6 +2,12 @@ import VuePage from '../../script/vue/page.js'
 import * as Nav from './nav.js'
 import * as SearchItem from './search-item.js'
 
+const pageSize = (function() {
+  const el = document.querySelector('.table-wrapper')
+  const height = el.clientHeight
+  return Math.floor((height - 26 - 12.6) / 26) // 12.6 是可能出现的横向滚动条
+})()
+
 VuePage(function(page) {
   const tableName = PPZ.initData.names[PPZ.initData.names.length - 1]
 
@@ -10,7 +16,7 @@ VuePage(function(page) {
       return {
         selectParams: {
           search: [],
-          page: { count: 0, size: 16, index: 1 }
+          page: { count: 0, size: pageSize, index: 1 }
         },
         sql: {
           clause: '',

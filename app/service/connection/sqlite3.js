@@ -1,6 +1,6 @@
-const { KnexConnection, TableInfo, notyConnErr } = require('./base')
+import { KnexConnection, TableInfo, notyConnErr } from  './base'
 
-module.exports =
+export default
 class Sqlite3KnexConnection extends KnexConnection {
   get clientName() { return 'sqlite3' }
   get driveName() { return 'sqlite3' }

@@ -1,13 +1,14 @@
-const collection = require('../../model/connection')
-const { clone } = require('../../utils')
-const connectionTreeview = require('../../view/treeview/connection')
-const MysqlKnexConnection = require('./mysql')
-const PostgreSQLKnexConnection = require('./pgsql')
-const Sqlite3KnexConnection = require('./sqlite3')
-const CockroachDB = require('./cock')
-const MSSQLKnexConnection = require('./mssql')
+import clone from '@ppzp/stupid/clone'
 
-const service = module.exports = Object.create(collection)
+import collection from '../../model/connection.js'
+import connectionTreeview from '../../treeview/connection/index.js'
+import MysqlKnexConnection from './mysql'
+import PostgreSQLKnexConnection from './pgsql'
+import Sqlite3KnexConnection from './sqlite3'
+import CockroachDB from './cock'
+import MSSQLKnexConnection from './mssql'
+
+const service = Object.create(collection)
 
 service.connect = function(connection) {
   console.debug('connecting to', connection)
@@ -29,13 +30,13 @@ service.connect = function(connection) {
 }
 
 service.upsert = async function({ record, connect }) {
-  const rawId = record.id
+  const rawId = record._id
   const id = await collection.upsert(record)
-  // 插入连接，是新用户接触的第一个功能
-  // 即使动态修改 treeview 节点很麻烦，也应尽量做好
-  // 但其他 upsert，就要量力而行了（用户可以点击相应的刷新按钮来更新）
+  const options = collection.findById(id)
   if(rawId)
-    connectionTreeview.tree.updateChild(collection.getByKey(id), connect)
+    connectionTreeview.updateConnection(options, connect)
   else
-    connectionTreeview.tree.addChild(record, connect)
+    connectionTreeview.addConnection(options, connect)
 }
+
+export default service

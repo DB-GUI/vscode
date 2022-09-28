@@ -1,5 +1,5 @@
-const { KnexConnection, notyConnErr, TableInfo, ColumnInfo } = require('./base')
-const noty = require('../../../lib/vscode-utils/noty')
+import { KnexConnection, notyConnErr, TableInfo, ColumnInfo } from './base'
+import noty from '../../../lib/vscode-utils/noty'
 
 class MssqlTableInfo extends TableInfo {
   constructor(name, id) {
@@ -8,7 +8,7 @@ class MssqlTableInfo extends TableInfo {
   }
 }
 
-module.exports =
+export default
 class MSSQLKnexConnection extends KnexConnection {
   get clientName() { return 'mssql' }
   get driveName() { return 'mssql' }

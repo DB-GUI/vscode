@@ -2,9 +2,13 @@
 	"name": "ppz",
 	"displayName": "ppz",
 	"description": "UI for database management",
-	"version": "0.3.1",
+	"version": "0.5.0",
 	"publisher": "ppz",
 	"icon": "assets/icon.png",
+	"scripts": {
+		"dist": "node ./build/index.js pro && cd dist && vsce package",
+		"dev": "node ./build/index.js dev"
+	},
 	"keywords": [
 		"database",
 		"sql",
@@ -31,7 +35,7 @@
 	"activationEvents": [
 		"onStartupFinished"
 	],
-	"main": "./app/extension.js",
+	"main": "./extension.js",
 	"contributes": {
 		"viewsContainers": {
 			"activitybar": [
@@ -63,7 +67,7 @@
 			},
 			{
 				"view": "help",
-				"contents": "简介：管理数据库的图形化界面\n当前版本：v0.3.1-beta\n[$(preview)使用帮助](https://github.com/ppz-pro/ppz.vscode/wiki/%E4%BD%BF%E7%94%A8%E5%B8%AE%E5%8A%A9)\n[$(comment-discussion)微信讨论](command:ppz.wechat)\n[$(comment)意见反馈](https://github.com/ppz-pro/ppz.vscode/issues/new)\n[$(bug)发现 bug！](https://github.com/ppz-pro/ppz.vscode/issues)\n[🐈可爱猫咪](command:ppz.love)\n[$(trash)清空 PPZ](command:ppz.empty)"
+				"contents": "简介：管理数据库的图形化界面\n当前版本：v0.5.0-alpha\n[$(preview)使用帮助](https://gitee.com/ppz-pro/ppz.vscode/wikis/pages)\n[$(comment)意见反馈](https://gitee.com/ppz-pro/ppz.vscode/issues)\n[$(bug)发现 bug！](https://gitee.com/ppz-pro/ppz.vscode/issues)\n[🐈可爱猫咪](command:ppz.love)\n[$(trash)清空 PPZ](command:ppz.empty)"
 			}
 		],
 		"commands": [
@@ -128,7 +132,7 @@
 				"category": "PPZ"
 			},
 			{
-				"command": "ppz.export",
+				"command": "ppz.exportBoth",
 				"title": "导出 DDL 和 DML",
 				"icon": "$(export)",
 				"category": "PPZ"
@@ -179,7 +183,7 @@
 					"group": "2_export@2"
 				},
 				{
-					"command": "ppz.export",
+					"command": "ppz.exportBoth",
 					"when": "view == connection && viewItem =~ /^mysqlSchema$|^table$|^pgSchema$|^sqlite3Connection$|^msSchema$/",
 					"group": "2_export@3"
 				},
@@ -193,14 +197,17 @@
 	},
 	"devDependencies": {
 		"@types/node": "14.x",
-		"@types/vscode": "^1.47.3"
+		"@types/vscode": "^1.47.3",
+		"esbuild": "^0.15.8"
 	},
 	"dependencies": {
+		"@ppzp/bd": "^0.1.1",
+		"@ppzp/context": "^0.0.0",
+		"@ppzp/stupid": "^0.1.1",
 		"@ppzp/type": "^0.0.4",
 		"knex": "^2.1.0",
 		"mysql2": "^2.3.3",
 		"pg": "^8.7.3",
-		"sqlite3": "^5.0.5",
 		"tedious": "^15.0.0",
 		"uuid": "^8.3.2"
 	}

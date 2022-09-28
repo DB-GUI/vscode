@@ -1,8 +1,9 @@
-const vscode = require('vscode')
-const Knex = require('knex')
-const noty = require('../../../lib/vscode-utils/noty')
-const untitledFile = require('../../../lib/vscode-utils/untitled-file')
+import vscode from 'vscode'
+import Knex from 'knex'
+import noty from '../../../lib/vscode-utils/noty'
+import untitledFile from '../../../lib/vscode-utils/untitled-file'
 
+export
 class KnexConnection {
   get clientName() { throw Error('未定义 clientName') }
   get driveName() { throw Error('未定义 driveName') }
@@ -182,12 +183,14 @@ function getSchemaName(el) {
   throw Error(msg)
 }
 
+export
 class TableInfo {
   constructor(name) {
     this.name = name
   }
 }
 
+export
 class ColumnInfo {
   constructor(name, type, notNull, defaultTo, pk, ppzType) {
     this.name = name
@@ -199,11 +202,7 @@ class ColumnInfo {
   }
 }
 
-module.exports = {
-  KnexConnection,
-  TableInfo,
-  ColumnInfo,
-  notyConnErr: err => {
-    noty.error('连接失败，请检查连接信息或服务器 ' + err)
-  }
+export
+function notyConnErr(err) {
+  noty.error('连接失败，请检查连接信息或服务器 ' + err)
 }

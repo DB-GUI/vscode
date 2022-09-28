@@ -5,7 +5,7 @@ import * as SearchItem from './search-item.js'
 const pageSize = (function() {
   const el = document.querySelector('.table-wrapper')
   const height = el.clientHeight
-  return Math.floor((height - 26 - 10) / 26) // 10 是可能出现的横向滚动条
+  return Math.floor((height - 26 - 12.6) / 26) // 12.6 是可能出现的横向滚动条
 })()
 
 VuePage(function(page) {

@@ -94,6 +94,9 @@ export const style = `
     top: 0;
     background: rgba(var(--color0), .68);
   }
+  .pne thead th {
+    background: rgba(var(--color1), .08);
+  }
   .pne th div {
     display: flex;
     align-items: center;

@@ -5,9 +5,7 @@ import TerminalWebview from '../webview/ppz-terminal.js'
 import openTableWebview from '../webview/table.js'
 import noty from '../../lib/vscode-utils/noty/index.js'
 
-export {
-  openTableWebview as openTable
-}
+export { openTableWebview }
 
 // 点击“添加按钮”，开始填“连接信息”，此时还未添加完成
 export
@@ -16,12 +14,13 @@ function addConnection() {
 }
 
 export
-function refreshTreeChildren(el) {
+function reloadTreeItemChildren(el) {
   connectionTreeview.reload(el)
 }
+
 // 点击“编辑按钮”，开始填“连接信息”，此时还未编辑完成
 export
-function editTreeItem(el) {
+function editConnection(el) {
   checkEl(el)
   new UpsertConnectionWebview(el.options)
 }
@@ -40,7 +39,7 @@ function ppzTerminal(el) {
 
 // 点击“删除按钮”，此时还未删除
 export
-function deleteTreeItem(el) {
+function deleteConnection(el) {
   checkEl(el)
   el.startDrop()
 }
@@ -69,6 +68,6 @@ function checkEl(el) {
   if(el instanceof TreeviewElement)
     return
   
-  noty.warn('请从左侧 PPZ 视图里操作')
+  noty.warn('请在 PPZ 视图里进行此操作')
   throw Error('用户可能直接执行了命令')
 }

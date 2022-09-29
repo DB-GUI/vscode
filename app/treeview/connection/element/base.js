@@ -64,7 +64,7 @@ class TableElement extends TreeviewElement {
     const result = super.getTreeItem()
     result.iconPath = this.getIconPath('table.svg')
     result.command = {
-      command: 'ppz.openTable',
+      command: 'ppz.openTableWebview',
       title: 'Open Table',
       arguments: [this]
     }

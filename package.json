@@ -79,19 +79,19 @@
 			},
 			{
 				"command": "ppz.github",
-				"title": "to ppz.vscode github",
+				"title": "open PPZ.vscode github",
 				"icon": "$(github-inverted)",
 				"category": "PPZ"
 			},
 			{
-				"command": "ppz.editTreeItem",
-				"title": "编辑",
+				"command": "ppz.editConnection",
+				"title": "编辑连接",
 				"icon": "$(edit)",
 				"category": "PPZ"
 			},
 			{
-				"command": "ppz.deleteTreeItem",
-				"title": "删除",
+				"command": "ppz.deleteConnection",
+				"title": "删除连接",
 				"icon": "$(trash)",
 				"category": "PPZ"
 			},
@@ -102,7 +102,7 @@
 				"category": "PPZ"
 			},
 			{
-				"command": "ppz.refreshTreeChildren",
+				"command": "ppz.reloadTreeItemChildren",
 				"title": "Refresh Children",
 				"icon": "$(refresh)",
 				"category": "PPZ"
@@ -151,24 +151,24 @@
 					"group": "navigation"
 				},
 				{
-					"command": "ppz.refreshTreeChildren",
+					"command": "ppz.reloadTreeItemChildren",
 					"when": "view == connection",
 					"group": "navigation"
 				}
 			],
 			"view/item/context": [
 				{
-					"command": "ppz.refreshTreeChildren",
+					"command": "ppz.reloadTreeItemChildren",
 					"when": "view == connection && viewItem =~ /^connection$|^mysqlSchema$|^pgDatabase$|^pgSchema$|^sqlite3Connection$|^msDatabase$|^msSchema$/",
 					"group": "inline"
 				},
 				{
-					"command": "ppz.editTreeItem",
+					"command": "ppz.editConnection",
 					"when": "view == connection && viewItem =~ /^connection$|^sqlite3Connection$/",
 					"group": "1_conn@1"
 				},
 				{
-					"command": "ppz.deleteTreeItem",
+					"command": "ppz.deleteConnection",
 					"when": "view == connection && viewItem =~ /^connection$|^sqlite3Connection$/",
 					"group": "1_conn@2"
 				},

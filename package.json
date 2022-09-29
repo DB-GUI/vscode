@@ -2,7 +2,7 @@
 	"name": "ppz",
 	"displayName": "ppz",
 	"description": "UI for database management",
-	"version": "0.5.0",
+	"version": "0.5.1",
 	"publisher": "ppz",
 	"icon": "assets/icon.png",
 	"scripts": {

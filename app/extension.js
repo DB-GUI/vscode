@@ -9,10 +9,10 @@ async function activate(context) {
   setContext(context)
   
   try {
-    // 数据迁移
-    await initState()
     // 注册命令
     initCommand()
+    // 数据迁移
+    await initState()
     // 左侧的 treeview
     initTreeview()
   } catch(e) {

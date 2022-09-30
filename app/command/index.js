@@ -1,5 +1,5 @@
 import vscode from 'vscode'
-import * as connection from './connection'
+import connection from './connection'
 import * as other from './other'
 import { get as getContext } from '@ppzp/context'
 

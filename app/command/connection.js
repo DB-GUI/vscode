@@ -1,73 +1,71 @@
 import connectionTreeview from '../treeview/connection/index.js'
 import { TreeviewElement } from '../treeview/connection/element/base.js'
+import ConnectionElement from '../treeview/connection/element/adapter/base'
 import UpsertConnectionWebview from '../webview/upsert-connection.js'
 import TerminalWebview from '../webview/ppz-terminal.js'
 import openTableWebview from '../webview/table.js'
 import noty from '../../lib/vscode-utils/noty/index.js'
 
-export { openTableWebview }
+export default {
+  // 重新加载子节点
+  reloadTreeItemChildren(el) {
+    connectionTreeview.reload(el)
+  },
 
-// 点击“添加按钮”，开始填“连接信息”，此时还未添加完成
-export
-function addConnection() {
-  new UpsertConnectionWebview()
+  // 打开“添加连接”页面
+  addConnection() {
+    new UpsertConnectionWebview()
+  },
+  // 打开“编辑连接”页面
+  editConnection: execBeforeCheckEl(
+    ConnectionElement,
+    el => new UpsertConnectionWebview(el.options)
+  ),
+  // 发起“删除连接”确认
+  deleteConnection: execBeforeCheckEl(
+    ConnectionElement,
+    el => el.startDrop()
+  ),
+  // sql 终端
+  ppzTerminal: execBeforeCheckEl(
+    ConnectionElement,
+    el => new TerminalWebview(el.connection.clone())
+  ),
+
+  // 打开 table
+  openTableWebview,
+
+  // 系统终端
+  terminal(el) {
+    throw Error('此功能待实现')
+  },
+
+  // 导出数据
+  exportDML: execBeforeCheckEl(
+    TreeviewElement,
+    el => el.connection.exportDML(el)
+  ),
+  // 导出表结构
+  exportDDL: execBeforeCheckEl(
+    TreeviewElement,
+    el => el.connection.exportDDL(el)
+  ),
+  // 导出结构和数据
+  exportBoth: execBeforeCheckEl(
+    TreeviewElement,
+    el => el.connection.export(el)
+  )
 }
 
-export
-function reloadTreeItemChildren(el) {
-  connectionTreeview.reload(el)
-}
-
-// 点击“编辑按钮”，开始填“连接信息”，此时还未编辑完成
-export
-function editConnection(el) {
-  checkEl(el)
-  new UpsertConnectionWebview(el.options)
-}
-
-export
-function terminal(el) {
-  checkEl(el)
-  el.terminal()
-}
-
-export
-function ppzTerminal(el) {
-  checkEl(el)
-  new TerminalWebview(el.connection.clone())
-}
-
-// 点击“删除按钮”，此时还未删除
-export
-function deleteConnection(el) {
-  checkEl(el)
-  el.startDrop()
-}
-
-// 导出数据
-export
-function exportDML(el) {
-  checkEl(el)
-  el.connection.exportDML(el)
-}
-// 导出表结构
-export
-function exportDDL(el) {
-  checkEl(el)
-  el.connection.exportDDL(el)
-}
-
-// 导出结构和数据
-export
-function exportBoth(el) {
-  checkEl(el)
-  el.connection.export(el)
-}
-
-function checkEl(el) {
-  if(el instanceof TreeviewElement)
-    return
-  
-  noty.warn('请在 PPZ 视图里进行此操作')
-  throw Error('用户可能直接执行了命令')
+function execBeforeCheckEl(ElTypes, exec) {
+  if(!(ElTypes instanceof Array))
+    ElTypes = [ElTypes]
+  return el => {
+    if(ElTypes.every(El => !(el instanceof El))) {
+      noty.warn('请在 PPZ 视图里进行此操作')
+      console.warn('用户似乎从 Command Palette 调用此命令', el)
+      return
+    }
+    return exec(el)
+  }
 }

@@ -7,7 +7,10 @@ class TerminalWebview extends Webview {
     super({
       filename: 'terminal',
       title: connection.name,
-      initData: { initSQL },
+      initData: {
+        initSQL,
+        clientName: connection.clientName
+      },
       webviewServerHandlers: {
         exec: async (sql) => {
           try {

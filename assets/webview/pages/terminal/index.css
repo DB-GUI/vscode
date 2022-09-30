@@ -23,8 +23,14 @@ textarea:focus {
   margin: 1em 0;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 }
+.tttips {
+  opacity: .6;
+  font-size: .68rem;
+  line-height: 1.5;
+}
+
 .table-wrapper {
   overflow: auto;
 }

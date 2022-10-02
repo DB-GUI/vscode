@@ -77,10 +77,17 @@ class MSSQLKnexConnection extends KnexConnection {
       c.name, c._type_name, !c.is_nullable,
       'ppz-bbbbbbbbbug', // TODO
       pks.indexOf(c.column_id) > -1,
-      null
+      this.ppzType(c._type_name)
     ))
   }
+
   ppzType(rawType) {
+    if(['smalldatetime', 'datetime', 'datetime2', 'datetimeoffset'].includes(rawType))
+      return 'datetime'
+    else if(rawType == 'time')
+      return 'time'
+    else if(rawType == 'date')
+      return 'date'
   }
 
   getCount(count) {

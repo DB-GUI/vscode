@@ -26,6 +26,18 @@ class KnexConnection {
     this.fields = fields // 保存最新的 fields
     return fields
   }
+
+  /**
+   * 统一原始类型  
+   * + datetime: 不带时区的时间类型；需要：格式化显示
+   * + datetime-ts: 带时区的时间类型，有时区问题；需要：格式化显示、处理输入时差
+   *   + 取：数据库原始数据 -> Node Date 类（驱动已处理好）-> 字符串
+   *   + 存：字符串 -> Node Date 类（开发者处理）-> 数据库原始数据（即不能“直接把字符串发给数据库”）
+   */
+  ppzType(rawType) {
+    console.warn('不需要统一类型？')
+  }
+
   formatInput(records) {
     const dateNames = this.fields
       .filter(f => f.ppzType == 'datetime-ts')

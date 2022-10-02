@@ -23,6 +23,7 @@ class PgsqlElement extends ConnectionElement {
   }
 }
 
+export
 class PgsqlDatabaseElement extends TreeviewElement {
   constructor(connEl, dbName, isDefault) {
     super({

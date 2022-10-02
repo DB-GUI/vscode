@@ -1,6 +1,8 @@
 import connectionTreeview from '../treeview/connection/index.js'
 import { TreeviewElement } from '../treeview/connection/element/base.js'
 import ConnectionElement from '../treeview/connection/element/adapter/base'
+import { MssqlDatabaseElement } from '../treeview/connection/element/adapter/mssql.js'
+import { PgsqlDatabaseElement } from '../treeview/connection/element/adapter/pgsql.js'
 import UpsertConnectionWebview from '../webview/upsert-connection.js'
 import TerminalWebview from '../webview/ppz-terminal.js'
 import openTableWebview from '../webview/table.js'
@@ -28,7 +30,7 @@ export default {
   ),
   // sql 终端
   ppzTerminal: execBeforeCheckEl(
-    ConnectionElement,
+    [ConnectionElement, MssqlDatabaseElement, PgsqlDatabaseElement],
     el => new TerminalWebview(el.connection.clone())
   ),
 

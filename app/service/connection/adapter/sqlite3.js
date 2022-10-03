@@ -1,4 +1,4 @@
-import { KnexConnection, TableInfo, notyConnErr } from  './base'
+import { KnexConnection, TableInfo, notyConnErr, ColumnInfo } from  '../base'
 
 export default
 class Sqlite3KnexConnection extends KnexConnection {
@@ -21,13 +21,13 @@ class Sqlite3KnexConnection extends KnexConnection {
 
   async _fieldList(schema, table) {
     return (await this.client.raw(`Pragma table_info(\`${table}\`)`))
-      .map(field => ({
-        name: field.name,
-        type: field.type,
-        notNull: Boolean(field.notnull),
-        default: field.dflt_value,
-        pk: Boolean(field.pk)
-      }))
+      .map(field => new ColumnInfo(
+        field.name,
+        field.type,
+        Boolean(field.notnull),
+        field.dflt_value,
+        Boolean(field.pk)
+      ))
   }
 
   terminal() {

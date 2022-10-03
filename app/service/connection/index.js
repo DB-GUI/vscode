@@ -2,11 +2,11 @@ import clone from '@ppzp/stupid/clone'
 
 import collection from '../../model/connection.js'
 import connectionTreeview from '../../treeview/connection/index.js'
-import MysqlKnexConnection from './mysql'
-import PostgreSQLKnexConnection from './pgsql'
-import Sqlite3KnexConnection from './sqlite3'
-import CockroachDB from './cock'
-import MSSQLKnexConnection from './mssql'
+import MysqlKnexConnection from './adapter/mysql'
+import PostgreSQLKnexConnection from './adapter/pgsql'
+import Sqlite3KnexConnection from './adapter/sqlite3'
+import CockroachDB from './adapter/cock'
+import MSSQLKnexConnection from './adapter/mssql'
 
 const service = Object.create(collection)
 

@@ -2,6 +2,8 @@ import vscode from 'vscode'
 import Knex from 'knex'
 import noty from '../../../lib/vscode-utils/noty'
 import untitledFile from '../../../lib/vscode-utils/untitled-file'
+import formatDate from './format-date'
+import { DateType, otherType, stringType, timeType } from './type'
 
 export
 class KnexConnection {
@@ -27,25 +29,37 @@ class KnexConnection {
     return fields
   }
 
-  /**
-   * 统一原始类型  
-   * + datetime: 不带时区的时间类型；需要：格式化显示
-   * + datetime-ts: 带时区的时间类型，有时区问题；需要：格式化显示、处理输入时差
-   *   + 取：数据库原始数据 -> Node Date 类（驱动已处理好）-> 字符串
-   *   + 存：字符串 -> Node Date 类（开发者处理）-> 数据库原始数据（即不能“直接把字符串发给数据库”）
-   */
-  ppzType(rawType) {
+  /** 统一原始类型 */
+  static ppzType(rawType) {
     console.warn('不需要统一类型？')
   }
 
+  /** 格式化来自用户的 input */
   formatInput(records) {
-    const dateNames = this.fields
-      .filter(f => f.ppzType == 'datetime-ts')
-      .map(f => f.name)
     for(let record of records)
-      for(let name of dateNames)
-        if((record[name] !== '') && (typeof record[name] == 'string'))
-          record[name] = new Date(record[name])
+      for(let f of this.fields) {
+        const type = f.ppzType
+        if(type.is(stringType))
+          continue
+        
+        if(record[f.name] === undefined) // 未填充的字段
+          continue
+        
+        if(record[f.name] === '') { // 非字符串的 '' 均为 null
+          record[f.name] = null
+          continue
+        }
+        
+        if(type.is(DateType)) {
+          const rawValue = record[f.name]
+          if(type.is(timeType))
+            record[f.name] = new Date('2022-10-03 ' + record[f.name])
+          else
+            record[f.name] = new Date(record[f.name])
+          if(isNaN(record[f.name].getTime()))
+            throw Error('格式异常 ' + rawValue)
+        }
+      }
   }
 
   getTarget(schema, table) {
@@ -57,6 +71,12 @@ class KnexConnection {
   }
   async select(schema, table, params) {
     const records = await this._queryBuilder2(schema, table, params)
+    for(let record of records) {
+      for(let f of this.fields) {
+        if(record[f.name] instanceof Date)
+          record[f.name] = formatDate(record[f.name], f.ppzType)
+      }
+    }
     const count = await this._queryBuilder(schema, table).count()
     return {
       records,
@@ -204,7 +224,7 @@ class TableInfo {
 
 export
 class ColumnInfo {
-  constructor(name, type, notNull, defaultTo, pk, ppzType) {
+  constructor(name, type, notNull, defaultTo, pk, ppzType = otherType) {
     this.name = name
     this.type = type
     this.notNull = notNull

@@ -1,5 +1,5 @@
-import { KnexConnection, notyConnErr, TableInfo, ColumnInfo } from './base'
-import noty from '../../../lib/vscode-utils/noty'
+import { KnexConnection, notyConnErr, TableInfo, ColumnInfo } from '../base'
+import noty from '../../../../lib/vscode-utils/noty'
 
 class MssqlTableInfo extends TableInfo {
   constructor(name, id) {
@@ -81,7 +81,7 @@ class MSSQLKnexConnection extends KnexConnection {
     ))
   }
 
-  ppzType(rawType) {
+  static ppzType(rawType) {
     if(['smalldatetime', 'datetime', 'datetime2', 'datetimeoffset'].includes(rawType))
       return 'datetime'
     else if(rawType == 'time')

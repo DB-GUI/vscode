@@ -1,4 +1,5 @@
-import { KnexConnection, TableInfo, notyConnErr } from './base'
+import { KnexConnection, TableInfo, ColumnInfo, notyConnErr } from '../base'
+import { dateTimeMsType1, dateTimeMsType2, dateTimeMsType3, dateTimeType, dateType } from '../type'
 
 export default
 class MysqlKnexConnection extends KnexConnection {
@@ -34,22 +35,34 @@ class MysqlKnexConnection extends KnexConnection {
   
   async _fieldList(schema, table) {
     const result = await this.client.raw(`desc \`${schema}\`.\`${table}\``)
-    return result[0].map(field => ({
-      name: field.Field,
-      type: field.Type,
-      ppzType: this.ppzType(field.Type), // 便于格式化显示/解析
-      notNull: field.Null == 'NO',
-      default: field.Default,
-      pk: field.Key == 'PRI'
-    }))
+    return result[0].map(field => new ColumnInfo(
+      field.Field,
+      field.Type,
+      field.Null == 'NO',
+      field.Default,
+      field.Key == 'PRI',
+      this.constructor.ppzType(field.Type)
+    ))
   }
-  ppzType(rawType) {
-    if(
-      (['date', 'datetime', 'timestamp'].indexOf(rawType) > -1)
-      || /datetime\(\d*\)/.test(rawType)
-      || /timestamp\(\d*\)/.test(rawType)
-    )
-      return 'datetime'
+
+  static ppzType(rawType) {
+    switch(rawType) {
+      case 'datetime':
+      case 'timestamp':
+        return dateTimeType
+      case 'date':
+        return dateType
+      // case 'time': // 被当作字符串
+      case 'datetime(1)': case 'timestamp(1)':
+        return dateTimeMsType1
+      case 'datetime(2)': case 'timestamp(2)':
+        return dateTimeMsType2
+      case 'datetime(3)': case 'timestamp(3)':
+      case 'datetime(4)': case 'timestamp(4)':
+      case 'datetime(5)': case 'timestamp(5)':
+      case 'datetime(6)': case 'timestamp(6)':
+        return dateTimeMsType3
+    }
   }
 
   terminal() {

@@ -73,6 +73,7 @@ async function esbuildBuild(buildType) {
       'pg-native', 'mock-aws-s3', 'aws-sdk', 'nock'
     ],
     platform: 'node',
+    target: 'node12',
     outfile: p('../dist/extension.js'),
   })
   console.log('打包成功，非 app 目录的文件发生改动时，要重启此命令！！！')

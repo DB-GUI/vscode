@@ -22,10 +22,6 @@ class TableWebview extends Webview {
           params.sort = sort
           const fields = await connection.fieldList(schemaName, tableName)
           const { records, count } = await connection.select(schemaName, tableName, params)
-          for(let record of records)
-            for(let f of fields)
-              if(f.ppzType && (f.ppzType.indexOf('datetime') == 0) && record[f.name])
-                record[f.name] = formatDate(record[f.name])
           return { fields, records, count }
         },
         checkSQL({ params, sort }) {

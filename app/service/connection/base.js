@@ -3,7 +3,7 @@ import Knex from 'knex'
 import noty from '../../../lib/vscode-utils/noty'
 import untitledFile from '../../../lib/vscode-utils/untitled-file'
 import formatDate from './format-date'
-import { DateType, otherType, stringType, timeType } from './type'
+import { DateType, otherType, stringType, TimeType } from './type'
 
 export
 class KnexConnection {
@@ -52,7 +52,7 @@ class KnexConnection {
         
         if(type.is(DateType)) {
           const rawValue = record[f.name]
-          if(type.is(timeType))
+          if(type.is(TimeType))
             record[f.name] = new Date('2022-10-03 ' + record[f.name])
           else
             record[f.name] = new Date(record[f.name])

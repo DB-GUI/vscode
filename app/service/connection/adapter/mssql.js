@@ -1,5 +1,10 @@
 import { KnexConnection, notyConnErr, TableInfo, ColumnInfo } from '../base'
 import noty from '../../../../lib/vscode-utils/noty'
+import {
+  dateTimeMsType3, dateTimeType, dateTimeMsType1, dateTimeMsType2,
+  dateType, smallDateTimeType,
+  timeType0, timeType1, timeType2, timeType3
+} from '../type'
 
 class MssqlTableInfo extends TableInfo {
   constructor(name, id) {
@@ -21,6 +26,7 @@ class MSSQLKnexConnection extends KnexConnection {
       options: {
         database,
         port,
+        useUTC: false,
         trustServerCertificate: true
       },
       userName: user,
@@ -77,17 +83,44 @@ class MSSQLKnexConnection extends KnexConnection {
       c.name, c._type_name, !c.is_nullable,
       'ppz-bbbbbbbbbug', // TODO
       pks.indexOf(c.column_id) > -1,
-      this.ppzType(c._type_name)
+      this.constructor.ppzType(c._type_name, c.scale)
     ))
   }
 
-  static ppzType(rawType) {
-    if(['smalldatetime', 'datetime', 'datetime2', 'datetimeoffset'].includes(rawType))
-      return 'datetime'
-    else if(rawType == 'time')
-      return 'time'
-    else if(rawType == 'date')
-      return 'date'
+  static ppzType(rawType, scale) {
+    switch(rawType) {
+      case 'date':
+        return dateType
+      case 'datetime': // 3 位
+        return dateTimeMsType3
+      case 'datetime2':
+      case 'datetimeoffset':
+        switch(scale) {
+          case 0:
+            return dateTimeType
+          case 1:
+            return dateTimeMsType1
+          case 2:
+            return dateTimeMsType2
+          case 3: case 4: case 5: case 6: case 7:
+            return dateTimeMsType3
+          default:
+            throw Error('精度 scale 未识别')
+        }
+      case 'smalldatetime':
+        return smallDateTimeType
+      case 'time':
+        switch(scale) {
+          case 0:
+            return timeType0
+          case 1:
+            return timeType1
+          case 2:
+            return timeType2
+          case 3: case 4: case 5: case 6: case 7:
+            return timeType3
+        }
+    }
   }
 
   getCount(count) {

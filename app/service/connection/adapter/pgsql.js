@@ -1,5 +1,9 @@
 import { KnexConnection, TableInfo, ColumnInfo, notyConnErr } from '../base'
 import noty from '../../../../lib/vscode-utils/noty'
+import {
+  dateType,
+  dateTimeType0, dateTimeType1, dateTimeType2, dateTimeType3
+} from '../type'
 
 export default
 class PostgreSQLKnexConnection extends KnexConnection {
@@ -48,20 +52,29 @@ class PostgreSQLKnexConnection extends KnexConnection {
       !Boolean(field.is_nullable),
       field.column_default,
       pkNames.indexOf(field.column_name) != -1,
-      this.ppzType(field.udt_name)
+      this.constructor.ppzType(field.udt_name, field.datetime_precision)
     ))
   }
-  static ppzType(rawType) {
-    if(
-      (['date', 'timestamp'].indexOf(rawType) > -1)
-      || /timestamp\(\d*\)/.test(rawType)
-    )
-      return 'datetime'
-    else if(
-      'timestamptz' == rawType
-      || /timestamptz\(\d*\)/.test(rawType)
-    )
-      return 'datetime-ts'
+
+  static ppzType(rawType, precision) {
+    switch(rawType) {
+      case 'date':
+        return dateType
+      case 'timestamp':
+      case 'timestamptz':
+        switch(precision) {
+          case 0:
+            return dateTimeType0
+          case 1:
+            return dateTimeType1
+          case 2:
+            return dateTimeType2
+          case 3: case 4: case 5: case 6:
+            return dateTimeType3
+          default:
+            throw Error('未识别的 pgsql 精度' + precision)
+        }
+    }
   }
 
   getCount(count) {

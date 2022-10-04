@@ -123,6 +123,16 @@ class MSSQLKnexConnection extends KnexConnection {
     }
   }
 
+  formatInput(records) {
+    super.formatInput(records)
+    const offsetFields = this.fields.filter(f => f.type == 'datetimeoffset')
+    const offset = new Date().getTimezoneOffset() * 60 * 1000
+    for(let record of records)
+      for(let f of offsetFields)
+        if(record[f.name] instanceof Date)
+          record[f.name] = new Date(record[f.name].getTime() + offset)
+  }
+
   getCount(count) {
     return count[0]['']
   }

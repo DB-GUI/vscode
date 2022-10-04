@@ -1,6 +1,6 @@
 import formatDate from '@ppzp/stupid/format-date'
 import {
-  dateTimeType, dateTimeMsType1, dateTimeMsType2, dateTimeMsType3,
+  dateTimeType0, dateTimeType1, dateTimeType2, dateTimeType3,
   dateType, smallDateTimeType,
   timeType0, timeType1, timeType2, timeType3
 } from './type'
@@ -16,15 +16,15 @@ function(date, ppzType) {
   switch(ppzType) {
     case dateType:
       return result.slice(0, 10)
-    case dateTimeType:
-      return result.slice(0, 19)
     case smallDateTimeType:
       return result.slice(0, 16)
-    case dateTimeMsType1:
+    case dateTimeType0:
+      return result.slice(0, 19)
+    case dateTimeType1:
       return result.slice(0, 21)
-    case dateTimeMsType2:
+    case dateTimeType2:
       return result.slice(0, 22)
-    case dateTimeMsType3:
+    case dateTimeType3:
       return result.slice(0, 23)
     case timeType0:
       return result.slice(11, 19)

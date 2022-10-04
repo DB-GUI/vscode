@@ -1,4 +1,4 @@
---drop schema [ppz-test];
+-- drop schema [ppz-test];
 create schema [ppz-test];
 
 create table [ppz-test].[date] (

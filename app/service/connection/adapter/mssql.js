@@ -1,7 +1,7 @@
 import { KnexConnection, notyConnErr, TableInfo, ColumnInfo } from '../base'
 import noty from '../../../../lib/vscode-utils/noty'
 import {
-  dateTimeMsType3, dateTimeType, dateTimeMsType1, dateTimeMsType2,
+  dateTimeType0, dateTimeType1, dateTimeType2, dateTimeType3,
   dateType, smallDateTimeType,
   timeType0, timeType1, timeType2, timeType3
 } from '../type'
@@ -92,18 +92,18 @@ class MSSQLKnexConnection extends KnexConnection {
       case 'date':
         return dateType
       case 'datetime': // 3 位
-        return dateTimeMsType3
+        return dateTimeType3
       case 'datetime2':
       case 'datetimeoffset':
         switch(scale) {
           case 0:
-            return dateTimeType
+            return dateTimeType0
           case 1:
-            return dateTimeMsType1
+            return dateTimeType1
           case 2:
-            return dateTimeMsType2
+            return dateTimeType2
           case 3: case 4: case 5: case 6: case 7:
-            return dateTimeMsType3
+            return dateTimeType3
           default:
             throw Error('精度 scale 未识别')
         }

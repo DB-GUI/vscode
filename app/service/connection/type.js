@@ -12,18 +12,20 @@ export
 const DateType = Object.create(Type)
 
 export
-const DateTimeMsType = Object.create(DateType)
+const DateTimeType = Object.create(DateType)
 export
-const dateTimeMsType1 = Object.create(DateType)
+const dateTimeType0 = Object.create(DateTimeType)
 export
-const dateTimeMsType2 = Object.create(DateType)
+const dateTimeType1 = Object.create(DateTimeType)
 export
-const dateTimeMsType3 = Object.create(DateType) // js 的 Date 类型就支持到 3
+const dateTimeType2 = Object.create(DateTimeType)
 export
-const dateTimeType = Object.create(DateType)
-export // 专用于 mssql，精确到分钟，参考：https://learn.microsoft.com/en-us/sql/t-sql/data-types/smalldatetime-transact-sql?view=sql-server-ver16
+const dateTimeType3 = Object.create(DateTimeType) // js 的 Date 类型就支持到 3
+
+export // 年月日时分 专用于 mssql，精确到分钟，参考：https://learn.microsoft.com/en-us/sql/t-sql/data-types/smalldatetime-transact-sql?view=sql-server-ver16
 const smallDateTimeType = Object.create(DateType)
-export
+
+export // 年月日
 const dateType = Object.create(DateType)
 
 export

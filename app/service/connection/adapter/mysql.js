@@ -1,5 +1,8 @@
 import { KnexConnection, TableInfo, ColumnInfo, notyConnErr } from '../base'
-import { dateTimeMsType1, dateTimeMsType2, dateTimeMsType3, dateTimeType, dateType } from '../type'
+import {
+  dateType,
+  dateTimeType0, dateTimeType1, dateTimeType2, dateTimeType3,
+} from '../type'
 
 export default
 class MysqlKnexConnection extends KnexConnection {
@@ -49,19 +52,19 @@ class MysqlKnexConnection extends KnexConnection {
     switch(rawType) {
       case 'datetime':
       case 'timestamp':
-        return dateTimeType
+        return dateTimeType0
       case 'date':
         return dateType
       // case 'time': // 被当作字符串
       case 'datetime(1)': case 'timestamp(1)':
-        return dateTimeMsType1
+        return dateTimeType1
       case 'datetime(2)': case 'timestamp(2)':
-        return dateTimeMsType2
+        return dateTimeType2
       case 'datetime(3)': case 'timestamp(3)':
       case 'datetime(4)': case 'timestamp(4)':
       case 'datetime(5)': case 'timestamp(5)':
       case 'datetime(6)': case 'timestamp(6)':
-        return dateTimeMsType3
+        return dateTimeType3
     }
   }
 

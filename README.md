@@ -31,8 +31,8 @@
 + 坚持低熵
 
 ## PPZ 需要你！
-+ 参与功能测试([如何参与？](./FCT.md))
 + [提交 BUG、批评、建议](https://gitee.com/ppz-pro/ppz.vscode/issues)
++ 参与功能测试([如何参与？](./FCT.md))
 + 提交新功能(请查看[开发手册](./CONTRIBUTION.md))
 + 给皮皮仔[画个图标](./assets/icon.png)
 

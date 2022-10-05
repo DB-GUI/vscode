@@ -2,7 +2,6 @@ import Webview from './common/base'
 import noty from '../../lib/vscode-utils/noty'
 import { TableElement } from '../treeview/connection/element/base'
 import NewRecordWebview from './new-record'
-import formatDate from '@ppzp/stupid/format-date'
 import { get as getContext } from '@ppzp/context'
 import makeOpenTerminal from './common/open-terminal'
 

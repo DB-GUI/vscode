@@ -2,7 +2,7 @@ import vscode from 'vscode'
 import Knex from 'knex'
 import noty from '../../../lib/vscode-utils/noty'
 import untitledFile from '../../../lib/vscode-utils/untitled-file'
-import formatDate from './format-date'
+import formatValue from './format-value'
 import { DateType, otherType, stringType, TimeType } from './type'
 
 export
@@ -71,12 +71,9 @@ class KnexConnection {
   }
   async select(schema, table, params) {
     const records = await this._queryBuilder2(schema, table, params)
-    for(let record of records) {
-      for(let f of this.fields) {
-        if(record[f.name] instanceof Date)
-          record[f.name] = formatDate(record[f.name], f.ppzType)
-      }
-    }
+    for(let record of records)
+      for(let f of this.fields)
+        record[f.name] = formatValue(record[f.name], f)
     const count = await this._queryBuilder(schema, table).count()
     return {
       records,

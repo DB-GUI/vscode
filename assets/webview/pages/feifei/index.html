@@ -17,3 +17,40 @@
 <img src="https://gitee.com/ppz-pro/ppz.vscode/raw/v0.3.1-beta/assets/feifei.jpg" />
 <p>这只猫猫的名字叫肥肥</p>
 <p>她的妈妈希望她以后能成为一个大明星</p>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+<script>
+var duration = 15 * 1000 // 15 seconds
+var animationEnd = Date.now() + duration
+var defaults = {
+  startVelocity: 30,
+  spread: 360,
+  ticks: 30,
+  zIndex: 0
+}
+
+function randomInRange(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+var interval = setInterval(function() {
+  var timeLeft = animationEnd - Date.now()
+
+  if (timeLeft <= 0) {
+    return clearInterval(interval)
+  }
+
+  var particleCount = 50 * (timeLeft / duration)
+  // since particles fall down, start a bit higher than random
+  confetti({
+    ...defaults,
+    particleCount,
+    origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 }
+  })
+  confetti({
+    ...defaults,
+    particleCount,
+    origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 }
+  })
+}, 300)
+</script>

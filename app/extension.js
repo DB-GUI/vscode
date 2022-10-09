@@ -1,6 +1,7 @@
 import { set as setContext } from '@ppzp/context'
-import initState from './model/migration/index.js'
 import initCommand from './command/index.js'
+import initState from './model/migration/index.js'
+import copyDependencies from './service/dependency/copy'
 import initTreeview from './treeview/index.js'
 
 export
@@ -13,6 +14,8 @@ async function activate(context) {
     initCommand()
     // 数据迁移
     await initState()
+    // copy 老版本的 dependencies
+    await copyDependencies()
     // 左侧的 treeview
     initTreeview()
   } catch(e) {

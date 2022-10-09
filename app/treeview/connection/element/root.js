@@ -1,6 +1,6 @@
 import vscode from 'vscode'
 import connectionService from '../../../service/connection'
-import { checkInstall } from '../../../service/install-sqlite3'
+import { checkInstall } from '../../../service/dependency/sqlite3'
 import { TreeviewElement } from './base'
 import { MysqlElement } from './adapter/mysql'
 import { Sqlite3Element } from './adapter/sqlite3'

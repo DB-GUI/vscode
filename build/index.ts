@@ -1,11 +1,10 @@
-const Path = require('path')
-const FS = require('node:fs/promises')
-const esbuild = require('esbuild')
-const packageJson = require('../package.json')
+import * as path from 'path';
+import * as FS from "node:fs/promises";
+import * as esbuild from 'esbuild';
+const packageJson = require('../package.json');
 
-;(async function() {
+(async function (): Promise<void> {
   const buildType = getBuildType()
-
   await deleteOldCreateNew()
   await copyStatics()
   await writePackageJSON()
@@ -13,16 +12,16 @@ const packageJson = require('../package.json')
 })()
 
 /** 检测 build type */
-function getBuildType() {
+function getBuildType(): string {
   const buildType = process.argv[2]
-  if(buildType != 'dev' && buildType != 'pro')
+  if (buildType != 'dev' && buildType != 'pro')
     throw Error('error build type: ' + buildType)
   console.log('build type:', buildType)
   return buildType
 }
 
 /** 删除旧的 dist，创建新的 dist */
-async function deleteOldCreateNew() {
+async function deleteOldCreateNew(): Promise<void> {
   const dir = p('../dist') // 目标
   try {
     await FS.rm(dir, { // 删除旧的
@@ -30,7 +29,7 @@ async function deleteOldCreateNew() {
       force: true
     })
     console.log('删除老文件')
-  } catch(err) {
+  } catch (err) {
     console.log('未检测到老文件或...', err)
   }
   await FS.mkdir(dir) // 创建新的
@@ -38,11 +37,11 @@ async function deleteOldCreateNew() {
 }
 
 /** 把静态文件直接复制过去 */
-async function copyStatics() {
+async function copyStatics(): Promise<void> {
   // webview
-  await cp('assets')
+  await copyDir('assets', './dist/' + 'assets')
   // lib
-  await cp('lib')
+  await copyDir('lib', './dist/' + 'lib')
   // doc
   await cp('CHANGELOG.md')
   await cp('LICENSE')
@@ -51,20 +50,21 @@ async function copyStatics() {
 }
 
 /** 处理 package.json */
-async function writePackageJSON() {
-  delete packageJson.devDependencies // 删除不需要的 dev dependencies 声明
-  delete packageJson.dependencies // 删除已打包的 dependencies
+async function writePackageJSON(): Promise<void> {
+  delete (packageJson as any).devDependencies // 删除不需要的 dev dependencies 声明
+  delete (packageJson as any).dependencies // 删除已打包的 dependencies
   await FS.writeFile(p('../dist/package.json'), JSON.stringify(packageJson))
   console.log('write package.json')
 }
 
 /** 使用 esbuild 编译 */
-async function esbuildBuild(buildType) {
+async function esbuildBuild(buildType: string) {
   await esbuild.build({
     watch: buildType == 'dev',
     minify: buildType == 'pro',
-    entryPoints: [p('../app/extension.js')],
+    entryPoints: [p('../app/extension.ts')],
     bundle: true,
+    tsconfig: p('../tsconfig.json'),
     sourcemap: buildType == 'dev',
     external: [
       'vscode',
@@ -73,7 +73,7 @@ async function esbuildBuild(buildType) {
       'pg-native', 'mock-aws-s3', 'aws-sdk', 'nock'
     ],
     platform: 'node',
-    target: 'node12',
+    target: 'node16',
     outfile: p('../dist/extension.js'),
   })
   console.log('打包成功，非 app 目录的文件发生改动时，要重启此命令！！！')
@@ -81,13 +81,30 @@ async function esbuildBuild(buildType) {
 
 // --------------------------------
 // 下面是一些工具
-function p(target) { // 获取绝对路径
-  return Path.join(__dirname, target)
+function p(target: string): string { // 获取绝对路径
+  return path.join(__dirname, target)
 }
-async function cp(from) { // 复制到 dist 文件夹
+
+async function cp(from: string): Promise<void> { // 复制到 dist 文件夹
   const to = '../dist/' + from
   from = '../' + from
-  await FS.cp(p(from), p(to), {
-    recursive: true
-  })
+  try {
+    await FS.copyFile(p(from), p(to))
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+async function copyDir(src: string, dest: string) { // 文件夹拷贝
+  await FS.mkdir(dest, { recursive: true });
+  let entries = await FS.readdir(src, { withFileTypes: true });
+
+  for (let entry of entries) {
+    let srcPath = path.join(src, entry.name);
+    let destPath = path.join(dest, entry.name);
+
+    entry.isDirectory() ?
+      await copyDir(srcPath, destPath) :
+      await FS.copyFile(srcPath, destPath);
+  }
 }

@@ -1,5 +1,5 @@
 import * as path from 'path';
-import * as FS from "node:fs/promises";
+import * as FS from 'node:fs/promises';
 import * as esbuild from 'esbuild';
 const packageJson = require('../package.json');
 
@@ -46,6 +46,11 @@ async function copyStatics(): Promise<void> {
   await cp('CHANGELOG.md')
   await cp('LICENSE')
   await cp('README.md')
+  // l10n
+  await copyDir('l10n', './dist/' + 'l10n')
+  await cp('package.nls.json')
+  await cp('package.nls.zh-cn.json')
+  await cp('package.nls.ja.json')
   console.log('copy assets, changelog, license, readme')
 }
 
@@ -58,7 +63,7 @@ async function writePackageJSON(): Promise<void> {
 }
 
 /** 使用 esbuild 编译 */
-async function esbuildBuild(buildType: string) {
+async function esbuildBuild(buildType: string): Promise<void> {
   await esbuild.build({
     watch: buildType == 'dev',
     minify: buildType == 'pro',
@@ -95,7 +100,7 @@ async function cp(from: string): Promise<void> { // 复制到 dist 文件夹
   }
 }
 
-async function copyDir(src: string, dest: string) { // 文件夹拷贝
+async function copyDir(src: string, dest: string): Promise<void> { // 文件夹拷贝
   await FS.mkdir(dest, { recursive: true });
   let entries = await FS.readdir(src, { withFileTypes: true });
 

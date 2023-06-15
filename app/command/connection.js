@@ -29,7 +29,7 @@ export default {
     el => el.startDrop()
   ),
   // sql 终端
-  ppzTerminal: execBeforeCheckEl(
+  sqlTerminal: execBeforeCheckEl(
     [ConnectionElement, MssqlDatabaseElement, PgsqlDatabaseElement],
     el => new TerminalWebview(el.connection.clone())
   ),

@@ -10,6 +10,7 @@
 		"rootDir": "./",
         "resolveJsonModule": true,
         "esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
 		"strict": true,
 		"allowJs": true
 	},

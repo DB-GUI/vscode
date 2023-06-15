@@ -36,12 +36,13 @@
 		"onStartupFinished"
 	],
 	"main": "./extension.js",
+	"l10n": "./l10n",
 	"contributes": {
 		"viewsContainers": {
 			"activitybar": [
 				{
 					"id": "ppz-container",
-					"title": "PPZ",
+					"title": "%extension.viewsContainers.activitybar.title%",
 					"icon": "assets/logo.svg"
 				}
 			]
@@ -50,12 +51,12 @@
 			"ppz-container": [
 				{
 					"id": "connection",
-					"name": "连接",
+					"name": "%extension.views.ppz-container.connection.name%",
 					"icon": "assets/logo.svg"
 				},
 				{
 					"id": "help",
-					"name": "帮助和反馈",
+					"name": "%extension.views.ppz-container.help.name%",
 					"icon": "assets/logo.svg"
 				}
 			]
@@ -63,77 +64,77 @@
 		"viewsWelcome": [
 			{
 				"view": "connection",
-				"contents": "点击右上方 “+” 或下面按钮，以连接数据库\n[创建连接](command:ppz.addConnection)"
+				"contents": "%extension.viewsWelcome.connection.contents%"
 			},
 			{
 				"view": "help",
-				"contents": "简介：管理数据库的图形化界面\n当前版本：v0.5.1-beta\n[$(preview)使用帮助](https://gitee.com/ppz-pro/ppz.vscode/wikis/pages)\n[$(comment)意见反馈](https://gitee.com/ppz-pro/ppz.vscode/issues)\n[$(bug)发现 bug！](https://gitee.com/ppz-pro/ppz.vscode/issues)\n[🐈可爱猫咪](command:ppz.love)\n[$(trash)清空 PPZ](command:ppz.empty)"
+				"contents": "%extension.viewsWelcome.help.contents%"
 			}
 		],
 		"commands": [
 			{
 				"command": "ppz.addConnection",
-				"title": "Add Connection",
+				"title": "%extension.commands.addConnection.title%",
 				"icon": "$(add)",
 				"category": "PPZ"
 			},
 			{
 				"command": "ppz.github",
-				"title": "open PPZ.vscode github",
+				"title": "%extension.commands.github.title%",
 				"icon": "$(github-inverted)",
 				"category": "PPZ"
 			},
 			{
 				"command": "ppz.editConnection",
-				"title": "编辑连接",
+				"title": "%extension.commands.editConnection.title%",
 				"icon": "$(edit)",
 				"category": "PPZ"
 			},
 			{
 				"command": "ppz.deleteConnection",
-				"title": "删除连接",
+				"title": "%extension.commands.deleteConnection.title%",
 				"icon": "$(trash)",
 				"category": "PPZ"
 			},
 			{
 				"command": "ppz.empty",
-				"title": "Empty PPZ",
+				"title": "%extension.commands.empty.title%",
 				"icon": "$(trash)",
 				"category": "PPZ"
 			},
 			{
 				"command": "ppz.reloadTreeItemChildren",
-				"title": "Refresh Children",
+				"title": "%extension.commands.reloadTreeItemChildren.title%",
 				"icon": "$(refresh)",
 				"category": "PPZ"
 			},
 			{
-				"command": "ppz.terminal",
-				"title": "系统终端",
+				"command": "ppz.systemTerminal",
+				"title": "%extension.commands.systemTerminal.title%",
 				"icon": "$(terminal)",
 				"category": "PPZ"
 			},
 			{
-				"command": "ppz.ppzTerminal",
-				"title": "SQL 终端",
+				"command": "ppz.sqlTerminal",
+				"title": "%extension.commands.sqlTerminal.title%",
 				"icon": "$(terminal)",
 				"category": "PPZ"
 			},
 			{
 				"command": "ppz.exportDML",
-				"title": "导出数据 DML",
+				"title": "%extension.commands.exportDML.title%",
 				"icon": "$(export)",
 				"category": "PPZ"
 			},
 			{
 				"command": "ppz.exportDDL",
-				"title": "导出表结构 DDL",
+				"title": "%extension.commands.exportDDL.title%",
 				"icon": "$(export)",
 				"category": "PPZ"
 			},
 			{
 				"command": "ppz.exportBoth",
-				"title": "导出 DDL 和 DML",
+				"title": "%extension.commands.exportBoth.title%",
 				"icon": "$(export)",
 				"category": "PPZ"
 			}
@@ -188,7 +189,7 @@
 					"group": "2_export@3"
 				},
 				{
-					"command": "ppz.ppzTerminal",
+					"command": "ppz.sqlTerminal",
 					"when": "view == connection && viewItem =~ /^connection$|^pgDatabase$|^sqlite3Connection$|^msDatabase$/",
 					"group": "9_other@1"
 				}
@@ -198,6 +199,7 @@
 	"devDependencies": {
 		"@types/node": "14.x",
 		"@types/vscode": "^1.47.3",
+		"@vscode/l10n-dev": "0.0.26",
 		"esbuild": "^0.15.8",
 		"source-map-loader": "^4.0.1",
 		"ts-loader": "^9.4.3"
@@ -207,6 +209,7 @@
 		"@ppzp/context": "^0.0.0",
 		"@ppzp/stupid": "^0.1.1",
 		"@ppzp/type": "^0.0.4",
+		"@vscode/l10n": "^0.0.14",
 		"knex": "^2.1.0",
 		"mysql2": "^2.3.3",
 		"pg": "^8.7.3",

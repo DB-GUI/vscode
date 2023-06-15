@@ -1,0 +1,18 @@
+{
+	"extension.viewsContainers.activitybar.title": "PPZ",
+	"extension.views.ppz-container.connection.name": "Connection",
+    "extension.views.ppz-container.help.name": "Help and feedback",
+    "extension.viewsWelcome.connection.contents": "Click upper right “+” or button below to connect to database\n[create connection](command:ppz.addConnection)",
+    "extension.viewsWelcome.help.contents": "GUI DBMS Manager\ncurrent version：v0.5.1-beta\n[$(preview)help](https://gitee.com/ppz-pro/ppz.vscode/wikis/pages)\n[$(comment)feedback](https://gitee.com/ppz-pro/ppz.vscode/issues)\n[$(bug)Bug fix](https://gitee.com/ppz-pro/ppz.vscode/issues)\n[🐈Kawaii Neko](command:ppz.love)\n[$(trash)Clear PPZ](command:ppz.empty)",
+    "extension.commands.addConnection.title": "Add Connection",
+    "extension.commands.github.title": "open PPZ.vscode github",
+    "extension.commands.editConnection.title": "Edit Connection",
+    "extension.commands.deleteConnection.title": "Delete Connection",
+    "extension.commands.empty.title": "Empty PPZ",
+    "extension.commands.reloadTreeItemChildren.title": "Refresh Children",
+    "extension.commands.systemTerminal.title":"System Terminal",
+    "extension.commands.sqlTerminal.title":"SQL Terminal",
+    "extension.commands.exportDML.title":"Export DML",
+    "extension.commands.exportDDL.title":"Export DDL",
+    "extension.commands.exportBoth.title":"Export DML & DDL"
+}

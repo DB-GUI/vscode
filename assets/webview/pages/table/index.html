@@ -3,11 +3,11 @@
     <ppz-nav></ppz-nav>
     <div class="operations">
       <div class="btns">
-        <icon-btn iid="light" @click="refresh" title="刷新"></icon-btn>
-        <icon-btn iid="search" @click="$refs.searchDialog.showModal()" title="搜索"></icon-btn>
+        <icon-btn iid="light" @click="refresh" title="{{l10n.refresh}}"></icon-btn>
+        <icon-btn iid="search" @click="$refs.searchDialog.showModal()" title="{{l10n.search}}"></icon-btn>
         <dialog class="search" ref="searchDialog">
           <div class="modal"></div>
-          <div class="title">搜索数据</div>
+          <div class="title">{{l10n.dataSearch}}</div>
           <div class="body">
             <search-item
               v-for="(item, index) in selectParams.search"
@@ -20,54 +20,54 @@
             <icon-btn iid="add" class="round" @click="addSearch"></icon-btn>
           </div>
           <div class="btns">
-            <button @click="search">搜索</button>
-            <button @click="emptySearch">清空</button>
-            <button @click="$refs.searchDialog.close()">关闭</button>
+            <button @click="search">{{l10n.search}}</button>
+            <button @click="emptySearch">{{l10n.clear}}</button>
+            <button @click="$refs.searchDialog.close()">{{l10n.close}}</button>
           </div>
         </dialog>
-        <icon-btn iid="filter" @click="$refs.fieldSelector.showModal()" title="字段选择"></icon-btn>
+        <icon-btn iid="filter" @click="$refs.fieldSelector.showModal()" title="{{l10n.fieldSelect}}"></icon-btn>
         <dialog class="field" ref="fieldSelector">
           <div class="modal"></div>
-          <div class="title">字段选择</div>
+          <div class="title">{{l10n.fieldSelect}}</div>
           <div class="body">
             <ppz-checkbox v-for="f in fields" v-model="f.show" :label="f.name"></ppz-checkbox>
           </div>
           <div class="btns">
-            <button @click="select1()">全选</button>
-            <button @click="select_1">反选</button>
-            <button @click="select0">全不选</button>
-            <button @click="$refs.fieldSelector.close()">关闭</button>
+            <button @click="select1()">{{l10n.selectAll}}</button>
+            <button @click="select_1">{{l10n.invertSelect}}</button>
+            <button @click="select0">{{l10n.noSelect}}</button>
+            <button @click="$refs.fieldSelector.close()">{{l10n.close}}</button>
           </div>
         </dialog>
-        <icon-btn iid="add" @click="newRecord()" title="插入"></icon-btn>
-        <icon-btn iid="copy" @click="newRecord(true)" title="拷贝"
+        <icon-btn iid="add" @click="newRecord()" title="{{l10n.add}}"></icon-btn>
+        <icon-btn iid="copy" @click="newRecord(true)" title="{{l10n.copy}}"
           :disabled="!pneOptions || pneOptions.focus.y === undefined"></icon-btn>
-        <icon-btn iid="save" @click="save" title="保存"
+        <icon-btn iid="save" @click="save" title="{{l10n.save}}"
           :disabled="!hasPK || !isEditing"></icon-btn>
-        <icon-btn iid="undo" @click="undo" title="撤销全部"
+        <icon-btn iid="undo" @click="undo" title="{{l10n.allUndo}}"
           :disabled="!hasPK || !isEditing"></icon-btn>
-        <icon-btn iid="delete" @click="drop" title="删除"
+        <icon-btn iid="delete" @click="drop" title="{{l10n.delete}}"
           :disabled="!hasPK || pneOptions.focus.y === undefined"></icon-btn>
-        <icon-btn iid="sql" @click="checkSQL" title="查看当前 sql"></icon-btn>
+        <icon-btn iid="sql" @click="checkSQL" title="{{l10n.checkCurrentSql}}"></icon-btn>
         <dialog ref="sqlViewer" class="sql">
           <div class="modal"></div>
-          <div class="title">查看 SQL</div>
+          <div class="title">{{l10n.checkSql}}</div>
           <div class="body">
             <p>{{sql.clause}}</p>
             <radio-group
               v-model="sql.noPagination"
               @update:model-value="checkSQL"
-              :list="[{ label: '带分页', value: false }, { label: '不带', value: true }]"
+              :list="list"
               ></radio-group>
           </div>
           <div class="btns">
-            <button @click="openFileWithSQL">在新文件中打开</button>
-            <button @click="writeClipboard">复制到剪切板</button>
-            <button @click="openTerminalWithSQL">在终端中打开</button>
-            <button @click="$refs.sqlViewer.close()">关闭</button>
+            <button @click="openFileWithSQL">{{l10n.openFileWithSQL}}</button>
+            <button @click="writeClipboard">{{l10n.writeClipboard}}</button>
+            <button @click="openTerminalWithSQL">{{l10n.openTerminalWithSQL}}</button>
+            <button @click="$refs.sqlViewer.close()">{{l10n.close}}</button>
           </div>
         </dialog>
-        <icon-btn iid="terminal" @click="terminal" title="打开终端"></icon-btn>
+        <icon-btn iid="terminal" @click="terminal" title="{{l10n.openTerminal}}"></icon-btn>
       </div>
       <ppz-pagination :count="selectParams.page.count"
         @click.capture="beforePage"

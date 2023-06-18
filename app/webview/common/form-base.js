@@ -1,6 +1,7 @@
 import Webview from './base'
 // import { NilField, FieldWrongDetail } from '@ppzp/type'
 import noty from '../../../lib/vscode-utils/noty'
+import vscode from 'vscode'
 
 export default
 class FormWebview extends Webview {
@@ -18,7 +19,7 @@ class FormWebview extends Webview {
   async save(data) {
     try {
       await this.upsert(data)
-      noty.info('已保存')
+      noty.info(vscode.l10n.t('saved'))
       return true
     } catch(err) {
       // if(err instanceof FieldWrongDetail) {

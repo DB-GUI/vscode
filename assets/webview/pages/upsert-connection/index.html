@@ -3,23 +3,24 @@
     <div class="forms">
       <div class="public form">
         <label>
-          <span>name</span>
+          <span>{{l10n.name}}</span>
           <ppz-input v-model="record.name" />
         </label>
         <div class="label">
-          <span>连接类型</span>
+          <span>{{l10n.connectionType}}</span>
           <radio-group v-model="record.client"
             :list="adapters.map(item => ({ label: item.label, value: item.name }))"></radio-group>
         </div>
         <template v-if="adapter.urlSupport">
           <br>
           <div class="label conn-type">
-            <span>连接方式</span>
-            <radio-group v-model="record.useUrl" :list="[{ label: '字段', value: 0 }, { label: 'URL', value: 1 }]"></radio-group>
+            <span>{{l10n.connectionMethod}}</span>
+            <radio-group v-model="record.useUrl"
+              :list="this.list"></radio-group>
             <span>
               <ppz-icon iid="help"></ppz-icon>
-              如果下面没有你需要的字段，可以尝试
-              <a @click="$refs.useUrl.showModal()">使用 URL 连接方式</a>
+              {{l10n.ifNoFleld}}
+              <a @click="$refs.useUrl.showModal()">{{l10n.useURL}}</a>
               <dialog class="useUrl" ref="useUrl">
                 <div class="modal"></div>
                 <div class="close" @click="$refs.useUrl.close()">x</div>
@@ -47,18 +48,19 @@
           <label v-if="adapter.keys.indexOf(f.key) > -1" :class="{ 'long-txt': f.type=='file' }">
             <span>{{f.key}}</span>
             <file-input v-if="f.type == 'file'" v-model="record[f.key]"></file-input>
-            <ppz-input v-else v-model="record[f.key]">
+            <ppz-input v-else v-model="record[dictionary[f.key]]"></ppz-input>
           </label>
         </template>
+
       </div>
     </div>
   </div>
   <div class="form-btns">
-    <button @click="save(true)">保存并连接</button>
-    <button @click="save()">保存</button>
+    <button @click="save(true)">{{l10n.saveAndConnect}}</button>
+    <button @click="save()">{{l10n.save}}</button>
   </div>
-</div>
 
-<div class="tttips">
-  * TiDB、StoneDB、MariaDB 等 MySQL 系数据库请使用 MySQL 驱动
+  <div class="tttips">
+    {{l10n.tip}}
+  </div>
 </div>

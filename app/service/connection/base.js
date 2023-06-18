@@ -118,7 +118,7 @@ class KnexConnection {
         else if('not null' === operator)
           query = query.whereNotNull(field)
         else
-          noty.fatal('预料之外的操作符：' + operator)
+          noty.fatal(vscode.l10n.t('unknownOperator') + operator)
       }
     return query
   }
@@ -207,7 +207,7 @@ function getSchemaName(el) {
   else if(el.isSchema)
     return el.name
   
-  const msg = '导出数据失败，意料之外的元素类型'
+  const msg = vscode.l10n.t('dataExportError')
   noty.fatal(msg)
   throw Error(msg)
 }
@@ -233,5 +233,5 @@ class ColumnInfo {
 
 export
 function notyConnErr(err) {
-  noty.error('连接失败，请检查连接信息或服务器 ' + err)
+  noty.error(vscode.l10n.t('connectFailed') + err)
 }

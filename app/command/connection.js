@@ -7,6 +7,7 @@ import UpsertConnectionWebview from '../webview/upsert-connection.js'
 import TerminalWebview from '../webview/ppz-terminal.js'
 import openTableWebview from '../webview/table.js'
 import noty from '../../lib/vscode-utils/noty/index.js'
+import vscode from 'vscode'
 
 export default {
   // 重新加载子节点
@@ -64,8 +65,8 @@ function execBeforeCheckEl(ElTypes, exec) {
     ElTypes = [ElTypes]
   return el => {
     if(ElTypes.every(El => !(el instanceof El))) {
-      noty.warn('请在 PPZ 视图里进行此操作')
-      console.warn('用户似乎从 Command Palette 调用此命令', el)
+      noty.warn(vscode.l10n.t('pleaseOperateInPPZView'))
+      console.warn(vscode.l10n.t('itSeemsUserCallThisCommandFromPalatte'), el)
       return
     }
     return exec(el)

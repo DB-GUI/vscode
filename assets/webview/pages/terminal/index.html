@@ -2,12 +2,14 @@
   <textarea v-model="sql" v-focus @keydown="keydown"></textarea>
   <div class="options">
     <div class="tttips">
-      * CTRL + Enter 直接运行 sql
-      <br v-if="tip">{{tip}}
+      {{l10n.shortcut}}
+      <br>
+      <div v-if="clientName == sqlite3 ">{{l10n.sqlite3tip}}</div>
     </div>
     <span>
       <!-- <button>导出至文件</button> -->
-      <button @click="exec">执行</button>
+      <button @click="exec">{{l10n.execute}}</button>
+      <button @click="testFunction">testButton</button>
     </span>
   </div>
 

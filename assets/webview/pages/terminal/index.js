@@ -1,16 +1,13 @@
 import VuePage from '../../script/vue/page.js'
 import * as ResultView from './result-view/index.js'
 
-const tip = {
-  sqlite3: '* sqlite3 每次仅可执行一条 sql（输入多条 sql 将只执行第一条）'
-}[PPZ.initData.clientName]
-
 VuePage(function(page) {
   return {
     initData() {
       return {
+        pageName: 'terminal',
         sql: PPZ.initData.initSQL || '',
-        tip,
+        clientName: PPZ.initData.clientName,
         result: null
       }
     },
@@ -23,6 +20,12 @@ VuePage(function(page) {
       keydown({ ctrlKey, key }) {
         if(ctrlKey && key == 'Enter')
           this.exec()
+      },
+      testFunction() {
+        const test2 = page.state.l10n.sqlite3tip
+        console.debug("PPZ.state:",PPZ)
+        console.debug("page.state.l10n:",page.state.l10n)
+        console.debug("test2:",test2)
       }
     }
   }

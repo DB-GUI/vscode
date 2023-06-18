@@ -1,3 +1,4 @@
+import vscode from 'vscode'
 import { TreeviewElement } from '../base'
 import connectionService from '../../../../service/connection'
 import noty from '../../../../../lib/vscode-utils/noty'
@@ -29,8 +30,8 @@ class ConnectionElement extends TreeviewElement {
     try {
       return await this._getChildren2()
     } catch(err) {
-      console.error('连接失败', err)
-      noty.fatal('连接失败 ' + err)
+      console.error(vscode.l10n.t('connectFail'), err)
+      noty.fatal(vscode.l10n.t('connectFail') + err)
     }
   }
 
@@ -41,14 +42,14 @@ class ConnectionElement extends TreeviewElement {
   }
 
   async startDrop() {
-    if(await warn('确认删除？', '此操作将删除当前连接信息'))
+    if(await warn(vscode.l10n.t('checkDelete'), vscode.l10n.t('thisOperateWillDeleteCurrentConnectionInfo')))
       return
     // 数据删除
     try {
       connectionService.deleteById(this.options._id)
       console.debug('已删除连接', this.name)
     } catch(err) {
-      noty.error('删除失败 ' + err)
+      noty.error(vscdode.l10n.t('deleteFail') + err)
       return
     }
     // 视图（元素）删除

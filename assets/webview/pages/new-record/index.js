@@ -4,6 +4,7 @@ VuePage(function(page) {
   return {
     initData() {
       return {
+        pageName: 'newRecord',
         record: PPZ.initData.data.record || {},
         fields: PPZ.initData.data.fields
       }
@@ -15,6 +16,10 @@ VuePage(function(page) {
           record: this.record
         })
       }
+    },
+    created: function(){
+      console.debug("page:",page)
+      console.debug("PPZ",PPZ)
     }
   }
 })

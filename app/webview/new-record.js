@@ -1,5 +1,6 @@
 import Webview from './common/base'
 import noty from '../../lib/vscode-utils/noty'
+import vscode from 'vscode'
 
 export default
 class TableWebview extends Webview {
@@ -7,7 +8,7 @@ class TableWebview extends Webview {
     console.debug('NewRecordWebview constructing', { database, table })
     super({
       filename: 'new-record',
-      title: table + ' 新记录',
+      title: table +" "+ vscode.l10n.t('newRecord'),
       initData: {
         data
       },
@@ -15,7 +16,7 @@ class TableWebview extends Webview {
         insert: async ({ record, closeAfterInserted }) => {
           try {
             await connection.insert(database, table, record)
-            noty.info('已保存')
+            noty.info(vscode.l10n.t('saved'))
             if(closeAfterInserted)
               this.dispose()
             return true

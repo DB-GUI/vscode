@@ -14,6 +14,7 @@ VuePage(function(page) {
   return {
     initData() {
       return {
+        pageName:'table',
         selectParams: {
           search: [],
           page: { count: 0, size: pageSize, index: 1 }
@@ -24,7 +25,8 @@ VuePage(function(page) {
         },
         fields: [],
         records: [],
-        pneOptions: null
+        pneOptions: null,
+        list:[{ label: page.state.l10n.withPaging , value: false }, { label: page.state.l10n.withoutPaging, value: true }]
       }
     },
     methods: {
@@ -38,7 +40,7 @@ VuePage(function(page) {
         this.setFields(fields)
         this.setRecords(records)
         if(isRefresh === true)
-          page.noty.info('数据已刷新')
+          page.noty.info(page.state.l10n.dataRefreshed)
       },
       addSearch() {
         this.selectParams.search.push(SearchItem.newItemData())
@@ -59,9 +61,9 @@ VuePage(function(page) {
       async writeClipboard() {
         try {
           await navigator.clipboard.writeText(this.sql.clause)
-          page.noty.info('已复制到剪切板')
+          page.noty.info(page.state.l10n.copyedToClipboard)
         } catch {
-          page.noty.fatal('发生意外')
+          page.noty.fatal(page.state.l10n.exception)
         }
       },
       search() {
@@ -105,13 +107,13 @@ VuePage(function(page) {
       beforePage(evt) {
         if(this.isEditing) {
           evt.stopPropagation()
-          return page.noty.warn('请先保存或撤销修改')
+          return page.noty.warn(page.state.l10n.pleaseSaveOrUndoModify)
         }
       },
 
       refresh() {
         if(this.isEditing) // 这里不能把按钮变灰，要不然用户不知道为什么灰
-          return page.noty.warn('请先保存或撤销修改')
+          return page.noty.warn(page.state.l10n.pleaseSaveOrUndoModify)
         this.putData(true)
       },
       newRecord(copy) {
@@ -124,13 +126,13 @@ VuePage(function(page) {
       },
       drop() {
         if(this.isEditing)
-          return page.noty.warn('请先保存或撤销修改')
+          return page.noty.warn(page.state.l10n.pleaseSaveOrUndoModify)
         const warning = this.pkNames
           .map(name => `${name} 为 ${this.focusedRecord[name]}`)
           .join(' 且 ')
         page.prompt.warn(
-          '确定删除？',
-          '您正在删除 ' + warning + ' 的记录，删除后不可恢复', 
+          page.state.l10n.deleteCheck,
+          warning + ' ' +page.state.l10n.deleteWarning, 
           {
             确定: async () => {
               const success = await page.api.drop(this.focusedPKValues)
@@ -157,8 +159,8 @@ VuePage(function(page) {
       },
       undo() {
         page.prompt.warn(
-          '撤销全部？',
-          '您可以使用 ctrl-z(windows) 或 cmd-z(macos) 来撤销一小步', 
+          page.state.l10n.allUndo,
+          page.state.l10n.forUndo, 
           {
             确定: async () => this._undo()
           }
@@ -166,7 +168,7 @@ VuePage(function(page) {
       },
       async save() {
         if(!this.isEditing)
-          return page.noty.fatal('没有待保存的数据')
+          return page.noty.fatal(page.state.l10n.noDataForSave)
         const records = Object.entries(this.pneOptions.editing).map(
           ([y, changed]) => {
             const pk = {}
@@ -210,9 +212,9 @@ VuePage(function(page) {
     watch: {
       hasPK(nv, ov) {
         if(!nv)
-          page.noty.warn(tableName + ' 表缺少主键，不能进行编辑、删除操作')
+          page.noty.warn(tableName + page.state.l10n.noPrimaryKey)
         else if(ov === false) // 现在有，且刚才没有
-          page.noty.info(tableName + ' 表已添加主键')
+          page.noty.info(tableName + page.state.l10n.primaryKeyAdded)
       }
     },
     mounted() {

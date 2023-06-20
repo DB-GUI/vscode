@@ -39,7 +39,7 @@ const language = {
     deleteCheck:'确定删除？',
     deleteWarning:'的记录将要被删除，删除后不可恢复',
     allUndo:'撤销全部？',
-    forUndo:'您可以使用 ctrl-z(windows) 或 cmd-z(macos) 来撤销一小步',
+    forUndo:'您可以使用 Ctrl-Z(windows) 或 Cmd-Z(macos) 来撤销一小步',
     confirm:'确定',
     noDataForSave:'没有待保存的数据',
     noPrimaryKey:' 表缺少主键，不能进行编辑、删除操作',

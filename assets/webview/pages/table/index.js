@@ -26,7 +26,7 @@ VuePage(function(page) {
         fields: [],
         records: [],
         pneOptions: null,
-        list:[{ label: page.state.l10n.withPaging , value: false }, { label: page.state.l10n.withoutPaging, value: true }]
+        list:[]
       }
     },
     methods: {
@@ -183,6 +183,9 @@ VuePage(function(page) {
           this.refresh()
         }
       }
+    },
+    created: function(){
+      this.list = [{ label: page.state.l10n.withPaging , value: false }, { label: page.state.l10n.withoutPaging, value: true }]
     },
     computed: {
       pks() { return this.fields.filter(f => f.pk) },

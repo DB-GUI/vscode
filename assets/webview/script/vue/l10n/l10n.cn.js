@@ -2,7 +2,10 @@ const language = {
   terminal: {
     shortcut: '* CTRL + Enter 直接运行 sql',
     execute: '执行',
-    sqlite3tip: '* sqlite3 每次仅可执行一条 sql（输入多条 sql 将只执行第一条）'
+    sqlite3tip: '* sqlite3 每次仅可执行一条 sql（输入多条 sql 将只执行第一条）',
+    executedAndTimeCost:'已执行, 耗时 ',
+    total:', 共 ',
+    resultCount:' 条结果'
   },
   upsertConnection: {
     name: '连接名称',
@@ -62,7 +65,11 @@ const language = {
     openFileWithSQL:'在新文件中打开',
     writeClipboard:'复制到剪切板',
     openTerminalWithSQL:'在终端中打开',
-    openTerminal:'打开终端'
+    openTerminal:'打开终端',
+    perPage:'每页',
+    totalRecords:'条记录，共 ',
+    record:' 条、',
+    pages:' 页'
   }
 }
 export default language

@@ -70,6 +70,7 @@
         <icon-btn iid="terminal" @click="terminal" title="{{l10n.openTerminal}}"></icon-btn>
       </div>
       <ppz-pagination :count="selectParams.page.count"
+        :l10n="this.l10n"
         @click.capture="beforePage"
         v-model:index="selectParams.page.index"
         v-model:size="selectParams.page.size"

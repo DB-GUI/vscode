@@ -34,7 +34,7 @@ class TableWebview extends Webview {
         async update(editing) {
           try {
             await connection.updateMany(schemaName, tableName, editing)
-            noty.info(vscode.l10n.t('saved'))
+            noty.info(vscode.l10n.t('Saved'))
             return true
           } catch(err) {
             noty.fatal(err.toString())
@@ -44,7 +44,7 @@ class TableWebview extends Webview {
         async drop(pkValues) {
           try {
             await connection.drop(schemaName, tableName, pkValues)
-            noty.info(vscode.l10n.t('deleted'))
+            noty.info(vscode.l10n.t('Deleted'))
             return true
           } catch(err) {
             noty.fatal(err.toString())

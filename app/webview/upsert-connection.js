@@ -7,7 +7,7 @@ class UpsertConnectionWebview extends Webview {
   constructor(record) {
     super({
       filename: 'upsert-connection',
-      title: record ? vscode.l10n.t('updateConnection') : vscode.l10n.t('newConnection'),
+      title: record ? vscode.l10n.t('Update Connection') : vscode.l10n.t('Create Connection'),
       initData: { record }
     })
   }

@@ -8,7 +8,7 @@ import { warn } from '../../lib/vscode-utils/prompt/confirm'
 
 export
 async function empty() {
-  if(await warn(vscode.l10n.t('checkToDeleteAllData'), vscode.l10n.t('thisOperationWillDeleteAllPPZData'), vscode.l10n.t('confirmToClear')))
+  if(await warn(vscode.l10n.t('Clear all data. Are you sure?'), vscode.l10n.t('This operate will delete all PPZ data'), vscode.l10n.t('Confirm to delete')))
     return
   const keys = getContext().globalState.keys()
   await Promise.all(
@@ -16,7 +16,7 @@ async function empty() {
       getContext().globalState.update(key, undefined)
     )
   )
-  noty.info(vscode.l10n.t('dataCleared'))
+  noty.info(vscode.l10n.t('Data cleared, please restart VSCode'))
 }
 
 export

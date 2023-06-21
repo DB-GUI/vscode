@@ -12,8 +12,8 @@ async function checkInstall() {
     await FS.access(Path.join(ep, 'node_modules/sqlite3/LICENSE'))
   } catch(err) {
     console.warn('未安装 sqlite3 驱动')
-    const result = await noty.warn(vscode.l10n.t('sqlite3DriverIsNotInstalled'), [vscode.l10n.t('installGuide')])
-    if(result == vscode.l10n.t('installGuide'))
+    const result = await noty.warn(vscode.l10n.t('SQLite3 driver is not installed, please install SQLite3 driver'), [vscode.l10n.t('Install guide')])
+    if(result == vscode.l10n.t('Install guide'))
       new InstallSqlite3Webview()
   }
 }

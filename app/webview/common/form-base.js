@@ -19,7 +19,7 @@ class FormWebview extends Webview {
   async save(data) {
     try {
       await this.upsert(data)
-      noty.info(vscode.l10n.t('saved'))
+      noty.info(vscode.l10n.t('Saved'))
       return true
     } catch(err) {
       // if(err instanceof FieldWrongDetail) {

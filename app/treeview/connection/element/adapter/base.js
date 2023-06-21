@@ -30,8 +30,8 @@ class ConnectionElement extends TreeviewElement {
     try {
       return await this._getChildren2()
     } catch(err) {
-      console.error(vscode.l10n.t('connectFail'), err)
-      noty.fatal(vscode.l10n.t('connectFail') + err)
+      console.error(vscode.l10n.t('Connect failed '), err)
+      noty.fatal(vscode.l10n.t('Connect failed ') + err)
     }
   }
 
@@ -42,14 +42,14 @@ class ConnectionElement extends TreeviewElement {
   }
 
   async startDrop() {
-    if(await warn(vscode.l10n.t('checkDelete'), vscode.l10n.t('thisOperateWillDeleteCurrentConnectionInfo')))
+    if(await warn(vscode.l10n.t('Delete. Are you sure?'), vscode.l10n.t('This operate will delete current connection info')))
       return
     // 数据删除
     try {
       connectionService.deleteById(this.options._id)
       console.debug('已删除连接', this.name)
     } catch(err) {
-      noty.error(vscdode.l10n.t('deleteFail') + err)
+      noty.error(vscdode.l10n.t('Delete failed ') + err)
       return
     }
     // 视图（元素）删除

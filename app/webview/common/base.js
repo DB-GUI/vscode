@@ -30,7 +30,7 @@ class Webview {
     // 读取 html 文件
     fs.readFile(path, (err, data) => {
       if(err) {
-        const msg = vscode.l10n.t('webviewErrorMsg')
+        const msg = vscode.l10n.t('Webview create failed: Exception happend when read in HTML file')
         console.error(msg, err)
         throw Error(msg)
       }
@@ -107,7 +107,7 @@ class Webview {
 
   handleErr(err) {
     console.error(err)
-    noty.fatal(vscode.l10n.t('unknownError')+ " " + err.toString())
+    noty.fatal(vscode.l10n.t('Unknown Error')+ " " + err.toString())
   }
 
   tmpl({

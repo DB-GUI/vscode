@@ -8,7 +8,7 @@ class TableWebview extends Webview {
     console.debug('NewRecordWebview constructing', { database, table })
     super({
       filename: 'new-record',
-      title: table +" "+ vscode.l10n.t('newRecord'),
+      title: table +" "+ vscode.l10n.t('New record'),
       initData: {
         data
       },
@@ -16,7 +16,7 @@ class TableWebview extends Webview {
         insert: async ({ record, closeAfterInserted }) => {
           try {
             await connection.insert(database, table, record)
-            noty.info(vscode.l10n.t('saved'))
+            noty.info(vscode.l10n.t('Saved'))
             if(closeAfterInserted)
               this.dispose()
             return true

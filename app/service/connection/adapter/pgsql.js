@@ -93,7 +93,7 @@ class PostgreSQLKnexConnection extends KnexConnection {
   }
 
   async getDDL2(schema, table) {
-    const msg = vscode.l10n.t('pgsqlTableStructureIsUnsupport')
+    const msg = vscode.l10n.t('PG SQL series\'s table structure export is unsupport now')
     noty.error(msg)
     throw Error(msg)
   }

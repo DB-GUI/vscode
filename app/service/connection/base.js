@@ -118,7 +118,7 @@ class KnexConnection {
         else if('not null' === operator)
           query = query.whereNotNull(field)
         else
-          noty.fatal(vscode.l10n.t('unknownOperator') + operator)
+          noty.fatal(vscode.l10n.t('Unexpected operator:') + operator)
       }
     return query
   }
@@ -207,7 +207,7 @@ function getSchemaName(el) {
   else if(el.isSchema)
     return el.name
   
-  const msg = vscode.l10n.t('dataExportError')
+  const msg = vscode.l10n.t('Data export failed, unexpected element type')
   noty.fatal(msg)
   throw Error(msg)
 }
@@ -233,5 +233,5 @@ class ColumnInfo {
 
 export
 function notyConnErr(err) {
-  noty.error(vscode.l10n.t('connectFailed') + err)
+  noty.error(vscode.l10n.t('Connect failed ') + err)
 }

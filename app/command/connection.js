@@ -65,8 +65,8 @@ function execBeforeCheckEl(ElTypes, exec) {
     ElTypes = [ElTypes]
   return el => {
     if(ElTypes.every(El => !(el instanceof El))) {
-      noty.warn(vscode.l10n.t('pleaseOperateInPPZView'))
-      console.warn(vscode.l10n.t('itSeemsUserCallThisCommandFromPalatte'), el)
+      noty.warn(vscode.l10n.t('Please do this in PPZ view'))
+      console.warn(vscode.l10n.t('It seems called this command from Command Palette'), el)
       return
     }
     return exec(el)

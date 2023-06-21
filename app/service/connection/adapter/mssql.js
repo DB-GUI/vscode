@@ -143,7 +143,7 @@ class MSSQLKnexConnection extends KnexConnection {
   }
 
   async getDDL2(schema, table) {
-    const msg = vscode.l10n.t('mssqlTableStructureIsUnsupport')
+    const msg = vscode.l10n.t('MS SQL series\'s table structure export is unsupport now')
     noty.error(msg)
     throw Error(msg)
   }

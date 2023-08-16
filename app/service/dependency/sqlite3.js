@@ -1,4 +1,5 @@
 import { get as getContext } from '@ppzp/context'
+import vscode from 'vscode'
 import FS from 'fs/promises'
 import Path from 'path'
 import noty from '../../../lib/vscode-utils/noty/index'
@@ -11,8 +12,8 @@ async function checkInstall() {
     await FS.access(Path.join(ep, 'node_modules/sqlite3/LICENSE'))
   } catch(err) {
     console.warn('未安装 sqlite3 驱动')
-    const result = await noty.warn('未安装 sqlite3 驱动，你需要先安装，才可以连接 sqlite3 数据库', ['安装指引'])
-    if(result == '安装指引')
+    const result = await noty.warn(vscode.l10n.t('SQLite3 driver is not installed, please install SQLite3 driver'), [vscode.l10n.t('Install guide')])
+    if(result == vscode.l10n.t('Install guide'))
       new InstallSqlite3Webview()
   }
 }

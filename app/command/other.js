@@ -1,5 +1,6 @@
 import cp from 'child_process'
 import { get as getContext } from '@ppzp/context'
+import vscode from 'vscode'
 
 import Feifei from '../webview/feifei.js'
 import noty from '../../lib/vscode-utils/noty/index.js'
@@ -7,7 +8,7 @@ import { warn } from '../../lib/vscode-utils/prompt/confirm'
 
 export
 async function empty() {
-  if(await warn('确认清除所有数据吗？', '此操作将清除全部 ppz 数据', '确认清除'))
+  if(await warn(vscode.l10n.t('Clear all data. Are you sure?'), vscode.l10n.t('This operate will delete all PPZ data'), vscode.l10n.t('Confirm to delete')))
     return
   const keys = getContext().globalState.keys()
   await Promise.all(
@@ -15,7 +16,7 @@ async function empty() {
       getContext().globalState.update(key, undefined)
     )
   )
-  noty.info('数据已清空，请重启 vscode')
+  noty.info(vscode.l10n.t('Data cleared, please restart VSCode'))
 }
 
 export

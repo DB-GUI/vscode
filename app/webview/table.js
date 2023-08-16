@@ -3,11 +3,13 @@ import noty from '../../lib/vscode-utils/noty'
 import { TableElement } from '../treeview/connection/element/base'
 import NewRecordWebview from './new-record'
 import { get as getContext } from '@ppzp/context'
+import vscode, { l10n } from 'vscode'
 import makeOpenTerminal from './common/open-terminal'
 
 class TableWebview extends Webview {
   constructor(schemaName, tableName, names, connection) {
     console.debug('TableWebview constructing', names)
+    console.debug('l10n.uri:',vscode.l10n.uri)
     super({
       filename: 'table',
       title: tableName,
@@ -32,7 +34,7 @@ class TableWebview extends Webview {
         async update(editing) {
           try {
             await connection.updateMany(schemaName, tableName, editing)
-            noty.info('已保存')
+            noty.info(vscode.l10n.t('Saved'))
             return true
           } catch(err) {
             noty.fatal(err.toString())
@@ -42,7 +44,7 @@ class TableWebview extends Webview {
         async drop(pkValues) {
           try {
             await connection.drop(schemaName, tableName, pkValues)
-            noty.info('已删除')
+            noty.info(vscode.l10n.t('Deleted'))
             return true
           } catch(err) {
             noty.fatal(err.toString())

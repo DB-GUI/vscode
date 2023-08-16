@@ -3,9 +3,10 @@ import initCommand from './command/index.js'
 import initState from './model/migration/index.js'
 import copyDependencies from './service/dependency/copy'
 import initTreeview from './treeview/index.js'
+import vscode from 'vscode'
 
 export
-async function activate(context) {
+async function activate(context: vscode.ExtensionContext) {
   // console.log('[ppz extension path]', context.extensionPath)
   setContext(context)
   

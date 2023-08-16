@@ -8,12 +8,14 @@ export const options = {
   props: { // 局部配置
     size: { type: Number, default: defaults.size },
     index: { type: Number, default: 1 },
-    count: { type: Number, default: 0 }
+    count: { type: Number, default: 0 },
+    l10n: {}
   },
   data() {
     return {
       inputingSize: this.size,
-      inputingIndex: this.index
+      inputingIndex: this.index,
+      inputingl10n: this.l10n
     }
   },
   computed: {
@@ -24,12 +26,12 @@ export const options = {
   template: `
     <div class="ppz-pagination">
       <icon-btn @click="refresh" iid="refresh" />
-      <span class="txt">每页</span>
+      <span class="txt">{{l10n.perPage}}</span>
       <ppz-input class="page-size" v-model.trim="inputingSize" />
-      <span class="txt">条记录，共 </span>
+      <span class="txt">{{l10n.totalRecords}}</span>
       <span>{{count}}</span>
-      <span class="txt"> 条、</span>
-      <span>{{pageCount}}</span><span class="txt"> 页</span>
+      <span class="txt">{{l10n.record}}</span>
+      <span>{{pageCount}}</span><span class="txt">{{l10n.pages}}</span>
       <icon-btn class="big" :disabled="index <= 1" @click="incr(-2)" iid="arrow-left2" />
       <icon-btn class="big" :disabled="index <= 1" @click="incr(-1)" iid="arrow-left" />
       <ppz-input v-model.trim="inputingIndex" />

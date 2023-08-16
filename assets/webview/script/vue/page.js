@@ -10,6 +10,9 @@ import * as PNE from './cmp/pne.js'
 import * as HR from './cmp/hr.js'
 import * as RadioGroup from './cmp/radio-group.js'
 import Style from './style.js'
+import LANG_JA from './l10n/l10n.ja.js'
+import LANG_CN from './l10n/l10n.cn.js'
+import LANG_EN from './l10n/l10n.en.js'
 
 export default
 function VuePage(getVueOptions, ...cmps) {
@@ -19,6 +22,11 @@ function VuePage(getVueOptions, ...cmps) {
       // state 初始化
       if(!page.state) {
         page.state = options.initData()
+        page.state.l10n = {
+          'en': LANG_EN,
+          'ja': LANG_JA,
+          'zh-cn': LANG_CN
+        }[PPZ.lang][page.state.pageName]
         page.saveState()
       }
       delete options.initData

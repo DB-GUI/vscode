@@ -17,17 +17,20 @@ class Webview {
     category = 'ppz',
     title = 'ppz',
     initData,
+    l10n,
     webviewServerHandlers
   }) {
     this.connection = connection
     console.debug('webview constructing', filename)
+    console.debug('vscode.env.language', vscode.env.language)
+    console.debug('vscode.l10n',vscode.l10n)
     // html 文件路径
     const path = this.localPath('webview/pages/' + filename + '/index.html')
     console.debug(path)
     // 读取 html 文件
     fs.readFile(path, (err, data) => {
       if(err) {
-        const msg = 'webview 创建失败：读取 html 文件时发生异常'
+        const msg = vscode.l10n.t('Webview create failed: Exception happend when read in HTML file')
         console.error(msg, err)
         throw Error(msg)
       }
@@ -53,6 +56,7 @@ class Webview {
       light: this.uri('logo.svg'),
       dark: this.uri('logo-white.svg')
     }
+    this.l10n = vscode.l10n
     // 处理来自网页的请求
     new WebviewServer(this.panel.webview, getContext().subscriptions, {
       noty: ({ type, msg, btns }) => {
@@ -75,7 +79,6 @@ class Webview {
       getState: () => this.state,
       ...webviewServerHandlers
     })
-
     console.debug('webview constructed')
   }
 
@@ -104,7 +107,7 @@ class Webview {
 
   handleErr(err) {
     console.error(err)
-    noty.fatal('未知错误 ' + err.toString())
+    noty.fatal(vscode.l10n.t('Unknown Error')+ " " + err.toString())
   }
 
   tmpl({
@@ -128,7 +131,8 @@ class Webview {
           <script>
             window.VSCODE = acquireVsCodeApi()
             window.PPZ = {
-              initData: ${JSON.stringify(this.initData)},
+              lang: '${vscode.env.language}',
+              initData: ${JSON.stringify(this.initData)}
             }
           </script>
           ${body}

@@ -1,12 +1,13 @@
 import Webview from './common/form-base'
 import service from '../service/connection'
+import vscode from 'vscode'
 
 export default
 class UpsertConnectionWebview extends Webview {
   constructor(record) {
     super({
       filename: 'upsert-connection',
-      title: record ? '更新连接' : '创建连接',
+      title: record ? vscode.l10n.t('Update Connection') : vscode.l10n.t('Create Connection'),
       initData: { record }
     })
   }

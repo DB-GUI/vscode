@@ -1,3 +1,4 @@
+import vscode from 'vscode'
 import { KnexConnection, TableInfo, ColumnInfo, notyConnErr } from '../base'
 import noty from '../../../../lib/vscode-utils/noty'
 import {
@@ -92,7 +93,7 @@ class PostgreSQLKnexConnection extends KnexConnection {
   }
 
   async getDDL2(schema, table) {
-    const msg = '暂不支持 pgsql 系数据库导出表结构的操作'
+    const msg = vscode.l10n.t('PG SQL series\'s table structure export is unsupport now')
     noty.error(msg)
     throw Error(msg)
   }

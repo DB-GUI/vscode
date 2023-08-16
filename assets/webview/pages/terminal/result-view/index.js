@@ -46,7 +46,7 @@ export const options = {
       `
     }
   },
-  props: ['result'],
+  props: ['result','l10n'],
   template: `
     <div class="result-view" v-if="result">
       <div class="error-view" v-if="result.error">
@@ -56,15 +56,15 @@ export const options = {
       </div>
       <template v-else>
         <p>
-          <span>已执行, 耗时 {{result.time}} ms</span>
-          <span v-if="data.records">, 共 {{data.records.length}} 条结果</span>
+          <span>{{l10n.executedAndTimeCost}} {{result.time}} ms</span>
+          <span v-if="data.records">{{l10n.total}} {{data.records.length}} {{l10n.resultCount}}</span>
         </p>
         <template v-if="data instanceof Array">
           <!-- 多条 sql -->
           <details v-for="(dd, index) in data">
             <summary>
               <span>No.{{index + 1}}</span>
-              <span v-if="dd.records">共  {{dd.records.length}} 条结果</span>
+              <span v-if="dd.records">{{l10n.total}} {{dd.records.length}} {{l10n.resultCount}}</span>
             </summary>
             <kv-table v-if="dd.notQuery" :data="dd.desc" />
             <data-table v-else-if="Object.values(dd.records).length > 0" :data="dd" />

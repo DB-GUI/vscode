@@ -1,3 +1,4 @@
+import vscode from 'vscode'
 import { KnexConnection, notyConnErr, TableInfo, ColumnInfo } from '../base'
 import noty from '../../../../lib/vscode-utils/noty'
 import {
@@ -142,7 +143,7 @@ class MSSQLKnexConnection extends KnexConnection {
   }
 
   async getDDL2(schema, table) {
-    const msg = '暂不支持 mssql 系数据库导出表结构的操作'
+    const msg = vscode.l10n.t('MS SQL series\'s table structure export is unsupport now')
     noty.error(msg)
     throw Error(msg)
   }

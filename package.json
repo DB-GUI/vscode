@@ -1,0 +1,14 @@
+{
+  "version": "1.0.0",
+  "scripts": {
+    "build": "node ./build/index.js"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.19.2",
+    "esbuild-stylus-loader": "^0.4.2"
+  }
+}

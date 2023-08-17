@@ -2,7 +2,7 @@ const FS = require('fs')
 const Path = require('path')
 const { build } = require('esbuild')
 
-const package_json = require('./package.json/')
+const meta = require('./meta/')
 const core = require('./core/')
 
 // 尽量用相对路径
@@ -17,8 +17,8 @@ function main() {
     // console.error(err)
   }
   
-  // 2. package.json
-  package_json()
+  // 2. meta
+  meta()
 
   // 3. core
   build(core())

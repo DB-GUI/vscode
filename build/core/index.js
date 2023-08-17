@@ -2,7 +2,7 @@ module.exports = is_dev => ({
   entryPoints: ['src/main.js'],
   bundle: true,
   sourcemap: true,
-  treeShaking: !is_dev,
+  treeShaking: true,
   minify: !is_dev,
   outdir: 'dist',
   logLevel: 'info',

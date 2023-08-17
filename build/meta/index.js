@@ -8,7 +8,7 @@ module.exports = function make_package_json() {
     description: 'UI for database management',
     version,
     publisher: 'ppz',
-    icon: './icon.png',
+    icon: './asset/icon/ppz.svg',
     main: './main.js',
     engines: {
       vscode: '^1.47.3'
@@ -18,6 +18,9 @@ module.exports = function make_package_json() {
     ]
   }
   FS.writeFileSync('dist/package.json', JSON.stringify(result, null, 2))
+  FS.cpSync('src/asset', 'dist/asset', {
+    recursive: true
+  })
   FS.copyFileSync('doc/CHANGELOG.md', 'dist/CHANGELOG.md')
   FS.copyFileSync('README.md', 'dist/README.md')
   FS.copyFileSync('LICENSE', 'dist/LICENSE')

@@ -1,5 +1,6 @@
-const vscode = require('vscode')
+import { init_contribution } from './contribution'
 
-exports.activate = function() {
-  vscode.window.showInformationMessage('hello, ppz')
+export
+function activate(context) {
+  init_contribution(context)
 }

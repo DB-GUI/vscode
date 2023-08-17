@@ -1,5 +1,8 @@
-const init_contribution = require('./contribution')
+const init_command = require('./command')
+const init_state = require('./state/init')
 
-exports.activate = function(context) {
-  init_contribution(context)
+exports.activate = async function(context) {
+  init_command(context)
+  await init_state()
+
 }

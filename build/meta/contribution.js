@@ -1,9 +1,19 @@
-const container_view = require('../../src/contribution/view_container').register
-const view_about = require('../../src/contribution/view/about').register
-const view_connection = require('../../src/contribution/view/connection').register
+const container_view = {
+  id: 'ppz_view_container',
+  title: 'PPz',
+  icon: 'asset/icon/inherit.svg'
+}
+const view_about = {
+  id: 'about',
+  name: '%ppz.views.about.name%',
+  icon: 'asset/icon/inherit.svg',
+}
+const view_connection = {
+  id: 'connection',
+  name: '%ppz.views.connection.name%',
+  icon: 'asset/icon/inherit.svg',
+}
 
-view_about.name = '%ppz.views.about.name%'
-view_connection.name = '%ppz.views.connection.name%'
 
 module.exports = {
   viewsContainers: {

@@ -5,8 +5,8 @@ const { build } = require('esbuild')
 const meta = require('./meta/')
 const core = require('./core/')
 
-// 尽量用相对路径
-const abs_path = relative_path => Path.resolve(process.cwd(), relative_path)
+// 开发模式
+const is_dev = true
 
 function main() {
   // 1. 创建 dist 文件夹
@@ -16,11 +16,9 @@ function main() {
     console.debug('info: 文件夹 dist 未创建') // 有可能是创建好了，所以失败也没事
     // console.error(err)
   }
-  
   // 2. meta
   meta()
-
   // 3. core
-  build(core())
+  build(core(is_dev))
 }
 main()

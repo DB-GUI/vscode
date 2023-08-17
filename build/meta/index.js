@@ -1,6 +1,7 @@
 const FS = require('fs')
 const { version } = require('../../package.json')
 const contributes = require('./contribution')
+const l10n = require('./l10n')
 
 module.exports = function make_package_json() {
   const result = {
@@ -19,6 +20,7 @@ module.exports = function make_package_json() {
     ],
     contributes
   }
+  l10n()
   FS.writeFileSync('dist/package.json', JSON.stringify(result, null, 2))
   FS.cpSync('src/asset', 'dist/asset', {
     recursive: true

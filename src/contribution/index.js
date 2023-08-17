@@ -1,6 +1,5 @@
-import { init_command } from './command'
+const init_command = require('./command')
 
-export
-function init_contribution(ctx) {
+module.exports = function(ctx) {
   init_command(ctx)
 }

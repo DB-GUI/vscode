@@ -1,4 +1,3 @@
-export
-function init_command(context) {
+module.exports = function(context) {
   
 }

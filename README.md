@@ -1,4 +1,4 @@
-# PPZ.vscode
+# PPz.vscode
 [![release](https://img.shields.io/github/release/ppz-pro/ppz.vscode)](https://github.com/ppz-pro/ppz.vscode/releases)
 [![installs](https://img.shields.io/visual-studio-marketplace/i/ppz.ppz)](https://marketplace.visualstudio.com/items?itemName=ppz.ppz)
 [![license](https://img.shields.io/github/license/ppz-pro/ppz.vscode)](https://github.com/ppz-pro/ppz.vscode/blob/main/LICENSE)
@@ -32,14 +32,15 @@
 
 ## PPZ 需要你！
 + [提交 BUG、批评、建议](https://gitee.com/ppz-pro/ppz.vscode/issues)
-+ 参与功能测试([如何参与？](./FCT.md))
-+ 提交新功能(请查看[开发手册](./CONTRIBUTION.md))
-+ 给皮皮仔[画个图标](./assets/icon.png)
 
 感谢以下朋友：
 <div align="center">
   <a href="https://github.com/yyt6801">
     <img src="https://avatars.githubusercontent.com/u/18433720?v=4" width=28 style="width: 2em">
     yyt6801
+  </a>
+  <a href="https://github.com/beiyan-kitagari">
+    <img src="https://avatars.githubusercontent.com/u/64340548?v=4" width=28 style="width: 2em">
+    北雁
   </a>
 </div>

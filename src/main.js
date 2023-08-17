@@ -1,6 +1,5 @@
-import { init_contribution } from './contribution'
+const init_contribution = require('./contribution')
 
-export
-function activate(context) {
+exports.activate = function(context) {
   init_contribution(context)
 }

@@ -1,5 +1,6 @@
 const FS = require('fs')
 const { version } = require('../../package.json')
+const contributes = require('./contribution')
 
 module.exports = function make_package_json() {
   const result = {
@@ -15,7 +16,8 @@ module.exports = function make_package_json() {
     },
     activationEvents: [
       'onStartupFinished'
-    ]
+    ],
+    contributes
   }
   FS.writeFileSync('dist/package.json', JSON.stringify(result, null, 2))
   FS.cpSync('src/asset', 'dist/asset', {

@@ -2,7 +2,7 @@
   "version": "1.0.0",
   "scripts": {
     "build": "node ./build/index.js",
-    "core_dev": "node ./build/core/dev.js"
+    "dev_core": "node ./build/core/dev.js"
   },
   "dependencies": {
     "react": "^18.2.0",

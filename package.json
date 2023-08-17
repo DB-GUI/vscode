@@ -1,5 +1,6 @@
 {
   "version": "1.0.0",
+  "beta": true,
   "scripts": {
     "build": "node ./build/index.js",
     "dev_core": "node ./build/core/dev.js"

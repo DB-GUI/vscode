@@ -37,10 +37,11 @@
 <div align="center">
   <a href="https://github.com/yyt6801">
     <img src="https://avatars.githubusercontent.com/u/18433720?v=4" width=28 style="width: 2em">
-    yyt6801
   </a>
   <a href="https://github.com/beiyan-kitagari">
     <img src="https://avatars.githubusercontent.com/u/64340548?v=4" width=28 style="width: 2em">
-    北雁
+  </a>
+  <a href="https://github.com/cuifeng33">
+    <img src="https://avatars.githubusercontent.com/u/43241600?v=4" width=28 style="width: 2em">
   </a>
 </div>

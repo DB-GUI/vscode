@@ -1,4 +1,4 @@
 exports.register = {
-  id: 'about',
+  id: 'connection',
   icon: 'asset/icon/inherit.svg',
 }

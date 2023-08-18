@@ -1,7 +1,7 @@
 export
 const logger = new Proxy(console, {
-  get: (_, type) =>
-    (...args) =>
+  get: (_, type: 'debug' | 'error') =>
+    (...args: any[]) =>
       console[type]('PPz.vscode', ...args)
 })
 
@@ -12,8 +12,8 @@ const meta_util = function() {
   return {
     key,
     name,
-    key_and: (str) => key + str,
-    name_and: (str) => name + str,
-    l10n: (str) => `%${key}.${str}%`,
+    key_and: (str: string) => key + str,
+    name_and: (str: string) => name + str,
+    l10n: (str: string) => `%${key}.${str}%`,
   }
 }()

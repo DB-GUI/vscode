@@ -4,6 +4,7 @@
     "require": ["tsconfig-paths/register"]
   },
   "compilerOptions": {
+    "strict": true,
     "outDir": "dist",
     "allowJs": true,
     "target": "ES6",

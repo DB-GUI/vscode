@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.5.0",
+    "@types/uuid": "^9.0.2",
     "@types/vscode": "^1.81.0",
     "esbuild": "^0.19.2",
     "esbuild-stylus-loader": "^0.4.2",

@@ -16,11 +16,13 @@ interface All_state {
   connection: List_state<Connection>
 }
 
+type Raw_state = Memento & {setKeysForSync: any}
+
 export
 class State<Value> {
-  state: Memento & {setKeysForSync}
+  state: Raw_state
   key: string
-  constructor(state, key) {
+  constructor(state: Raw_state, key: string) {
     this.state = state
     this.key = key
   }
@@ -37,19 +39,19 @@ class List_state<Record extends Base_record> extends State<Record[]> {
   get() {
     return super.get([])
   }
-  get_by_id(id) {
+  get_by_id(id: string) {
     return this.get().find(record => record._id == id)
   }
-  async add(record) {
+  async add(record: Record) {
     record._id = UUID()
     const records = this.get()
     records.push(record)
     await this.save(records)
     return record._id
   }
-  async update(record) {
+  async update(record: Record) {
     const records = this.get()
-    const index = records.findIndex(r => r._id == record.id)
+    const index = records.findIndex(r => r._id == record._id)
     if(index == -1)
       throw Error('error on update list state: target nonexistent')
     const old_record = records.splice(index, 1, record)

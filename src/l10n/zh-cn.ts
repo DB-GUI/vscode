@@ -1,6 +1,7 @@
-const { version, beta } = require('../../package.json')
+import { version, beta } from '../../package.json'
 
-exports.contribution = {
+export
+const contribution = {
   views: {
     connection: {
       name: '连接',

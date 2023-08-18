@@ -1,4 +1,4 @@
-module.exports = is_dev => ({
+export default is_dev => ({
   entryPoints: ['src/main.ts'],
   bundle: true,
   sourcemap: true,

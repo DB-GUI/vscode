@@ -1,21 +1,21 @@
-const FS = require('fs')
-const list = [
-  'zh-cn',
-  'en',
-].map(name => ({
-  name,
-  data: require('../../src/l10n/' + name).contribution
-}))
+import { writeFileSync } from 'fs'
 
-module.exports = function() {
-  for(const { name, data } of list)
-    FS.writeFileSync(
-      `dist/package.nls.${
-        name == 'en' && '' // 英文不需要 en.
-        || (name + '.')
-      }json`,
-      JSON.stringify(flat(data), null, 2)
+export default async function() {
+  const list = await Promise.all(
+    [
+      'zh-cn',
+      'en',
+    ].map(async name => ({
+      name,
+      data: await import('src/l10n/' + name + '.ts')
+    }))
+  )
+  for(const { name, data } of list) {
+    writeFileSync(
+      `dist/package.nls.${name == 'en'?'':(name + '.')}json`,
+      JSON.stringify(flat(data.contribution), null, 2)
     )
+  }
 }
 
 function flat(data, prefix = 'ppz.', result = {}) {

@@ -1,22 +1,21 @@
-const FS = require('fs')
-const { build } = require('esbuild')
+import * as FS from 'fs'
+import { build } from 'esbuild'
 
-const meta = require('./meta/')
-const core = require('./core/')
+import meta from './meta'
+import core from './core'
 
 // 开发模式
 const is_dev = true
 
-function main() {
+async function main() {
   // 1. 创建 dist 文件夹
   try {
     FS.mkdirSync('dist')
   } catch(err) {
     console.debug('info: 文件夹 dist 未创建') // 有可能是创建好了，所以失败也没事
-    // console.error(err)
   }
   // 2. meta
-  meta()
+  await meta()
   // 3. core
   build(core(is_dev))
 }

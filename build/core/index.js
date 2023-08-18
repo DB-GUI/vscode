@@ -10,7 +10,5 @@ module.exports = is_dev => ({
   target: ['node14.0'],
   external: [
     'vscode',
-    'better-sqlite3',
-    'oracledb',
   ],
 })

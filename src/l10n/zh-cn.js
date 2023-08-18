@@ -8,13 +8,13 @@ exports.contribution = {
     },
     about: {
       name: '关于',
-      welcome: `数据库图形化操作界面
+      welcome: `关系型数据库的图形界面
 v${version}${beta ? '-beta' : ''}
-[$(preview) 使用帮助](https://gitee.com/ppz-pro/ppz.vscode/wikis/pages)
-[$(comment) 意见反馈](https://gitee.com/ppz-pro/ppz.vscode/issues)
-[$(bug) 发现 bug! ](https://gitee.com/ppz-pro/ppz.vscode/issues)
-[🐈 可爱猫咪](command:ppz.love)
-[$(trash) 清空 PPz](command:ppz.empty)`
+[使用帮助](https://gitee.com/ppz-pro/ppz.vscode/wikis/pages)
+[意见反馈](https://gitee.com/ppz-pro/ppz.vscode/issues)
+[导出配置](https://gitee.com/ppz-pro/ppz.vscode/issues)
+[$(trash) 清空 PPz](command:ppz.empty)
+[🐈 猫咪!](command:ppz.love)`
     }
   }
 }

@@ -10,11 +10,10 @@ exports.contribution = {
       name: 'About',
       welcome: `UI for sql database
 v${version}${beta ? '-beta' : ''}
-[$(preview) Usage](https://gitee.com/ppz-pro/ppz.vscode/wikis/pages)
-[$(comment) Advice](https://gitee.com/ppz-pro/ppz.vscode/issues)
-[$(bug) Issue](https://gitee.com/ppz-pro/ppz.vscode/issues)
+[Usage](https://gitee.com/ppz-pro/ppz.vscode/wikis/pages)
+[Fallback](https://gitee.com/ppz-pro/ppz.vscode/issues)
 [🐈 Cat!](command:ppz.love)
-[$(trash) Empty PPz](command:ppz.empty)`
+[Empty PPz](command:ppz.empty)`
     }
   }
 }

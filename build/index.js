@@ -1,5 +1,4 @@
 const FS = require('fs')
-const Path = require('path')
 const { build } = require('esbuild')
 
 const meta = require('./meta/')

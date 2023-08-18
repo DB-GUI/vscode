@@ -2,7 +2,7 @@
   "version": "1.0.0",
   "beta": true,
   "scripts": {
-    "build": "node ./build/index.js"
+    "build": "ts-node ./build/index.js"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -10,7 +10,10 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
+    "@types/vscode": "^1.81.0",
     "esbuild": "^0.19.2",
-    "esbuild-stylus-loader": "^0.4.2"
+    "esbuild-stylus-loader": "^0.4.2",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.6"
   }
 }

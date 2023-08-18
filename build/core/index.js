@@ -1,5 +1,5 @@
 module.exports = is_dev => ({
-  entryPoints: ['src/main.js'],
+  entryPoints: ['src/main.ts'],
   bundle: true,
   sourcemap: true,
   treeShaking: true,

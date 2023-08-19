@@ -52,11 +52,6 @@ export default {
         contents: meta_util.l10n('views.about.welcome')
       }
     ],
-    commands: commands.map(({ register }) => ({
-      title: register.title,
-      icon: `$(${register.icon})`,
-      command: meta_util.key_and('.' + register.command),
-      category: meta_util.name
-    })),
+    commands: commands.map(({ register }) => register),
   }
 }

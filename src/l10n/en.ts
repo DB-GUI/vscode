@@ -1,11 +1,12 @@
 import { version, beta } from '../../package.json'
+import { register as command_connection_add } from '../command/all/connection/add'
 
 export
 const contribution = {
   views: {
     connection: {
       name: 'Connection',
-      welcome: `[New Connection](command:ppz.addConnection)`,
+      welcome: `[New Connection](command:${command_connection_add.command})`,
     },
     about: {
       name: 'About',

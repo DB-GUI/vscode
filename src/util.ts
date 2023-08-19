@@ -15,5 +15,6 @@ const meta_util = function() {
     key_and: (str: string) => key + str,
     name_and: (str: string) => name + str,
     l10n: (str: string) => `%${key}.${str}%`,
+    icon: (name: string) => `$(${name})`,
   }
 }()

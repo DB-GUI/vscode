@@ -1,9 +1,11 @@
+import { Register } from '../../oo'
+
 export
-const register = {
-  command: 'connection.add',
-  title: 'add connection',
-  icon: 'add',
-}
+const register = new Register(
+  'connection.add',
+  'add connection',
+  'add'
+)
 
 export
 function exec() {

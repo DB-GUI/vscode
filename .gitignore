@@ -3,4 +3,4 @@ node_modules
 /dist
 pnpm-lock.yaml
 package-lock.json
-/playground.js
+/playground.*

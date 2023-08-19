@@ -7,7 +7,7 @@ export default async function() {
       'en',
     ].map(async name => ({
       name,
-      data: await import('src/l10n/' + name + '.ts')
+      data: await import('@/l10n/' + name + '.ts')
     }))
   )
   for(const { name, data } of list) {

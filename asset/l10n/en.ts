@@ -1,12 +1,12 @@
 import { version, beta } from '../../package.json'
-import { register as command_connection_add } from '../command/all/connection/add'
+import { key } from '@/constant/command'
 
 export
 const contribution = {
   views: {
     connection: {
       name: 'Connection',
-      welcome: `[New Connection](command:${command_connection_add.command})`,
+      welcome: `[New Connection](command:${key.connection.add})`,
     },
     about: {
       name: 'About',

@@ -5,7 +5,7 @@ import l10n from './l10n'
 export default async function() {
   writeFileSync('dist/package.json', JSON.stringify(package_json, null, 2))
   await l10n()
-  cpSync('src/asset', 'dist/asset', {
+  cpSync('asset/public', 'dist/public', {
     recursive: true
   })
   copyFileSync('doc/CHANGELOG.md', 'dist/CHANGELOG.md')

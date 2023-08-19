@@ -1,7 +1,7 @@
 const { context } = require('esbuild')
 
 module.exports = is_dev => ({
-  entryPoints: 'src/core/main.js',
+  entryPoints: '@/core/main.js',
   bundle: true,
   sourcemap: true,
   treeShaking: !is_dev,

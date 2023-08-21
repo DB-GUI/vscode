@@ -1,7 +1,7 @@
 import { join } from 'path'
 import { ExtensionContext, WebviewPanel, window, ViewColumn, Uri } from 'vscode'
-import { meta_util } from '@/util'
-import { All_state } from '@/state/oo'
+import { meta_util } from 'src/util'
+import { All_state } from 'src/state/oo'
 
 interface Webview_context {
   ext_context: ExtensionContext

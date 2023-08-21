@@ -11,10 +11,14 @@
     "moduleResolution": "Bundler",
     "resolveJsonModule": true,
     "paths": {
-      "@/*": [
+      "src/*": [
         "./src/*",
-        "./asset/*",
-        "./lib/ui/*"
+      ],
+      "asset/*": [
+        "./asset/*"
+      ],
+      "lib/*": [
+        "./lib/*"
       ]
     }
   },

@@ -1,5 +1,5 @@
 export default is_dev => ({
-  entryPoints: ['@/main'],
+  entryPoints: ['src/main'],
   bundle: true,
   sourcemap: is_dev,
   treeShaking: true,

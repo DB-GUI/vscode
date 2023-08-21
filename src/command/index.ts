@@ -1,8 +1,8 @@
 import { commands, ExtensionContext } from 'vscode'
-import { logger } from '@/util'
-import { key } from '@/constant/command'
-import { Webview_wrapper_react } from '@/webview/oo'
-import { All_state } from '@/state/oo'
+import { logger } from 'src/util'
+import { key } from 'asset/constant/command'
+import { Webview_wrapper_react } from 'src/webview/oo'
+import { All_state } from 'src/state/oo'
 
 export
 function init_command(ext_context: ExtensionContext, state: All_state) {

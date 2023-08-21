@@ -4,9 +4,9 @@ import { stylusLoader } from 'esbuild-stylus-loader'
 
 export default
 is_dev => {
-  const root = join(process.cwd(), 'src/webview/entry')
+  const root = join(process.cwd(), 'src/webview/all')
   const list = readdirSync(root)
-  const entryPoints = list.map(entry => join(root, entry))
+  const entryPoints = list.map(entry => join(root, entry, 'entry.tsx'))
   return {
     entryPoints: entryPoints,
     bundle: true, // https://esbuild.github.io/api/#bundle

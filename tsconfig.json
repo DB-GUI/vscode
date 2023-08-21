@@ -10,6 +10,7 @@
     "target": "ES6",
     "moduleResolution": "Bundler",
     "resolveJsonModule": true,
+    "jsx": "react-jsx", // https://www.typescriptlang.org/tsconfig#jsx
     "paths": {
       "src/*": [
         "./src/*",

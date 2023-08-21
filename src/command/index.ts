@@ -1,7 +1,7 @@
 import { commands, ExtensionContext } from 'vscode'
 import { logger } from 'src/util'
 import { key } from 'asset/constant/command'
-import { Webview_wrapper_react } from 'src/webview/oo'
+import open_webview_connection_upsert from 'src/webview/all/connection_upsert'
 import { All_state } from 'src/state/oo'
 
 export
@@ -11,10 +11,7 @@ function init_command(ext_context: ExtensionContext, state: All_state) {
       key: key.command.connection.add,
       exec(...args: any[]) {
         logger.debug('open add connection webview')
-        new Webview_wrapper_react({ ext_context, state }, {
-          title: 'upsert connection',
-          name: 'connection_upsert'
-        })
+        open_webview_connection_upsert(ext_context, state)
       }
     }
   ].forEach(({ key, exec }) => {

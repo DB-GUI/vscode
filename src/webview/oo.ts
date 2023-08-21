@@ -8,32 +8,59 @@ interface Webview_context {
   state: All_state
 }
 
+// const get_path = (context: ExtensionContext, relative_path: string) =>
+//   join(context.extensionPath, relative_path)
+const get_uri = (context: ExtensionContext, relative_path: string) =>
+  Uri.file(join(context.extensionPath, relative_path))
+
 export
 class Webview_wrapper {
   context: Webview_context
   panel: WebviewPanel
-  constructor(context: Webview_context, html: string) {
+  constructor(context: Webview_context) {
     this.context = context
     this.panel = window.createWebviewPanel(
       meta_util.name,
       'test',
       ViewColumn.One,
       {
-        localResourceRoots: [this.get_uri('1')],
+        localResourceRoots: [get_uri(context.ext_context, '')],
         enableScripts: true
       }
     )
-    this.panel.webview.html = html
     this.panel.iconPath = {
-      light: this.get_uri('asset/icon/black.svg'),
-      dark: this.get_uri('asset/icon/white.svg')
+      light: get_uri(context.ext_context, 'asset/icon/black.svg'),
+      dark: get_uri(context.ext_context, 'asset/icon/white.svg')
     }
   }
-
-  get_path(relative_path: string) {
-    return join(this.context.ext_context.extensionPath, relative_path)
+  
+  // webview 内静态资源引用 https://code.visualstudio.com/api/extension-guides/webview#loading-local-content
+  get_uri(r_path: string) {
+    return this.panel.webview.asWebviewUri(get_uri(this.context.ext_context, r_path))
   }
-  get_uri(relative_path: string) {
-    return Uri.file(this.get_path(relative_path))
+}
+
+interface Html_option {
+  title: string
+  name: string
+}
+
+export
+class Webview_wrapper_react extends Webview_wrapper {
+  constructor(context: Webview_context, html: Html_option) {
+    super(context)
+    this.panel.webview.html = `
+      <!DOCTYPE HTML>
+      <html>
+        <head>
+          <title>${html.title}</title>
+          <link rel="stylesheet" href="webview/${html.name}.css"></link>
+        </head>
+        <body>
+          <div id="react_root">loading</div>
+          <script type="module" src="${this.get_uri(`webview/${html.name}.js`)}"></script>
+        </body>
+      </html>
+    `
   }
 }

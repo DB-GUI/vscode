@@ -1,7 +1,7 @@
 export default is_dev => ({
   entryPoints: ['@/main'],
   bundle: true,
-  sourcemap: true,
+  sourcemap: is_dev,
   treeShaking: true,
   minify: !is_dev,
   outdir: 'dist',

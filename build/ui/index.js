@@ -1,5 +1,6 @@
 import { join } from 'path'
 import { readdirSync } from 'fs'
+import { stylusLoader } from 'esbuild-stylus-loader'
 
 export default
 is_dev => {
@@ -19,5 +20,8 @@ is_dev => {
     loader: {
       // '.woff2': 'file' // 静态资源
     },
+    plugins: [
+      stylusLoader(),
+    ],
   }
 }

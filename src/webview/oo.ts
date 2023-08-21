@@ -54,7 +54,7 @@ class Webview_wrapper_react extends Webview_wrapper {
       <html>
         <head>
           <title>${html.title}</title>
-          <link rel="stylesheet" href="webview/${html.name}.css"></link>
+          <link rel="stylesheet" href="${this.get_uri(`webview/${html.name}.css`)}"></link>
         </head>
         <body>
           <div id="react_root">loading</div>

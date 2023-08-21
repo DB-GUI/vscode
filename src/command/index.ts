@@ -8,7 +8,7 @@ export
 function init_command(ext_context: ExtensionContext, state: All_state) {
   [
     {
-      key: key.connection.add,
+      key: key.command.connection.add,
       exec(...args: any[]) {
         logger.debug('open add connection webview')
         new Webview_wrapper_react({ ext_context, state }, {

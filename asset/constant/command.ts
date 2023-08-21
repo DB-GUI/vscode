@@ -1,6 +1,10 @@
+import { meta_util } from 'src/util'
+
 export
 const key = {
-  connection: {
-    add: 'ppz.connection.add'
-  }
+  command: {
+    connection: {
+      add: meta_util.key_and('.connection.add')
+    },
+  },
 }

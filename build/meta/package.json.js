@@ -56,7 +56,7 @@ export default {
     ],
     commands: [
       {
-        command: key.connection.add,
+        command: key.command.connection.add,
         title: 'add connection',
         icon: meta_util.icon('add'),
         category,

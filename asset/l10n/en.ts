@@ -6,7 +6,7 @@ const contribution = {
   views: {
     connection: {
       name: 'Connection',
-      welcome: `[New Connection](command:${key.connection.add})`,
+      welcome: `[New Connection](command:${key.command.connection.add})`,
     },
     about: {
       name: 'About',

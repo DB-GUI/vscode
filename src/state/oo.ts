@@ -4,28 +4,28 @@ import { v4 as UUID } from 'uuid'
 interface Base_record {
   _id: string
 }
+export
 interface SystemConfig extends Base_record {
   version: string
 }
-interface Connection extends Base_record {
+export
+interface Config_connection extends Base_record {
   name: string
 }
 export
 interface All_state {
   system: State<SystemConfig>
-  connection: List_state<Connection>
+  connection: State_list<Config_connection>
 }
 
 type Raw_state = Memento & {setKeysForSync: any}
 
 export
 class State<Value> {
-  state: Raw_state
-  key: string
-  constructor(state: Raw_state, key: string) {
-    this.state = state
-    this.key = key
-  }
+  constructor(
+    private state: Raw_state,
+    private key: string,
+  ) {}
   get(default_value: Value) {
     return this.state.get(this.key, default_value)
   }
@@ -35,7 +35,7 @@ class State<Value> {
 }
 
 export
-class List_state<Record extends Base_record> extends State<Record[]> {
+class State_list<Record extends Base_record> extends State<Record[]> {
   get() {
     return super.get([])
   }

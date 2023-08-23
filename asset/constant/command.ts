@@ -7,4 +7,9 @@ const key = {
       add: meta_util.key_and('.connection.add')
     },
   },
+  view: {
+    id: {
+      connection: meta_util.key_and('.connection'),
+    },
+  },
 }

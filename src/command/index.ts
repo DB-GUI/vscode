@@ -1,11 +1,12 @@
-import { commands, ExtensionContext } from 'vscode'
+import { commands, ExtensionContext, EventEmitter } from 'vscode'
 import { logger } from 'src/util'
 import { key } from 'asset/constant/command'
 import open_webview_connection_upsert from 'src/webview/all/connection_upsert'
 import { All_state } from 'src/state/oo'
+import { Element } from 'src/connection_view/oo'
 
 export
-function init_command(ext_context: ExtensionContext, state: All_state) {
+function init_command(ext_context: ExtensionContext, state: All_state, event_emitter_treeview: EventEmitter<Element>) {
   [
     {
       key: key.command.connection.add,

@@ -15,9 +15,10 @@ const get_uri = (context: ExtensionContext, relative_path: string) =>
 
 export
 class Webview_wrapper {
-  context: Webview_context
-  panel: WebviewPanel
-  constructor(context: Webview_context) {
+  protected panel: WebviewPanel
+  constructor(
+    protected context: Webview_context
+  ) {
     this.context = context
     this.panel = window.createWebviewPanel(
       meta_util.name,

@@ -13,7 +13,7 @@ const view_about = {
   icon: 'public/icon/inherit.svg',
 }
 const view_connection = {
-  id: meta_util.key_and('.connection'),
+  id: key.view.id.connection,
   name: meta_util.l10n('views.connection.name'),
   icon: 'public/icon/inherit.svg',
 }

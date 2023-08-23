@@ -1,5 +1,5 @@
 import { version, beta } from '../../package.json'
-import { key } from 'asset/constant/command'
+import key from 'asset/constant/key'
 
 export
 const contribution = {

@@ -1,5 +1,5 @@
 import { EventEmitter, window } from 'vscode'
-import { key } from 'asset/constant/command'
+import key from 'asset/constant/key'
 import { State_list, Config_connection } from 'src/state/oo'
 import { Element, Has_item, Has_children, Element_root } from './oo'
 

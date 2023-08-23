@@ -1,6 +1,6 @@
 import { commands, ExtensionContext, EventEmitter } from 'vscode'
 import { logger } from 'src/util'
-import { key } from 'asset/constant/command'
+import key from 'asset/constant/key'
 import open_webview_connection_upsert from 'src/webview/all/connection_upsert'
 import { All_state } from 'src/state/oo'
 import { Element } from 'src/connection_view/oo'

@@ -1,6 +1,6 @@
 import { version } from '../../package.json'
 import { meta_util } from 'src/util'
-import { key } from 'asset/constant/command'
+import key from 'asset/constant/key'
 
 const container_view = {
   id: 'ppz_view_container',

@@ -1,32 +1,32 @@
-import { version } from '../../package.json'
-import { meta_util } from 'src/util'
-import key from 'asset/constant/key'
+import { version } from '../../../package.json'
+import util_meta from '@/common/util_meta'
+import key from '@/common/constant/key'
 
 const container_view = {
   id: 'ppz_view_container',
   title: 'PPz View',
-  icon: 'public/icon/inherit.svg'
+  icon: 'asset/icon/inherit.svg'
 }
 const view_about = {
-  id: meta_util.key_and('.about'),
-  name: meta_util.l10n('views.about.name'),
-  icon: 'public/icon/inherit.svg',
+  id: util_meta.key_and('.about'),
+  name: util_meta.l10n('views.about.name'),
+  icon: 'asset/icon/inherit.svg',
 }
 const view_connection = {
   id: key.view.id.connection,
-  name: meta_util.l10n('views.connection.name'),
-  icon: 'public/icon/inherit.svg',
+  name: util_meta.l10n('views.connection.name'),
+  icon: 'asset/icon/inherit.svg',
 }
 
-const category = meta_util.name
+const category = util_meta.name
 
 export default {
-  name: meta_util.key,
-  displayName: meta_util.name,
+  name: util_meta.key,
+  displayName: util_meta.name,
   description: 'UI for database management',
   version,
   publisher: 'ppz',
-  icon: './public/icon/ppz.png',
+  icon: './asset/icon/ppz.png',
   main: './main.js',
   engines: {
     vscode: '^1.47.3'
@@ -47,18 +47,18 @@ export default {
     viewsWelcome: [
       {
         view: view_connection.id,
-        contents: meta_util.l10n('views.connection.welcome')
+        contents: util_meta.l10n('views.connection.welcome')
       },
       {
         view: view_about.id,
-        contents: meta_util.l10n('views.about.welcome')
+        contents: util_meta.l10n('views.about.welcome')
       }
     ],
     commands: [
       {
         command: key.command.connection.add,
         title: 'add connection',
-        icon: meta_util.icon('add'),
+        icon: util_meta.icon('add'),
         category,
       }
     ],

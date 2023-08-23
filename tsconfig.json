@@ -12,14 +12,8 @@
     "resolveJsonModule": true,
     "jsx": "react-jsx", // https://www.typescriptlang.org/tsconfig#jsx
     "paths": {
-      "src/*": [
+      "@/*": [
         "./src/*",
-      ],
-      "asset/*": [
-        "./asset/*"
-      ],
-      "lib/*": [
-        "./lib/*"
       ]
     }
   },

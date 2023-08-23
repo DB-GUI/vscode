@@ -1,5 +1,5 @@
 import { v4 as UUID } from 'uuid'
-import { logger } from 'src/util'
+import { logger } from '@/main/util'
 
 export default
 async function migrate(state) {

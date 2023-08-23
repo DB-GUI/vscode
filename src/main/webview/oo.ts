@@ -1,7 +1,7 @@
 import { join } from 'path'
 import { ExtensionContext, WebviewPanel, window, ViewColumn, Uri } from 'vscode'
-import { meta_util } from 'src/util'
-import { All_state } from 'src/state/oo'
+import util_meta from '@/common/util_meta'
+import { All_state } from '@/main/state/oo'
 
 interface Webview_context {
   ext_context: ExtensionContext
@@ -21,7 +21,7 @@ class Webview_wrapper {
   ) {
     this.context = context
     this.panel = window.createWebviewPanel(
-      meta_util.name,
+      util_meta.name,
       'test',
       ViewColumn.One,
       {

@@ -1,5 +1,5 @@
 import { TreeItem, TreeItemCollapsibleState } from 'vscode'
-import { State_list, Config_connection } from 'src/state/oo'
+import { State_list, Config_connection } from '@/main/state/oo'
 
 export
 interface Has_children {

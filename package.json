@@ -2,7 +2,7 @@
   "version": "1.0.0",
   "beta": true,
   "scripts": {
-    "build": "ts-node ./build/index"
+    "build": "ts-node ./src/build/index"
   },
   "dependencies": {
     "react": "^18.2.0",

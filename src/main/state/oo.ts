@@ -13,6 +13,14 @@ interface Config_connection extends Base_record {
   name: string
 }
 export
+interface Config_connection_simple extends Config_connection {
+  ip: string
+  port: string
+  user: string
+  password: string
+}
+
+export
 interface All_state {
   system: State<SystemConfig>
   connection: State_list<Config_connection>

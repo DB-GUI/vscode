@@ -25,13 +25,14 @@ function make_webview_server(
         code: 0
       }
       try {
-        const handler = map_handler.get(message.id_request)
+        const handler = map_handler.get(message.key_handler)
         if(handler)
           result.data = await handler(message.post)
         else
           throw new Error_handler('unregistered request', 404)
       } catch(error) {
         if (error instanceof Error_handler) {
+          logger.error('404', message)
           result.code = error.code
           result.msg = error.msg
         } else {

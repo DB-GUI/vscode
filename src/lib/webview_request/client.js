@@ -8,6 +8,7 @@ function make_client(get_id_request = () => '' + new Date().getTime() + Math.ran
     const message = event.data
     const promise = map_request.get(message.id_request)
     if(promise) {
+      console.debug('PPz.vscode request responded', message.id_request, message)
       if(message.code_error)
         promise.reject({
           code: message.code_error,
@@ -19,13 +20,14 @@ function make_client(get_id_request = () => '' + new Date().getTime() + Math.ran
   })
   
   const vscode = acquireVsCodeApi()
-  return function request(key_api, post) {
+  return function request(key_handler, post) {
     return new Promise((resolve, reject) => {
       const id_request = get_id_request()
+      console.debug('PPz.vscode requesting', id_request, key_handler, post)
       map_request.set(id_request, { resolve, reject })
       vscode.postMessage({
         id_request,
-        key_api,
+        key_handler,
         post,
       })
     })

@@ -1,9 +1,14 @@
 import { ExtensionContext } from 'vscode'
-import { All_state } from '@/main/state/oo'
+import { State_list, Config_connection } from '@/main/state/oo'
 import { Webview_wrapper_react } from '@/main/webview/oo'
 
-export default (ext_context: ExtensionContext, state: All_state) =>
-  new Webview_wrapper_react({ ext_context, state }, {
-    title: 'upsert connection',
-    name: 'connection_upsert',
-  })
+export default
+function create_webview(context: ExtensionContext, state: State_list<Config_connection>) {
+  new Webview_wrapper_react(
+    context,
+    {
+      title: 'upsert connection',
+      name: 'connection_upsert',
+    }
+  )
+}

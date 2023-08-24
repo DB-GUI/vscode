@@ -12,8 +12,8 @@ is_dev => {
     bundle: true, // https://esbuild.github.io/api/#bundle
     splitting: true,
     format: 'esm',
+    treeShaking: true,
     sourcemap: is_dev,
-    treeShaking: !is_dev,
     minify: !is_dev,
     outdir: 'dist/webview',
     logLevel: 'info',

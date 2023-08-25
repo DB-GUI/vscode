@@ -1,4 +1,4 @@
-import { render_root } from '@/main/webview/entry_util'
+import { render_root } from '@/main/webview/util_entry'
 
 /**
  * 这个文件是 webview（网页）的入口文件（类似于常规 Vue、React 应用的 main.js 或 dist.js 或 bundle.js 或 src/index.js）

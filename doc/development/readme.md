@@ -1,6 +1,6 @@
 # PPz.vscode 开发
-+ webview: 用户操作界面
-+ core:
++ webview: 用户操作界面（运行时：浏览器）
++ core:（运行时：Node.js + vscode）
+  + 主程序：启动 PPz.vscode，初始化 state、webview、connection view、命令
   + webview 之外的用户操作界面，包括“左侧 treeview”、“通知”等
-  + 为 webview 提供服务，主要是存取数据
-+ 生成配置文件、转移
++ build: 生成、转移配置文件

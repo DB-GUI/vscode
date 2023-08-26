@@ -5,7 +5,9 @@
 
 [github 仓库](https://github.com/ppz-pro/ppz.vscode) | [微软商店](https://marketplace.visualstudio.com/items?itemName=ppz.ppz) | [国内仓库](https://gitee.com/ppz-pro/ppz.vscode)
 
-[**PPZ**](https://marketplace.visualstudio.com/items?itemName=ppz.ppz) 是一个 vscode 插件，提供操作数据库的图形界面，详情请参考[使用帮助](https://gitee.com/ppz-pro/ppz.vscode/wikis/%E4%BD%BF%E7%94%A8%E5%B8%AE%E5%8A%A9)  
+[**PPz.vscode**](https://marketplace.visualstudio.com/items?itemName=ppz.ppz) 是一个 vscode 插件，提供操作数据库的图形界面，详情请参考[使用帮助](https://gitee.com/ppz-pro/ppz.vscode/wikis/%E4%BD%BF%E7%94%A8%E5%B8%AE%E5%8A%A9)  
+
+> 目前 PPz.vscode 正在重构，当前最新的公测版是 [v0.5.1-beta](https://github.com/ppz-pro/PPz.vscode/tree/v0.5.1-beta)（发布于 2022 年 10 月 9 日）
 
 + ✅ **界面干净**
 + ✅ 支持多种数据库（目前：MySQL、MSSQL(SQL Server)、SQLite3、PostgreSQL、CockroachDB、[StoneDB(国产)](https://www.stoneatom.com/StoneDB)、MariaDB 等）
@@ -32,6 +34,7 @@
 
 ## PPZ 需要你！
 + [提交 BUG、批评、建议](https://gitee.com/ppz-pro/ppz.vscode/issues)
++ [开发指引](./doc/development/)
 
 感谢以下朋友：
 <div align="center">

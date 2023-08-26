@@ -25,7 +25,7 @@ function make_webview(context: ExtensionContext, option: Webview_options) {
     option.title, // webview 的标题
     ViewColumn.One, // 在第一栏打开 webview
     {
-      localResourceRoots: [get_uri('')], // html 允许加载的静态文件的目录（不能随意加载）
+      // localResourceRoots: [get_uri('')], // html 允许加载的静态文件的目录（默认可访问插件所在目录）
       enableScripts: true, // 开启 js（默认情况下，在 webview 里禁止运行 js）
     },
   )
@@ -34,13 +34,16 @@ function make_webview(context: ExtensionContext, option: Webview_options) {
     light: get_uri('asset/icon/black.svg'), // 亮模式的 icon
     dark: get_uri('asset/icon/white.svg'), // 暗模式的 icon
   }
+  // webview 内静态资源引用 https://code.visualstudio.com/api/extension-guides/webview#loading-local-content
+  const get_webiview_uri = (r_path: string) =>
+    panel.webview.asWebviewUri(get_uri(r_path))
   // 设置 webview 的 html
   panel.webview.html = option.html || `
     <!DOCTYPE HTML>
     <html>
       <head>
         <title>${option.title}</title>
-        <link rel="stylesheet" href="${get_uri(`webview/${option.name}/index.css`)}"></link>
+        <link rel="stylesheet" href="${get_webiview_uri(`webview/${option.name}/index.css`)}"></link>
       </head>
       <body>
         <div id="react_root">loading</div>
@@ -51,7 +54,7 @@ function make_webview(context: ExtensionContext, option: Webview_options) {
           }
           console.log('PPz ready', { PPz })
         </script>
-        <script type="module" src="${get_uri(`webview/${option.name}/index.js`)}"></script>
+        <script type="module" src="${get_webiview_uri(`webview/${option.name}/index.js`)}"></script>
       </body>
     </html>
   `

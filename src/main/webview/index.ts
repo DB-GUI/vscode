@@ -19,14 +19,13 @@ function make_webview(context: ExtensionContext, option: Webview_options) {
   const get_uri = (relative_path: string) =>
     Uri.file(join(context.extensionPath, relative_path))
 
-    console.log(get_uri(''))
   // 创建 webview
   const panel = window.createWebviewPanel(
     util_meta.name, // webview 的分类（没啥用）
     option.title, // webview 的标题
     ViewColumn.One, // 在第一栏打开 webview
     {
-      // localResourceRoots: [get_uri('')], // html 允许加载的静态文件的目录（不能随意加载）
+      localResourceRoots: [get_uri('')], // html 允许加载的静态文件的目录（不能随意加载）
       enableScripts: true, // 开启 js（默认情况下，在 webview 里禁止运行 js）
     },
   )

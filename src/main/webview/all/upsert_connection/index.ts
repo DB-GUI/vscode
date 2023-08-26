@@ -5,6 +5,6 @@ export default
 function make_upsert_connection_webview(context: ExtensionContext) {
   make_webview(context, {
     title: 'upsert connection',
-    name: 'connection_upsert',
+    name: 'upsert_connection',
   })
 }

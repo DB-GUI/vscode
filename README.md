@@ -33,8 +33,9 @@
 + 坚持低熵
 
 ## PPZ 需要你！
-+ [提交 BUG、批评、建议](https://gitee.com/ppz-pro/ppz.vscode/issues)
 + [开发指引](./doc/development/)
++ [提交 BUG、批评、建议](https://gitee.com/ppz-pro/ppz.vscode/issues)
++ [给个好评](https://marketplace.visualstudio.com/items?itemName=ppz.ppz&ssr=false#review-details)
 
 感谢以下朋友：
 <div align="center">

@@ -2,7 +2,7 @@ import { TreeItem } from 'vscode'
 
 export
 interface Has_children {
-  get_children(): Element[]
+  get_children(): Element[] | Promise<Element[]>
 }
 
 export

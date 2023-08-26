@@ -5,6 +5,7 @@
     "build": "ts-node ./src/build/index"
   },
   "dependencies": {
+    "mysql2": "^3.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "uuid": "^9.0.0"

@@ -1,12 +1,14 @@
 import { EventEmitter, window, TreeItemCollapsibleState, TreeItem } from 'vscode'
+import { PPz_context } from '../oo'
 import key from '@/common/constant/key'
 import { State_list, Connection_config } from '@/main/state/oo'
 import { Element, Has_item, Has_children } from './oo'
+import get_adapter from '@/adapter'
 
 // https://code.visualstudio.com/api/extension-guides/tree-view
 
 export
-function init_connection_view(state: State_list<Connection_config>) {
+function init_connection_view(ppz: PPz_context, state: State_list<Connection_config>) {
   const event_emitter = new EventEmitter<Element>()
   window.createTreeView<Element>(key.view.id.connection, {
     // https://code.visualstudio.com/api/references/vscode-api#TreeViewOptions
@@ -14,7 +16,7 @@ function init_connection_view(state: State_list<Connection_config>) {
     treeDataProvider: {
       // https://code.visualstudio.com/api/references/vscode-api#TreeDataProvider
       onDidChangeTreeData: event_emitter.event,
-      getChildren: (el: Has_children = make_root(state)) =>
+      getChildren: (el: Has_children = make_root(ppz, state)) =>
         el.get_children()
       ,
       getTreeItem: (el: Has_item) =>
@@ -24,23 +26,14 @@ function init_connection_view(state: State_list<Connection_config>) {
   return event_emitter
 }
 
-function make_root(state: State_list<Connection_config>) {
-  const default_collapse = TreeItemCollapsibleState.Collapsed
+function make_root(ppz: PPz_context, state: State_list<Connection_config>) {
   return {
     get_children() {
-      return state.get().map(config => make_connection(config))
-    }
-  }
-
-  function make_connection(config: Connection_config) {
-    return {
-      get_children() {
-        return []
-      },
-      get_item() {
-        const item = new TreeItem(config.name)
-        return item
-      }
+      return state.get() // 获取所有连接
+        .map(config =>
+          get_adapter(ppz, config.client) // 根据 config 获取适配器
+            .make_treeview(config)
+      )
     }
   }
 }

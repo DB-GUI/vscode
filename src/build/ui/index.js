@@ -15,7 +15,7 @@ is_dev => {
     splitting: true,
     format: 'esm',
     treeShaking: true,
-    sourcemap: is_dev,
+    // sourcemap: is_dev,
     minify: !is_dev,
     logLevel: 'info',
     loader: {

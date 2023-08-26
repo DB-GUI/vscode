@@ -8,14 +8,17 @@ export
 interface SystemConfig extends Record {
   version: string
 }
+
 export
 interface Connection_config extends Record {
   name: string
+  client: string
 }
+
 export
 interface Simple_connection_config extends Connection_config {
-  ip: string
-  port: string
+  host: string
+  port: number
   user: string
   password: string
 }

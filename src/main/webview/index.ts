@@ -14,8 +14,6 @@ interface Webview_options {
 
 export
 function make_webview(context: ExtensionContext, option: Webview_options) {
-  // const get_path = (context: ExtensionContext, relative_path: string) =>
-  //   join(context.extensionPath, relative_path)
   const get_uri = (relative_path: string) =>
     Uri.file(join(context.extensionPath, relative_path))
 

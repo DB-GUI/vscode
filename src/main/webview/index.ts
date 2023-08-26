@@ -5,7 +5,7 @@ import make_webview_server from '@/lib/webview_request/server'
 import util_meta from '@/common/util_meta'
 import { logger } from '@/main/util'
 
-interface Prop_make {
+interface Webview_options {
   title: string
   name: string
   html?: string
@@ -13,7 +13,7 @@ interface Prop_make {
 }
 
 export
-function make_webview(context: ExtensionContext, option: Prop_make) {
+function make_webview(context: ExtensionContext, option: Webview_options) {
   // const get_path = (context: ExtensionContext, relative_path: string) =>
   //   join(context.extensionPath, relative_path)
   const get_uri = (relative_path: string) =>

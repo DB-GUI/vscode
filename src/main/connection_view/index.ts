@@ -1,12 +1,12 @@
 import { EventEmitter, window } from 'vscode'
 import key from '@/common/constant/key'
-import { State_list, Config_connection } from '@/main/state/oo'
+import { State_list, Connection_config } from '@/main/state/oo'
 import { Element, Has_item, Has_children, Element_root } from './oo'
 
 // https://code.visualstudio.com/api/extension-guides/tree-view
 
 export
-function init_connection_view(state: State_list<Config_connection>) {
+function init_connection_view(state: State_list<Connection_config>) {
   const event_emitter = new EventEmitter<Element>()
   window.createTreeView<Element>(key.view.id.connection, {
     // https://code.visualstudio.com/api/references/vscode-api#TreeViewOptions

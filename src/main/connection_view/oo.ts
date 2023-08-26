@@ -1,5 +1,5 @@
 import { TreeItem, TreeItemCollapsibleState } from 'vscode'
-import { State_list, Config_connection } from '@/main/state/oo'
+import { State_list, Connection_config } from '@/main/state/oo'
 
 export
 interface Has_children {
@@ -17,22 +17,22 @@ interface Has_both extends Has_children, Has_item {}
 export
 type Element = Has_children | Has_item | Has_both
 
-const collapse_default = TreeItemCollapsibleState.Collapsed
+const default_collapse = TreeItemCollapsibleState.Collapsed
 
 export
 class Element_root implements Has_children {
-  private collapse_default: TreeItemCollapsibleState = collapse_default
-  constructor(private state: State_list<Config_connection>) {
-  }
+  constructor(
+    private state: State_list<Connection_config>
+  ) {}
 
   get_children() {
-    return this.state.get().map(config => new Element_conn(config))
+    return this.state.get().map(config => new Conn_element(config))
   }
 }
 
-class Element_conn implements Has_both {
+class Conn_element implements Has_both {
   constructor(
-    private config: Config_connection,
+    private config: Connection_config,
   ) {}
   get_children() {
     return []

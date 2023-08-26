@@ -1,19 +1,19 @@
 import { Memento } from 'vscode'
 import { v4 as UUID } from 'uuid'
 
-interface Base_record {
+interface Record {
   _id: string
 }
 export
-interface SystemConfig extends Base_record {
+interface SystemConfig extends Record {
   version: string
 }
 export
-interface Config_connection extends Base_record {
+interface Connection_config extends Record {
   name: string
 }
 export
-interface Config_connection_simple extends Config_connection {
+interface Simple_connection_config extends Connection_config {
   ip: string
   port: string
   user: string
@@ -23,7 +23,7 @@ interface Config_connection_simple extends Config_connection {
 export
 interface All_state {
   system: State<SystemConfig>
-  connection: State_list<Config_connection>
+  connection: State_list<Connection_config>
 }
 
 type Raw_state = Memento & {setKeysForSync: any}
@@ -43,21 +43,21 @@ class State<Value> {
 }
 
 export
-class State_list<Record extends Base_record> extends State<Record[]> {
+class State_list<R extends Record> extends State<R[]> {
   get() {
     return super.get([])
   }
   get_by_id(id: string) {
     return this.get().find(record => record._id == id)
   }
-  async add(record: Record) {
+  async add(record: R) {
     record._id = UUID()
     const records = this.get()
     records.push(record)
     await this.save(records)
     return record._id
   }
-  async update(record: Record) {
+  async update(record: R) {
     const records = this.get()
     const index = records.findIndex(r => r._id == record._id)
     if(index == -1)

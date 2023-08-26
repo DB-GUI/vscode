@@ -1,17 +1,17 @@
 export default
-function make_client(get_id_request = () => '' + new Date().getTime() + Math.random()) {
-  // 暂存所有请求 id_request => promise_request
-  const map_request = new Map()
+function make_client(get_request_id = () => '' + new Date().getTime() + Math.random()) {
+  // 暂存所有请求 request_id => request_promise
+  const request_map = new Map()
 
   // 打开监听: 后端响应消息
   window.addEventListener('message', function handle_response_receive(event) {
     const message = event.data
-    const promise = map_request.get(message.id_request)
+    const promise = request_map.get(message.request_id)
     if(promise) {
-      console.debug('PPz.vscode request responded', message.id_request, message)
-      if(message.code_error)
+      console.debug('PPz.vscode request responded', message.request_id, message)
+      if(message.code)
         promise.reject({
-          code: message.code_error,
+          code: message.code,
           msg: message.msg
         })
       else
@@ -20,14 +20,14 @@ function make_client(get_id_request = () => '' + new Date().getTime() + Math.ran
   })
   
   const vscode = acquireVsCodeApi()
-  return function request(key_handler, post) {
+  return function request(handler_key, post) {
     return new Promise((resolve, reject) => {
-      const id_request = get_id_request()
-      console.debug('PPz.vscode requesting', id_request, key_handler, post)
-      map_request.set(id_request, { resolve, reject })
+      const request_id = get_request_id()
+      console.debug('PPz.vscode requesting', request_id, handler_key, post)
+      request_map.set(request_id, { resolve, reject })
       vscode.postMessage({
-        id_request,
-        key_handler,
+        request_id,
+        handler_key,
         post,
       })
     })

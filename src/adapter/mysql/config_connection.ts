@@ -1,6 +1,6 @@
-import { Config_connection_simple } from '@/main/state/oo'
+import { Connection_config } from '@/main/state/oo'
 
 export
-interface Config_connection_mysql extends Config_connection_simple {
+interface Mysql_connection_config extends Connection_config {
   database?: string
 }

@@ -18,14 +18,14 @@ function make_webview_server(
   // 打开监听
   webview.onDidReceiveMessage(
     async function handle_request(message: Received<any>) {
-      if(!message.id_request) // 没有 id 就认为不是一次请求，就不处理
+      if(!message.request_id) // 没有 id 就认为不是一次请求，就不处理
         return
       const result: Result<any, any> = {
-        id_request: message.id_request,
+        request_id: message.request_id,
         code: 0
       }
       try {
-        const handler = map_handler.get(message.key_handler)
+        const handler = map_handler.get(message.handler_key)
         if(handler)
           result.data = await handler(message.post)
         else

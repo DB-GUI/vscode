@@ -8,7 +8,7 @@ export
 async function activate(context: ExtensionContext) {
   logger.debug('starting')
   const state = await init_state(context)
-  const event_emitter_treeview = init_connection_view(state.connection)
-  init_command(context, state, event_emitter_treeview)
+  const treeview_event_emitter = init_connection_view(state.connection)
+  init_command(context, state, treeview_event_emitter)
   logger.debug('started')
 }

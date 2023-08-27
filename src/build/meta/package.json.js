@@ -7,12 +7,12 @@ const container_view = {
   title: 'PPz View',
   icon: 'asset/icon/inherit.svg'
 }
-const view_about = {
+const about_view = {
   id: util_meta.key_and('.about'),
   name: util_meta.l10n('views.about.name'),
   icon: 'asset/icon/inherit.svg',
 }
-const view_connection = {
+const connection_view = {
   id: key.view.id.connection,
   name: util_meta.l10n('views.connection.name'),
   icon: 'asset/icon/inherit.svg',
@@ -40,17 +40,17 @@ export default {
     },
     views: {
       [container_view.id]: [
-        view_connection,
-        view_about,
+        connection_view,
+        about_view,
       ]
     },
     viewsWelcome: [
       {
-        view: view_connection.id,
+        view: connection_view.id,
         contents: util_meta.l10n('views.connection.welcome')
       },
       {
-        view: view_about.id,
+        view: about_view.id,
         contents: util_meta.l10n('views.about.welcome')
       }
     ],
@@ -62,5 +62,14 @@ export default {
         category,
       }
     ],
+    menus: { // 菜单项
+      'view/title': [ // 出现在 view 的 title 栏的“菜单项”
+        {
+          when: 'view==' + connection_view.id, // 出现的位置（当 view 是 connection view 时）
+          command: key.command.connection.add, // 点击“菜单项”执行的 command
+          group: 'navigation',
+        },
+      ],
+    },
   }
 }

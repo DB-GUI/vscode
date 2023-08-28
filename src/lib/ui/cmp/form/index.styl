@@ -1,9 +1,23 @@
-@require '../../style/base'
+@require './base'
 
-.basic_input
+Reset()
+  display: block
   border: none
-  outline: none
+  outline: none !important
   background: transparent
   color: inherit
+  font-size: inherit
+Rect()
+  height: $height
+  padding: $padding
+  border: 1px solid $color_input_border
+  Round()
+
+Focus()
+  border: 1px solid $color_pri_bg
+
+.basic_input
+  Reset()
+  Rect()
   &:focus
-    outline: $color_pri solid
+    Focus()

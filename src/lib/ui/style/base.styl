@@ -1,4 +1,19 @@
-$color = #fff
-$color_err = red
-$color_bg = #000
-$color_pri = blue
+$color = var(--vscode-editor-foreground)
+$color_bg = var(--vscode-editor-background)
+$color_err = var(--vscode-editorError-background)
+$color_err_bg = var(--vscode-editorError-background)
+$color_pri = var(--vscode-button-foreground)
+$color_pri_bg = var(--vscode-button-background)
+$color_input_border = var(--vscode-input-border)
+
+Color_pri()
+  color: $color_pri
+  background-color: $color_pri_bg
+
+Flex($align_items = center, $justify_content = flex-start)
+  display: flex
+  align-items: $align_items
+  justify-content: $justify_content
+
+Round()
+  border-radius: 2px

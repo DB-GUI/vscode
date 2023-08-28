@@ -22,7 +22,13 @@ is_dev => {
       // '.woff2': 'file' // 静态资源
     },
     plugins: [
-      stylusLoader(),
+      stylusLoader({
+        stylusOptions: {
+          include: [
+            'src/lib/ui'
+          ]
+        }
+      }),
     ],
   }
 }

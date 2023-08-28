@@ -1,6 +1,7 @@
 import { useState } from 'react'
-import { Input } from '../../cmp/form/input'
+import { Input, Button } from '../../cmp/form'
 import { State } from '../../oo'
+import './index.styl'
 
 export default
 function Connection_upsert({ request }) {
@@ -15,6 +16,7 @@ function Connection_upsert({ request }) {
           <Input
             state = {new State(value_name, set_name)}
           />
+          <Button>test</Button>
         </div>
       </div>
     </div>

@@ -13,15 +13,20 @@ interface Simple_connection_config extends Connection_config {
 }
 
 export
-interface Basic_info {
-  name: string
-  icon: string
+interface Upsert_form_field {
+  key: string
+  label: string
+  type: 'string' | 'number' | 'file'
 }
 
 export
 interface Adapter<Connection_config> {
-  name: string
   make_treeview(config: Connection_info<Connection_config>): Element
+  webview: {
+    connection: {
+      upsert: Upsert_form_field[]
+    }
+  }
 }
 
 export

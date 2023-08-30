@@ -1,5 +1,5 @@
 import { ExtensionContext } from 'vscode'
-import { make_webview } from '../..'
+import { make_webview } from '../../base'
 
 /**
  * 创建并打开 demo webview

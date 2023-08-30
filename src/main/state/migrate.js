@@ -16,15 +16,27 @@ async function migrate(state) {
       await state.update('system', {
         version: '0.5.0'
       })
-      const records = state.get('connection', [])
-      records.forEach(record => {
+      const records050 = state.get('connection', [])
+      records050.forEach(record => {
         record._id = UUID()
         delete record.id
       })
-      await state.update('connection', records)
+      await state.update('connection', records050)
       return migrate(state) // next migration
     case '0.5.0':
-      logger.debug('0.5.0, latest, no migration')
+      logger.debug('0.5.0')
+      await state.update('system', {
+        version: '1.0.0'
+      })
+      await state.update('connection',
+        state.get('connection', [])
+          .map(({ _id, name, client, ...config }) => ({
+            _id,
+            name,
+            adapter: client,
+            config,
+          }))
+      )
       return
   }
 }

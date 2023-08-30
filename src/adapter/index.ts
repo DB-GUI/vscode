@@ -5,7 +5,7 @@ import mysql from './mysql'
 
 export default
 function get_adapter(ppz: PPz_context, name: string) {
-  const list: Adapter[] = [
+  const list: Adapter<any>[] = [
     mysql,
   ].map(make_adapter => make_adapter(ppz))
 

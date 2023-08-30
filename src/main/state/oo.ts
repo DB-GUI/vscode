@@ -10,23 +10,16 @@ interface SystemConfig extends Record {
 }
 
 export
-interface Connection_config extends Record {
+interface Connection_info<Connection_config> extends Record {
   name: string
-  client: string
-}
-
-export
-interface Simple_connection_config extends Connection_config {
-  host: string
-  port: number
-  user: string
-  password: string
+  adapter: string
+  config: Connection_config
 }
 
 export
 interface All_state {
   system: State<SystemConfig>
-  connection: State_list<Connection_config>
+  connection: State_list<Connection_info<any>>
 }
 
 type Raw_state = Memento & {setKeysForSync: any}

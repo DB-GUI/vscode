@@ -1,6 +1,16 @@
 import { TreeItem, TreeItemCollapsibleState } from 'vscode'
-import { Connection_config } from '@/main/state/oo'
 import { Element } from '@/main/connection_view/oo'
+import { Connection_info } from '@/main/state/oo'
+
+type Field_type = string | number | 'file'
+type Connection_config = Record<string, Field_type | undefined>
+export
+interface Simple_connection_config extends Connection_config {
+  host: string
+  port: number
+  user: string
+  password: string
+}
 
 export
 interface Basic_info {
@@ -9,9 +19,9 @@ interface Basic_info {
 }
 
 export
-interface Adapter {
+interface Adapter<Connection_config> {
   name: string
-  make_treeview(config: Connection_config): Element
+  make_treeview(config: Connection_info<Connection_config>): Element
 }
 
 export

@@ -11,6 +11,6 @@ async function activate(context: ExtensionContext) {
   const ppz_context = new PPz_context(context)
   const state = await init_state(context)
   const treeview_event_emitter = init_connection_view(ppz_context, state.connection)
-  init_command(context, state, treeview_event_emitter)
+  init_command(ppz_context, state, treeview_event_emitter)
   logger.debug('started')
 }

@@ -16,9 +16,7 @@ interface make_adapter_map {
 
 export default
 function get_adapter(ppz: PPz_context, name: string) {
-  const list: make_adapter_map[] = [
-    { adapter_name: 'mysql', make_adapter: mysql },
-  ]
+  
   const make_adapter_map = list.find(item => item.adapter_name == name)
   if(make_adapter_map)
     return make_adapter_map.make_adapter(ppz)

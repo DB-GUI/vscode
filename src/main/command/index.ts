@@ -1,13 +1,14 @@
-import { commands, ExtensionContext, EventEmitter } from 'vscode'
+import { commands, EventEmitter } from 'vscode'
 import { logger } from '@/main/util'
 import key from '@/common/constant/key'
 import { All_state } from '@/main/state/oo'
 import { Element } from '@/main/connection_view/oo'
 import make_upsert_connection_webview from '@/main/webview/all/upsert_connection'
+import { PPz_context } from '../oo'
 
 export
 function init_command(
-  context: ExtensionContext,
+  ppz: PPz_context,
   state: All_state,
   event_emitter_treeview: EventEmitter<Element>,
 ) {
@@ -16,7 +17,7 @@ function init_command(
       key: key.command.connection.add,
       exec(...args: any[]) {
         logger.debug('open add connection webview')
-        make_upsert_connection_webview(context)
+        make_upsert_connection_webview(ppz)
       }
     }
   ].forEach(({ key, exec }) => {

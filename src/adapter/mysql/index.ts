@@ -6,16 +6,20 @@ import mm_treeview from './treeview'
 export default
 function make_mysql_adapter(ppz: PPz_context): Adapter<Mysql_connection_config> {
   return {
+    key: 'mysql',
+    label: 'MySQL',
     make_treeview: mm_treeview(ppz),
     webview: {
       connection: {
-        upsert: [
-          { key: 'host', label: 'Host', type: 'string' },
-          { key: 'port', label: 'Port', type: 'number' },
-          { key: 'user', label: 'User', type: 'string' },
-          { key: 'password', label: 'Password', type: 'string' },
-          { key: 'database', label: 'Database', type: 'string' },
-        ]
+        upsert: {
+          form: [
+            { key: 'host', label: 'Host', type: 'string' },
+            { key: 'port', label: 'Port', type: 'number' },
+            { key: 'user', label: 'User', type: 'string' },
+            { key: 'password', label: 'Password', type: 'string' },
+            { key: 'database', label: 'Database', type: 'string' },
+          ]
+        }
       }
     }
   }
